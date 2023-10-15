@@ -15,7 +15,7 @@ public class UserSession {
         if (instance == null) {
             instance = new UserSession();
         }
-        return instance;
+        return instance;	
     }
 
     public void setUsername(String username) {
