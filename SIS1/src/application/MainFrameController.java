@@ -17,10 +17,10 @@ public class MainFrameController implements Initializable {
 
 
     @FXML
-    private Button Menu;
+    private Label Menu;
 
     @FXML
-    private Button exitMenu;
+    private Label exitMenu;
 
     @FXML
     private AnchorPane slidenav;
@@ -28,7 +28,7 @@ public class MainFrameController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	
-        slidenav.setTranslateX(-266);
+        slidenav.setTranslateX(-270);
         Menu.setOnMouseClicked(event -> {
             TranslateTransition slide = new TranslateTransition();
             slide.setDuration(Duration.seconds(0.4));
@@ -37,7 +37,7 @@ public class MainFrameController implements Initializable {
             slide.setToX(0);
             slide.play();
 
-            slidenav.setTranslateX(-266);
+            slidenav.setTranslateX(-270);
 
             slide.setOnFinished((ActionEvent e)-> {
                 Menu.setVisible(false);
@@ -50,7 +50,7 @@ public class MainFrameController implements Initializable {
             slide.setDuration(Duration.seconds(0.4));
             slide.setNode(slidenav);
 
-            slide.setToX(-266);
+            slide.setToX(-270);
             slide.play();
 
             slidenav.setTranslateX(0);
