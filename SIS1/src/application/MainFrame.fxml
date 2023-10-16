@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,101 +11,93 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
    <children>
-      <BorderPane prefHeight="900.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: #d9dcd6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane prefHeight="160.0" prefWidth="1200.0" style="-fx-background-color: #3a7ca5;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="160.0" prefWidth="1200.0" style="-fx-background-color: #38686a;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="500.0" layoutY="79.0" prefHeight="80.0" prefWidth="1200.0" style="-fx-background-color: #2f6690;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="1062.0" layoutY="104.0" mnemonicParsing="false" text="Button" />
-                  <Button layoutX="574.0" layoutY="104.0" mnemonicParsing="false" text="Button" />
-                  <Button fx:id="Menu" layoutX="51.0" layoutY="90.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="-fx-background-color: transparent;" text="MENU" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="51.0">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../Downloads/pngwing.com.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="exitMenu" layoutX="51.0" layoutY="85.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="164.0" style="-fx-background-color: transparent;" text="MENU" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../Downloads/pngwing.com.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                  <Pane layoutY="75.0" prefHeight="80.0" prefWidth="1200.0" style="-fx-background-color: #a3b4a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+                     <children>
+                        <Label fx:id="exitMenu" layoutX="88.0" layoutY="25.0" text="Menu" textFill="#794e4e">
+                           <font>
+                              <Font name="Tw Cen MT" size="25.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </Label>
+                        <Label fx:id="Menu" layoutX="88.0" layoutY="25.0" text="Menu" textFill="#794e4e">
+                           <font>
+                              <Font name="Tw Cen MT" size="25.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../Downloads/menu.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children></Pane>
                </children>
             </AnchorPane>
          </top>
          <left>
-            <AnchorPane fx:id="slidenav" prefHeight="742.0" prefWidth="266.0" style="-fx-background-color: #81c3d7;" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="slidenav" prefHeight="740.0" prefWidth="270.0" style="-fx-background-color: #cdc6ae;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="12.0" layoutY="90.0" prefHeight="560.0" prefWidth="241.0" style="-fx-background-color: #81c3d7;">
+                  <VBox layoutX="13.0" layoutY="102.0" prefHeight="537.0" prefWidth="250.0">
                      <children>
-                        <Button minHeight="80.0" mnemonicParsing="false" prefWidth="300.0" style="-fx-background-color: transparent; -fx-border-style: ;" text="Student Profile" textFill="WHITE">
+                        <Label alignment="CENTER" prefHeight="88.0" prefWidth="258.0" text="Student Profile" textFill="#794e4e">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="Tw Cen MT" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../Downloads/profile.png" />
+                                 </image>
+                              </ImageView>
                            </graphic>
-                        </Button>
-                        <Button minHeight="80.0" mnemonicParsing="false" prefWidth="300.0" style="-fx-background-color: transparent; -fx-border-style: ;" text="Button" textFill="WHITE">
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="89.0" prefWidth="253.0" text="Schedule" textFill="#794e4e">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="Tw Cen MT" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
-                        </Button>
-                        <Button minHeight="80.0" mnemonicParsing="false" prefWidth="300.0" style="-fx-background-color: transparent; -fx-border-style: ;" text="Button" textFill="WHITE">
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="252.0" text="Grading" textFill="#794e4e">
                            <font>
-                              <Font name="System Bold" size="20.0" />
+                              <Font name="Tw Cen MT" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
-                        </Button>
-                        <Button minHeight="80.0" mnemonicParsing="false" prefWidth="300.0" style="-fx-background-color: transparent; -fx-border-style: ;" text="Button" textFill="WHITE">
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="252.0" text="Enrollment" textFill="#794e4e">
                            <font>
-                              <Font name="Corbel" size="20.0" />
+                              <Font name="Tw Cen MT" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
-                        </Button>
-                        <Button minHeight="80.0" mnemonicParsing="false" prefWidth="300.0" style="-fx-background-color: transparent; -fx-border-style: ;" text="Button" textFill="WHITE">
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="251.0" text="Backup" textFill="#794e4e">
                            <font>
-                              <Font name="Corbel" size="20.0" />
+                              <Font name="Tw Cen MT" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
-                        </Button>
-                        <Button minHeight="80.0" mnemonicParsing="false" prefWidth="300.0" style="-fx-background-color: transparent; -fx-border-style: ;" text="Button" textFill="WHITE">
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="256.0" text="Logout" textFill="#794e4e">
                            <font>
-                              <Font name="Corbel" size="20.0" />
+                              <Font name="Tw Cen MT" size="20.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
-                        </Button>
-                        <Button minHeight="80.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="247.0" style="-fx-background-color: transparent; -fx-border-style: ;" text="Button" textFill="WHITE">
-                           <font>
-                              <Font name="Corbel" size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Button>
+                        </Label>
                      </children>
                   </VBox>
                </children>
