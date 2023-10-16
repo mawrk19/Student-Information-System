@@ -24,6 +24,10 @@ public class MainFrameController implements Initializable {
 
     @FXML
     private AnchorPane slidenav;
+    
+    public void Borderpane(){
+    	
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
