@@ -1,0 +1,32 @@
+#WholeBorderPane{
+	-fx-background-color: #d9dcd6;
+}
+
+#UpperBorderPane{
+	-fx-background-color: #38686a;
+}
+
+#UpperPane{
+	-fx-background-color:  #a3b4a2;
+}
+
+.label{
+	-fx-font-family: "Tw Cen MT";
+	-fx-font-size: 20px;
+	-fx-text-fill: #794e4e;
+}
+
+#exitMenuIconbg{
+	-fx-background-color: #d9dcd6;
+	-fx-background-radius: 25px;
+}
+
+#MenuIconbg{
+	-fx-background-color: #d9dcd6;
+	-fx-background-radius: 25px;
+}
+
+#StudentProfileIconbg{
+	-fx-background-color: #d9dcd6;
+	-fx-background-radius: 25px;
+}
