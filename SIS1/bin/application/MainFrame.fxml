@@ -9,15 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
 
    <children>
       <BorderPane prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: #d9dcd6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <AnchorPane prefHeight="160.0" prefWidth="1200.0" style="-fx-background-color: #38686a;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutY="75.0" prefHeight="80.0" prefWidth="1200.0" style="-fx-background-color: #a3b4a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
+                  <Pane layoutY="75.0" prefHeight="158.0" prefWidth="1200.0" style="-fx-background-color: #a3b4a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
                      <children>
                         <Label fx:id="exitMenu" layoutX="88.0" layoutY="25.0" text="Menu" textFill="#794e4e">
                            <font>
@@ -51,7 +50,7 @@
          <left>
             <AnchorPane fx:id="slidenav" prefHeight="740.0" prefWidth="270.0" style="-fx-background-color: #cdc6ae;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="13.0" layoutY="102.0" prefHeight="537.0" prefWidth="250.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="102.0">
+                  <VBox layoutX="8.0" layoutY="14.0" prefHeight="520.0" prefWidth="255.0" AnchorPane.bottomAnchor="206.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="14.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="88.0" prefWidth="258.0" text="Student Profile" textFill="#794e4e">
                            <font>
