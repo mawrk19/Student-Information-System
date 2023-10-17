@@ -20,10 +20,9 @@ public class MainController implements Initializable {
     private Parent fxml;
     
     
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
+        TranslateTransition t = new TranslateTransition(Duration.seconds(.5), vbox);
         t.setToX(vbox.getLayoutX() * 20);
         t.play();
         t.setOnFinished((e) ->{
@@ -38,11 +37,12 @@ public class MainController implements Initializable {
     }
     @FXML
     private void open_signin(ActionEvent event){
-          TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
+          TranslateTransition t = new TranslateTransition(Duration.seconds(.5), vbox);
         t.setToX(vbox.getLayoutX() * 20);
         t.play();
         t.setOnFinished((e) ->{
             try{
+            	System.out.println("sign in");
                 fxml = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
                 vbox.getChildren().removeAll();
                 vbox.getChildren().setAll(fxml);
@@ -53,11 +53,12 @@ public class MainController implements Initializable {
     }   
     @FXML
     private void open_signup(ActionEvent event){
-          TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
+          TranslateTransition t = new TranslateTransition(Duration.seconds(.5), vbox);
         t.setToX(0);
         t.play();
         t.setOnFinished((e) ->{
             try{
+            	System.out.println("sign up");
                 fxml = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
                 vbox.getChildren().removeAll();
                 vbox.getChildren().setAll(fxml);

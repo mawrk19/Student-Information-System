@@ -39,6 +39,6 @@
 
 .prompt{
 	-fx-font-family: "Quicksand";
-	-fx-font-size: 10px ;
-	-fx-color: #2589bd ;
+	-fx-font-size: 20px ;
+	-fx-prompt-text-fill: #2589bd, 0.1;
 }

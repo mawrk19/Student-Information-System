@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="481.0" styleClass="blue-panel" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.login.MainController">
+<VBox fx:id="vbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="481.0" styleClass="blue-panel" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.login.MainController">
    <children>
       <HBox prefHeight="63.0" prefWidth="480.0">
          <children>
@@ -28,7 +28,7 @@
       </HBox>
       <HBox prefHeight="30.0" prefWidth="480.0">
          <children>
-            <TextField editable="false" prefHeight="30.0" prefWidth="480.0" promptText="First Name" styleClass="prompt" stylesheets="@styles.css" />
+            <TextField prefHeight="30.0" prefWidth="480.0" promptText="First Name" styleClass="pane" stylesheets="@styles.css" />
          </children>
          <VBox.margin>
             <Insets />
@@ -39,7 +39,7 @@
       </HBox>
       <HBox prefHeight="30.0" prefWidth="480.0">
          <children>
-            <TextField prefHeight="30.0" prefWidth="480.0" promptText="Last Name" styleClass="prompt" />
+            <TextField prefHeight="30.0" prefWidth="480.0" promptText="Last Name" styleClass="pane" />
          </children>
          <padding>
             <Insets left="15.0" right="15.0" top="20.0" />
@@ -50,7 +50,7 @@
       </HBox>
       <HBox prefHeight="30.0" prefWidth="480.0">
          <children>
-            <TextField prefHeight="30.0" prefWidth="480.0" promptText="email " />
+            <TextField prefHeight="30.0" prefWidth="480.0" promptText="email " styleClass="pane" stylesheets="@styles.css" />
          </children>
          <padding>
             <Insets left="15.0" right="15.0" top="20.0" />
@@ -58,7 +58,7 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="480.0" stylesheets="@styles.css">
          <children>
-            <PasswordField alignment="TOP_LEFT" prefHeight="30.0" prefWidth="480.0" promptText="password" styleClass="prompt" stylesheets="@styles.css" />
+            <PasswordField alignment="TOP_LEFT" prefHeight="30.0" prefWidth="480.0" promptText="password" styleClass="pane" stylesheets="@styles.css" />
          </children>
          <padding>
             <Insets left="15.0" right="15.0" top="20.0" />
@@ -69,7 +69,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="54.0" prefWidth="480.0">
          <children>
-            <Button mnemonicParsing="false" text="Sign Up" />
+            <Button mnemonicParsing="false" styleClass="pane" stylesheets="@styles.css" text="Sign Up" />
          </children>
       </HBox>
    </children>
