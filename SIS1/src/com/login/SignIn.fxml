@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="480.0" styleClass="blue-panel" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="480.0" styleClass="blue-panel" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.login.FormController">
    <children>
       <Label styleClass="Label" text="Login" textFill="#2196f3">
          <font>
@@ -20,9 +20,18 @@
             <Insets left="20.0" />
          </VBox.margin>
       </Label>
+      <HBox prefHeight="40.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="messLabel" alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <HBox.margin>
+                  <Insets left="150.0" right="150.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
          <children>
-            <TextField promptText="Email" HBox.hgrow="ALWAYS">
+            <TextField fx:id="emailField" promptText="Email" HBox.hgrow="ALWAYS">
                <styleClass>
                   <String fx:value="tf_box" />
                   <String fx:value="prompt" />
@@ -34,7 +43,7 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
          <children>
-            <PasswordField prefHeight="40.0" prefWidth="480.0" promptText="Password">
+            <PasswordField fx:id="passField" prefHeight="40.0" prefWidth="480.0" promptText="Password">
                <styleClass>
                   <String fx:value="prompt" />
                   <String fx:value="tf_box" />
@@ -47,7 +56,7 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="456.0" styleClass="blue-btn" text="Sign In" textFill="WHITE">
+            <Button fx:id="signInBTN" mnemonicParsing="false" prefHeight="38.0" prefWidth="456.0" styleClass="blue-btn" text="Sign In" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
