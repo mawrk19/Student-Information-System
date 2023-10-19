@@ -1,9 +1,9 @@
 package com.login;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-
+import java.sql.SQLException;
 import application.DatabaseManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,27 +39,28 @@ public class FormController {
 //	}
 
 	public void ValidateCon() {
-		DatabaseManager connectNow = new DatabaseManager();
-		Connection con = connectNow.getConnection();
+	    DatabaseManager connectNow = new DatabaseManager();
+	    Connection con = connectNow.getConnection();
 
-		String verifyLogin = "'select * from where username ='" + emailField.getText() + "'and password'"
-				+ passField.getText() + "'";
+	    String verifyLogin = "SELECT * FROM users WHERE username = ? AND password = ?";
 
-		try {
-			Statement statement = con.createStatement();
-			ResultSet result = statement.executeQuery(verifyLogin);
+	    try {
+	        PreparedStatement preparedStatement = con.prepareStatement(verifyLogin);
+	        preparedStatement.setString(1, emailField.getText());
+	        preparedStatement.setString(2, passField.getText());
 
-			while (result.next()) {
-				if (result.getInt(1) == 1) {
-					messLabel.setText("Tanginanyu");
-				} else {
-					messLabel.setText("Tanginanyu ule");
-				}
-			}
+	        ResultSet result = preparedStatement.executeQuery();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+	        if (result.next()) {
+	            messLabel.setText("Yun oh nakapasok si Idok");
+	        } else {
+	            messLabel.setText("Bobo mali credentials mo -,- ");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        messLabel.setText("Database error");
+	    }
 	}
+
+	
 }
