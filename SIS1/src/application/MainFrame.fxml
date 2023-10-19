@@ -103,13 +103,13 @@
                         <Font name="System Bold Italic" size="35.0" />
                      </font>
                   </Label>
-                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
-                     <font>
-                        <Font name="Berlin Sans FB" size="20.0" />
-                     </font>
+                  <Label id="Dashboardlbl" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
                   </Label>
                   <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
                      <font>
