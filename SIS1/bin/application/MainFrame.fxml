@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
 
    <children>
@@ -44,12 +47,26 @@
                         </Label>
                      </children>
                   </Pane>
-               </children>
-            </AnchorPane>
-         </top>
-         <left>
-            <AnchorPane fx:id="slidenav" prefHeight="740.0" prefWidth="270.0" style="-fx-background-color: #cdc6ae;" BorderPane.alignment="CENTER">
+=======
+<AnchorPane id="Mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1220.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="244.0" layoutY="65.0" prefHeight="72.0" prefWidth="940.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="78.0" prefWidth="447.0">
                <children>
+                  <TextField layoutX="79.0" layoutY="24.0" prefHeight="25.0" prefWidth="268.0" />
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="357.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+>>>>>>> c6dc4246822c43607e118f893061d1f518edf944
+               </children>
+            </Pane>
+            <Pane prefHeight="78.0" prefWidth="514.0" />
+         </children>
+      </HBox>
+      <FlowPane layoutX="58.0" layoutY="1.0" prefHeight="899.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox id="NavigationIcons" prefHeight="900.0" prefWidth="85.0" stylesheets="@MainFrame.css">
+               <children>
+<<<<<<< HEAD
                   <VBox layoutX="8.0" layoutY="14.0" prefHeight="520.0" prefWidth="255.0" AnchorPane.bottomAnchor="206.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="14.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="88.0" prefWidth="258.0" text="Student Profile" textFill="#794e4e">
@@ -106,9 +123,126 @@
                         </Label>
                      </children>
                   </VBox>
+=======
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="131.0" prefWidth="199.0" stylesheets="@MainFrame.css" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="35.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                     <VBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+>>>>>>> c6dc4246822c43607e118f893061d1f518edf944
                </children>
-            </AnchorPane>
-         </left>
-      </BorderPane>
+            </VBox>
+            <VBox id="NavigationLabelsPane" prefHeight="900.0" prefWidth="195.0" stylesheets="@MainFrame.css">
+               <children>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="130.0" prefWidth="199.0" stylesheets="@MainFrame.css" text="SIS" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="30.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold Italic" size="35.0" />
+                     </font>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </FlowPane>
    </children>
 </AnchorPane>
