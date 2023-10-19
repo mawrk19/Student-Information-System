@@ -11,43 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
-
-   <children>
-      <BorderPane prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: #d9dcd6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <AnchorPane prefHeight="160.0" prefWidth="1200.0" style="-fx-background-color: #38686a;" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane layoutY="75.0" prefHeight="158.0" prefWidth="1200.0" style="-fx-background-color: #a3b4a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="75.0">
-                     <children>
-                        <Label fx:id="exitMenu" layoutX="88.0" layoutY="25.0" text="Menu" textFill="#794e4e">
-                           <font>
-                              <Font name="Tw Cen MT" size="25.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../Downloads/menu.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label fx:id="Menu" layoutX="88.0" layoutY="25.0" text="Menu" textFill="#794e4e">
-                           <font>
-                              <Font name="Tw Cen MT" size="25.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../Downloads/menu.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                     </children>
-                  </Pane>
-=======
 <AnchorPane id="Mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1220.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="244.0" layoutY="65.0" prefHeight="72.0" prefWidth="940.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -56,7 +19,6 @@
                <children>
                   <TextField layoutX="79.0" layoutY="24.0" prefHeight="25.0" prefWidth="268.0" />
                   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="357.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
->>>>>>> c6dc4246822c43607e118f893061d1f518edf944
                </children>
             </Pane>
             <Pane prefHeight="78.0" prefWidth="514.0" />
@@ -66,64 +28,6 @@
          <children>
             <VBox id="NavigationIcons" prefHeight="900.0" prefWidth="85.0" stylesheets="@MainFrame.css">
                <children>
-<<<<<<< HEAD
-                  <VBox layoutX="8.0" layoutY="14.0" prefHeight="520.0" prefWidth="255.0" AnchorPane.bottomAnchor="206.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="14.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="88.0" prefWidth="258.0" text="Student Profile" textFill="#794e4e">
-                           <font>
-                              <Font name="Tw Cen MT" size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../Downloads/profile.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="89.0" prefWidth="253.0" text="Schedule" textFill="#794e4e">
-                           <font>
-                              <Font name="Tw Cen MT" size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="252.0" text="Grading" textFill="#794e4e">
-                           <font>
-                              <Font name="Tw Cen MT" size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="252.0" text="Enrollment" textFill="#794e4e">
-                           <font>
-                              <Font name="Tw Cen MT" size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="251.0" text="Backup" textFill="#794e4e">
-                           <font>
-                              <Font name="Tw Cen MT" size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="90.0" prefWidth="256.0" text="Logout" textFill="#794e4e">
-                           <font>
-                              <Font name="Tw Cen MT" size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Label>
-                     </children>
-                  </VBox>
-=======
                   <Label id="Titleproj" alignment="CENTER" prefHeight="131.0" prefWidth="199.0" stylesheets="@MainFrame.css" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="35.0" />
@@ -187,7 +91,6 @@
                         <Insets right="10.0" top="10.0" />
                      </VBox.margin>
                   </Label>
->>>>>>> c6dc4246822c43607e118f893061d1f518edf944
                </children>
             </VBox>
             <VBox id="NavigationLabelsPane" prefHeight="900.0" prefWidth="195.0" stylesheets="@MainFrame.css">
