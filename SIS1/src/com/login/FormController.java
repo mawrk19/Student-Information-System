@@ -7,60 +7,73 @@ import java.sql.SQLException;
 import application.DatabaseManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class FormController {
 
-	@FXML
-	TextField emailField;
-	@FXML
-	PasswordField passField;
-	@FXML
-	Button signInBTN;
-	@FXML
-	Label messLabel;
+    @FXML
+    TextField emailField;
+    @FXML
+    PasswordField passField;
+    @FXML
+    Button signInBTN;
+    @FXML
+    Label messLabel;
 
-	public void LogIn(ActionEvent e) {
+    public void LogIn(ActionEvent e) {
+        if (!emailField.getText().isBlank() && !passField.getText().isBlank()) {
+            messLabel.setText("Baliw ka ba?");
+        } else {
+            messLabel.setText("tanga maglagay ka (nag side eye)");
+        }
+        ValidateCon((Stage) signInBTN.getScene().getWindow()); // Pass the stage
+    }
 
-		if (emailField.getText().isBlank() == false && passField.getText().isBlank() == false) {
-			messLabel.setText("Baliw ka ba?");
-		} else {
-			messLabel.setText("tanga maglagay ka (nag side eye)");
-		}
+    public void openMF(Stage stage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle any exceptions that may occur during FXML loading
+        }
+    }
 
-		ValidateCon();
-	}
+    public void ValidateCon(Stage stage) {
+        DatabaseManager connectNow = new DatabaseManager();
+        Connection con = connectNow.getConnection();
 
-//	public void Cancel() {
-//		
-//	}
+        String verifyLogin = "SELECT * FROM users WHERE username = ? AND password = ?";
 
-	public void ValidateCon() {
-	    DatabaseManager connectNow = new DatabaseManager();
-	    Connection con = connectNow.getConnection();
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(verifyLogin);
+            preparedStatement.setString(1, emailField.getText());
+            preparedStatement.setString(2, passField.getText());
 
-	    String verifyLogin = "SELECT * FROM users WHERE username = ? AND password = ?";
+            ResultSet result = preparedStatement.executeQuery();
 
-	    try {
-	        PreparedStatement preparedStatement = con.prepareStatement(verifyLogin);
-	        preparedStatement.setString(1, emailField.getText());
-	        preparedStatement.setString(2, passField.getText());
-
-	        ResultSet result = preparedStatement.executeQuery();
-
-	        if (result.next()) {
-	            messLabel.setText("Yun oh nakapasok si Idok");
-	        } else {
-	            messLabel.setText("Bobo mali credentials mo -,- ");
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        messLabel.setText("Database error");
-	    }
-	}
-
-	
+            if (result.next()) {
+                messLabel.setText("Yun oh nakapasok si Idok");
+                openMF(stage); // Pass the stage
+            } else {
+                messLabel.setText("Boba mali credentials mo -,- ");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            messLabel.setText("Database error");
+        }
+    }
 }
