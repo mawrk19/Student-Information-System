@@ -42,3 +42,16 @@
 	-fx-font-size: 20px ;
 	-fx-prompt-text-fill: #2589bd;
 }
+
+
+.mainLabel {
+	-fx-font-family: "Quicksand";
+	-fx-font-size: 30px ;
+	-fx-prompt-text-fill: #2589bd;
+}
+
+.mainDef {
+	-fx-font-family: "Quicksand";
+	-fx-font-size: 20px ;
+	-fx-prompt-text-fill: #2589bd;
+}

@@ -20,11 +20,11 @@
             <Insets left="20.0" />
          </VBox.margin>
       </Label>
-      <HBox prefHeight="40.0" prefWidth="200.0">
+      <HBox prefHeight="40.0" prefWidth="480.0">
          <children>
-            <Label fx:id="messLabel" alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+            <Label fx:id="messLabel" alignment="CENTER" prefHeight="40.0" prefWidth="480.0" styleClass="mainLabel">
                <HBox.margin>
-                  <Insets left="150.0" right="150.0" />
+                  <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </Label>
          </children>
