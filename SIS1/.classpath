@@ -13,6 +13,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
-	<classpathentry kind="lib" path="C:/Users/PC/git/budgee/mysql-connector-j-8.0.31.jar"/>
+	<classpathentry kind="lib" path="C:/Users/SHEAL/git/Student-Information-System/SIS1/mysql-connector-j-8.0.31.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
