@@ -31,7 +31,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../imgs_icons/Dashboard.png" />
+                              <Image url="@../src/imgs_icons/Dashboard.png" />
                            </image></ImageView>
                      </graphic>
                      <VBox.margin>
@@ -45,7 +45,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../imgs_icons/Stud_Profile.png" />
+                              <Image url="@../src/imgs_icons/Stud_Profile.png" />
                            </image></ImageView>
                      </graphic>
                      <VBox.margin>
@@ -59,7 +59,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../imgs_icons/Timetable.png" />
+                              <Image url="@../src/imgs_icons/Timetable.png" />
                            </image></ImageView>
                      </graphic>
                      <VBox.margin>
@@ -95,7 +95,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../imgs_icons/Logoff.png" />
+                              <Image url="@../src/imgs_icons/Logoff.png" />
                            </image>
                         </ImageView>
                      </graphic>
