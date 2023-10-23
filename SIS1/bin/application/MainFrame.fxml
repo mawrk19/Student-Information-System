@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="Mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1220.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="Mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1220.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
    <children>
       <FlowPane layoutX="58.0" layoutY="1.0" prefHeight="899.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -123,7 +123,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Label>
-                  <Label id="StudentProflbl" alignment="CENTER" prefHeight="60.0" prefWidth="201.0" stylesheets="@MainFrame.css" text="Student Profile" textFill="WHITE">
+                  <Label id="StudentProflbl" fx:id="StudentProf" alignment="CENTER" onMouseClicked="#StudentProfScene" prefHeight="60.0" prefWidth="201.0" stylesheets="@MainFrame.css" text="Student Profile" textFill="WHITE">
                      <font>
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
