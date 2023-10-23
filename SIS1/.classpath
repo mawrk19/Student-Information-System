@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="imgs_icons"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-18">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="C:/Users/user/git/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
-=======
-	<classpathentry kind="lib" path="C:/Users/SHEAL/git/Student-Information-System/SIS1/mysql-connector-j-8.0.31.jar"/>
->>>>>>> 8ed14ce2c7662e88b9708c8eefdbd9d134d7b328
 	<classpathentry kind="output" path="bin"/>
 </classpath>
