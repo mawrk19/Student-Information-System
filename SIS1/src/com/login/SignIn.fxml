@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="480.0" styleClass="blue-panel" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.login.FormController">
+<VBox fx:id="vbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="480.0" styleClass="sign_panel" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.login.FormController">
    <children>
       <Label styleClass="Label" text="Login" textFill="#2196f3">
          <font>
@@ -20,11 +20,11 @@
             <Insets left="20.0" />
          </VBox.margin>
       </Label>
-      <HBox prefHeight="40.0" prefWidth="200.0">
+      <HBox prefHeight="40.0" prefWidth="480.0">
          <children>
-            <Label fx:id="messLabel" alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+            <Label fx:id="messLabel" alignment="CENTER" prefHeight="40.0" prefWidth="480.0" styleClass="mainLabel">
                <HBox.margin>
-                  <Insets left="150.0" right="150.0" />
+                  <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </Label>
          </children>

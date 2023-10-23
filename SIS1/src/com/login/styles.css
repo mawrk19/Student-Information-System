@@ -2,7 +2,7 @@
     -fx-background-color: transparent;
 }
 .pane{
-   -fx-background-color: #48686A; 
+   -fx-background-color: #5d76dc; 
 }
 .trans-btn-white-border{
     -fx-background-color: transparent;
@@ -15,8 +15,8 @@
 .white-pane{
     -fx-background-color: #ffffff;
 }
-.blue-panel{
-    -fx-background-color: #a3b4a2;
+.sign_panel{
+    -fx-background-color: #454a60;
 }
 .tf_box{
     -fx-background-color: transparent;
@@ -38,6 +38,19 @@
 }
 
 .prompt{
+	-fx-font-family: "Quicksand";
+	-fx-font-size: 20px ;
+	-fx-prompt-text-fill: #2589bd;
+}
+
+
+.mainLabel {
+	-fx-font-family: "Quicksand";
+	-fx-font-size: 30px ;
+	-fx-prompt-text-fill: #2589bd;
+}
+
+.mainDef {
 	-fx-font-family: "Quicksand";
 	-fx-font-size: 20px ;
 	-fx-prompt-text-fill: #2589bd;
