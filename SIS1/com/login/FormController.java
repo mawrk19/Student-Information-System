@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import application.DatabaseManager;
+import application.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,114 +25,108 @@ import javafx.stage.StageStyle;
 
 public class FormController {
 
-    @FXML
-    TextField emailField;
-    @FXML
-    PasswordField passField;
-    @FXML
-    Button signInBTN;
-    @FXML
-    Label messLabel;
-    @FXML
-    TextField regFname;
-    @FXML
-    TextField regLname;
-    @FXML
-    TextField regUser;
-    @FXML
-    TextField regPass;
-    
-    JOptionPane tbox = new JOptionPane();
-    
-    public void LogIn(ActionEvent e) {
-        if (!emailField.getText().isBlank() && !passField.getText().isBlank()) {
-            messLabel.setText("Baliw ka ba?");
-        } else {
-            messLabel.setText("tanga maglagay ka (nag side eye)");
-        }
-        ValidateCon((Stage) signInBTN.getScene().getWindow()); // Pass the stage
-    }
+	@FXML
+	TextField emailField, regFname, regLname, regUser, regPass;
+	@FXML
+	PasswordField passField;
+	@FXML
+	Button signInBTN;
+	@FXML
+	Label messLabel,tbox;
 
-    public void openMF(Stage stage) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);        
-            stage.show();
-            stage.isResizable();
-            stage.initStyle(StageStyle.DECORATED);
-            } catch (Exception e) {
-            e.printStackTrace();
-            // Handle any exceptions that may occur during FXML loading
-        }
-    }
+	public void LogIn(ActionEvent e) {
+		if (!emailField.getText().isBlank() && !passField.getText().isBlank()) {
+			messLabel.setText("Incorrect username or password");
+		} else {
+			messLabel.setText("No inputs taken");
+		}
+		ValidateCon((Stage) signInBTN.getScene().getWindow()); // Pass the stage
+	}
 
-    public void ValidateCon(Stage stage) {
-        DatabaseManager connectNow = new DatabaseManager();
-        Connection con = connectNow.getConnection();
+	public void openMF(Stage stage) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
+			Scene scene = new Scene(root);
+			stage.setMaximized(true);
+			stage.setScene(scene);
+			stage.show();
+			stage.isResizable();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Handle any exceptions that may occur during FXML loading
+		}
+	}
 
-        String verifyLogin = "SELECT * FROM users WHERE username = ? AND password = ?";
+	public void ValidateCon(Stage stage) {
+		Connection con = DatabaseManager.getConnection();
 
-        try {
-            PreparedStatement preparedStatement = con.prepareStatement(verifyLogin);
-            preparedStatement.setString(1, emailField.getText());
-            preparedStatement.setString(2, passField.getText());
+		String verifyLogin = "SELECT * FROM users WHERE username = ? AND password = ?";
 
-            ResultSet result = preparedStatement.executeQuery();
+		try {
+			PreparedStatement stmt = con.prepareStatement(verifyLogin);
+			stmt.setString(1, emailField.getText());
+			stmt.setString(2, passField.getText());
 
-            if (result.next()) {
-                messLabel.setText("Yun oh nakapasok si Idok");
-                openMF(stage); // Pass the stage
-            } else {
-                messLabel.setText("Boba mali credentials mo -,- ");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            messLabel.setText("Database error");
-        }
-    }
-    
-    public void getInfo(ActionEvent e) {
-    	DatabaseManager connectNow = new DatabaseManager();
-        Connection con = connectNow.getConnection();
-        
-    	String fname = regFname.getText();
-    	String lname = regLname.getText();
-    	String username = regUser.getText();
-    	String password = regPass.getText();
-    	
-    	String infos = "INSERT INTO encoders(FName, LName, username, password) VALUE(?,?,?,?)";
-    	
-    	try {
-    		PreparedStatement stmt = con.prepareStatement(infos);
-    		
-    		stmt.setString(1, fname);
+			ResultSet result = stmt.executeQuery();
+
+			if (result.next()) {
+				// gets username
+				int sessionId = result.getInt("ID");
+				String sessionUsername = result.getString("fname");
+
+				UserSession session = UserSession.getInstance();
+				session.setId(sessionId);
+				session.setUsername(sessionUsername);
+
+				messLabel.setText("Yun oh nakapasok si Idok");
+				openMF(stage); // Pass the stage
+			} else {
+				messLabel.setText("Boba mali credentials mo -,- ");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			messLabel.setText("Database error");
+		}
+	}
+
+	public void getInfo(ActionEvent e) {
+		DatabaseManager connectNow = new DatabaseManager();
+		Connection con = connectNow.getConnection();
+
+		String fname = regFname.getText();
+		String lname = regLname.getText();
+		String username = regUser.getText();
+		String password = regPass.getText();
+
+		String infos = "INSERT INTO users	(FName, LName, username, password) VALUE(?,?,?,?)";
+
+		try {
+			PreparedStatement stmt = con.prepareStatement(infos);
+
+			stmt.setString(1, fname);
 			stmt.setString(2, lname);
 			stmt.setString(3, username);
 			stmt.setString(4, password);
 			if (fname.isEmpty() || lname.isEmpty() || username.isEmpty() || password.isEmpty()) {
-				JOptionPane.showMessageDialog(tbox, "add something");
+				tbox.setText("Kulang kulang ka ba?");
 				return;
 			}
 			int rs = stmt.executeUpdate();
 			if (rs == 1) {
-				JOptionPane.showMessageDialog(tbox, "You Have Successfully Registered");
+				tbox.setText("Succesfully Registered");
 				regFname.setText("");
 				regLname.setText("");
 				regUser.setText("");
 				regPass.setText("");
-				
+
 			} else {
-				JOptionPane.showMessageDialog(tbox, "You Failed Now Flee");
-			
+				tbox.setText("Failed Registration");
+
 			}
-    	} catch (SQLException ex){
-    		ex.printStackTrace();
-    	}
-    	
-    	
-    }
-    
-    
-    
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
 }
