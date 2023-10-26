@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import application.DatabaseManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +32,17 @@ public class FormController {
     Button signInBTN;
     @FXML
     Label messLabel;
-
+    @FXML
+    TextField regFname;
+    @FXML
+    TextField regLname;
+    @FXML
+    TextField regUser;
+    @FXML
+    TextField regPass;
+    
+    JOptionPane tbox = new JOptionPane();
+    
     public void LogIn(ActionEvent e) {
         if (!emailField.getText().isBlank() && !passField.getText().isBlank()) {
             messLabel.setText("Baliw ka ba?");
@@ -42,11 +56,11 @@ public class FormController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
             Scene scene = new Scene(root);
-            scene.setFill(Color.TRANSPARENT);
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);        
             stage.show();
-        } catch (Exception e) {
+            stage.isResizable();
+            stage.initStyle(StageStyle.DECORATED);
+            } catch (Exception e) {
             e.printStackTrace();
             // Handle any exceptions that may occur during FXML loading
         }
@@ -76,4 +90,48 @@ public class FormController {
             messLabel.setText("Database error");
         }
     }
+    
+    public void getInfo(ActionEvent e) {
+    	DatabaseManager connectNow = new DatabaseManager();
+        Connection con = connectNow.getConnection();
+        
+    	String fname = regFname.getText();
+    	String lname = regLname.getText();
+    	String username = regUser.getText();
+    	String password = regPass.getText();
+    	
+    	String infos = "INSERT INTO encoders(FName, LName, username, password) VALUE(?,?,?,?)";
+    	
+    	try {
+    		PreparedStatement stmt = con.prepareStatement(infos);
+    		
+    		stmt.setString(1, fname);
+			stmt.setString(2, lname);
+			stmt.setString(3, username);
+			stmt.setString(4, password);
+			if (fname.isEmpty() || lname.isEmpty() || username.isEmpty() || password.isEmpty()) {
+				JOptionPane.showMessageDialog(tbox, "add something");
+				return;
+			}
+			int rs = stmt.executeUpdate();
+			if (rs == 1) {
+				JOptionPane.showMessageDialog(tbox, "You Have Successfully Registered");
+				regFname.setText("");
+				regLname.setText("");
+				regUser.setText("");
+				regPass.setText("");
+				
+			} else {
+				JOptionPane.showMessageDialog(tbox, "You Failed Now Flee");
+			
+			}
+    	} catch (SQLException ex){
+    		ex.printStackTrace();
+    	}
+    	
+    	
+    }
+    
+    
+    
 }
