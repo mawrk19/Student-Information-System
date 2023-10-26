@@ -18,25 +18,25 @@
 	-fx-background-radius: 0 0 25 0;
 }
 
-#Dashboardlbl:hover{
+#Dashboardbtn:hover{
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#StudentProflbl:hover{
+#StudentProfbtn:hover{
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#Timetablelbl:hover{
+#Timetablebtn:hover{
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#LogOutlbl:hover{
+#LogOutbtn:hover{
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25;
 	-fx-background-radius: 25;
