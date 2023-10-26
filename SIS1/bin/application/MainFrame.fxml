@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="Borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
+<BorderPane id="Borderpane" fx:id="Borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
    <left>
       <HBox prefHeight="850.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
@@ -131,7 +131,7 @@
                         <Font name="System Bold Italic" size="35.0" />
                      </font>
                   </Label>
-                  <Button id="Dashboardbtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
+                  <Button id="Dashboardbtn" fx:id="Dashboard" mnemonicParsing="false" onAction="#Dashboardbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="15.0" />
                      </VBox.margin>
@@ -147,7 +147,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="Timetablebtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Timetable" textFill="WHITE">
+                  <Button id="Timetablebtn" fx:id="Timetable" mnemonicParsing="false" onAction="#Timetablebtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Timetable" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="15.0" />
                      </VBox.margin>
@@ -202,7 +202,7 @@
       </HBox>
    </top>
    <center>
-      <StackPane fx:id="stackarea" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <StackPane fx:id="stackarea" prefHeight="780.0" prefWidth="880.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
