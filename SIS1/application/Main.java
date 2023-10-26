@@ -17,7 +17,6 @@ public class Main extends Application {
     	//Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
-        stage.setMaximized(true);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();

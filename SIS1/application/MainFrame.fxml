@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="Mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1220.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
+
+<AnchorPane id="Mainpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1220.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
    <children>
       <FlowPane layoutX="58.0" layoutY="1.0" prefHeight="899.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -168,6 +169,7 @@
          </children>
       </FlowPane>
       <Pane layoutX="306.0" layoutY="26.0" prefHeight="72.0" prefWidth="893.0" style="-fx-background-color: white;" />
-      <Pane layoutX="321.0" layoutY="115.0" prefHeight="761.0" prefWidth="893.0" style="-fx-background-color: white;" stylesheets="@MainFrame.css" />
+
+      <Pane layoutX="306.0" layoutY="118.0" prefHeight="761.0" prefWidth="893.0" style="-fx-background-color: white;" stylesheets="@MainFrame.css" />
    </children>
 </AnchorPane>
