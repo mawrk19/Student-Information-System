@@ -1,128 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0"
-	prefWidth="1200.0" xmlns="http://javafx.com/javafx/21"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.MainFrameController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
 	<left>
-		<HBox prefHeight="850.0" prefWidth="300.0"
-			BorderPane.alignment="CENTER">
+		<HBox prefHeight="850.0" prefWidth="300.0" BorderPane.alignment="CENTER">
 			<children>
-				<VBox id="NavigationIcons" prefHeight="900.0" prefWidth="70.0"
-					spacing="30.0" stylesheets="@MainFrame.css">
-
+				<VBox id="NavigationIcons" prefHeight="900.0" prefWidth="70.0" spacing="30.0" stylesheets="@MainFrame.css">
 					<children>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="131.0"
-							prefWidth="199.0" stylesheets="@MainFrame.css" textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="130.0" prefWidth="199.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="System Bold Italic" size="35.0" />
 							</font>
 							<VBox.margin>
-								<Insets bottom="30.0" top="10.0" />
+								<Insets />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<graphic>
-								<ImageView fitHeight="35.0" fitWidth="35.0"
-									pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 									<image>
 										<Image url="@../src/imgs_icons/Dashboard.png" />
 									</image>
+									<rotationAxis>
+										<Point3D />
+									</rotationAxis>
 								</ImageView>
 							</graphic>
 							<VBox.margin>
-								<Insets bottom="15.0" top="15.0" />
+								<Insets />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<graphic>
-								<ImageView fitHeight="35.0" fitWidth="35.0"
-									pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 									<image>
 										<Image url="@../src/imgs_icons/Stud_Profile.png" />
 									</image>
+									<rotationAxis>
+										<Point3D />
+									</rotationAxis>
 								</ImageView>
 							</graphic>
 							<VBox.margin>
-								<Insets bottom="15.0" top="15.0" />
+								<Insets />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<graphic>
-								<ImageView fitHeight="35.0" fitWidth="35.0"
-									pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 									<image>
 										<Image url="@../src/imgs_icons/Timetable.png" />
-
 									</image>
 									<rotationAxis>
 										<Point3D />
 									</rotationAxis>
 								</ImageView>
-
 							</graphic>
 							<VBox.margin>
-								<Insets bottom="15.0" top="15.0" />
+								<Insets />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<graphic>
-								<ImageView fitHeight="35.0" fitWidth="35.0"
-									pickOnBounds="true" preserveRatio="true" />
-							</graphic>
-							<VBox.margin>
-								<Insets bottom="15.0" top="15.0" />
-							</VBox.margin>
-						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
-							<font>
-								<Font name="Berlin Sans FB" size="20.0" />
-							</font>
-							<graphic>
-								<ImageView fitHeight="35.0" fitWidth="35.0"
-									pickOnBounds="true" preserveRatio="true" />
-							</graphic>
-							<VBox.margin>
-								<Insets bottom="70.0" top="15.0" />
-							</VBox.margin>
-						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
-							<font>
-								<Font name="Berlin Sans FB" size="20.0" />
-							</font>
-							<graphic>
-								<ImageView fitHeight="35.0" fitWidth="35.0"
-									pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 									<rotationAxis>
 										<Point3D />
 									</rotationAxis>
@@ -135,14 +110,12 @@
 								<Point3D />
 							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<graphic>
-								<ImageView fitHeight="35.0" fitWidth="35.0"
-									pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 									<rotationAxis>
 										<Point3D />
 									</rotationAxis>
@@ -155,10 +128,7 @@
 								<Point3D />
 							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER"
-							maxHeight="1.7976931348623157E308"
-							maxWidth="1.7976931348623157E308" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
@@ -169,102 +139,112 @@
 								<Point3D />
 							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<graphic>
-								<ImageView fitHeight="35.0" fitWidth="35.0"
-									pickOnBounds="true" preserveRatio="true">
+								<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 									<rotationAxis>
 										<Point3D />
 									</rotationAxis>
-									>>>>>>> 66ddec1d9572ba4aee16501a20591814dbfe4fc5
 									<image>
 										<Image url="@../src/imgs_icons/Logoff.png" />
 									</image>
 								</ImageView>
 							</graphic>
-							<VBox.margin>
-								<Insets top="70.0" />
-							</VBox.margin>
 						</Label>
 					</children>
 				</VBox>
-				<VBox id="NavigationLabelsPane" prefHeight="900.0"
-					prefWidth="215.0" stylesheets="@MainFrame.css">
+				<VBox id="NavigationLabelsPane" prefHeight="900.0" prefWidth="230.0" spacing="30.0" stylesheets="@MainFrame.css">
 					<children>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="130.0"
-							prefWidth="199.0" stylesheets="@MainFrame.css" text="SIS"
-							textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="130.0" prefWidth="215.0" stylesheets="@MainFrame.css" text="SIS" textFill="WHITE">
 							<VBox.margin>
-								<Insets bottom="30.0" top="10.0" />
+								<Insets />
 							</VBox.margin>
 							<font>
 								<Font name="System Bold Italic" size="35.0" />
 							</font>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="Dashboardlbl" alignment="CENTER"
-							prefHeight="60.0" prefWidth="203.0" stylesheets="@MainFrame.css"
-							text="Dashboard" textFill="WHITE">
+						<Label id="Dashboardlbl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="205.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
 							<VBox.margin>
-								<Insets bottom="15.0" left="15.0" top="15.0" />
+								<Insets left="15.0" />
 							</VBox.margin>
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="StudentProflbl" fx:id="StudentProf"
-							alignment="CENTER" onMouseClicked="#StudentProfScene"
-							prefHeight="60.0" prefWidth="201.0" stylesheets="@MainFrame.css"
-							text="Student Profile" textFill="WHITE">
+						<Label id="StudentProflbl" fx:id="StudentProf" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#StudentProfScene" prefHeight="60.0" prefWidth="205.0" stylesheets="@MainFrame.css" text="Student Profile" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<VBox.margin>
-								<Insets bottom="15.0" left="15.0" top="15.0" />
+								<Insets left="15.0" />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="Timetablelbl" alignment="CENTER"
-							prefHeight="60.0" prefWidth="205.0" stylesheets="@MainFrame.css"
-							text="Timetable" textFill="WHITE">
+						<Label id="Timetablelbl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="205.0" stylesheets="@MainFrame.css" text="Timetable" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<VBox.margin>
-								<Insets bottom="15.0" left="15.0" top="15.0" />
+								<Insets left="15.0" />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="204.0" stylesheets="@MainFrame.css" text="Dashboard"
-							textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="205.0" stylesheets="@MainFrame.css" text="Enrollment" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<VBox.margin>
-								<Insets bottom="15.0" left="15.0" top="15.0" />
+								<Insets left="15.0" />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="Titleproj" alignment="CENTER" prefHeight="60.0"
-							prefWidth="203.0" stylesheets="@MainFrame.css" text="Dashboard"
-							textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="205.0" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<VBox.margin>
-								<Insets bottom="70.0" left="15.0" top="15.0" />
+								<Insets left="15.0" />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
-						<Label id="LogOutlbl" alignment="CENTER" prefHeight="60.0"
-							prefWidth="229.0" stylesheets="@MainFrame.css" text="Log Out"
-							textFill="WHITE">
+						<Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="205.0" stylesheets="@MainFrame.css" textFill="WHITE">
 							<font>
 								<Font name="Berlin Sans FB" size="20.0" />
 							</font>
 							<VBox.margin>
-								<Insets left="15.0" right="15.0" top="70.0" />
+								<Insets />
 							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
+						</Label>
+						<Label id="LogOutlbl" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="205.0" stylesheets="@MainFrame.css" text="Log Out" textFill="WHITE">
+							<font>
+								<Font name="Berlin Sans FB" size="20.0" />
+							</font>
+							<VBox.margin>
+								<Insets left="15.0" />
+							</VBox.margin>
+							<rotationAxis>
+								<Point3D />
+							</rotationAxis>
 						</Label>
 					</children>
 				</VBox>
@@ -272,23 +252,19 @@
 		</HBox>
 	</left>
 	<top>
-		<HBox prefHeight="50.0" prefWidth="1200.0"
-			BorderPane.alignment="CENTER">
+		<HBox prefHeight="50.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
 			<children>
 				<HBox prefHeight="50.0" prefWidth="300.0">
 					<children>
-						<Pane prefHeight="200.0" prefWidth="70.0"
-							style="-fx-background-color: #5d76dc;" />
-						<Pane id="upperNavlbl" prefHeight="50.0" prefWidth="230.0"
-							stylesheets="@MainFrame.css" />
+						<Pane prefHeight="200.0" prefWidth="70.0" style="-fx-background-color: #5d76dc;" />
+						<Pane id="upperNavlbl" prefHeight="50.0" prefWidth="230.0" stylesheets="@MainFrame.css" />
 					</children>
 				</HBox>
 			</children>
 		</HBox>
 	</top>
 	<center>
-		<StackPane prefHeight="150.0" prefWidth="200.0"
-			style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+		<StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: white;" stylesheets="@MainFrame.css" BorderPane.alignment="CENTER">
 			<BorderPane.margin>
 				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 			</BorderPane.margin>
