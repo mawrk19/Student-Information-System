@@ -155,7 +155,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="Enrollmentbtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Enrollment" textFill="WHITE">
+                  <Button id="Enrollmentbtn" fx:id="Enrollment" mnemonicParsing="false" onAction="#Enrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Enrollment" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="15.0" />
                      </VBox.margin>
