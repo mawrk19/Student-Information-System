@@ -2,14 +2,19 @@
 	-fx-background-color: #eff0f3;
 }
 
+#upperNavlbl{
+	-fx-border-radius: 0 25 0 0;
+	-fx-background-radius: 0 25 0 0;
+}
+
 #NavigationIcons{
 	-fx-background-color: #5d76dc;
 }
 
 #NavigationLabelsPane{
 	-fx-background-color: #3c5199;
-	-fx-border-radius: 0 25 25 0;
-	-fx-background-radius: 0 25 25 0;
+	-fx-border-radius: 0 0 25 0;
+	-fx-background-radius: 0 0 25 0;
 }
 
 #Dashboardlbl:hover{
