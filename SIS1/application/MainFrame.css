@@ -2,6 +2,12 @@
 	-fx-background-color: #eff0f3;
 }
 
+#upperNavlbl{
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 0 25 0 0;
+	-fx-background-radius: 0 25 0 0;
+}
+s
 #NavigationIcons{
 	-fx-background-color: #5d76dc;
 }
