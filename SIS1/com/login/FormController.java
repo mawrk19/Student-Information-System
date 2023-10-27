@@ -35,7 +35,7 @@ public class FormController {
 	@FXML
 	Button signInBTN;
 	@FXML
-	Label messLabel,tbox;
+	Label messLabel, tbox;
 
 		
 	public void LogIn(ActionEvent e) {
@@ -63,7 +63,6 @@ public class FormController {
 
 	public void ValidateCon(Stage stage) {
 		Connection con = DatabaseManager.getConnection();
-
 		String verifyLogin = "SELECT * FROM users WHERE username = ? AND password = ?";
 
 		try {
@@ -112,6 +111,7 @@ public class FormController {
 			stmt.setString(3, username);
 			stmt.setString(4, password);
 			if (fname.isEmpty() || lname.isEmpty() || username.isEmpty() || password.isEmpty()) {
+				//EB easter egg
 				tbox.setText("Kulang kulang ka ba?");
 				return;
 			}
