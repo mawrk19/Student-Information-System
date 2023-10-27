@@ -169,7 +169,6 @@ public class FormController {
 //	    }
 //	}
 
-	
 //	void showImage() {
 //		DatabaseManager connectNow = new DatabaseManager();
 //		Connection con = connectNow.getConnection();
