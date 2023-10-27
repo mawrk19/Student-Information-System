@@ -25,6 +25,9 @@ import javafx.stage.StageStyle;
 
 public class FormController {
 
+	
+
+	
 	@FXML
 	TextField emailField, regFname, regLname, regUser, regPass;
 	@FXML
@@ -34,6 +37,7 @@ public class FormController {
 	@FXML
 	Label messLabel,tbox;
 
+		
 	public void LogIn(ActionEvent e) {
 		if (!emailField.getText().isBlank() && !passField.getText().isBlank()) {
 			messLabel.setText("Incorrect username or password");
