@@ -26,17 +26,7 @@ public class MainFrameController implements Initializable{
     private StackPane stackarea;
     
     @FXML
-    private Button Dashboard;
-    
-    @FXML
-    private Button StudentProf;
-    
-    @FXML
-    private Button Timetable;
-    
-    @FXML
-    private Button Enrollment;
-   
+    private Button Dashboard,  StudentProf, Timetable, Enrollment;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
