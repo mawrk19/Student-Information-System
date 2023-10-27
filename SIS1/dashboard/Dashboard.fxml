@@ -1,10 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
    <children>
-      <Label layoutX="250.0" layoutY="190.0" text="DASHBOARD" />
+      <BorderPane layoutX="-1.0" layoutY="1.0" prefHeight="400.0" prefWidth="602.0">
+         <left>
+            <Pane prefHeight="228.0" prefWidth="233.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="191.0" layoutX="9.0" stroke="BLACK" strokeType="INSIDE" width="225.0" />
+                  <PieChart layoutX="25.0" layoutY="18.0" prefHeight="160.0" prefWidth="202.0" title="Pie" />
+               </children>
+            </Pane>
+         </left>
+         <center>
+            <Pane prefHeight="221.0" prefWidth="238.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="190.0" layoutX="16.0" stroke="BLACK" strokeType="INSIDE" width="231.0" />
+                  <StackedBarChart layoutX="9.0" layoutY="13.0" prefHeight="185.0" prefWidth="236.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </StackedBarChart>
+               </children>
+            </Pane>
+         </center>
+         <right>
+            <Pane prefHeight="228.0" prefWidth="131.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="364.0" layoutX="21.0" layoutY="-128.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
+               </children>
+            </Pane>
+         </right>
+         <bottom>
+            <Pane prefHeight="65.0" prefWidth="602.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="35.0" layoutX="9.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="471.0" />
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Pane>
+         </bottom>
+         <top>
+            <VBox prefHeight="99.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" stroke="BLACK" strokeType="INSIDE" width="472.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Rectangle>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="94.0" stroke="BLACK" strokeType="INSIDE" width="217.0">
+                           <HBox.margin>
+                              <Insets left="10.0" top="12.0" />
+                           </HBox.margin>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="114.0" stroke="BLACK" strokeType="INSIDE" width="117.0">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="140.0" />
+                           </HBox.margin>
+                        </Rectangle>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </top>
+      </BorderPane>
    </children>
 </Pane>
