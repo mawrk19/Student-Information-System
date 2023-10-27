@@ -32,7 +32,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../src/imgs_icons/Dashboard.png" />
                            </image>
@@ -47,7 +47,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../src/imgs_icons/Stud_Profile.png" />
                            </image>
@@ -62,7 +62,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../src/imgs_icons/Timetable.png" />
                            </image>
@@ -77,10 +77,13 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <rotationAxis>
                               <Point3D />
                            </rotationAxis>
+                           <image>
+                              <Image url="@../src/imgs_icons/Enrollment.png" />
+                           </image>
                         </ImageView>
                      </graphic>
                      <VBox.margin>
@@ -112,12 +115,15 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../src/imgs_icons/Logoff.png" />
                            </image>
                         </ImageView>
                      </graphic>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
                   </Label>
                </children>
             </VBox>
@@ -175,7 +181,7 @@
                   </Button>
                   <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Log Out" textFill="WHITE">
                      <VBox.margin>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets left="15.0" right="15.0" top="15.0" />
                      </VBox.margin>
                      <font>
                         <Font name="Berlin Sans FB" size="20.0" />
@@ -190,11 +196,26 @@
       </HBox>
    </left>
    <top>
-      <HBox prefHeight="50.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="60.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="50.0" prefWidth="300.0">
                <children>
-                  <Pane prefHeight="200.0" prefWidth="70.0" style="-fx-background-color: #5d76dc;" />
+                  <VBox prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #5d76dc;">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="70.0">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/Userprofile.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
                   <Pane id="upperNavlbl" prefHeight="50.0" prefWidth="230.0" stylesheets="@MainFrame.css" />
                </children>
             </HBox>
@@ -202,7 +223,7 @@
       </HBox>
    </top>
    <center>
-      <StackPane fx:id="stackarea" prefHeight="780.0" prefWidth="880.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <StackPane fx:id="stackarea" prefHeight="770.0" prefWidth="880.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
