@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="880.0" style="-fx-background-color: #EFF0F3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EnrollmentController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="880.0" style="-fx-background-color: #EFF0F3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EnrollmentController">
    <children>
       <AnchorPane layoutX="130.0" layoutY="265.0" prefHeight="284.0" prefWidth="254.0" style="-fx-background-color: #DFE2ED;">
          <children>
@@ -33,7 +33,7 @@
             <Label layoutX="745.0" layoutY="398.0" text="Address" />
             <TextField fx:id="emailtxtbox" layoutX="689.0" layoutY="457.0" />
             <Label layoutX="752.0" layoutY="440.0" text="Email" />
-            <Button fx:id="exportdata" layoutX="719.0" layoutY="544.0" mnemonicParsing="false" onAction="#exportdata" prefHeight="48.0" prefWidth="90.0" text="Import Data" />
+            <Button fx:id="exportdata" layoutX="719.0" layoutY="544.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" text="Import Data" />
       <AnchorPane layoutX="223.0" layoutY="125.0" prefHeight="48.0" prefWidth="366.0" style="-fx-background-color: #DFE2ED;" />
       <Label layoutX="286.0" layoutY="86.0" text="ENROLLMENT STATUS">
          <font>
