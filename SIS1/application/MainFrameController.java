@@ -3,6 +3,8 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 
 public class MainFrameController implements Initializable{
 
@@ -31,6 +34,13 @@ public class MainFrameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/WelcomePage.fxml"));
+			stackarea.getChildren().removeAll();
+			stackarea.getChildren().setAll(fxml);
+		} catch (IOException ex) {
+			Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 	
 	@FXML
@@ -77,9 +87,9 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 
-			 Pane studprofstage = FXMLLoader.load(getClass().getResource("/timetable/Timetable.fxml"));
+			 Pane timetablestage = FXMLLoader.load(getClass().getResource("/timetable/Timetable.fxml"));
 				stackarea.getChildren().removeAll();
-				stackarea.getChildren().setAll(studprofstage);
+				stackarea.getChildren().setAll(timetablestage);
 		 
    }
 	
@@ -93,9 +103,9 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.BLACK);
 		 
-			 Pane studprofstage = FXMLLoader.load(getClass().getResource("/enrollment/MainEnrollment.fxml"));
+			 Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
 				stackarea.getChildren().removeAll();
-				stackarea.getChildren().setAll(studprofstage);
+				stackarea.getChildren().setAll(enrollmentstage);
 		 
   }
    
