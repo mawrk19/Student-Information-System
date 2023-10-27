@@ -8,8 +8,16 @@
 	-fx-background-radius: 0 25 0 0;
 }
 
+#Closeicon{
+	-fx-background-color: #5d76dc;
+	-fx-border-radius: 5;
+	-fx-background-radius: 5;
+}
+
 #NavigationIcons{
 	-fx-background-color: #5d76dc;
+	-fx-border-radius: 0 0 25 0;
+	-fx-background-radius: 0 0 0 0;
 }
 
 #NavigationLabelsPane{
@@ -18,25 +26,25 @@
 	-fx-background-radius: 0 0 25 0;
 }
 
-#Dashboardbtn:hover{
+#Dbbtn:hover{
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#StudentProfbtn:hover{
+#StudentProfButton:hover{
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#Timetablebtn:hover{
+#TimetablebtButton:hover{
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#LogOutbtn:hover{
+#LogOutButton:hover{
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25;
 	-fx-background-radius: 25;

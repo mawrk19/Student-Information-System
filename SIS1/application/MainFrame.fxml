@@ -137,7 +137,7 @@
                         <Font name="System Bold Italic" size="35.0" />
                      </font>
                   </Label>
-                  <Button id="Dashboardbtn" fx:id="Dashboard" mnemonicParsing="false" onAction="#Dashboardbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
+                  <Button id="DashboardButton" fx:id="Dashboard" mnemonicParsing="false" onAction="#Dashboardbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Dashboard" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="15.0" />
                      </VBox.margin>
@@ -145,7 +145,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="StudentProfbtn" fx:id="StudentProf" mnemonicParsing="false" onAction="#StudentProfbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Student Profile" textFill="WHITE">
+                  <Button id="StudentProfButton" fx:id="StudentProf" mnemonicParsing="false" onAction="#StudentProfbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Student Profile" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="15.0" />
                      </VBox.margin>
@@ -153,7 +153,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="Timetablebtn" fx:id="Timetable" mnemonicParsing="false" onAction="#Timetablebtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Timetable" textFill="WHITE">
+                  <Button id="TimetableButton" fx:id="Timetable" mnemonicParsing="false" onAction="#Timetablebtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Timetable" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="15.0" />
                      </VBox.margin>
@@ -161,7 +161,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Button>
-                  <Button id="Enrollmentbtn" fx:id="Enrollment" mnemonicParsing="false" onAction="#Enrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Enrollment" textFill="WHITE">
+                  <Button id="EnrollmentButton" fx:id="Enrollment" mnemonicParsing="false" onAction="#Enrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Enrollment" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="15.0" />
                      </VBox.margin>
@@ -196,7 +196,7 @@
       </HBox>
    </left>
    <top>
-      <HBox prefHeight="60.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="55.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="50.0" prefWidth="300.0">
                <children>
@@ -204,28 +204,59 @@
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="70.0">
                            <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../src/imgs_icons/Userprofile.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                            <padding>
-                              <Insets top="5.0" />
+                              <Insets top="10.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </Label>
                      </children>
                   </VBox>
                   <Pane id="upperNavlbl" prefHeight="50.0" prefWidth="230.0" stylesheets="@MainFrame.css" />
                </children>
             </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="900.0">
+               <children>
+                  <Label id="Closeicon" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../src/imgs_icons/Minimize.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="10.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="Closeicon" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../src/imgs_icons/Close.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="15.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </HBox>
    </top>
    <center>
-      <StackPane fx:id="stackarea" prefHeight="770.0" prefWidth="880.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <StackPane fx:id="stackarea" prefHeight="765.0" prefWidth="880.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
          </BorderPane.margin>
       </StackPane>
    </center>
