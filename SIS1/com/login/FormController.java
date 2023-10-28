@@ -56,7 +56,7 @@ public class FormController {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
 			Scene scene = new Scene(root);
-			stage.setMaximized(true);
+			stage.setFullScreen(true);
 			stage.setScene(scene);
 			stage.show();
 			stage.isResizable();
@@ -78,7 +78,6 @@ public class FormController {
 			ResultSet result = stmt.executeQuery();
 
 			if (result.next()) {
-				// gets username
 				int sessionId = result.getInt("ID");
 				String sessionUsername = result.getString("fname");
 
@@ -138,60 +137,5 @@ public class FormController {
 
 	}
 	
-//	void getImage() {
-//	    DatabaseManager connectNow = new DatabaseManager();
-//	    Connection con = connectNow.getConnection();
-//	    
-//	    try {
-//	        File imageFile = new File("path_to_image.jpg");
-//	        FileInputStream fis = new FileInputStream(imageFile);
-//
-//	        String insertSql = "INSERT INTO Images (ImageName, ImageData) VALUES (?, ?)";
-//	        PreparedStatement pstmt = con.prepareStatement(insertSql);
-//	        pstmt.setString(1, "MyImage");
-//	        pstmt.setBinaryStream(2, fis, (int) imageFile.length());
-//	        pstmt.executeUpdate();
-//
-//	        pstmt.close();
-//	    } catch (FileNotFoundException e) {
-//	        e.printStackTrace();
-//	        // Handle the error, e.g., show an error message to the user
-//	    } catch (SQLException e) {
-//	        e.printStackTrace();
-//	        // Handle SQL-related errors
-//	    } finally {
-//	        try {
-//	            con.close();
-//	        } catch (SQLException e) {
-//	            e.printStackTrace();
-//	            // Handle any database connection closing errors
-//	        }
-//	    }
-//	}
 
-	
-//	void showImage() {
-//		DatabaseManager connectNow = new DatabaseManager();
-//		Connection con = connectNow.getConnection();
-//		int imageId = 1; // Change this to the desired ImageID
-//
-//		String selectSql = "SELECT ImageData FROM student WHERE ImageID = ?";
-//		PreparedStatement pstmt = con.prepareStatement(selectSql);
-//		pstmt.setInt(1, imageId);
-//		ResultSet rs = pstmt.executeQuery();
-//
-//		if (rs.next()) {
-//		    Blob imageBlob = rs.getBlob("ImageData");
-//		    InputStream imageStream = imageBlob.getBinaryStream();
-//
-//		    Image image = new Image(imageStream);
-//		    ImageView imageView = new ImageView(image);
-//		    // Add the imageView to your JavaFX scene for display
-//		}
-//
-//		rs.close();
-//		pstmt.close();
-//		con.close();
-//		
-//	}
 }
