@@ -29,7 +29,7 @@ public class MainFrameController implements Initializable{
     private StackPane stackarea;
     
     @FXML
-    private Button Dashboard,  StudentProf, Timetable, Enrollment;
+    private Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -51,6 +51,8 @@ public class MainFrameController implements Initializable{
 		 StudentProf.setTextFill(Color.WHITE);
 		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Timetable.setTextFill(Color.WHITE);
+		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Schedule.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 
@@ -68,6 +70,8 @@ public class MainFrameController implements Initializable{
 		 StudentProf.setTextFill(Color.BLACK);
 		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Timetable.setTextFill(Color.WHITE);
+		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Schedule.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 
@@ -84,6 +88,8 @@ public class MainFrameController implements Initializable{
 		 StudentProf.setTextFill(Color.WHITE);
 		 Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Timetable.setTextFill(Color.BLACK);
+		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Schedule.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 
@@ -93,6 +99,25 @@ public class MainFrameController implements Initializable{
 		 
    }
 	
+	public void Schedulebtn(ActionEvent event) throws IOException {
+		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Dashboard.setTextFill(Color.WHITE);
+		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 StudentProf.setTextFill(Color.WHITE);
+		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Timetable.setTextFill(Color.WHITE);
+		 Schedule.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Schedule.setTextFill(Color.BLACK);
+		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Enrollment.setTextFill(Color.WHITE);
+		 
+			 Pane schedulestage = FXMLLoader.load(getClass().getResource("/schedule/Schedule.fxml"));
+				stackarea.getChildren().removeAll();
+				stackarea.getChildren().setAll(schedulestage);
+		 
+ }
+
+	
 	public void Enrollmentbtn(ActionEvent event) throws IOException {
 		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Dashboard.setTextFill(Color.WHITE);
@@ -100,6 +125,8 @@ public class MainFrameController implements Initializable{
 		 StudentProf.setTextFill(Color.WHITE);
 		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Timetable.setTextFill(Color.WHITE);
+		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Schedule.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.BLACK);
 		 
