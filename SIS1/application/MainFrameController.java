@@ -36,8 +36,7 @@ public class MainFrameController implements Initializable{
 		// TODO Auto-generated method stub
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/WelcomePage.fxml"));
-			stackarea.getChildren().removeAll();
-			stackarea.getChildren().setAll(fxml);
+			Borderpane.setCenter(fxml);
 		} catch (IOException ex) {
 			Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -56,9 +55,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 
-			 Pane dashbordstage = FXMLLoader.load(getClass().getResource("/dashboard/Dashboard.fxml"));
-				stackarea.getChildren().removeAll();
-				stackarea.getChildren().setAll(dashbordstage);
+			 Pane dashboardstage = FXMLLoader.load(getClass().getResource("/dashboard/Dashboard.fxml"));
+			 Borderpane.setCenter(dashboardstage);
 		 
     }
 	
@@ -76,8 +74,7 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 
 			 Pane studprofstage = FXMLLoader.load(getClass().getResource("/studentprof/StudentProfile.fxml"));
-				stackarea.getChildren().removeAll();
-				stackarea.getChildren().setAll(studprofstage);
+			 Borderpane.setCenter(studprofstage);
 		 
     }
     
@@ -94,8 +91,7 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 
 			 Pane timetablestage = FXMLLoader.load(getClass().getResource("/timetable/Timetable.fxml"));
-				stackarea.getChildren().removeAll();
-				stackarea.getChildren().setAll(timetablestage);
+			 Borderpane.setCenter(timetablestage);
 		 
    }
 	
@@ -112,8 +108,7 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 
 			 Pane schedulestage = FXMLLoader.load(getClass().getResource("/schedule/Schedule.fxml"));
-				stackarea.getChildren().removeAll();
-				stackarea.getChildren().setAll(schedulestage);
+			 Borderpane.setCenter(schedulestage);
 		 
  }
 
@@ -131,8 +126,7 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.BLACK);
 		 
 			 Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
-				stackarea.getChildren().removeAll();
-				stackarea.getChildren().setAll(enrollmentstage);
+			 Borderpane.setCenter(enrollmentstage);
 		 
   }
    

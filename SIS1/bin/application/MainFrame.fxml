@@ -238,7 +238,7 @@
             </HBox>
             <HBox alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label id="Closeicon" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css">
+                  <Label id="Closeicon" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css" HBox.hgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -250,7 +250,7 @@
                         <Insets right="10.0" top="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Label id="Closeicon" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css">
+                  <Label id="Closeicon" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css" HBox.hgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
