@@ -249,7 +249,7 @@
                         <Insets right="10.0" top="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Label id="Closeicon" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css" HBox.hgrow="ALWAYS">
+                  <Label id="Closeicon" fx:id="Exit" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css" HBox.hgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>

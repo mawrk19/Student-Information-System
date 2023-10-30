@@ -13,10 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
@@ -25,6 +22,9 @@ public class MainFrameController implements Initializable{
 
 	@FXML
 	private BorderPane Borderpane;
+	
+	@FXML
+	private Label Exit;
 	
     @FXML 
     private AnchorPane contentarea;
@@ -35,13 +35,23 @@ public class MainFrameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+		Exit.setOnMouseClicked(event -> {
+			System.exit(0);
+		});
+		
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/WelcomePage.fxml"));
 			contentarea.getChildren().removeAll();
 			contentarea.getChildren().setAll(fxml);
+			AnchorPane.setLeftAnchor(fxml, 10.0);
+			AnchorPane.setRightAnchor(fxml, 10.0);
+			AnchorPane.setTopAnchor(fxml, 10.0);
+			AnchorPane.setBottomAnchor(fxml, 0.0);
 		} catch (IOException ex) {
 			Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
 		}
+		
 	}
 	
 	@FXML
@@ -60,7 +70,10 @@ public class MainFrameController implements Initializable{
 		 Pane dashboardstage = FXMLLoader.load(getClass().getResource("/dashboard/Dashboard.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(dashboardstage);
-		 
+		 AnchorPane.setLeftAnchor(dashboardstage, 10.0);
+		 AnchorPane.setRightAnchor(dashboardstage, 10.0);
+		 AnchorPane.setTopAnchor(dashboardstage, 10.0);
+		 AnchorPane.setBottomAnchor(dashboardstage, 0.0);
     }
 	
 	@FXML
@@ -79,6 +92,10 @@ public class MainFrameController implements Initializable{
 		 Pane studprofstage = FXMLLoader.load(getClass().getResource("/studentprof/StudentProfile.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(studprofstage);
+		 AnchorPane.setLeftAnchor(studprofstage, 10.0);
+		 AnchorPane.setRightAnchor(studprofstage, 10.0);
+		 AnchorPane.setTopAnchor(studprofstage, 10.0);
+		 AnchorPane.setBottomAnchor(studprofstage, 0.0);
 		 
     }
     
@@ -97,6 +114,11 @@ public class MainFrameController implements Initializable{
 		 Pane timetablestage = FXMLLoader.load(getClass().getResource("/timetable/Timetable.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(timetablestage);
+		 AnchorPane.setLeftAnchor(timetablestage, 10.0);
+		 AnchorPane.setRightAnchor(timetablestage, 10.0);
+		 AnchorPane.setTopAnchor(timetablestage, 10.0);
+		 AnchorPane.setBottomAnchor(timetablestage, 0.0);
+		 
 		 
    }
 	
@@ -115,6 +137,10 @@ public class MainFrameController implements Initializable{
 		 Pane schedulestage = FXMLLoader.load(getClass().getResource("/schedule/Schedule.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(schedulestage);
+		 AnchorPane.setLeftAnchor(schedulestage, 10.0);
+		 AnchorPane.setRightAnchor(schedulestage, 10.0);
+		 AnchorPane.setTopAnchor(schedulestage, 10.0);
+		 AnchorPane.setBottomAnchor(schedulestage, 0.0);
 		 
  }
 
@@ -134,6 +160,10 @@ public class MainFrameController implements Initializable{
 		 Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(enrollmentstage);
+		 AnchorPane.setLeftAnchor(enrollmentstage, 10.0);
+		 AnchorPane.setRightAnchor(enrollmentstage, 10.0);
+		 AnchorPane.setTopAnchor(enrollmentstage, 10.0);
+		 AnchorPane.setBottomAnchor(enrollmentstage, 0.0);
 		 
   }
    
