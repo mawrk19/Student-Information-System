@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="880.0" style="-fx-background-color: #eff0f3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="880.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="189.0" layoutY="324.0" text="OPENING BAHALA N KYO DTO" AnchorPane.bottomAnchor="413.0" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="324.0">
          <font>
