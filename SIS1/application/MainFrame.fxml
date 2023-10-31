@@ -246,7 +246,7 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets right="10.0" top="20.0" />
+                        <Insets bottom="10.0" right="10.0" top="15.0" />
                      </HBox.margin>
                   </Label>
                   <Label id="Closeicon" fx:id="Exit" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@MainFrame.css" HBox.hgrow="ALWAYS">
@@ -258,7 +258,7 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets right="15.0" top="20.0" />
+                        <Insets bottom="10.0" right="15.0" top="15.0" />
                      </HBox.margin>
                   </Label>
                </children>
@@ -269,7 +269,7 @@
    <center>
       <AnchorPane fx:id="contentarea" prefHeight="790.0" prefWidth="870.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" />
          </BorderPane.margin>
       </AnchorPane>
    </center>
