@@ -47,7 +47,7 @@ public class MainFrameController implements Initializable{
 			AnchorPane.setLeftAnchor(fxml, 10.0);
 			AnchorPane.setRightAnchor(fxml, 10.0);
 			AnchorPane.setTopAnchor(fxml, 10.0);
-			AnchorPane.setBottomAnchor(fxml, 0.0);
+			AnchorPane.setBottomAnchor(fxml, 20.0);
 		} catch (IOException ex) {
 			Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -73,7 +73,7 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setLeftAnchor(dashboardstage, 10.0);
 		 AnchorPane.setRightAnchor(dashboardstage, 10.0);
 		 AnchorPane.setTopAnchor(dashboardstage, 10.0);
-		 AnchorPane.setBottomAnchor(dashboardstage, 0.0);
+		 AnchorPane.setBottomAnchor(dashboardstage, 20.0);
     }
 	
 	@FXML
@@ -95,7 +95,7 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setLeftAnchor(studprofstage, 10.0);
 		 AnchorPane.setRightAnchor(studprofstage, 10.0);
 		 AnchorPane.setTopAnchor(studprofstage, 10.0);
-		 AnchorPane.setBottomAnchor(studprofstage, 0.0);
+		 AnchorPane.setBottomAnchor(studprofstage, 20.0);
 		 
     }
     
@@ -117,7 +117,7 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setLeftAnchor(timetablestage, 10.0);
 		 AnchorPane.setRightAnchor(timetablestage, 10.0);
 		 AnchorPane.setTopAnchor(timetablestage, 10.0);
-		 AnchorPane.setBottomAnchor(timetablestage, 0.0);
+		 AnchorPane.setBottomAnchor(timetablestage, 20.0);
 		 
 		 
    }
@@ -140,7 +140,7 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setLeftAnchor(schedulestage, 10.0);
 		 AnchorPane.setRightAnchor(schedulestage, 10.0);
 		 AnchorPane.setTopAnchor(schedulestage, 10.0);
-		 AnchorPane.setBottomAnchor(schedulestage, 0.0);
+		 AnchorPane.setBottomAnchor(schedulestage, 20.0);
 		 
  }
 
@@ -163,7 +163,7 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setLeftAnchor(enrollmentstage, 10.0);
 		 AnchorPane.setRightAnchor(enrollmentstage, 10.0);
 		 AnchorPane.setTopAnchor(enrollmentstage, 10.0);
-		 AnchorPane.setBottomAnchor(enrollmentstage, 0.0);
+		 AnchorPane.setBottomAnchor(enrollmentstage, 20.0);
 		 
   }
    

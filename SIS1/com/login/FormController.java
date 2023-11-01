@@ -1,10 +1,5 @@
 package com.login;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +7,6 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.html.ImageView;
 
 import application.DatabaseManager;
 import application.UserSession;
@@ -25,13 +19,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class FormController {
-	
+
 	@FXML
 	TextField emailField, regFname, regLname, regUser, regPass;
 	@FXML
@@ -39,11 +32,9 @@ public class FormController {
 	@FXML
 	Button signInBTN;
 	@FXML
-	Label messLabel, tbox;
-	@FXML
-	ImageView mageView;
-		
-	void LogIn(ActionEvent e) {
+	Label messLabel,tbox;
+
+	public void LogIn(ActionEvent e) {
 		if (!emailField.getText().isBlank() && !passField.getText().isBlank()) {
 			messLabel.setText("Incorrect username or password");
 		} else {
@@ -52,12 +43,12 @@ public class FormController {
 		ValidateCon((Stage) signInBTN.getScene().getWindow()); // Pass the stage
 	}
 
-	void openMF(Stage stage) {
+	public void openMF(Stage stage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
-			Scene scene = new Scene(root);
-			stage.setFullScreen(true);
+			Scene scene = new Scene(root, 1200, 850);
 			stage.setScene(scene);
+			stage.setFullScreen(true);
 			stage.show();
 			stage.isResizable();
 		} catch (Exception e) {
@@ -66,8 +57,9 @@ public class FormController {
 		}
 	}
 
-	void ValidateCon(Stage stage) {
+	public void ValidateCon(Stage stage) {
 		Connection con = DatabaseManager.getConnection();
+
 		String verifyLogin = "SELECT * FROM users WHERE username = ? AND password = ?";
 
 		try {
@@ -78,6 +70,7 @@ public class FormController {
 			ResultSet result = stmt.executeQuery();
 
 			if (result.next()) {
+				// gets username
 				int sessionId = result.getInt("ID");
 				String sessionUsername = result.getString("fname");
 
@@ -96,7 +89,7 @@ public class FormController {
 		}
 	}
 
-	void getInfo(ActionEvent e) {
+	public void getInfo(ActionEvent e) {
 		DatabaseManager connectNow = new DatabaseManager();
 		Connection con = connectNow.getConnection();
 
@@ -105,7 +98,7 @@ public class FormController {
 		String username = regUser.getText();
 		String password = regPass.getText();
 
-		String infos = "INSERT INTO users (FName, LName, username, password) VALUE(?,?,?,?)";
+		String infos = "INSERT INTO users	(FName, LName, username, password) VALUE(?,?,?,?)";
 
 		try {
 			PreparedStatement stmt = con.prepareStatement(infos);
@@ -115,7 +108,6 @@ public class FormController {
 			stmt.setString(3, username);
 			stmt.setString(4, password);
 			if (fname.isEmpty() || lname.isEmpty() || username.isEmpty() || password.isEmpty()) {
-				//EB easter egg
 				tbox.setText("Kulang kulang ka ba?");
 				return;
 			}
@@ -136,4 +128,5 @@ public class FormController {
 		}
 
 	}
+
 }
