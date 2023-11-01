@@ -17,8 +17,6 @@ public class EnrollmentController {
 	@FXML
 	TextField fname, mname, lname, sid;
 	@FXML
-	TextField emailField, regFname, regLname, regUser, regPass;
-	@FXML
 	PasswordField passField;
 	@FXML
 	Button signInBTN;
