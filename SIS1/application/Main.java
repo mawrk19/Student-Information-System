@@ -13,11 +13,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-    	//Parent root = FXMLLoader.load(getClass().getResource("/com/login/MainLogin.fxml"));  
-    	Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
-        Scene scene = new Scene(root, 1200, 850);
+    	Parent root = FXMLLoader.load(getClass().getResource("/com/login/MainLogin.fxml"));  
+    	//Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
+        Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
-        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
