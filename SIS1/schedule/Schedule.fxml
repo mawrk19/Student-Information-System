@@ -7,15 +7,17 @@
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schedule.ScheduleController">
    <children>
-      <Button fx:id="BtnTimetable" layoutX="40.0" layoutY="34.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="455.0" text=" BUTTON TO TIMETABLE" AnchorPane.bottomAnchor="506.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="34.0" />
-      <Rectangle fx:id="CALENDER" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="227.0" layoutX="512.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" width="319.0" AnchorPane.bottomAnchor="482.0" AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="81.0" />
-      <Rectangle fx:id="schedBG" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="335.0" layoutX="40.0" layoutY="407.0" stroke="BLACK" strokeType="INSIDE" width="790.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="407.0" />
+      <VBox layoutX="-1.0" layoutY="24.0" prefHeight="730.0" prefWidth="870.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="-26.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="24.0" />
+      <Button id="BtnTimetable" layoutX="40.0" layoutY="34.0" mnemonicParsing="false" prefHeight="250.0" prefWidth="455.0" text=" BUTTON TO TIMETABLE" />
+      <Rectangle id="CALENDER" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="227.0" layoutX="512.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" width="319.0" />
+      <Rectangle id="schedBG" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="335.0" layoutX="40.0" layoutY="407.0" stroke="BLACK" strokeType="INSIDE" width="790.0" />
       <TreeTableView layoutX="73.0" layoutY="443.0" prefHeight="268.0" prefWidth="721.0">
         <columns>
           <TreeTableColumn prefWidth="90.0" text="SUBJECT CODE" />
@@ -29,13 +31,13 @@
             <TreeTableColumn prefWidth="60.0" text="SLOTS" />
         </columns>
       </TreeTableView>
-      <Text fx:id="YRSECtxt" layoutX="40.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YEAR  AND SECTION" wrappingWidth="329.9921875" AnchorPane.bottomAnchor="433.767578125" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="500.0078125" AnchorPane.topAnchor="314.5478515625">
+      <Text fx:id="YRSECtxt" layoutX="40.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YEAR  AND SECTION" wrappingWidth="329.9921875">
          <font>
             <Font size="31.0" />
          </font>
       </Text>
       <Label layoutX="630.0" layoutY="176.0" text="CALENDAR  TO" />
-      <TextField fx:id="searchCD" layoutX="512.0" layoutY="35.0" opacity="0.87" prefHeight="35.0" prefWidth="319.0" promptText="Search..." AnchorPane.bottomAnchor="720.0" AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="35.0">
+      <TextField fx:id="searchCD" layoutX="512.0" layoutY="35.0" opacity="0.87" prefHeight="35.0" prefWidth="319.0" promptText="Search...">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
