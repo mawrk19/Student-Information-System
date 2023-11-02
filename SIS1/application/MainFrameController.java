@@ -13,10 +13,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class MainFrameController implements Initializable{
 
@@ -24,7 +26,7 @@ public class MainFrameController implements Initializable{
 	private BorderPane Borderpane;
 	
 	@FXML
-	private Label Exit;
+	private Label Exit, Maximize, Minimize;
 	
     @FXML 
     private AnchorPane contentarea;
@@ -40,6 +42,8 @@ public class MainFrameController implements Initializable{
 			System.exit(0);
 		});
 		
+		
+		
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/WelcomePage.fxml"));
 			contentarea.getChildren().removeAll();
@@ -52,6 +56,21 @@ public class MainFrameController implements Initializable{
 			Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		
+	}
+	
+	@FXML
+	public void Maximizebtn(MouseEvent event) {
+		Stage stage = (Stage) Maximize.getScene().getWindow();
+		if(stage.isMaximized()) {
+			stage.setMaximized(false);
+		}else {
+			stage.setMaximized(true);
+		}
+	}
+	
+	public void Minimizebtn(MouseEvent event) {
+		Stage stage = (Stage) Minimize.getScene().getWindow();
+		stage.setIconified(true);
 	}
 	
 	@FXML
