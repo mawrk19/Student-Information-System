@@ -48,7 +48,6 @@ public class FormController {
 			Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
 			Scene scene = new Scene(root, 1200, 850);
 			stage.setScene(scene);
-			stage.setFullScreen(true);
 			stage.show();
 			stage.isResizable();
 		} catch (Exception e) {
