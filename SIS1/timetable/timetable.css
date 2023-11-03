@@ -22,18 +22,21 @@
 	-fx-border-color: #D9D9D9;
 	-fx-border-width: 2px; 
 	-fx-border-radius: 24;
+	-fx-text-fill: white;
 }
 
 #Semester {
 	-fx-border-color: #D9D9D9;
 	-fx-border-width: 2px; 
 	-fx-border-radius: 24;
+	-fx-text-fill: white;
 }
 
 #Year {
 	-fx-border-color: #D9D9D9;
 	-fx-border-width: 2px; 
 	-fx-border-radius: 24;
+	-fx-text-fill: white;
 }
 
 #button {

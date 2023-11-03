@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@timetable.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
@@ -29,37 +29,30 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Pane id="Container" layoutX="37.0" layoutY="36.0" prefHeight="101.0" prefWidth="795.0" stylesheets="@timetable.css">
+      <AnchorPane layoutX="37.0" layoutY="36.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="36.0">
          <children>
-            <Pane id="Course" layoutX="22.0" layoutY="18.0" prefHeight="35.0" prefWidth="752.0" stylesheets="@timetable.css">
+            <AnchorPane id="Container" prefHeight="100.0" prefWidth="800.0" stylesheets="@timetable.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TextField id="text" alignment="CENTER" layoutX="106.0" layoutY="2.0" prefHeight="26.0" prefWidth="540.0" stylesheets="@timetable.css" text="COURSE">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </TextField>
+                  <AnchorPane id="Course" layoutX="22.0" layoutY="16.0" stylesheets="@timetable.css" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="21.0">
+                     <children>
+                        <TextField id="text" alignment="CENTER" prefHeight="30.0" prefWidth="540.0" stylesheets="@timetable.css" text="COURSE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+                  <HBox layoutX="46.0" layoutY="58.0" prefHeight="35.0" prefWidth="700.0" spacing="75.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="58.0">
+                     <children>
+                        <TextField id="AY" alignment="CENTER" style="-fx-background-color: transparent;" stylesheets="@timetable.css" text="A.Y" HBox.hgrow="ALWAYS" />
+                        <TextField id="Semester" alignment="CENTER" style="-fx-background-color: transparent;" stylesheets="@timetable.css" text="SEMESTER" HBox.hgrow="ALWAYS" />
+                        <TextField id="Year" alignment="CENTER" style="-fx-background-color: transparent;" stylesheets="@timetable.css" text="YEAR LEVEL" HBox.hgrow="ALWAYS" />
+                        <Button id="button" mnemonicParsing="false" prefHeight="29.0" prefWidth="121.0" stylesheets="@timetable.css" text="Edit Timetable" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
                </children>
-            </Pane>
-            <Pane id="AY" layoutX="72.0" layoutY="62.0" prefHeight="35.0" prefWidth="127.0" stylesheets="@timetable.css">
-               <children>
-                  <TextField id="text" alignment="CENTER" layoutX="6.0" layoutY="5.0" prefHeight="20.0" prefWidth="115.0" stylesheets="@timetable.css" text="A.Y" />
-               </children>
-            </Pane>
-            <Pane id="Semester" layoutX="271.0" layoutY="61.0" prefHeight="35.0" prefWidth="127.0" stylesheets="@timetable.css">
-               <children>
-                  <TextField id="text" alignment="CENTER" layoutX="6.0" layoutY="5.0" prefHeight="20.0" prefWidth="115.0" stylesheets="@timetable.css" text="SEMESTER" />
-               </children>
-            </Pane>
-            <Pane id="Year" layoutX="456.0" layoutY="60.0" prefHeight="35.0" prefWidth="127.0" stylesheets="@timetable.css">
-               <children>
-                  <TextField id="text" alignment="CENTER" layoutX="6.0" layoutY="5.0" prefHeight="20.0" prefWidth="115.0" stylesheets="@timetable.css" text="YEAR LEVEL" />
-               </children>
-            </Pane>
-            <Button id="button" layoutX="618.0" layoutY="60.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="109.0" stylesheets="@timetable.css" text="edit timetable" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Button>
-         </children></Pane>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
