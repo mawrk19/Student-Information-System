@@ -6,11 +6,19 @@
 }
 .trans-btn-white-border{
     -fx-background-color: transparent;
-    -fx-background-radius: 5px;
     -fx-border-color: #cccccc;
     -fx-border-radius: 5px;
     -fx-border-width: 1px;
     -fx-text-fill: whitesmoke;
+}
+
+.trans-btn-white-border:hover{
+    -fx-background-color:#2196f3 ;
+    -fx-background-radius:6px;
+    -fx-border-color: white;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: white;
 }
 .white-pane{
     -fx-background-color: #ffffff;
@@ -28,7 +36,20 @@
 }
 .blue-btn{
     -fx-background-color: #2196f3;
+    -fx-text-fill:white;
     -fx-background-radius: 5px;
+    -fx-border-color: #2196f3;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+.blue-btn:hover{
+    -fx-background-color:transparent;
+    -fx-text-fill: #00BFFF;
+    -fx-background-radius: 5px;
+    -fx-border-color: #2196f3;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
 }
 
 .Label {
