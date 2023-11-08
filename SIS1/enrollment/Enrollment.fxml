@@ -13,9 +13,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EnrollmentController">
    <children>
-      <AnchorPane prefHeight="790.0" prefWidth="870.0" style="-fx-background-color: #3C5199;" stylesheets="@Enrollment.css">
+      <AnchorPane prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css">
          <children>
-            <AnchorPane layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #DFE2ED;">
+            <AnchorPane layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #DFE2ED;" stylesheets="@Enrollment.css">
                <children>
                   <TableView layoutX="12.0" layoutY="12.0" prefHeight="424.0" prefWidth="800.0">
                     <columns>
@@ -27,7 +27,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" style="-fx-background-color: #DFE2ED;">
+            <AnchorPane layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" stylesheets="@../com/login/styles.css">
                <children>
                   <ImageView fx:id="insertIMG" fitHeight="188.0" fitWidth="201.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
                   <HBox layoutX="237.0" layoutY="13.0" prefHeight="197.0" prefWidth="575.0" style="-fx-background-color: grey;">

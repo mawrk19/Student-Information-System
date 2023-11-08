@@ -1,6 +1,6 @@
-#Body {
+.Body {
 	-fx-background-color:  #3C5199;
 }
-#Containers {
+.Containers {
 	-fx-background-color:  #DFE2ED;
 }
