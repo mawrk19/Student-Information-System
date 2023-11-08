@@ -42,8 +42,6 @@ public class MainFrameController implements Initializable{
 			System.exit(0);
 		});
 		
-		
-		
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/WelcomePage.fxml"));
 			contentarea.getChildren().removeAll();
@@ -186,6 +184,5 @@ public class MainFrameController implements Initializable{
 		 
   }
    
-
 }
     
