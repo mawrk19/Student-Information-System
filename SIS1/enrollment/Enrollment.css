@@ -9,34 +9,11 @@
 }
 .enrollBTN {
 	-fx-background-color:  #DFE2ED;
-}
-/* Apply the style to the ComboBox */
+	}
+	
 .combo-box {
-    -fx-background-color: #f2f2f2; /* Background color */
-    -fx-border-color: #ccc; /* Border color */
-    -fx-border-width: 1px; /* Border width */
-    -fx-border-radius: 3px; /* Border radius */
-}
-
-/* Style the arrow button on the right of the ComboBox */
-.combo-box .arrow-button {
-    -fx-background-color: #ccc; /* Arrow button background color */
-}
-
-/* Style the list view that drops down when the ComboBox is clicked */
-.combo-box .list-view {
-    -fx-background-color: #ffffff; /* List view background color */
-}
-
-/* Style the items in the list view */
-.combo-box .list-view .list-cell {
-    -fx-padding: 5px 10px; /* Padding for each list item */
-    -fx-background-color: #ffffff; /* List item background color */
-    -fx-text-fill: #000; /* List item text color */
-}
-
-/* Style the selected item in the list view */
-.combo-box .list-view .list-cell:selected {
-    -fx-background-color: #0078d4; /* Selected item background color */
-    -fx-text-fill: #fff; /* Selected item text color */
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #ccc; 
+    -fx-border-width: 1px; 
+    -fx-border-radius: 3px; 
 }

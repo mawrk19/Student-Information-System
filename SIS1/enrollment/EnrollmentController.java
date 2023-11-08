@@ -65,6 +65,8 @@ public class EnrollmentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    	
+
         // Initialize ComboBoxes with sample data
         ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
         courseCMB.setItems(courses);
