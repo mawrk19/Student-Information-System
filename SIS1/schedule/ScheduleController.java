@@ -35,7 +35,7 @@ import javafx.fxml.FXMLLoader;
 	       public void initialize() {
 	           BtnTimetable.setOnMouseClicked(event -> {
 	               
-	                FXMLLoader loader = new FXMLLoader(getClass().getResource("/timetable/Timetable.fxml"));
+	                FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
 	                Parent root = null;
 					try {
 						root = loader.load();
