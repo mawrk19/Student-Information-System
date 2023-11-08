@@ -1,5 +1,7 @@
 package enrollment;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -16,6 +19,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import application.DatabaseManager;
@@ -75,6 +80,14 @@ public class EnrollmentController implements Initializable {
 
         ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd","4th");
         yrCMB.setItems(years);
+        
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            dateTF.setText(formatter.format(now));
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
     }
 
     @FXML
