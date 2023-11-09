@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -29,43 +30,30 @@ public class EnrollmentController implements Initializable {
 
     @FXML
     private ComboBox<String> courseCMB;
-
+    
     @FXML
-    private TextField dateTF;
+    private ComboBox<String> genderCMB;
+    
+    @FXML
+    private ComboBox<String> locCMB;
+    
+    @FXML
+    private ComboBox<String> secCMB;
+    
+    @FXML
+    private ComboBox<String> yrCMB;
+    
+    @FXML
+    private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
 
     @FXML
     private Button enrollBTN;
 
     @FXML
-    private TextField fNameTF;
-
-    @FXML
-    private ComboBox<String> genderCMB;
-
-    @FXML
     private ImageView insertIMG;
-
-    @FXML
-    private TextField lNameTF;
-
-    @FXML
-    private ComboBox<String> locCMB;
-
-    @FXML
-    private TextField mNameTF;
-
-    @FXML
-    private ComboBox<String> secCMB;
-
-    @FXML
-    private TextField sidTF;
-
-    @FXML
-    private ComboBox<String> yrCMB;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	
 
         // Initialize ComboBoxes with sample data
         ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
@@ -90,6 +78,7 @@ public class EnrollmentController implements Initializable {
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
     }
 
     @FXML
@@ -146,7 +135,6 @@ public class EnrollmentController implements Initializable {
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle database errors here
         }
     }
 

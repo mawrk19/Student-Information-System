@@ -9,50 +9,81 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@timetable.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <effect>
-      <Blend />
-   </effect>
-   <children>
-      <TableView id="table" layoutX="41.0" layoutY="158.0" prefHeight="593.0" prefWidth="787.0" stylesheets="@timetable.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="158.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="TIME" />
-          <TableColumn prefWidth="75.0" text="MONDAY" />
-            <TableColumn prefWidth="75.0" text="TUESDAY" />
-            <TableColumn prefWidth="75.0" text="WEDNESDAY" />
-            <TableColumn prefWidth="75.0" text="THURSDAY" />
-            <TableColumn prefWidth="75.0" text="FRIDAY" />
-            <TableColumn prefWidth="75.0" text="SATURDAY" />
-            <TableColumn prefWidth="75.0" text="SUNDAY" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <AnchorPane layoutX="37.0" layoutY="36.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="36.0">
-         <children>
-            <AnchorPane id="Container" prefHeight="100.0" prefWidth="800.0" stylesheets="@timetable.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane id="Course" layoutX="22.0" layoutY="16.0" stylesheets="@timetable.css" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="21.0">
-                     <children>
-                        <TextField id="text" alignment="CENTER" prefHeight="30.0" prefWidth="540.0" stylesheets="@timetable.css" text="COURSE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="0.0">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </AnchorPane>
-                  <HBox layoutX="46.0" layoutY="58.0" prefHeight="35.0" prefWidth="700.0" spacing="75.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="58.0">
-                     <children>
-                        <TextField id="AY" alignment="CENTER" style="-fx-background-color: transparent;" stylesheets="@timetable.css" text="A.Y" HBox.hgrow="ALWAYS" />
-                        <TextField id="Semester" alignment="CENTER" style="-fx-background-color: transparent;" stylesheets="@timetable.css" text="SEMESTER" HBox.hgrow="ALWAYS" />
-                        <TextField id="Year" alignment="CENTER" style="-fx-background-color: transparent;" stylesheets="@timetable.css" text="YEAR LEVEL" HBox.hgrow="ALWAYS" />
-                        <Button id="button" mnemonicParsing="false" prefHeight="29.0" prefWidth="121.0" stylesheets="@timetable.css" text="Edit Timetable" textFill="WHITE" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane id="background" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="790.0" prefWidth="870.0" stylesheets="@timetable.css"
+	xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+	<effect>
+		<Blend />
+	</effect>
+	<children>
+		<TableView id="table" layoutX="41.0" layoutY="158.0"
+			prefHeight="593.0" prefWidth="787.0" stylesheets="@timetable.css"
+			AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="41.0"
+			AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="158.0">
+			<columns>
+				<TableColumn prefWidth="75.0" text="TIME" />
+				<TableColumn prefWidth="75.0" text="MONDAY" />
+				<TableColumn prefWidth="75.0" text="TUESDAY" />
+				<TableColumn prefWidth="75.0" text="WEDNESDAY" />
+				<TableColumn prefWidth="75.0" text="THURSDAY" />
+				<TableColumn prefWidth="75.0" text="FRIDAY" />
+				<TableColumn prefWidth="75.0" text="SATURDAY" />
+				<TableColumn prefWidth="75.0" text="SUNDAY" />
+			</columns>
+			<columnResizePolicy>
+				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			</columnResizePolicy>
+		</TableView>
+		<AnchorPane layoutX="37.0" layoutY="36.0"
+			AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="38.0"
+			AnchorPane.topAnchor="36.0">
+			<children>
+				<AnchorPane id="Container" prefHeight="100.0"
+					prefWidth="800.0" stylesheets="@timetable.css"
+					AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+					AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<AnchorPane id="Course" layoutX="22.0" layoutY="16.0"
+							stylesheets="@timetable.css" AnchorPane.leftAnchor="22.0"
+							AnchorPane.rightAnchor="21.0">
+							<children>
+								<TextField id="text" alignment="CENTER"
+									prefHeight="30.0" prefWidth="540.0"
+									stylesheets="@timetable.css" text="COURSE"
+									AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0"
+									AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="0.0">
+									<font>
+										<Font name="System Bold" size="15.0" />
+									</font>
+								</TextField>
+							</children>
+						</AnchorPane>
+						<HBox layoutX="46.0" layoutY="58.0" prefHeight="35.0"
+							prefWidth="700.0" spacing="75.0" AnchorPane.bottomAnchor="6.0"
+							AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0"
+							AnchorPane.topAnchor="58.0">
+							<children>
+								<TextField id="AY" alignment="CENTER"
+									style="-fx-background-color: transparent;"
+									stylesheets="@timetable.css" text="A.Y" HBox.hgrow="ALWAYS" />
+								<TextField id="Semester" alignment="CENTER"
+									style="-fx-background-color: transparent;"
+									stylesheets="@timetable.css" text="SEMESTER"
+									HBox.hgrow="ALWAYS" />
+								<TextField id="Year" alignment="CENTER"
+									style="-fx-background-color: transparent;"
+									stylesheets="@timetable.css" text="YEAR LEVEL"
+									HBox.hgrow="ALWAYS" />
+								<Button id="button" mnemonicParsing="false"
+									prefHeight="29.0" prefWidth="121.0"
+									stylesheets="@timetable.css" text="Edit Timetable"
+									textFill="WHITE" HBox.hgrow="ALWAYS" />
+							</children>
+						</HBox>
+					</children>
+				</AnchorPane>
+			</children>
+		</AnchorPane>
+	</children>
 </AnchorPane>
