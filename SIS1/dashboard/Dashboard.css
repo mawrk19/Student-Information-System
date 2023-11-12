@@ -1,0 +1,30 @@
+#background {
+	-fx-background-color:#eff0f3;
+}
+
+#greeting {
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 24;
+}
+
+#preview {
+	-fx-background-color: #3C5199;
+	-fx-opacity: 0.82;
+	-fx-background-radius: 24;
+}
+
+#pie {
+	-fx-background-color: #C9CAD9;
+	-fx-opacity: 0.82;
+	-fx-background-radius: 24;
+}
+
+#bar {
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 24;
+}
+
+#marquee {
+	-fx-background-color: #C9CAD9;
+	-fx-background-radius: 24;
+}

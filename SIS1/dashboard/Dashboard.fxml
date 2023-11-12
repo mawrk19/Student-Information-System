@@ -1,93 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0">
+      <AnchorPane prefHeight="790.0" prefWidth="870.0">
          <children>
-            <BorderPane layoutX="134.0" layoutY="195.0" prefHeight="400.0" prefWidth="602.0">
-               <left>
-                  <Pane prefHeight="228.0" prefWidth="233.0" BorderPane.alignment="CENTER">
+            <AnchorPane id="background" layoutX="350.0" layoutY="255.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="21.0">
+               <children>
+                  <AnchorPane id="greeting" fx:id="Greeting" layoutX="10.0" layoutY="28.0" prefHeight="200.0" prefWidth="539.0" stylesheets="@Dashboard.css">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="191.0" layoutX="9.0" stroke="BLACK" strokeType="INSIDE" width="225.0" />
-                        <PieChart layoutX="25.0" layoutY="18.0" prefHeight="160.0" prefWidth="202.0" title="Pie" />
+                        <ImageView fitHeight="147.0" fitWidth="156.0" layoutX="360.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="Hello" layoutX="26.0" layoutY="57.0" prefHeight="31.0" prefWidth="280.0" text="HELLO" textAlignment="CENTER">
+                           <font>
+                              <Font name="Verdana" size="40.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="adminName" layoutX="32.0" layoutY="111.0" prefHeight="40.0" prefWidth="222.0" />
                      </children>
-                  </Pane>
-               </left>
-               <center>
-                  <Pane prefHeight="221.0" prefWidth="238.0" BorderPane.alignment="CENTER">
+                  </AnchorPane>
+                  <AnchorPane id="preview" fx:id="Preview" layoutX="567.0" layoutY="28.0" prefHeight="710.0" prefWidth="245.0" stylesheets="@Dashboard.css" />
+                  <AnchorPane id="greeting" fx:id="Graph" layoutX="10.0" layoutY="248.0" prefHeight="219.0" prefWidth="252.0" style="-fx-background-color: gray;">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="190.0" layoutX="16.0" stroke="BLACK" strokeType="INSIDE" width="231.0" />
-                        <StackedBarChart layoutX="9.0" layoutY="13.0" prefHeight="185.0" prefWidth="236.0">
+                        <PieChart id="pie" prefHeight="400.0" prefWidth="500.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane id="greeting" fx:id="Data" layoutX="284.0" layoutY="248.0" prefHeight="411.0" prefWidth="260.0" stylesheets="@Dashboard.css">
+                     <children>
+                        <BarChart id="bar" prefHeight="410.0" prefWidth="260.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis prefHeight="178.0" prefWidth="18.0" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane id="marquee" fx:id="marquee" layoutX="6.0" layoutY="673.0" prefHeight="65.0" prefWidth="548.0" stylesheets="@Dashboard.css" />
+                  <AnchorPane id="greeting" fx:id="Graph1" layoutX="14.0" layoutY="481.0" prefHeight="179.0" prefWidth="245.0" style="-fx-background-color: gray;">
+                     <children>
+                        <LineChart layoutX="-1.0" prefHeight="181.0" prefWidth="245.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
                           <yAxis>
                             <NumberAxis side="LEFT" />
                           </yAxis>
-                        </StackedBarChart>
+                        </LineChart>
                      </children>
-                  </Pane>
-               </center>
-               <right>
-                  <Pane prefHeight="228.0" prefWidth="131.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="364.0" layoutX="21.0" layoutY="-128.0" stroke="BLACK" strokeType="INSIDE" width="98.0" />
-                     </children>
-                  </Pane>
-               </right>
-               <bottom>
-                  <Pane prefHeight="65.0" prefWidth="602.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="35.0" layoutX="9.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="471.0" />
-                     </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </Pane>
-               </bottom>
-               <top>
-                  <VBox prefHeight="99.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" stroke="BLACK" strokeType="INSIDE" width="472.0">
-                           <VBox.margin>
-                              <Insets left="10.0" />
-                           </VBox.margin>
-                        </Rectangle>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="94.0" stroke="BLACK" strokeType="INSIDE" width="217.0">
-                                 <HBox.margin>
-                                    <Insets left="10.0" top="12.0" />
-                                 </HBox.margin>
-                              </Rectangle>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="114.0" stroke="BLACK" strokeType="INSIDE" width="117.0">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="140.0" />
-                                 </HBox.margin>
-                              </Rectangle>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </top>
-            </BorderPane>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
-      </Pane>
+      </AnchorPane>
    </children>
 </AnchorPane>
