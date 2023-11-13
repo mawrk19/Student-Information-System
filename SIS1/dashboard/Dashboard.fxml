@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
    <children>
       <AnchorPane prefHeight="790.0" prefWidth="870.0">
          <children>
@@ -25,7 +24,7 @@
                               <Font name="Verdana" size="40.0" />
                            </font>
                         </Label>
-                        <Label fx:id="adminName" layoutX="32.0" layoutY="111.0" prefHeight="40.0" prefWidth="222.0" />
+                        <Label fx:id="adminName" layoutX="14.0" layoutY="117.0" prefHeight="51.0" prefWidth="222.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane id="preview" fx:id="Preview" layoutX="567.0" layoutY="28.0" prefHeight="710.0" prefWidth="245.0" stylesheets="@Dashboard.css" />

@@ -91,6 +91,9 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setRightAnchor(dashboardstage, 10.0);
 		 AnchorPane.setTopAnchor(dashboardstage, 10.0);
 		 AnchorPane.setBottomAnchor(dashboardstage, 20.0);
+		 UserSession session = UserSession.getInstance();
+	     String username = session.getUsername();
+		 System.out.println(username);
     }
 	
 	@FXML
