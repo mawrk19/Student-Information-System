@@ -8,120 +8,89 @@
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane id="Apane" maxHeight="-Infinity"
-	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-	prefHeight="790.0" prefWidth="870.0" stylesheets="@Schedule.css"
-	xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="schedule.ScheduleController">
+<AnchorPane id="Apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Schedule.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schedule.ScheduleController">
 	<children>
-		<AnchorPane id="YRSECtxt" layoutX="40.0" layoutY="337.0"
-			prefHeight="0.0" prefWidth="330.0" stylesheets="@Schedule.css"
-			AnchorPane.bottomAnchor="453.0" AnchorPane.leftAnchor="40.0"
-			AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="337.0">
+      <HBox layoutX="19.0" layoutY="42.0" prefHeight="310.0" prefWidth="827.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="42.0">
+         <children>
+      		<AnchorPane id="BtnTimetable" prefHeight="285.0" prefWidth="455.0" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
+      			<children>
+      				<Button id="BtnTimetable" fx:id="BtnTimetable" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" prefHeight="250.0" prefWidth="455.0" stylesheets="@Schedule.css" text=" BUTTON TO TIMETABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      					<cursor>
+      						<Cursor fx:constant="HAND" />
+      					</cursor>
+      				</Button>
+      			</children>
+      		</AnchorPane>
+            <VBox prefHeight="310.0" prefWidth="338.0" HBox.hgrow="ALWAYS">
+               <children>
+            		<AnchorPane id="SBar" prefHeight="44.0" prefWidth="336.0" stylesheets="@Schedule.css">
+            			<children>
+            				<TextField id="SBar" fx:id="searchCD" opacity="0.87" prefHeight="35.0" prefWidth="336.0" promptText="Search..." stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            					<opaqueInsets>
+            						<Insets />
+            					</opaqueInsets>
+            				</TextField>
+            			</children>
+            		</AnchorPane>
+                  <Pane prefHeight="248.0" prefWidth="336.0" style="-fx-background-color: #3C5199;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Pane>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox layoutX="33.0" layoutY="369.0" prefHeight="36.0" prefWidth="795.0" spacing="10.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="369.0">
+         <children>
+            <Label maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="293.0" text="YEAR AND SECTION..." HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Label maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="301.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <AnchorPane id="EditBG" prefHeight="36.0" prefWidth="364.0" stylesheets="@Schedule.css">
+               <children>
+                  <Label alignment="CENTER" prefHeight="36.0" prefWidth="260.0" text="Edit Timetable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button id="EditBtn" layoutX="264.0" layoutY="6.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@Schedule.css" AnchorPane.rightAnchor="14.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+		<AnchorPane id="bgpane" layoutX="22.0" layoutY="420.0" prefHeight="360.0" prefWidth="830.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="420.0">
 			<children>
-				<Label prefHeight="50.0" prefWidth="302.0"
-					text="YEAR AND SECTION...">
-					<font>
-						<Font name="Gill Sans MT" size="30.0" />
-					</font>
-				</Label>
-			</children>
-		</AnchorPane>
-		<AnchorPane id="BtnTimetable" layoutX="36.0" layoutY="31.0"
-			prefHeight="285.0" prefWidth="455.0" stylesheets="@Schedule.css"
-			AnchorPane.bottomAnchor="474.0" AnchorPane.leftAnchor="36.0"
-			AnchorPane.topAnchor="31.0">
-			<children>
-				<Button id="BtnTimetable" fx:id="BtnTimetable"
-					layoutX="4.099998474121094" layoutY="3.1000003814697266"
-					mnemonicParsing="false" prefHeight="250.0" prefWidth="455.0"
-					stylesheets="@Schedule.css" text=" BUTTON TO TIMETABLE"
-					AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-					AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-				</Button>
-			</children>
-		</AnchorPane>
-		<AnchorPane id="bgpane" layoutX="14.0" layoutY="420.0"
-			prefHeight="326.0" prefWidth="794.0" stylesheets="@Schedule.css"
-			AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="36.0"
-			AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="420.0">
-			<children>
-				<TreeTableView id="table" prefHeight="268.0"
-					prefWidth="721.0" stylesheets="@Schedule.css"
-					AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
-					AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+				<TreeTableView id="table" prefHeight="268.0" prefWidth="721.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
 					<columns>
-						<TreeTableColumn prefWidth="90.0"
-							text="SUBJECT CODE" />
-						<TreeTableColumn prefWidth="85.0"
-							text="DESCRIPTION" />
-						<TreeTableColumn prefWidth="76.0"
-							text="CRED. UNIT" />
+						<TreeTableColumn prefWidth="90.0" text="SUBJECT CODE" />
+						<TreeTableColumn prefWidth="85.0" text="DESCRIPTION" />
+						<TreeTableColumn prefWidth="76.0" text="CRED. UNIT" />
 						<TreeTableColumn prefWidth="64.0" text="SECTION" />
 						<TreeTableColumn prefWidth="66.0" text="DAY" />
 						<TreeTableColumn prefWidth="64.0" text="TIME" />
-						<TreeTableColumn prefWidth="124.0"
-							text="PROFESSOR" />
+						<TreeTableColumn prefWidth="124.0" text="PROFESSOR" />
 						<TreeTableColumn prefWidth="91.0" text="SCHEDULE" />
 						<TreeTableColumn prefWidth="60.0" text="SLOTS" />
 					</columns>
 				</TreeTableView>
-			</children>
-		</AnchorPane>
-		<AnchorPane id="SBar" layoutX="512.0" layoutY="35.0"
-			stylesheets="@Schedule.css" AnchorPane.bottomAnchor="720.0"
-			AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="36.0"
-			AnchorPane.topAnchor="35.0">
-			<children>
-				<TextField id="SBar" fx:id="searchCD" opacity="0.87"
-					prefHeight="35.0" prefWidth="319.0" promptText="Search..."
-					stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0"
-					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-					AnchorPane.topAnchor="0.0">
-					<opaqueInsets>
-						<Insets />
-					</opaqueInsets>
-				</TextField>
-			</children>
-		</AnchorPane>
-		<AnchorPane layoutX="515.0" layoutY="83.0"
-			prefHeight="256.0" prefWidth="322.0" AnchorPane.bottomAnchor="451.0"
-			AnchorPane.leftAnchor="512.0" AnchorPane.rightAnchor="36.0"
-			AnchorPane.topAnchor="83.0">
-			<children>
-				<Pane prefHeight="262.0" prefWidth="322.0"
-					style="-fx-background-color: blue;" AnchorPane.bottomAnchor="0.0"
-					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-					AnchorPane.topAnchor="0.0" />
-			</children>
-		</AnchorPane>
-		<Label layoutX="630.0" layoutY="176.0" text="CALENDAR  TO" />
-		<AnchorPane id="EditBG" layoutX="533.0" layoutY="360.0"
-			prefHeight="27.0" prefWidth="260.0" stylesheets="@Schedule.css"
-			AnchorPane.bottomAnchor="403.0" AnchorPane.rightAnchor="51.0"
-			AnchorPane.topAnchor="360.0">
-			<children>
-				<Text id="Edittxt" layoutX="45.0" layoutY="20.0"
-					strokeType="OUTSIDE" strokeWidth="0.0" text="edit schedule"
-					wrappingWidth="132.90625" AnchorPane.bottomAnchor="2.76171875"
-					AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="108.09375"
-					AnchorPane.topAnchor="1.89453125">
-					<font>
-						<Font name="Arial" size="20.0" />
-					</font>
-				</Text>
-				<Button id="EditBtn" layoutX="224.0" layoutY="2.0"
-					minWidth="22.0" mnemonicParsing="false" prefHeight="22.0"
-					prefWidth="22.0" stylesheets="@Schedule.css" text="C"
-					AnchorPane.bottomAnchor="2.5" AnchorPane.rightAnchor="8.0"
-					AnchorPane.topAnchor="2.5" />
 			</children>
 		</AnchorPane>
 	</children>
