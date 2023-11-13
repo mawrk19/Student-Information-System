@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import application.DatabaseManager;
+import application.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,11 +27,21 @@ import javafx.scene.layout.AnchorPane;
 
 public class DashboardController implements Initializable {
 
+	@FXML
+	String adminName;
+	
 	 @Override
 	 public void initialize(URL url, ResourceBundle rb) {
+		 
 		 Connection con = DatabaseManager.getConnection();
          String sql = "select fname from users where ";
-
+         setUsername(adminName);
 	 }
+	 
+	 private void setUsername(String username) {
+		    UserSession session = UserSession.getInstance();
+		    session.setUsername(username);
+		}
+
 }
     
