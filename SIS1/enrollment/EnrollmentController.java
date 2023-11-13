@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -16,7 +15,6 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,20 +28,8 @@ import application.DatabaseManager;
 public class EnrollmentController implements Initializable {
 
     @FXML
-    private ComboBox<String> courseCMB;
-    
-    @FXML
-    private ComboBox<String> genderCMB;
-    
-    @FXML
-    private ComboBox<String> locCMB;
-    
-    @FXML
-    private ComboBox<String> secCMB;
-    
-    @FXML
-    private ComboBox<String> yrCMB;
-    
+    private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB;
+
     @FXML
     private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
 
@@ -55,7 +41,6 @@ public class EnrollmentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // Initialize ComboBoxes with sample data
         ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
         courseCMB.setItems(courses);
@@ -69,21 +54,19 @@ public class EnrollmentController implements Initializable {
         ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
         secCMB.setItems(sections);
 
-        ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd","4th");
+        ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
         yrCMB.setItems(years);
-        
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            dateTF.setText(formatter.format(now));
+            dateTF.setText(LocalDateTime.now().format(formatter));
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
     }
 
     @FXML
-    private void enrollButtonClicked() {
+    private void enrollButtonClicked() throws SQLException {
         String selectedCourse = courseCMB.getValue();
         String enrollmentDate = dateTF.getText();
         String firstName = fNameTF.getText();
@@ -92,11 +75,9 @@ public class EnrollmentController implements Initializable {
         String lastName = lNameTF.getText();
         String middleName = mNameTF.getText();
         String section = secCMB.getValue();
-        
         String year = "2023";
 
-        try {
-            Connection con = DatabaseManager.getConnection();
+        try (Connection con = DatabaseManager.getConnection()) {
             String sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, selectedCourse);
@@ -122,31 +103,27 @@ public class EnrollmentController implements Initializable {
                             sidTF.setText(formattedId);
 
                             // Clear other UI components
-                            courseCMB.setValue(null);
-                            dateTF.clear();
-                            fNameTF.clear();
-                            genderCMB.setValue(null);
-                            locCMB.setValue(null);
-                            lNameTF.clear();
-                            mNameTF.clear();
-                            secCMB.setValue(null);
+                            clearFields();
                         });
 
                         System.out.println("Enrollment successful!");
                     }
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e; // Re-throw the exception after handling
         }
     }
 
+    private void clearFields() {
+        courseCMB.setValue(null);
+        dateTF.clear();
+        fNameTF.clear();
+        genderCMB.setValue(null);
+        locCMB.setValue(null);
+        lNameTF.clear();
+        mNameTF.clear();
+        secCMB.setValue(null);
+    }
 }
