@@ -2,6 +2,7 @@ package enrollment;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -92,47 +93,57 @@ public class EnrollmentController implements Initializable {
         String middleName = mNameTF.getText();
         String section = secCMB.getValue();
         
-        String year = "2023"; // Define the year value here or get it from a ComboBox
+        String year = "2023";
 
         try {
             Connection con = DatabaseManager.getConnection();
             String sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setString(1, selectedCourse);
+                preparedStatement.setString(2, enrollmentDate);
+                preparedStatement.setString(3, firstName);
+                preparedStatement.setString(4, gender);
+                preparedStatement.setString(5, location);
+                preparedStatement.setString(6, lastName);
+                preparedStatement.setString(7, middleName);
+                preparedStatement.setString(8, section);
+                preparedStatement.setString(9, year);
 
-            preparedStatement.setString(1, selectedCourse);
-            preparedStatement.setString(2, enrollmentDate);
-            preparedStatement.setString(3, firstName);
-            preparedStatement.setString(4, gender);
-            preparedStatement.setString(5, location);
-            preparedStatement.setString(6, lastName);
-            preparedStatement.setString(7, middleName);
-            preparedStatement.setString(8, section);
-            preparedStatement.setString(9, year);
+                int rowsInserted = preparedStatement.executeUpdate();
 
-            int rowsInserted = preparedStatement.executeUpdate();
+                if (rowsInserted > 0) {
+                    ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        int generatedId = generatedKeys.getInt(1);
+                        String formattedId = String.format("%s%04d", year, generatedId);
 
-            if (rowsInserted > 0) {
-                // Retrieve the auto-generated ID
-                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    int generatedId = generatedKeys.getInt(1);
-                    String formattedId = String.format("%s%04d", year, generatedId);
-                    sidTF.setText(formattedId);
+                        // Use Platform.runLater() for UI updates
+                        Platform.runLater(() -> {
+                            sidTF.setText(formattedId);
+
+                            // Clear other UI components
+                            courseCMB.setValue(null);
+                            dateTF.clear();
+                            fNameTF.clear();
+                            genderCMB.setValue(null);
+                            locCMB.setValue(null);
+                            lNameTF.clear();
+                            mNameTF.clear();
+                            secCMB.setValue(null);
+                        });
+
+                        System.out.println("Enrollment successful!");
+                    }
                 }
-
-                System.out.println("Enrollment successful!");
-                
-                courseCMB.setValue(null);
-                dateTF.clear();
-                fNameTF.clear();
-                genderCMB.setValue(null);
-                locCMB.setValue(null);
-                lNameTF.clear();
-                mNameTF.clear();
-                secCMB.setValue(null);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-
-            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
