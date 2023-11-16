@@ -1,0 +1,29 @@
+#BorderPane{
+	-fx-background-color: #EFF0F3;
+}
+
+#EnrollStatPane{
+	-fx-background-color: #DFE2ED;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#SchedPane{
+	-fx-background-color: #DFE2ED;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#GradesPane{
+	-fx-background-color: #DFE2ED;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	
+}
+
+#SidePane{
+	-fx-background-color: #DEDFE2;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+

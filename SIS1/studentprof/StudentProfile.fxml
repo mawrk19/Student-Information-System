@@ -1,10 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="880.0" style="-fx-background-color: #EFF0F3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentprof.StudentProfController">
-   <children>
-      <Label layoutX="389.0" layoutY="377.0" prefHeight="17.0" prefWidth="102.0" text="STUDENT PROFILE" />
-   </children>
-</Pane>
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@StudentProf.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <AnchorPane prefHeight="790.0" prefWidth="250.0" stylesheets="@StudentProf.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox id="SidePane" layoutX="75.0" layoutY="295.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" stylesheets="@StudentProf.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="141.0" prefWidth="230.0" VBox.vgrow="ALWAYS">
+                     <graphic>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Label>
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="250.0" text="SURNAME, FIRST NAME MIDDLE NAME" VBox.vgrow="ALWAYS" />
+                  <HBox fillHeight="false" prefHeight="40.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="201.0" text="Edit Student Profile" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="51.0" text="Button" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="70.0" prefWidth="250.0" text="YEAR | SID" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="70.0" prefWidth="250.0" text="Course" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="70.0" prefWidth="250.0" text="Year Level and Section" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="70.0" prefWidth="250.0" text="Age" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="70.0" prefWidth="250.0" text="Address" VBox.vgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="70.0" prefWidth="250.0" text="Email" VBox.vgrow="ALWAYS" />
+                  <Button alignment="CENTER" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="35.0" prefWidth="251.0" text="Button" VBox.vgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </right>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="55.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <TextField alignment="CENTER" prefHeight="55.0" prefWidth="510.0" promptText="Admin Ui" HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="60.0" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </HBox>
+            <AnchorPane id="EnrollStatPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@StudentProf.css" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER" layoutX="198.0" layoutY="72.0" AnchorPane.bottomAnchor="72.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0">
+                     <children>
+                        <Label text="Enrollment Status">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <HBox prefHeight="535.0" prefWidth="620.0" spacing="20.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <AnchorPane id="SchedPane" prefHeight="535.0" prefWidth="350.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER" layoutY="14.0" prefHeight="30.0" prefWidth="285.0" AnchorPane.bottomAnchor="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <Label text="Schedule" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane id="GradesPane" prefHeight="535.0" prefWidth="350.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="112.0" layoutY="14.0" AnchorPane.bottomAnchor="475.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <Label text="Grades" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>
