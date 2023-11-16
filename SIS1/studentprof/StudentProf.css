@@ -2,6 +2,12 @@
 	-fx-background-color: #EFF0F3;
 }
 
+#SearchIcon{
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
 #EnrollStatPane{
 	-fx-background-color: #DFE2ED;
 	-fx-background-radius: 25;
@@ -27,3 +33,20 @@
 	-fx-border-radius: 25;
 }
 
+#EditStudProfLbl{
+	-fx-border-color: black;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#EditStudProfBtn{
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#ExportBtn{
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
