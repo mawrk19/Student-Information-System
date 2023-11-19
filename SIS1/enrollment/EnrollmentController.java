@@ -104,7 +104,7 @@ public class EnrollmentController implements Initializable {
 						Statement.RETURN_GENERATED_KEYS)) {
 
 			int generatedId = getGeneratedId(con);
-			String formattedSid = String.format("%s%04d", year, generatedId);
+			String formattedSid = String.format("%s%04d", year, generatedId); 
 
 			preparedStatement.setString(1, selectedCourse);
 			preparedStatement.setString(2, enrollmentDate);

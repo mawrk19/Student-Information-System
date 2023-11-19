@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="Borderpane" fx:id="Borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
+<BorderPane id="Borderpane" fx:id="Borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
    <left>
       <AnchorPane prefHeight="836.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
@@ -180,7 +180,7 @@
                               <Font name="Berlin Sans FB" size="20.0" />
                            </font>
                         </Button>
-                        <Button id="EnrollmentButton" fx:id="Enrollment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Enrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Enrollment" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Button id="EnrollmentButton" fx:id="Enrollment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Enrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Freshies" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets left="15.0" />
                            </VBox.margin>
