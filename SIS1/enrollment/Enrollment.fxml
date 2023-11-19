@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0"
-	prefWidth="870.0" stylesheets="Enrollment.css"
+	prefWidth="870.0" stylesheets="@Enrollment.css"
 	xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="enrollment.EnrollmentController">
 	<children>
