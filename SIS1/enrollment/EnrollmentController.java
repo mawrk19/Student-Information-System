@@ -24,106 +24,130 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import application.DatabaseManager;
+import application.UserSession;
 
 public class EnrollmentController implements Initializable {
 
-    @FXML
-    private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB;
+	@FXML
+	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, statCMB;
 
-    @FXML
-    private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
+	@FXML
+	private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
 
-    @FXML
-    private Button enrollBTN;
+	@FXML
+	private Button enrollBTN;
 
-    @FXML
-    private ImageView insertIMG;
+	@FXML
+	private ImageView insertIMG;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // Initialize ComboBoxes with sample data
-        ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
-        courseCMB.setItems(courses);
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		// Initialize ComboBoxes with sample data
+		ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
+		courseCMB.setItems(courses);
 
-        ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
-        genderCMB.setItems(genders);
+		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
+		genderCMB.setItems(genders);
 
-        ObservableList<String> locations = FXCollections.observableArrayList("Camarin", "Congress", "South");
-        locCMB.setItems(locations);
+		ObservableList<String> locations = FXCollections.observableArrayList("Camarin", "Congress", "South");
+		locCMB.setItems(locations);
 
-        ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
-        secCMB.setItems(sections);
+		ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
+		secCMB.setItems(sections);
 
-        ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
-        yrCMB.setItems(years);
+		ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
+		yrCMB.setItems(years);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dateTF.setText(LocalDateTime.now().format(formatter));
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-    }
+		ObservableList<String> type = FXCollections.observableArrayList("Regular", "Irregular");
+		statCMB.setItems(type);
 
-    @FXML
-    private void enrollButtonClicked() throws SQLException {
-        String selectedCourse = courseCMB.getValue();
-        String enrollmentDate = dateTF.getText();
-        String firstName = fNameTF.getText();
-        String gender = genderCMB.getValue();
-        String location = locCMB.getValue();
-        String lastName = lNameTF.getText();
-        String middleName = mNameTF.getText();
-        String section = secCMB.getValue();
-        String year = "2023";
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			dateTF.setText(LocalDateTime.now().format(formatter));
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+	}
 
-        try (Connection con = DatabaseManager.getConnection()) {
-            String sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, selectedCourse);
-                preparedStatement.setString(2, enrollmentDate);
-                preparedStatement.setString(3, firstName);
-                preparedStatement.setString(4, gender);
-                preparedStatement.setString(5, location);
-                preparedStatement.setString(6, lastName);
-                preparedStatement.setString(7, middleName);
-                preparedStatement.setString(8, section);
-                preparedStatement.setString(9, year);
+	private int getGeneratedId(Connection con) throws SQLException {
+	    int generatedId = 0;
 
-                int rowsInserted = preparedStatement.executeUpdate();
+	    try (Statement statement = con.createStatement();
+	         ResultSet resultSet = statement.executeQuery("SELECT LAST_INSERT_ID()")) {
 
-                if (rowsInserted > 0) {
-                    ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                    if (generatedKeys.next()) {
-                        int generatedId = generatedKeys.getInt(1);
-                        String formattedId = String.format("%s%04d", year, generatedId);
+	        if (resultSet.next()) {
+	            generatedId = resultSet.getInt(1);
+	        }
+	    }
 
-                        // Use Platform.runLater() for UI updates
-                        Platform.runLater(() -> {
-                            sidTF.setText(formattedId);
+	    return generatedId;
+	}
 
-                            // Clear other UI components
-                            clearFields();
-                        });
 
-                        System.out.println("Enrollment successful!");
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e; // Re-throw the exception after handling
-        }
-    }
+	@FXML
+	private void enrollButtonClicked() {
+		UserSession session = UserSession.getInstance();
+		String username = session.getUsername();
+		String selectedCourse = courseCMB.getValue();
+		String enrollmentDate = dateTF.getText();
+		String firstName = fNameTF.getText();
+		String gender = genderCMB.getValue();
+		String location = locCMB.getValue();
+		String lastName = lNameTF.getText();
+		String middleName = mNameTF.getText();
+		String section = secCMB.getValue();
+		String year = "2023";
+		
+		try (Connection con = DatabaseManager.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(
+						"INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, encoder, scode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+						Statement.RETURN_GENERATED_KEYS)) {
 
-    private void clearFields() {
-        courseCMB.setValue(null);
-        dateTF.clear();
-        fNameTF.clear();
-        genderCMB.setValue(null);
-        locCMB.setValue(null);
-        lNameTF.clear();
-        mNameTF.clear();
-        secCMB.setValue(null);
-    }
+			int generatedId = getGeneratedId(con);
+			String formattedSid = String.format("%s%04d", year, generatedId);
+
+			preparedStatement.setString(1, selectedCourse);
+			preparedStatement.setString(2, enrollmentDate);
+			preparedStatement.setString(3, firstName);
+			preparedStatement.setString(4, gender);
+			preparedStatement.setString(5, location);
+			preparedStatement.setString(6, lastName);
+			preparedStatement.setString(7, middleName);
+			preparedStatement.setString(8, section);
+			preparedStatement.setString(9, year);
+			preparedStatement.setString(10, username);
+			preparedStatement.setString(11, formattedSid);
+
+			int rowsInserted = preparedStatement.executeUpdate();
+
+			if (rowsInserted > 0) {
+				// Use Platform.runLater() for UI updates
+				Platform.runLater(() -> {
+					sidTF.setText(formattedSid);
+
+					// Clear other UI components
+					clearFields();
+				});
+
+				System.out.println("Enrollment successful!");
+			}
+		} catch (SQLException e) {
+			// Use Platform.runLater() for UI updates
+			Platform.runLater(() -> {
+				e.printStackTrace(); // Log the error or show a user-friendly message
+			});
+		}
+	}
+
+	private void clearFields() {
+		courseCMB.setValue(null);
+		dateTF.clear();
+		fNameTF.clear();
+		genderCMB.setValue(null);
+		locCMB.setValue(null);
+		lNameTF.clear();
+		mNameTF.clear();
+		secCMB.setValue(null);
+	}
+
 }

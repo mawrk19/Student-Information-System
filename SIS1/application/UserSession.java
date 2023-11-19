@@ -28,7 +28,6 @@ public class UserSession {
 
     public void clearSession() {
         username = null;
-        // Clear any other session data if needed
     }
 
 	public int getId() {

@@ -11,104 +11,65 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0"
-	prefWidth="870.0" stylesheets="Enrollment.css"
-	xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="enrollment.EnrollmentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="Enrollment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EnrollmentController">
 	<children>
-		<AnchorPane prefHeight="790.0" prefWidth="870.0"
-			styleClass="Body" stylesheets="@Enrollment.css"
-			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<AnchorPane prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
 
-				<AnchorPane layoutX="26.0" layoutY="265.0"
-					prefHeight="450.0" prefWidth="825.0"
-					style="-fx-background-color: #DFE2ED;"
-					stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0"
-					AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0"
-					AnchorPane.topAnchor="260.0">
+				<AnchorPane layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #DFE2ED;" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="260.0">
 					<children>
-						<TableView layoutX="12.0" layoutY="12.0"
-							prefHeight="424.0" prefWidth="800.0"
-							AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="12.0"
-							AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="12.0">
+						<TableView layoutX="12.0" layoutY="12.0" prefHeight="424.0" prefWidth="800.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="12.0">
 							<columns>
-								<TableColumn prefWidth="95.0" resizable="false"
-									text="Subject ID" />
-								<TableColumn prefWidth="118.0" resizable="false"
-									text="Sub Code" />
-								<TableColumn minWidth="0.0" prefWidth="84.0"
-									resizable="false" text="Units" />
-								<TableColumn prefWidth="502.0" resizable="false"
-									text="Subject" />
+								<TableColumn prefWidth="95.0" resizable="false" text="Subject ID" />
+								<TableColumn prefWidth="118.0" resizable="false" text="Sub Code" />
+								<TableColumn minWidth="0.0" prefWidth="84.0" resizable="false" text="Units" />
+								<TableColumn prefWidth="502.0" resizable="false" text="Subject" />
 							</columns>
 						</TableView>
 					</children>
 				</AnchorPane>
-				<AnchorPane layoutX="26.0" layoutY="26.0"
-					prefHeight="220.0" prefWidth="825.0" styleClass="Containers"
-					stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0"
-					AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
+				<AnchorPane layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" styleClass="Containers" stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
 					<children>
-						<ImageView fx:id="insertIMG" fitHeight="188.0"
-							fitWidth="201.0" layoutX="20.0" layoutY="16.0"
-							pickOnBounds="true" preserveRatio="true" />
-						<HBox layoutX="237.0" layoutY="13.0" prefHeight="197.0"
-							prefWidth="575.0" style="-fx-background-color: grey;"
-							AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="237.0"
-							AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
+						<ImageView fx:id="insertIMG" fitHeight="188.0" fitWidth="201.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+						<HBox layoutX="237.0" layoutY="13.0" prefHeight="197.0" prefWidth="575.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="237.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
 							<children>
-								<VBox prefHeight="188.0" prefWidth="189.0"
-									HBox.hgrow="ALWAYS">
+								<VBox prefHeight="188.0" prefWidth="189.0" HBox.hgrow="ALWAYS">
 									<children>
-										<TextField fx:id="fNameTF" promptText="fname"
-											VBox.vgrow="ALWAYS">
+										<TextField fx:id="fNameTF" promptText="fname" VBox.vgrow="ALWAYS">
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
 										</TextField>
-										<TextField fx:id="mNameTF" promptText="mname"
-											VBox.vgrow="ALWAYS">
+										<TextField fx:id="mNameTF" promptText="mname" VBox.vgrow="ALWAYS">
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
 										</TextField>
-										<TextField fx:id="lNameTF" promptText="lname"
-											VBox.vgrow="ALWAYS">
+										<TextField fx:id="lNameTF" promptText="lname" VBox.vgrow="ALWAYS">
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
 										</TextField>
 									</children>
 								</VBox>
-								<VBox prefHeight="188.0" prefWidth="189.0"
-									HBox.hgrow="ALWAYS">
+								<VBox prefHeight="188.0" prefWidth="189.0" HBox.hgrow="ALWAYS">
 									<children>
-										<TextField fx:id="sidTF" promptText="sid"
-											VBox.vgrow="ALWAYS" />
-										<ComboBox fx:id="yrCMB"
-											maxWidth="1.7976931348623157E308" prefHeight="27.0"
-											prefWidth="196.0" promptText="yr level" VBox.vgrow="ALWAYS">
+										<TextField fx:id="sidTF" promptText="sid" VBox.vgrow="ALWAYS" />
+										<ComboBox fx:id="yrCMB" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="196.0" promptText="yr level" VBox.vgrow="ALWAYS">
 
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
 										</ComboBox>
 
-										<ComboBox fx:id="secCMB"
-											maxWidth="1.7976931348623157E308" prefHeight="27.0"
-											prefWidth="194.0" promptText="section" VBox.vgrow="ALWAYS">
+										<ComboBox fx:id="secCMB" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="194.0" promptText="section" VBox.vgrow="ALWAYS">
 
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
 										</ComboBox>
 
-										<ComboBox fx:id="courseCMB"
-											maxWidth="1.7976931348623157E308" prefHeight="27.0"
-											prefWidth="194.0" promptText="course" VBox.vgrow="ALWAYS">
+										<ComboBox fx:id="courseCMB" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="194.0" promptText="course" VBox.vgrow="ALWAYS">
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
@@ -116,33 +77,32 @@
 									</children>
 								</VBox>
 
-								<VBox prefHeight="188.0" prefWidth="189.0"
-									HBox.hgrow="ALWAYS">
+								<VBox prefHeight="188.0" prefWidth="189.0" HBox.hgrow="ALWAYS">
 									<children>
-										<TextField fx:id="dateTF" promptText="date"
-											VBox.vgrow="ALWAYS">
+										<TextField fx:id="dateTF" promptText="date" VBox.vgrow="ALWAYS">
 
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
 										</TextField>
-										<ComboBox fx:id="genderCMB"
-											maxWidth="1.7976931348623157E308" prefWidth="150.0"
-											promptText="gender" VBox.vgrow="ALWAYS">
+										<ComboBox fx:id="genderCMB" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="gender" VBox.vgrow="ALWAYS">
 
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
 										</ComboBox>
 
-										<ComboBox fx:id="locCMB"
-											maxWidth="1.7976931348623157E308" prefWidth="150.0"
-											promptText="location" VBox.vgrow="ALWAYS">
+										<ComboBox fx:id="locCMB" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="location" VBox.vgrow="ALWAYS">
 
 											<VBox.margin>
 												<Insets top="20.0" />
 											</VBox.margin>
 										</ComboBox>
+                              <ComboBox fx:id="statCMB" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="194.0" promptText="type">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </ComboBox>
 									</children>
 								</VBox>
 							</children>
@@ -150,25 +110,12 @@
 					</children>
 				</AnchorPane>
 
-				<AnchorPane layoutX="26.0" layoutY="730.0"
-					prefHeight="46.0" prefWidth="825.0" AnchorPane.bottomAnchor="14.0"
-					AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="20.0">
+				<AnchorPane layoutX="26.0" layoutY="730.0" prefHeight="46.0" prefWidth="825.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="20.0">
 					<children>
-						<HBox prefHeight="46.0" prefWidth="825.0" spacing="15.0"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<HBox prefHeight="46.0" prefWidth="825.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<Button maxHeight="1.7976931348623157E308"
-									maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-									prefHeight="45.0" prefWidth="405.0"
-									style="-fx-background-color: #DFE2ED;" text="Button"
-									HBox.hgrow="ALWAYS" />
-								<Button fx:id="enrollBTN1"
-									maxHeight="1.7976931348623157E308"
-									maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-									onAction="#enrollButtonClicked" prefHeight="45.0"
-									prefWidth="405.0" style="-fx-background-color: #DFE2ED;"
-									text="Enroll" HBox.hgrow="ALWAYS" />
+								<Button fx:id="subjectsBTN" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #DFE2ED;" text="Subjects" HBox.hgrow="ALWAYS" />
+								<Button fx:id="enrollBTN1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#enrollButtonClicked" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #DFE2ED;" text="Enroll" HBox.hgrow="ALWAYS" />
 							</children>
 						</HBox>
 					</children>
