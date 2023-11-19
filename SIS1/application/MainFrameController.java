@@ -32,7 +32,7 @@ public class MainFrameController implements Initializable{
     private AnchorPane contentarea;
     
     @FXML
-    private Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule, oldEnrollment;
+    private Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule, oldEnrollment,Grading;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -97,6 +97,8 @@ public class MainFrameController implements Initializable{
 		 Timetable.setTextFill(Color.WHITE);
 		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Schedule.setTextFill(Color.WHITE);
+		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -124,6 +126,8 @@ public class MainFrameController implements Initializable{
 		 Timetable.setTextFill(Color.WHITE);
 		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Schedule.setTextFill(Color.WHITE);
+		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -148,6 +152,8 @@ public class MainFrameController implements Initializable{
 		 Timetable.setTextFill(Color.BLACK);
 		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Schedule.setTextFill(Color.WHITE);
+		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -173,6 +179,8 @@ public class MainFrameController implements Initializable{
 		 Timetable.setTextFill(Color.WHITE);
 		 Schedule.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Schedule.setTextFill(Color.BLACK);
+		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -187,6 +195,32 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setBottomAnchor(schedulestage, 20.0);
 		 
  }
+	
+	public void Gradingbtn(ActionEvent event) throws IOException {
+		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Dashboard.setTextFill(Color.WHITE);
+		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 StudentProf.setTextFill(Color.WHITE);
+		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Timetable.setTextFill(Color.WHITE);
+		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Schedule.setTextFill(Color.WHITE);
+		 Grading.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.BLACK);
+		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Enrollment.setTextFill(Color.WHITE);
+		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 oldEnrollment.setTextFill(Color.WHITE);
+		 
+		 Pane gradingstage = FXMLLoader.load(getClass().getResource("/grading/Grading.fxml"));
+		 contentarea.getChildren().removeAll();
+		 contentarea.getChildren().setAll(gradingstage);
+		 AnchorPane.setLeftAnchor(gradingstage, 10.0);
+		 AnchorPane.setRightAnchor(gradingstage, 10.0);
+		 AnchorPane.setTopAnchor(gradingstage, 10.0);
+		 AnchorPane.setBottomAnchor(gradingstage, 20.0);
+		 
+}
 
 	
 	public void Enrollmentbtn(ActionEvent event) throws IOException {
@@ -198,6 +232,8 @@ public class MainFrameController implements Initializable{
 		 Timetable.setTextFill(Color.WHITE);
 		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Schedule.setTextFill(Color.WHITE);
+		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.BLACK);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -223,6 +259,8 @@ public class MainFrameController implements Initializable{
 		 Timetable.setTextFill(Color.WHITE);
 		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Schedule.setTextFill(Color.WHITE);
+		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.WHITE);
 		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
