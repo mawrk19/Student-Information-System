@@ -9,7 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -29,7 +32,7 @@ import application.UserSession;
 public class EnrollmentController implements Initializable {
 
 	@FXML
-	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, statCMB;
+	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, statCMB, semCMB;
 
 	@FXML
 	private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
@@ -39,6 +42,42 @@ public class EnrollmentController implements Initializable {
 
 	@FXML
 	private ImageView insertIMG;
+
+	@FXML
+	private TableView<Subject> subjectsTableView;
+
+	@FXML
+	private TableColumn<Subject, Integer> idColumn;
+
+	@FXML
+	private TableColumn<Subject, String> subCodeColumn;
+
+	@FXML
+	private TableColumn<Subject, Integer> unitsColumn;
+
+	@FXML
+	private TableColumn<Subject, String> subjectColumn;
+
+	private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
+
+	private void fetchSubjectsFromDatabase() {
+		try (Connection connection = DatabaseManager.getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM subjects")) {
+
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String subCode = resultSet.getString("sub_code");
+				int units = resultSet.getInt("units");
+				String subject = resultSet.getString("subject");
+
+				Subject subjectObj = new Subject(id, subCode, units, subject);
+				subjectsList.add(subjectObj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle the exception as needed
+		}
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -61,28 +100,44 @@ public class EnrollmentController implements Initializable {
 		ObservableList<String> type = FXCollections.observableArrayList("Regular", "Irregular");
 		statCMB.setItems(type);
 
+		ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
+		semCMB.setItems(type);
+
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			dateTF.setText(LocalDateTime.now().format(formatter));
 		}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
+
+		// Initialize TableView and TableColumn for subjects
+		idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+		subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subCode"));
+		unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
+		subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
+
+		// Bind the ObservableList to the TableView
+		subjectsTableView.setItems(subjectsList);
+
+		// Fetch subjects data from the database and populate the ObservableList
+		fetchSubjectsFromDatabase();
+		
+		System.out.println(subjectsList);
 	}
 
 	private int getGeneratedId(Connection con) throws SQLException {
-	    int generatedId = 0;
+		int generatedId = 0;
 
-	    try (Statement statement = con.createStatement();
-	         ResultSet resultSet = statement.executeQuery("SELECT LAST_INSERT_ID()")) {
+		try (Statement statement = con.createStatement();
+				ResultSet resultSet = statement.executeQuery("SELECT LAST_INSERT_ID()")) {
 
-	        if (resultSet.next()) {
-	            generatedId = resultSet.getInt(1);
-	        }
-	    }
+			if (resultSet.next()) {
+				generatedId = resultSet.getInt(1);
+			}
+		}
 
-	    return generatedId;
+		return generatedId;
 	}
-
 
 	@FXML
 	private void enrollButtonClicked() {
@@ -97,14 +152,14 @@ public class EnrollmentController implements Initializable {
 		String middleName = mNameTF.getText();
 		String section = secCMB.getValue();
 		String year = "2023";
-		
+
 		try (Connection con = DatabaseManager.getConnection();
 				PreparedStatement preparedStatement = con.prepareStatement(
 						"INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, encoder, scode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS)) {
 
 			int generatedId = getGeneratedId(con);
-			String formattedSid = String.format("%s%04d", year, generatedId); 
+			String formattedSid = String.format("%s%04d", year, generatedId);
 
 			preparedStatement.setString(1, selectedCourse);
 			preparedStatement.setString(2, enrollmentDate);
@@ -150,4 +205,24 @@ public class EnrollmentController implements Initializable {
 		secCMB.setValue(null);
 	}
 
+	public class Subject {
+		private int id;
+		private String subCode;
+		private int units;
+		private String subject;
+
+		public Subject(int id, String subCode, int units, String subject) {
+			this.id = id;
+			this.subCode = subCode;
+			this.units = units;
+			this.subject = subject;
+		}
+
+		// getters and setters
+	}
+
+	void showSubjects() {
+		
+		
+	}
 }

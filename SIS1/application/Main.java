@@ -20,29 +20,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
-//      //scene.getStylesheets().add(getClass().getResource("mainframe.css").toExternalForm());s      
-//      String mfcss = this.getClass().getResource("mainframe.css").toExternalForm();
-//      scene.getStylesheets().add(mfcss);
     }
 
     public static void main(String[] args) {
         launch(args);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-       
+
     }
 }
