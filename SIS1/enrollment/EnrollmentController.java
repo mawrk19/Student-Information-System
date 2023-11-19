@@ -101,7 +101,7 @@ public class EnrollmentController implements Initializable {
 		statCMB.setItems(type);
 
 		ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
-		semCMB.setItems(type);
+		semCMB.setItems(sem);
 
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
