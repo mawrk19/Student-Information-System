@@ -95,14 +95,20 @@ public class EnrollmentController implements Initializable {
 		unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
 		subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
 
-		courseCMB.setOnAction(event -> setSubBSCS1A());
-		yrCMB.setOnAction(event -> setSubBSCS1A());
-		secCMB.setOnAction(event -> setSubBSCS1A());
-		semCMB.setOnAction(event -> setSubBSCS1A());
-		statCMB.setOnAction(event -> setSubBSCS1A());
+		courseCMB.setOnAction(event -> setSubBSCS1A1st());
+		yrCMB.setOnAction(event -> setSubBSCS1A1st());
+		secCMB.setOnAction(event -> setSubBSCS1A1st());
+		semCMB.setOnAction(event -> setSubBSCS1A1st());
+		statCMB.setOnAction(event -> setSubBSCS1A1st());
+		
+		courseCMB.setOnAction(event -> setSubBSCS1A2nd());
+		yrCMB.setOnAction(event -> setSubBSCS1A2nd());
+		secCMB.setOnAction(event -> setSubBSCS1A2nd());
+		semCMB.setOnAction(event -> setSubBSCS1A2nd());
+		statCMB.setOnAction(event -> setSubBSCS1A2nd());
 	}
 
-	private void setSubBSCS1A() {
+	private void setSubBSCS1A1st() {
 		String selectedCourse = courseCMB.getValue();
 		String selectedYear = yrCMB.getValue();
 		String selectedSection = secCMB.getValue();
@@ -111,7 +117,22 @@ public class EnrollmentController implements Initializable {
 
 		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
 				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
-			BSCS1A();
+			BSCS1A1st();
+		} else {
+			clearSubjectsTable();
+		}
+	}
+	
+	private void setSubBSCS1A2nd() {
+		String selectedCourse = courseCMB.getValue();
+		String selectedYear = yrCMB.getValue();
+		String selectedSection = secCMB.getValue();
+		String selectedSemester = semCMB.getValue();
+		String selectedType = statCMB.getValue();
+
+		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			BSCS1A2nd();
 		} else {
 			clearSubjectsTable();
 		}
@@ -121,11 +142,35 @@ public class EnrollmentController implements Initializable {
 	    subjectsTableView.getItems().clear();
 	}
 	
-	private void BSCS1A() {
+	private void BSCS1A1st() {
 
 		try (Connection connection = DatabaseManager.getConnection();
 				PreparedStatement preparedStatement = connection
 						.prepareStatement("SELECT * FROM subjects WHERE id between 1 and 9")) {
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					int id = resultSet.getInt("id");
+					String subCode = resultSet.getString("sub_code");
+					int units = resultSet.getInt("units");
+					String subject = resultSet.getString("subject");
+
+					Subject subjectObj = new Subject(id, subCode, units, subject);
+					subjectsList.add(subjectObj);
+
+					subjectsTableView.setItems(subjectsList);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle the exception as needed
+		}
+	}
+	
+	private void BSCS1A2nd() {
+
+		try (Connection connection = DatabaseManager.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM subjects WHERE id between 10 and 17")) {
 
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				while (resultSet.next()) {
