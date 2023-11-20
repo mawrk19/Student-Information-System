@@ -31,201 +31,213 @@ import application.UserSession;
 
 public class EnrollmentController implements Initializable {
 
-    @FXML
-    private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, statCMB, semCMB;
+	@FXML
+	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, statCMB, semCMB;
 
-    @FXML
-    private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
+	@FXML
+	private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
 
-    @FXML
-    private Button enrollBTN;
+	@FXML
+	private Button enrollBTN;
 
-    @FXML
-    private ImageView insertIMG;
+	@FXML
+	private ImageView insertIMG;
 
-    @FXML
-    private TableView<Subject> subjectsTableView;
+	@FXML
+	private TableView<Subject> subjectsTableView;
 
-    @FXML
-    private TableColumn<Subject, Integer> idColumn;
+	@FXML
+	private TableColumn<Subject, Integer> idColumn;
 
-    @FXML
-    private TableColumn<Subject, String> subCodeColumn;
+	@FXML
+	private TableColumn<Subject, String> subCodeColumn;
 
-    @FXML
-    private TableColumn<Subject, Integer> unitsColumn;
+	@FXML
+	private TableColumn<Subject, Integer> unitsColumn;
 
-    @FXML
-    private TableColumn<Subject, String> subjectColumn;
+	@FXML
+	private TableColumn<Subject, String> subjectColumn;
 
-    private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
+	private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
 
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
+		courseCMB.setItems(courses);
 
+		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
+		genderCMB.setItems(genders);
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    	ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
-        courseCMB.setItems(courses);
+		ObservableList<String> locations = FXCollections.observableArrayList("Camarin", "Congress", "South");
+		locCMB.setItems(locations);
 
-        ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
-        genderCMB.setItems(genders);
+		ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
+		secCMB.setItems(sections);
 
-        ObservableList<String> locations = FXCollections.observableArrayList("Camarin", "Congress", "South");
-        locCMB.setItems(locations);
+		ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
+		yrCMB.setItems(years);
 
-        ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
-        secCMB.setItems(sections);
+		ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
+		semCMB.setItems(sem);
 
-        ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
-        yrCMB.setItems(years);
+		ObservableList<String> type = FXCollections.observableArrayList("Regular", "Irregular");
+		statCMB.setItems(type);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dateTF.setText(LocalDateTime.now().format(formatter));
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			dateTF.setText(LocalDateTime.now().format(formatter));
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subCode"));
-        unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
-        subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
-        
-        courseCMB.setOnAction(event -> setSubBSCS1A());
-        yrCMB.setOnAction(event -> setSubBSCS1A());
-        secCMB.setOnAction(event -> setSubBSCS1A());
+		idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+		subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subCode"));
+		unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
+		subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
 
-    }
+		courseCMB.setOnAction(event -> setSubBSCS1A());
+		yrCMB.setOnAction(event -> setSubBSCS1A());
+		secCMB.setOnAction(event -> setSubBSCS1A());
+		semCMB.setOnAction(event -> setSubBSCS1A());
+		statCMB.setOnAction(event -> setSubBSCS1A());
+	}
 
-    
-    private void setSubBSCS1A() {
-        String selectedCourse = courseCMB.getValue();
-        String selectedYear = yrCMB.getValue();
-        String selectedSection = secCMB.getValue();
+	private void setSubBSCS1A() {
+		String selectedCourse = courseCMB.getValue();
+		String selectedYear = yrCMB.getValue();
+		String selectedSection = secCMB.getValue();
+		String selectedSemester = semCMB.getValue();
+		String selectedType = statCMB.getValue();
 
-        if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)) {
-            // Call the method to fetch subjects based on the selected criteria
-            fetchSubjectsFromDatabase(selectedCourse, selectedYear, selectedSection);
-        }
-    }
-    
-    private void fetchSubjectsFromDatabase(String course, String year, String section) {
+		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			BSCS1A();
+		} else {
+			clearSubjectsTable();
+		}
+	}
 
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM subjects WHERE id between 1 and 9")) {
-        	
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    String subCode = resultSet.getString("sub_code");
-                    int units = resultSet.getInt("units");
-                    String subject = resultSet.getString("subject");
+	private void clearSubjectsTable() {
+	    subjectsTableView.getItems().clear();
+	}
+	
+	private void BSCS1A() {
 
-                    Subject subjectObj = new Subject(id, subCode, units, subject);
-                    subjectsList.add(subjectObj);
-                    
-                    subjectsTableView.setItems(subjectsList);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception as needed
-        }
-    }
+		try (Connection connection = DatabaseManager.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM subjects WHERE id between 1 and 9")) {
 
-    @FXML
-    private void enrollButtonClicked() throws SQLException {
-        String selectedCourse = courseCMB.getValue();
-        String enrollmentDate = dateTF.getText();
-        String firstName = fNameTF.getText();
-        String gender = genderCMB.getValue();
-        String location = locCMB.getValue();
-        String lastName = lNameTF.getText();
-        String middleName = mNameTF.getText();
-        String section = secCMB.getValue();
-        String year = "2023";
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					int id = resultSet.getInt("id");
+					String subCode = resultSet.getString("sub_code");
+					int units = resultSet.getInt("units");
+					String subject = resultSet.getString("subject");
 
-        try (Connection con = DatabaseManager.getConnection()) {
-            String sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, selectedCourse);
-                preparedStatement.setString(2, enrollmentDate);
-                preparedStatement.setString(3, firstName);
-                preparedStatement.setString(4, gender);
-                preparedStatement.setString(5, location);
-                preparedStatement.setString(6, lastName);
-                preparedStatement.setString(7, middleName);
-                preparedStatement.setString(8, section);
-                preparedStatement.setString(9, year);
+					Subject subjectObj = new Subject(id, subCode, units, subject);
+					subjectsList.add(subjectObj);
 
-                int rowsInserted = preparedStatement.executeUpdate();
+					subjectsTableView.setItems(subjectsList);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle the exception as needed
+		}
+	}
 
-                if (rowsInserted > 0) {
-                    ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-                    if (generatedKeys.next()) {
-                        int generatedId = generatedKeys.getInt(1);
-                        String formattedId = String.format("%s%04d", year, generatedId);
+	@FXML
+	private void enrollButtonClicked() throws SQLException {
+		String selectedCourse = courseCMB.getValue();
+		String enrollmentDate = dateTF.getText();
+		String firstName = fNameTF.getText();
+		String gender = genderCMB.getValue();
+		String location = locCMB.getValue();
+		String lastName = lNameTF.getText();
+		String middleName = mNameTF.getText();
+		String section = secCMB.getValue();
+		String year = "2023";
 
-                        // Use Platform.runLater() for UI updates
-                        Platform.runLater(() -> {
-                            sidTF.setText(formattedId);
+		try (Connection con = DatabaseManager.getConnection()) {
+			String sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+				preparedStatement.setString(1, selectedCourse);
+				preparedStatement.setString(2, enrollmentDate);
+				preparedStatement.setString(3, firstName);
+				preparedStatement.setString(4, gender);
+				preparedStatement.setString(5, location);
+				preparedStatement.setString(6, lastName);
+				preparedStatement.setString(7, middleName);
+				preparedStatement.setString(8, section);
+				preparedStatement.setString(9, year);
 
-                            // Clear other UI components
-                            clearFields();
-                        });
+				int rowsInserted = preparedStatement.executeUpdate();
 
-                        System.out.println("Enrollment successful!");
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e; // Re-throw the exception after handling
-        }
-    }
+				if (rowsInserted > 0) {
+					ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+					if (generatedKeys.next()) {
+						int generatedId = generatedKeys.getInt(1);
+						String formattedId = String.format("%s%04d", year, generatedId);
 
-    public class Subject {
-        private int id;
-        private String subCode;
-        private int units;
-        private String subject;
+						// Use Platform.runLater() for UI updates
+						Platform.runLater(() -> {
+							sidTF.setText(formattedId);
 
-        public Subject(int id, String subCode, int units, String subject) {
-            this.id = id;
-            this.subCode = subCode;
-            this.units = units;
-            this.subject = subject;
-        }
+							// Clear other UI components
+							clearFields();
+						});
 
-        public int getId() {
-            return id;
-        }
+						System.out.println("Enrollment successful!");
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e; // Re-throw the exception after handling
+		}
+	}
 
-        public String getSubCode() {
-            return subCode;
-        }
+	public class Subject {
+		private int id;
+		private String subCode;
+		private int units;
+		private String subject;
 
-        public int getUnits() {
-            return units;
-        }
+		public Subject(int id, String subCode, int units, String subject) {
+			this.id = id;
+			this.subCode = subCode;
+			this.units = units;
+			this.subject = subject;
+		}
 
-        public String getSubject() {
-            return subject;
-        }
-    }
+		public int getId() {
+			return id;
+		}
 
-    private void clearFields() {
-        courseCMB.setValue(null);
-        dateTF.clear();
-        fNameTF.clear();
-        genderCMB.setValue(null);
-        locCMB.setValue(null);
-        lNameTF.clear();
-        mNameTF.clear();
-        secCMB.setValue(null);
-    }
-    
-    void setSubCS1A() {
-    	
-    }
+		public String getSubCode() {
+			return subCode;
+		}
+
+		public int getUnits() {
+			return units;
+		}
+
+		public String getSubject() {
+			return subject;
+		}
+	}
+
+	private void clearFields() {
+		courseCMB.setValue(null);
+		dateTF.clear();
+		fNameTF.clear();
+		genderCMB.setValue(null);
+		locCMB.setValue(null);
+		lNameTF.clear();
+		mNameTF.clear();
+		secCMB.setValue(null);
+	}
+
+	void setSubCS1A() {
+		// para sa subject button sa baba
+	}
 }
