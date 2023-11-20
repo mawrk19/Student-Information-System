@@ -95,100 +95,61 @@ public class EnrollmentController implements Initializable {
 		unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
 		subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
 
-		courseCMB.setOnAction(event -> setSubBSCS1A1st());
-		yrCMB.setOnAction(event -> setSubBSCS1A1st());
-		secCMB.setOnAction(event -> setSubBSCS1A1st());
-		semCMB.setOnAction(event -> setSubBSCS1A1st());
-		statCMB.setOnAction(event -> setSubBSCS1A1st());
-		
-		courseCMB.setOnAction(event -> setSubBSCS1A2nd());
-		yrCMB.setOnAction(event -> setSubBSCS1A2nd());
-		secCMB.setOnAction(event -> setSubBSCS1A2nd());
-		semCMB.setOnAction(event -> setSubBSCS1A2nd());
-		statCMB.setOnAction(event -> setSubBSCS1A2nd());
+		courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	    yrCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	    secCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	    semCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	    statCMB.setOnAction(event -> setSubjectsBasedOnSelection());
 	}
 
-	private void setSubBSCS1A1st() {
-		String selectedCourse = courseCMB.getValue();
-		String selectedYear = yrCMB.getValue();
-		String selectedSection = secCMB.getValue();
-		String selectedSemester = semCMB.getValue();
-		String selectedType = statCMB.getValue();
+	private void setSubjectsBasedOnSelection() {
+	    String selectedCourse = courseCMB.getValue();
+	    String selectedYear = yrCMB.getValue();
+	    String selectedSection = secCMB.getValue();
+	    String selectedSemester = semCMB.getValue();
+	    String selectedType = statCMB.getValue();
 
-		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
-				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
-			BSCS1A1st();
-		} else {
-			clearSubjectsTable();
-		}
+	    if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+	            && "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+	        setSubjectsForSemester("BSCS1A1st", 1, 9);
+	    } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+	            && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+	        setSubjectsForSemester("BSCS1A2nd", 10, 17);
+	    } else {
+	        clearSubjectsTable();
+	    }
 	}
 	
-	private void setSubBSCS1A2nd() {
-		String selectedCourse = courseCMB.getValue();
-		String selectedYear = yrCMB.getValue();
-		String selectedSection = secCMB.getValue();
-		String selectedSemester = semCMB.getValue();
-		String selectedType = statCMB.getValue();
-
-		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
-				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
-			BSCS1A2nd();
-		} else {
-			clearSubjectsTable();
-		}
-	}
 
 	private void clearSubjectsTable() {
 	    subjectsTableView.getItems().clear();
 	}
 	
-	private void BSCS1A1st() {
+	private void setSubjectsForSemester(String semester, int startId, int endId) {
+	    try (Connection connection = DatabaseManager.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
 
-		try (Connection connection = DatabaseManager.getConnection();
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM subjects WHERE id between 1 and 9")) {
+	        preparedStatement.setInt(1, startId);
+	        preparedStatement.setInt(2, endId);
 
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				while (resultSet.next()) {
-					int id = resultSet.getInt("id");
-					String subCode = resultSet.getString("sub_code");
-					int units = resultSet.getInt("units");
-					String subject = resultSet.getString("subject");
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            clearSubjectsTable(); // Clear existing items before adding new ones
+	            while (resultSet.next()) {
+	                int id = resultSet.getInt("id");
+	                String subCode = resultSet.getString("sub_code");
+	                int units = resultSet.getInt("units");
+	                String subject = resultSet.getString("subject");
 
-					Subject subjectObj = new Subject(id, subCode, units, subject);
-					subjectsList.add(subjectObj);
-
-					subjectsTableView.setItems(subjectsList);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace(); // Handle the exception as needed
-		}
+	                Subject subjectObj = new Subject(id, subCode, units, subject);
+	                subjectsList.add(subjectObj);
+	            }
+	            subjectsTableView.setItems(subjectsList);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Handle the exception as needed
+	    }
 	}
 	
-	private void BSCS1A2nd() {
-
-		try (Connection connection = DatabaseManager.getConnection();
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("SELECT * FROM subjects WHERE id between 10 and 17")) {
-
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-				while (resultSet.next()) {
-					int id = resultSet.getInt("id");
-					String subCode = resultSet.getString("sub_code");
-					int units = resultSet.getInt("units");
-					String subject = resultSet.getString("subject");
-
-					Subject subjectObj = new Subject(id, subCode, units, subject);
-					subjectsList.add(subjectObj);
-
-					subjectsTableView.setItems(subjectsList);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace(); // Handle the exception as needed
-		}
-	}
 
 	@FXML
 	private void enrollButtonClicked() throws SQLException {
