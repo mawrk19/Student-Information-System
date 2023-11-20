@@ -22,6 +22,5 @@ public class DashboardController implements Initializable {
         UserSession session = UserSession.getInstance();
         String username = session.getUsername();
         adminName.setText(username);
-        System.out.println(username);
     }
 }

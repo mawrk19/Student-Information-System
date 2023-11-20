@@ -28,3 +28,9 @@
 	-fx-background-color: #C9CAD9;
 	-fx-background-radius: 24;
 }
+
+#admin {
+	-fx-color: #000000;
+	-fx-font-family: Verdana;
+	-fx-font-size:40px;
+}

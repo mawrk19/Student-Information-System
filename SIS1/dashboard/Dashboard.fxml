@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
    <children>
       <AnchorPane prefHeight="790.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,13 +20,13 @@
                <children>
                   <AnchorPane id="greeting" fx:id="Greeting" prefHeight="200.0" prefWidth="575.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                      <children>
+                        <Label id="admin" fx:id="adminName" layoutX="14.0" layoutY="117.0" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css" AnchorPane.leftAnchor="26.0" />
                         <ImageView fitHeight="147.0" fitWidth="156.0" layoutX="360.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
                         <Label fx:id="Hello" layoutX="26.0" layoutY="57.0" prefHeight="31.0" prefWidth="280.0" text="HELLO" textAlignment="CENTER" AnchorPane.leftAnchor="26.0">
                            <font>
                               <Font name="Verdana" size="40.0" />
                            </font>
                         </Label>
-                        <Label fx:id="adminName" layoutX="14.0" layoutY="117.0" prefHeight="51.0" prefWidth="222.0" AnchorPane.leftAnchor="26.0" />
                      </children>
                   </AnchorPane>
                   <HBox prefHeight="456.0" prefWidth="574.0" spacing="10.0" VBox.vgrow="ALWAYS">
