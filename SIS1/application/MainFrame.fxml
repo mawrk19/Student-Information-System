@@ -204,7 +204,7 @@
                               <Insets left="15.0" />
                            </VBox.margin>
                         </Button>
-                        <Button id="EnrollmentButton" fx:id="Enrollment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Enrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="Enrollment" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Button id="EnrollmentButton" fx:id="Enrollment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Enrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" stylesheets="@MainFrame.css" text="New Student" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets left="15.0" />
                            </VBox.margin>
@@ -212,7 +212,7 @@
                               <Font name="Berlin Sans FB" size="20.0" />
                            </font>
                         </Button>
-                        <Button fx:id="oldEnrollment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#oldEnrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" text="Enrollment" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Button fx:id="oldEnrollment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#oldEnrollmentbtn" prefHeight="60.0" prefWidth="215.0" style="-fx-background-color: #3c5199;" text="Old Student" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" />
                            </VBox.margin>
