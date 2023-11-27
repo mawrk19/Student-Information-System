@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.effect.ColorAdjust;
 
 public class MainFrameController implements Initializable{
 
@@ -32,7 +33,7 @@ public class MainFrameController implements Initializable{
     private AnchorPane contentarea;
     
     @FXML
-    private Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule, oldEnrollment,Grading;
+    private Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule, oldEnrollment, Grading, Profileicn;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -87,8 +88,36 @@ public class MainFrameController implements Initializable{
 		stage.setIconified(true);
 	}
 	
+	public void profileicnbtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #20273E; -fx-border-radius: 50; -fx-background-radius: 25;");
+		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Dashboard.setTextFill(Color.WHITE);
+		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 StudentProf.setTextFill(Color.WHITE);
+		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Timetable.setTextFill(Color.WHITE);
+		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Schedule.setTextFill(Color.WHITE);
+		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.WHITE);
+		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Enrollment.setTextFill(Color.WHITE);
+		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 oldEnrollment.setTextFill(Color.WHITE);
+		 
+		 Pane profilestage = FXMLLoader.load(getClass().getResource("/profile/Profile.fxml"));
+		 contentarea.getChildren().removeAll();
+		 contentarea.getChildren().setAll(profilestage);
+		 AnchorPane.setLeftAnchor(profilestage, 10.0);
+		 AnchorPane.setRightAnchor(profilestage, 10.0);
+		 AnchorPane.setTopAnchor(profilestage, 10.0);
+		 AnchorPane.setBottomAnchor(profilestage, 20.0);
+		 
+}
+	
 	@FXML
 	public void Dashboardbtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		 Dashboard.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Dashboard.setTextFill(Color.BLACK);
 		 StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -118,6 +147,7 @@ public class MainFrameController implements Initializable{
 	
 	@FXML
 	public void StudentProfbtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Dashboard.setTextFill(Color.WHITE);
 		 StudentProf.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -144,6 +174,7 @@ public class MainFrameController implements Initializable{
     }
     
 	public void Timetablebtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Dashboard.setTextFill(Color.WHITE);
 		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -171,6 +202,7 @@ public class MainFrameController implements Initializable{
    }
 	
 	public void Schedulebtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Dashboard.setTextFill(Color.WHITE);
 		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -197,6 +229,7 @@ public class MainFrameController implements Initializable{
  }
 	
 	public void Gradingbtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Dashboard.setTextFill(Color.WHITE);
 		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -224,6 +257,7 @@ public class MainFrameController implements Initializable{
 
 	
 	public void Enrollmentbtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Dashboard.setTextFill(Color.WHITE);
 		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
@@ -251,6 +285,7 @@ public class MainFrameController implements Initializable{
   }
 	
 	public void oldEnrollmentbtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 Dashboard.setTextFill(Color.WHITE);
 		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
