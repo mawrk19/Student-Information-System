@@ -19,7 +19,7 @@
          <children>
             <VBox id="SidePane" alignment="CENTER" layoutX="75.0" layoutY="295.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" stylesheets="@StudentProf.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <children>
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="138.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="138.0" prefWidth="250.0" style="-fx-border-radius: 25;" VBox.vgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
