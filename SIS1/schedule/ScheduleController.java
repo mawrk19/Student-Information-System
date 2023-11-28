@@ -113,8 +113,11 @@ public class ScheduleController implements Initializable{
 	                    }
 	                    if(today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate){
 	                    	Color kolay = Color.web("#3c5199");
+	                    	double currentDateRadius = 40;
+	    	                rectangle.setArcWidth(currentDateRadius);
+	    	                rectangle.setArcHeight(currentDateRadius);
 	                        rectangle.setStroke(kolay);
-	                        rectangle.setFill(kolay);
+	                        rectangle.setFill(Color.PINK);
 	                    }
 	                }
 	                FlowPane.setMargin(stackPane, new Insets(0, 0, 0, 0)); // Adjust the bottom margin as needed
