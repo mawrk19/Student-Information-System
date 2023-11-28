@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -95,24 +96,28 @@ public class ScheduleController implements Initializable{
 	                double rectangleWidth =(calendarWidth/7) - strokeWidth - spacingH;
 	                rectangle.setWidth(rectangleWidth);
 	                double rectangleHeight = (calendarHeight/6) - strokeWidth - spacingV;
+	                double cornerRadius = 10;
+	                rectangle.setArcWidth(cornerRadius);
+	                rectangle.setArcHeight(cornerRadius);
 	                rectangle.setHeight(rectangleHeight);
 	                stackPane.getChildren().add(rectangle);
-	                
-	                
 
 	                int calculatedDate = (j+1)+(7*i);
 	                if(calculatedDate > dateOffset){
 	                    int currentDate = calculatedDate - dateOffset;
 	                    if(currentDate <= monthMaxDate){
 	                        Text date = new Text(String.valueOf(currentDate));
-	                        double textTranslationY = - (rectangleHeight / 2) * 0.75;
+	                        double textTranslationY = - (rectangleHeight / 10) * 0.50;
 	                        date.setTranslateY(textTranslationY);
 	                        stackPane.getChildren().add(date);
 	                    }
 	                    if(today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate){
-	                        rectangle.setStroke(Color.BLUE);
+	                    	Color kolay = Color.web("#3c5199");
+	                        rectangle.setStroke(kolay);
+	                        rectangle.setFill(kolay);
 	                    }
 	                }
+	                FlowPane.setMargin(stackPane, new Insets(0, 0, 0, 0)); // Adjust the bottom margin as needed
 	                calendar.getChildren().add(stackPane);
 	            }
 	        }

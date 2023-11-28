@@ -20,7 +20,7 @@
 	<children>
       <VBox layoutX="13.0" layoutY="30.0" prefWidth="845.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="30.0">
          <children>
-            <HBox prefHeight="310.0" prefWidth="845.0">
+            <HBox prefHeight="280.0" prefWidth="845.0">
                <children>
             		<AnchorPane id="BtnTimetable" prefHeight="285.0" prefWidth="455.0" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
             			<children>
@@ -33,9 +33,9 @@
             		</AnchorPane>
                   <VBox alignment="CENTER" prefHeight="310.0" prefWidth="338.0" HBox.hgrow="ALWAYS">
                      <children>
-                  		<AnchorPane id="SBar" prefHeight="44.0" prefWidth="336.0" stylesheets="@Schedule.css">
+                  		<AnchorPane id="SBar" prefHeight="30.0" prefWidth="354.0" stylesheets="@Schedule.css">
                   			<children>
-                  				<TextField id="SBar" fx:id="searchCD" opacity="0.87" prefHeight="35.0" prefWidth="336.0" promptText="Search..." stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  				<TextField id="SBar" fx:id="searchCD" opacity="0.87" prefHeight="25.0" prefWidth="354.0" promptText="Search..." stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   					<opaqueInsets>
                   						<Insets />
                   					</opaqueInsets>
@@ -44,7 +44,7 @@
                   		</AnchorPane>
                         <HBox alignment="CENTER" prefHeight="55.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
-                              <Insets top="15.0" />
+                              <Insets top="5.0" />
                            </VBox.margin>
                            <children>
                               <Button id="calendarprev" fx:id="Prev" mnemonicParsing="false" onAction="#backOneMonth" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
@@ -80,28 +80,35 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="73.0" prefWidth="354.0" spacing="30.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Label maxWidth="1.7976931348623157E308" text="Sun" HBox.hgrow="ALWAYS" />
-                              <Label maxWidth="1.7976931348623157E308" text="Mon" HBox.hgrow="ALWAYS" />
-                              <Label maxWidth="1.7976931348623157E308" text="Tue" HBox.hgrow="ALWAYS" />
-                              <Label maxWidth="1.7976931348623157E308" text="Wed" HBox.hgrow="ALWAYS" />
-                              <Label maxWidth="1.7976931348623157E308" text="Thu" HBox.hgrow="ALWAYS" />
-                              <Label maxWidth="1.7976931348623157E308" text="Fri" HBox.hgrow="ALWAYS" />
-                              <Label maxWidth="1.7976931348623157E308" text="Sat" HBox.hgrow="ALWAYS" />
-                           </children>
+                        <VBox alignment="CENTER" prefWidth="357.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <AnchorPane prefHeight="250.0" prefWidth="345.0" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets top="5.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                            <children>
-                              <FlowPane id="Calendar" fx:id="calendar" alignment="CENTER" columnHalignment="CENTER" prefHeight="250.0" prefWidth="345.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="340.0" spacing="10.0">
+                                 <children>
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Sun" HBox.hgrow="ALWAYS" />
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Mon" HBox.hgrow="ALWAYS" />
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Tue" HBox.hgrow="ALWAYS" />
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Wed" HBox.hgrow="ALWAYS" />
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Thu" HBox.hgrow="ALWAYS" />
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Fri" HBox.hgrow="ALWAYS" />
+                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Sat" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                              <AnchorPane prefHeight="250.0" prefWidth="345.0" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <FlowPane id="Calendar" fx:id="calendar" alignment="CENTER" columnHalignment="CENTER" prefHeight="250.0" prefWidth="345.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
+                        </VBox>
                      </children>
                      <HBox.margin>
                         <Insets left="20.0" />
