@@ -18,124 +18,148 @@
 
 <AnchorPane id="Apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Schedule.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schedule.ScheduleController">
 	<children>
-      <HBox layoutX="13.0" layoutY="30.0" prefHeight="310.0" prefWidth="845.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="30.0">
+      <VBox layoutX="13.0" layoutY="30.0" prefWidth="845.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="30.0">
          <children>
-      		<AnchorPane id="BtnTimetable" prefHeight="285.0" prefWidth="455.0" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
-      			<children>
-      				<Button id="BtnTimetable" fx:id="BtnTimetable" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" prefHeight="250.0" prefWidth="455.0" stylesheets="@Schedule.css" text=" BUTTON TO TIMETABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      					<cursor>
-      						<Cursor fx:constant="HAND" />
-      					</cursor>
-      				</Button>
-      			</children>
-      		</AnchorPane>
-            <VBox prefHeight="310.0" prefWidth="338.0" HBox.hgrow="ALWAYS">
+            <HBox prefHeight="310.0" prefWidth="845.0">
                <children>
-            		<AnchorPane id="SBar" prefHeight="44.0" prefWidth="336.0" stylesheets="@Schedule.css">
+            		<AnchorPane id="BtnTimetable" prefHeight="285.0" prefWidth="455.0" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
             			<children>
-            				<TextField id="SBar" fx:id="searchCD" opacity="0.87" prefHeight="35.0" prefWidth="336.0" promptText="Search..." stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            					<opaqueInsets>
-            						<Insets />
-            					</opaqueInsets>
-            				</TextField>
+            				<Button id="BtnTimetable" fx:id="BtnTimetable" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" prefHeight="250.0" prefWidth="455.0" stylesheets="@Schedule.css" text=" BUTTON TO TIMETABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            					<cursor>
+            						<Cursor fx:constant="HAND" />
+            					</cursor>
+            				</Button>
             			</children>
             		</AnchorPane>
-                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
+                  <VBox alignment="CENTER" prefHeight="310.0" prefWidth="338.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button id="calendarprev" mnemonicParsing="false" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../src/imgs_icons/Previous.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                        <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                        <Button id="calendarnxt" mnemonicParsing="false" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../src/imgs_icons/Next.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                  		<AnchorPane id="SBar" prefHeight="44.0" prefWidth="336.0" stylesheets="@Schedule.css">
+                  			<children>
+                  				<TextField id="SBar" fx:id="searchCD" opacity="0.87" prefHeight="35.0" prefWidth="336.0" promptText="Search..." stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  					<opaqueInsets>
+                  						<Insets />
+                  					</opaqueInsets>
+                  				</TextField>
+                  			</children>
+                  		</AnchorPane>
+                        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <children>
+                              <Button id="calendarprev" fx:id="Prev" mnemonicParsing="false" onAction="#backOneMonth" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../src/imgs_icons/Previous.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                              <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                              <Button id="calendarnxt" fx:id="forward" mnemonicParsing="false" onAction="#forwardOneMonth" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../src/imgs_icons/Next.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="73.0" prefWidth="354.0" spacing="30.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" text="Sun" HBox.hgrow="ALWAYS" />
+                              <Label maxWidth="1.7976931348623157E308" text="Mon" HBox.hgrow="ALWAYS" />
+                              <Label maxWidth="1.7976931348623157E308" text="Tue" HBox.hgrow="ALWAYS" />
+                              <Label maxWidth="1.7976931348623157E308" text="Wed" HBox.hgrow="ALWAYS" />
+                              <Label maxWidth="1.7976931348623157E308" text="Thu" HBox.hgrow="ALWAYS" />
+                              <Label maxWidth="1.7976931348623157E308" text="Fri" HBox.hgrow="ALWAYS" />
+                              <Label maxWidth="1.7976931348623157E308" text="Sat" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <AnchorPane prefHeight="250.0" prefWidth="345.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                           <children>
+                              <FlowPane id="Calendar" fx:id="calendar" alignment="CENTER" columnHalignment="CENTER" prefHeight="250.0" prefWidth="345.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
-                  </HBox>
-                  <AnchorPane prefHeight="250.0" prefWidth="345.0" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="36.0" prefWidth="795.0" spacing="10.0">
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="293.0" text="YEAR AND SECTION..." HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="301.0" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane id="EditBG" prefHeight="36.0" prefWidth="364.0" stylesheets="@Schedule.css">
                      <children>
-                        <FlowPane id="Calendar" fx:id="calendar" alignment="CENTER" columnHalignment="CENTER" prefHeight="250.0" prefWidth="345.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="260.0" text="Edit Timetable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Button id="EditBtn" layoutX="264.0" layoutY="6.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@Schedule.css" AnchorPane.rightAnchor="14.0" />
                      </children>
                   </AnchorPane>
                </children>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-            </VBox>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+      		<AnchorPane id="bgpane" prefHeight="367.0" prefWidth="845.0" stylesheets="@Schedule.css" VBox.vgrow="ALWAYS">
+      			<children>
+      				<TreeTableView id="table" prefHeight="268.0" prefWidth="721.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      					<columns>
+      						<TreeTableColumn prefWidth="90.0" text="SUBJECT CODE" />
+      						<TreeTableColumn prefWidth="85.0" text="DESCRIPTION" />
+      						<TreeTableColumn prefWidth="76.0" text="CRED. UNIT" />
+      						<TreeTableColumn prefWidth="64.0" text="SECTION" />
+      						<TreeTableColumn prefWidth="66.0" text="DAY" />
+      						<TreeTableColumn prefWidth="64.0" text="TIME" />
+      						<TreeTableColumn prefWidth="124.0" text="PROFESSOR" />
+      						<TreeTableColumn prefWidth="91.0" text="SCHEDULE" />
+      						<TreeTableColumn prefWidth="60.0" text="SLOTS" />
+      					</columns>
+      				</TreeTableView>
+      			</children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+      		</AnchorPane>
          </children>
-      </HBox>
-      <HBox layoutX="33.0" layoutY="369.0" prefHeight="36.0" prefWidth="795.0" spacing="10.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="369.0">
-         <children>
-            <Label maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="293.0" text="YEAR AND SECTION..." HBox.hgrow="ALWAYS">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Label>
-            <Label maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="301.0" HBox.hgrow="ALWAYS">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <AnchorPane id="EditBG" prefHeight="36.0" prefWidth="364.0" stylesheets="@Schedule.css">
-               <children>
-                  <Label alignment="CENTER" prefHeight="36.0" prefWidth="260.0" text="Edit Timetable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button id="EditBtn" layoutX="264.0" layoutY="6.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" stylesheets="@Schedule.css" AnchorPane.rightAnchor="14.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </HBox>
-		<AnchorPane id="bgpane" layoutX="22.0" layoutY="420.0" prefHeight="360.0" prefWidth="830.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="420.0">
-			<children>
-				<TreeTableView id="table" prefHeight="268.0" prefWidth="721.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-					<columns>
-						<TreeTableColumn prefWidth="90.0" text="SUBJECT CODE" />
-						<TreeTableColumn prefWidth="85.0" text="DESCRIPTION" />
-						<TreeTableColumn prefWidth="76.0" text="CRED. UNIT" />
-						<TreeTableColumn prefWidth="64.0" text="SECTION" />
-						<TreeTableColumn prefWidth="66.0" text="DAY" />
-						<TreeTableColumn prefWidth="64.0" text="TIME" />
-						<TreeTableColumn prefWidth="124.0" text="PROFESSOR" />
-						<TreeTableColumn prefWidth="91.0" text="SCHEDULE" />
-						<TreeTableColumn prefWidth="60.0" text="SLOTS" />
-					</columns>
-				</TreeTableView>
-			</children>
-		</AnchorPane>
+      </VBox>
 	</children>
 </AnchorPane>

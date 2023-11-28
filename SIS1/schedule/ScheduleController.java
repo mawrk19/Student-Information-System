@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -35,6 +36,12 @@ public class ScheduleController implements Initializable{
 	    private Text year;
 	    
 	    @FXML
+	    private Button forward;
+	    
+	    @FXML
+	    private Button prev;
+	    
+	    @FXML
 	    private FlowPane calendar;
 		   
 		@Override
@@ -45,6 +52,20 @@ public class ScheduleController implements Initializable{
 	        
 	        drawCalendar();
 		}
+		
+		 @FXML
+		    void backOneMonth(ActionEvent event) {
+		        dateFocus = dateFocus.minusMonths(1);
+		        calendar.getChildren().clear();
+		        drawCalendar();
+		    }
+
+		    @FXML
+		    void forwardOneMonth(ActionEvent event) {
+		        dateFocus = dateFocus.plusMonths(1);
+		        calendar.getChildren().clear();
+		        drawCalendar();
+		    }
 		
 		private void drawCalendar(){
 	        year.setText(String.valueOf(dateFocus.getYear()));
