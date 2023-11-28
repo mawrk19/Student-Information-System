@@ -91,8 +91,7 @@ public class ScheduleController implements Initializable{
 
 	                Rectangle rectangle = new Rectangle();
 	                rectangle.setFill(Color.TRANSPARENT);
-	                rectangle.setStroke(Color.BLACK);
-	                rectangle.setStrokeWidth(strokeWidth);
+	                
 	                double rectangleWidth =(calendarWidth/7) - strokeWidth - spacingH;
 	                rectangle.setWidth(rectangleWidth);
 	                double rectangleHeight = (calendarHeight/6) - strokeWidth - spacingV;
@@ -112,12 +111,15 @@ public class ScheduleController implements Initializable{
 	                        stackPane.getChildren().add(date);
 	                    }
 	                    if(today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate){
-	                    	Color kolay = Color.web("#3c5199");
-	                    	double currentDateRadius = 40;
-	    	                rectangle.setArcWidth(currentDateRadius);
-	    	                rectangle.setArcHeight(currentDateRadius);
-	                        rectangle.setStroke(kolay);
-	                        rectangle.setFill(Color.PINK);
+	                    	Color ube = Color.web("#3c5199");
+	                    	for (Node node : stackPane.getChildren()) {
+	                            if (node instanceof Text) {
+	                                Text textNode = (Text) node;
+	                                textNode.setFill(Color.WHITE);
+	                            }
+	                        }
+	                        rectangle.setStroke(ube);
+	                        rectangle.setFill(ube);
 	                    }
 	                }
 	                FlowPane.setMargin(stackPane, new Insets(0, 0, 0, 0)); // Adjust the bottom margin as needed
