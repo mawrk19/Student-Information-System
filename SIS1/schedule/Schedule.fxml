@@ -7,15 +7,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="Apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Schedule.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schedule.ScheduleController">
 	<children>
-      <HBox layoutX="19.0" layoutY="42.0" prefHeight="310.0" prefWidth="827.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="42.0">
+      <HBox layoutX="13.0" layoutY="30.0" prefHeight="310.0" prefWidth="845.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="30.0">
          <children>
       		<AnchorPane id="BtnTimetable" prefHeight="285.0" prefWidth="455.0" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
       			<children>
@@ -37,11 +40,52 @@
             				</TextField>
             			</children>
             		</AnchorPane>
-                  <Pane prefHeight="248.0" prefWidth="336.0" style="-fx-background-color: #3C5199;">
+                  <HBox alignment="CENTER" prefHeight="55.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="15.0" />
                      </VBox.margin>
-                  </Pane>
+                     <children>
+                        <Button id="calendarprev" mnemonicParsing="false" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/Previous.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Button id="calendarnxt" mnemonicParsing="false" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/Next.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <AnchorPane prefHeight="250.0" prefWidth="345.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <FlowPane id="Calendar" fx:id="calendar" alignment="CENTER" columnHalignment="CENTER" prefHeight="250.0" prefWidth="345.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
                </children>
                <HBox.margin>
                   <Insets left="20.0" />

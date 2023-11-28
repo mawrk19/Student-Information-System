@@ -16,3 +16,26 @@
 #EditBtn {
 	-fx-background-radius:50% 50%;
 }
+
+#calendarnxt{
+	-fx-background-color: #3c5199;
+}
+
+#calendarnxt{
+	-fx-background-color: #3c5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#calendarprev{
+	-fx-background-color: #3c5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#Calendar{
+	-fx-background-color: #dedfe2;
+	-fx-border-radius: 5;
+	-fx-border-width: 2;
+	-fx-border-color: #3c5199;
+}
