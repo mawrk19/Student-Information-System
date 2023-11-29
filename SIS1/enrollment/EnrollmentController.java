@@ -191,9 +191,9 @@ public class EnrollmentController implements Initializable {
 	        String sql;
 
 	        if (image != null) {
-	            sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year, image_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, image_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        } else {
-	            sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        }
 
 	        try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -295,10 +295,6 @@ public class EnrollmentController implements Initializable {
 		mNameTF.clear();
 		secCMB.setValue(null);
 	}
-
-	void setSubCS1A() {
-		// para sa subject button sa baba
-	} 
 	
 	private void insertIMG() {
 	    // Open a FileChooser to allow the user to select an image file
