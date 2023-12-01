@@ -24,10 +24,20 @@
                <children>
             		<AnchorPane id="BtnTimetable" prefHeight="280.0" prefWidth="465.0" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
             			<children>
-            				<Button id="BtnTimetable" fx:id="BtnTimetable" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" onAction="#gotoTimetable" prefHeight="280.0" prefWidth="457.0" stylesheets="@Schedule.css" text=" BUTTON TO TIMETABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            				<Button id="BtnTimetable" fx:id="BtnTimetable" alignment="CENTER" graphicTextGap="5.0" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#gotoTimetable" prefHeight="280.0" prefWidth="457.0" stylesheets="@Schedule.css" text="GO TO TIMETABLE     " textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             					<cursor>
             						<Cursor fx:constant="HAND" />
             					</cursor>
+                           <font>
+                              <Font name="Berlin Sans FB" size="25.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/Timetable_to_Sched.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
             				</Button>
             			</children>
             		</AnchorPane>
@@ -178,18 +188,21 @@
             </HBox>
       		<AnchorPane id="bgpane" prefHeight="367.0" prefWidth="845.0" stylesheets="@Schedule.css" VBox.vgrow="ALWAYS">
       			<children>
-      				<TreeTableView id="table" prefHeight="268.0" prefWidth="721.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      				<TreeTableView id="table" layoutX="10.0" layoutY="12.0" prefHeight="385.0" prefWidth="825.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
       					<columns>
-      						<TreeTableColumn prefWidth="90.0" text="SUBJECT CODE" />
+      						<TreeTableColumn prefWidth="97.0" text="SUBJECT CODE" />
       						<TreeTableColumn prefWidth="85.0" text="DESCRIPTION" />
-      						<TreeTableColumn prefWidth="76.0" text="CRED. UNIT" />
-      						<TreeTableColumn prefWidth="64.0" text="SECTION" />
-      						<TreeTableColumn prefWidth="66.0" text="DAY" />
-      						<TreeTableColumn prefWidth="64.0" text="TIME" />
-      						<TreeTableColumn prefWidth="124.0" text="PROFESSOR" />
-      						<TreeTableColumn prefWidth="91.0" text="SCHEDULE" />
-      						<TreeTableColumn prefWidth="60.0" text="SLOTS" />
+      						<TreeTableColumn prefWidth="79.0" text="CRED. UNIT" />
+      						<TreeTableColumn prefWidth="76.0" text="SECTION" />
+      						<TreeTableColumn prefWidth="63.0" text="DAY" />
+      						<TreeTableColumn prefWidth="79.0" text="TIME" />
+      						<TreeTableColumn prefWidth="131.0" text="PROFESSOR" />
+      						<TreeTableColumn prefWidth="98.0" text="SCHEDULE" />
+      						<TreeTableColumn prefWidth="95.0" text="SLOTS" />
       					</columns>
+                     <columnResizePolicy>
+                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
       				</TreeTableView>
       			</children>
                <VBox.margin>
