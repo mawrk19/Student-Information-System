@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,7 +34,7 @@ public class MainFrameController implements Initializable{
     private AnchorPane contentarea;
     
     @FXML
-    private Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule, oldEnrollment, Grading, Profileicn;
+    public Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule, oldEnrollment, Grading, Profileicn;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -310,6 +311,10 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setBottomAnchor(oldenrollmentstage, 20.0);
 		 
  }
+	
+	public void setContent(Node node) {
+        contentarea.getChildren().setAll(node);
+    }
    
 }
     
