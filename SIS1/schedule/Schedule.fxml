@@ -188,18 +188,21 @@
             </HBox>
       		<AnchorPane id="bgpane" prefHeight="367.0" prefWidth="845.0" stylesheets="@Schedule.css" VBox.vgrow="ALWAYS">
       			<children>
-      				<TreeTableView id="table" prefHeight="268.0" prefWidth="721.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      				<TreeTableView id="table" layoutX="10.0" layoutY="12.0" prefHeight="385.0" prefWidth="825.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
       					<columns>
-      						<TreeTableColumn prefWidth="90.0" text="SUBJECT CODE" />
+      						<TreeTableColumn prefWidth="97.0" text="SUBJECT CODE" />
       						<TreeTableColumn prefWidth="85.0" text="DESCRIPTION" />
-      						<TreeTableColumn prefWidth="76.0" text="CRED. UNIT" />
-      						<TreeTableColumn prefWidth="64.0" text="SECTION" />
-      						<TreeTableColumn prefWidth="66.0" text="DAY" />
-      						<TreeTableColumn prefWidth="64.0" text="TIME" />
-      						<TreeTableColumn prefWidth="124.0" text="PROFESSOR" />
-      						<TreeTableColumn prefWidth="91.0" text="SCHEDULE" />
-      						<TreeTableColumn prefWidth="60.0" text="SLOTS" />
+      						<TreeTableColumn prefWidth="79.0" text="CRED. UNIT" />
+      						<TreeTableColumn prefWidth="76.0" text="SECTION" />
+      						<TreeTableColumn prefWidth="63.0" text="DAY" />
+      						<TreeTableColumn prefWidth="79.0" text="TIME" />
+      						<TreeTableColumn prefWidth="131.0" text="PROFESSOR" />
+      						<TreeTableColumn prefWidth="98.0" text="SCHEDULE" />
+      						<TreeTableColumn prefWidth="95.0" text="SLOTS" />
       					</columns>
+                     <columnResizePolicy>
+                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
       				</TreeTableView>
       			</children>
                <VBox.margin>

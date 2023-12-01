@@ -34,7 +34,7 @@ public class MainFrameController implements Initializable{
     private AnchorPane contentarea;
     
     @FXML
-    public Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule, oldEnrollment, Grading, Profileicn;
+    public Button Dashboard, StudentProf, Timetable, Enrollment, Schedule, oldEnrollment, Grading, Profileicn, Students;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -105,6 +105,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 oldEnrollment.setTextFill(Color.WHITE);
+		 Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.WHITE);
 		 
 		 Pane profilestage = FXMLLoader.load(getClass().getResource("/profile/Profile.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -133,6 +135,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 oldEnrollment.setTextFill(Color.WHITE);
+		 Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.WHITE);
 		 
 		 Pane dashboardstage = FXMLLoader.load(getClass().getResource("/dashboard/Dashboard.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -163,6 +167,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 oldEnrollment.setTextFill(Color.WHITE);
+		 Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.WHITE);
 		 
 		 Pane studprofstage = FXMLLoader.load(getClass().getResource("/studentprof/StudentProfile.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -190,6 +196,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 oldEnrollment.setTextFill(Color.WHITE);
+		 Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.WHITE);
 		 
 		 Pane timetablestage = FXMLLoader.load(getClass().getResource("/timetable/Timetable.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -218,6 +226,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 oldEnrollment.setTextFill(Color.WHITE);
+		 Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.WHITE);
 		 
 		 Pane schedulestage = FXMLLoader.load(getClass().getResource("/schedule/Schedule.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -245,6 +255,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 oldEnrollment.setTextFill(Color.WHITE);
+		 Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.WHITE);
 		 
 		 Pane gradingstage = FXMLLoader.load(getClass().getResource("/grading/Grading.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -273,6 +285,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.BLACK);
 		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 oldEnrollment.setTextFill(Color.WHITE);
+		 Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.WHITE);
 		 
 		 Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -301,6 +315,8 @@ public class MainFrameController implements Initializable{
 		 Enrollment.setTextFill(Color.WHITE);
 		 oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		 oldEnrollment.setTextFill(Color.BLACK);
+		 Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.WHITE);
 		 
 		 Pane oldenrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/OldEnrollment.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -311,6 +327,35 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setBottomAnchor(oldenrollmentstage, 20.0);
 		 
  }
+	
+	public void studentsbtn(ActionEvent event) throws IOException {
+		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Dashboard.setTextFill(Color.WHITE);
+		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 StudentProf.setTextFill(Color.WHITE);
+		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Timetable.setTextFill(Color.WHITE);
+		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Schedule.setTextFill(Color.WHITE);
+		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Grading.setTextFill(Color.WHITE);
+		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Enrollment.setTextFill(Color.WHITE);
+		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 oldEnrollment.setTextFill(Color.WHITE);
+		 Students.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		 Students.setTextFill(Color.BLACK);
+		 
+		 Pane studentsstage = FXMLLoader.load(getClass().getResource("/students/Students.fxml"));
+		 contentarea.getChildren().removeAll();
+		 contentarea.getChildren().setAll(studentsstage);
+		 AnchorPane.setLeftAnchor(studentsstage, 10.0);
+		 AnchorPane.setRightAnchor(studentsstage, 10.0);
+		 AnchorPane.setTopAnchor(studentsstage, 10.0);
+		 AnchorPane.setBottomAnchor(studentsstage, 20.0);
+		 
+}
 	
 	public void setContent(Node node) {
         contentarea.getChildren().setAll(node);
