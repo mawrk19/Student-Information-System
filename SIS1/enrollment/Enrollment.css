@@ -1,8 +1,10 @@
 .Body {
-	-fx-background-color:  #3C5199;
+	-fx-background-color:  #DFE2ED;
 }
 .Containers {
-	-fx-background-color:  #DFE2ED;
+	-fx-background-color:  #3C5199;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
 }
 .img {
 	-fx-background-color:  #f5f5f5;
@@ -15,6 +17,11 @@
     -fx-border-color: #ccc; 
     -fx-border-width: 1px; 
     -fx-border-radius: 3px; 
+}
+
+#Infos{
+	-fx-border-radius: 10;
+	-fx-background-radius: 10; 
 }
 
 .user-name {

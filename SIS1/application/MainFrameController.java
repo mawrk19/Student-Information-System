@@ -110,9 +110,9 @@ public class MainFrameController implements Initializable{
 	
 	public void profileicnbtn(ActionEvent event) throws IOException {
 		
-		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
-		
 		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
 		
 		Dashboard.setStyle("-fx-background-radius: 25 0 0 25;");
 		Dashboard.setTextFill(Color.WHITE);
