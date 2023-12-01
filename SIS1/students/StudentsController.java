@@ -182,12 +182,12 @@ public class StudentsController {
     	try {
 	    	
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/students/Update.fxml"));
-	        Parent timetable = loader.load();
+	        Parent update = loader.load();
 	        
-	        AnchorPane.setLeftAnchor(timetable, 10.0);
-			AnchorPane.setRightAnchor(timetable, 10.0);
-			AnchorPane.setTopAnchor(timetable, 10.0);
-			AnchorPane.setBottomAnchor(timetable, 20.0);
+	        AnchorPane.setLeftAnchor(update, 10.0);
+			AnchorPane.setRightAnchor(update, 10.0);
+			AnchorPane.setTopAnchor(update, 10.0);
+			AnchorPane.setBottomAnchor(update, 20.0);
 
 	        FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
 	        Parent mainFrame = mainFrameLoader.load();
@@ -197,19 +197,19 @@ public class StudentsController {
 	    	mainFrameController.Dashboard.setTextFill(Color.WHITE);
 	    	mainFrameController.StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 	    	mainFrameController.StudentProf.setTextFill(Color.WHITE);
-	    	mainFrameController.Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Timetable.setTextFill(Color.BLACK);
+	    	mainFrameController.Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+	    	mainFrameController.Timetable.setTextFill(Color.WHITE);
 	    	mainFrameController.Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 	    	mainFrameController.Schedule.setTextFill(Color.WHITE);
 	    	mainFrameController.Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 	    	mainFrameController.Enrollment.setTextFill(Color.WHITE);
 	    	mainFrameController.oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 	    	mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
-	    	mainFrameController.Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Students.setTextFill(Color.WHITE);
+	    	mainFrameController.Students.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+	    	mainFrameController.Students.setTextFill(Color.BLACK);
 	        
 
-	        mainFrameController.setContent(timetable);
+	        mainFrameController.setContent(update);
 
 	        Scene scene = new Scene(mainFrame);
 	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -233,12 +233,12 @@ public class StudentsController {
     	try {
 	    	
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/students/Update.fxml"));
-	        Parent timetable = loader.load();
+	        Parent delete = loader.load();
 	        
-	        AnchorPane.setLeftAnchor(timetable, 10.0);
-			AnchorPane.setRightAnchor(timetable, 10.0);
-			AnchorPane.setTopAnchor(timetable, 10.0);
-			AnchorPane.setBottomAnchor(timetable, 20.0);
+	        AnchorPane.setLeftAnchor(delete, 10.0);
+			AnchorPane.setRightAnchor(delete, 10.0);
+			AnchorPane.setTopAnchor(delete, 10.0);
+			AnchorPane.setBottomAnchor(delete, 20.0);
 
 	        FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
 	        Parent mainFrame = mainFrameLoader.load();
@@ -248,19 +248,19 @@ public class StudentsController {
 	    	mainFrameController.Dashboard.setTextFill(Color.WHITE);
 	    	mainFrameController.StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 	    	mainFrameController.StudentProf.setTextFill(Color.WHITE);
-	    	mainFrameController.Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Timetable.setTextFill(Color.BLACK);
+	    	mainFrameController.Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+	    	mainFrameController.Timetable.setTextFill(Color.WHITE);
 	    	mainFrameController.Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 	    	mainFrameController.Schedule.setTextFill(Color.WHITE);
 	    	mainFrameController.Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 	    	mainFrameController.Enrollment.setTextFill(Color.WHITE);
 	    	mainFrameController.oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 	    	mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
-	    	mainFrameController.Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Students.setTextFill(Color.WHITE);
+	    	mainFrameController.Students.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+	    	mainFrameController.Students.setTextFill(Color.BLACK);
 	        
 
-	        mainFrameController.setContent(timetable);
+	        mainFrameController.setContent(delete);
 
 	        Scene scene = new Scene(mainFrame);
 	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
