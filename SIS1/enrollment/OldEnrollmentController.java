@@ -5,6 +5,8 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,10 +15,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import javafx.embed.swing.SwingFXUtils;
 
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +39,8 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
 
 import application.DatabaseManager;
 import application.UserSession;
@@ -57,8 +73,14 @@ public class OldEnrollmentController implements Initializable {
 
 	@FXML
 	private TableColumn<Subject, String> subjectColumn;
+	
+	@FXML
+	private ImageView imageView; 
 
 	private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
+	
+	private Image image;
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -100,6 +122,13 @@ public class OldEnrollmentController implements Initializable {
 	    secCMB.setOnAction(event -> setSubjectsBasedOnSelection());
 	    semCMB.setOnAction(event -> setSubjectsBasedOnSelection());
 	    statCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	    
+	    imageView.setOnMouseClicked(event -> {
+	        if (event.getButton() == MouseButton.PRIMARY) {
+	            // Handle primary (left) mouse click
+	            insertIMG();
+	        }
+	    });
 	}
 
 	private void setSubjectsBasedOnSelection() {
@@ -150,57 +179,76 @@ public class OldEnrollmentController implements Initializable {
 	    }
 	}
 	
-
+	private InputStream convertImageToInputStream(Image image) throws IOException {
+        // Convert Image to InputStream
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", outputStream);
+        return new ByteArrayInputStream(outputStream.toByteArray());
+    }
+	
 	@FXML
-	private void enrollButtonClicked() throws SQLException {
-		String selectedCourse = courseCMB.getValue();
-		String enrollmentDate = dateTF.getText();
-		String firstName = fNameTF.getText();
-		String gender = genderCMB.getValue();
-		String location = locCMB.getValue();
-		String lastName = lNameTF.getText();
-		String middleName = mNameTF.getText();
-		String section = secCMB.getValue();
-		String year = "2023";
+	private void enrollButtonClicked(InputStream image) throws SQLException, IOException {
+	    String selectedCourse = courseCMB.getValue();
+	    String enrollmentDate = dateTF.getText();
+	    String firstName = fNameTF.getText();
+	    String gender = genderCMB.getValue();
+	    String location = locCMB.getValue();
+	    String lastName = lNameTF.getText();
+	    String middleName = mNameTF.getText();
+	    String section = secCMB.getValue();
+	    String year = "2023";
 
-		try (Connection con = DatabaseManager.getConnection()) {
-			String sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-				preparedStatement.setString(1, selectedCourse);
-				preparedStatement.setString(2, enrollmentDate);
-				preparedStatement.setString(3, firstName);
-				preparedStatement.setString(4, gender);
-				preparedStatement.setString(5, location);
-				preparedStatement.setString(6, lastName);
-				preparedStatement.setString(7, middleName);
-				preparedStatement.setString(8, section);
-				preparedStatement.setString(9, year);
+	    UserSession session = UserSession.getInstance();
+	    String username = session.getUsername(); // Assuming you have a method to get the username
 
-				int rowsInserted = preparedStatement.executeUpdate();
+	    try (Connection con = DatabaseManager.getConnection()) {
+	        String sql;
 
-				if (rowsInserted > 0) {
-					ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-					if (generatedKeys.next()) {
-						int generatedId = generatedKeys.getInt(1);
-						String formattedId = String.format("%s%04d", year, generatedId);
+	        if (image != null) {
+	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, image, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        } else {
+	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        }
 
-						// Use Platform.runLater() for UI updates
-						Platform.runLater(() -> {
-							sidTF.setText(formattedId);
+	        try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+	            preparedStatement.setString(1, selectedCourse);
+	            preparedStatement.setString(2, enrollmentDate);
+	            preparedStatement.setString(3, firstName);
+	            preparedStatement.setString(4, gender);
+	            preparedStatement.setString(5, location);
+	            preparedStatement.setString(6, lastName);
+	            preparedStatement.setString(7, middleName);
+	            preparedStatement.setString(8, section);
+	            preparedStatement.setString(9, year);
 
-							// Clear other UI components
-							clearFields();
-						});
+	            if (image != null) {
+	                // Assuming image is a byte array
+	            	preparedStatement.setBlob(10, image); // Use setBlob for InputStream
+	                preparedStatement.setString(11, username); // Set encoder for the image case
+	            } else {
+	                preparedStatement.setString(10, username); // Set encoder for the non-image case
+	            }
 
-						System.out.println("Enrollment successful!");
-					}
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e; // Re-throw the exception after handling
-		}
+	            int rowsAffected = preparedStatement.executeUpdate();
+
+	            if (rowsAffected > 0) {
+	                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+	                    if (generatedKeys.next()) {
+	                        int generatedId = generatedKeys.getInt(1);
+	                        System.out.println("Student with ID " + generatedId + " inserted successfully.");
+	                    }
+	                }
+	            } else {
+	                System.out.println("No rows affected. Insertion failed.");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Handle the exception as needed
+	    }
 	}
+
 
 	public class Subject {
 		private int id;
@@ -242,8 +290,27 @@ public class OldEnrollmentController implements Initializable {
 		mNameTF.clear();
 		secCMB.setValue(null);
 	}
+	
+	private void insertIMG() {
+	    // Open a FileChooser to allow the user to select an image file
+	    FileChooser fileChooser = new FileChooser();
+	    fileChooser.setTitle("Select Image File");
+	    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
 
-	void setSubCS1A() {
-		// para sa subject button sa baba
+	    File selectedFile = fileChooser.showOpenDialog(null);
+
+	    if (selectedFile != null) {
+	        // Load the selected image into the ImageView
+	        Image newImage = new Image(selectedFile.toURI().toString());
+	        imageView.setImage(newImage);
+
+	        // Set the global 'image' variable for later use in enrollment
+	        image = newImage;
+	    }
+	}
+	
+	@FXML
+	private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
+	    enrollButtonClicked(convertImageToInputStream(image));
 	}
 }
