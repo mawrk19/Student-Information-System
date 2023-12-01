@@ -487,5 +487,12 @@ public class MainFrameController implements Initializable{
         contentarea.getChildren().setAll(node);
 	}
    
+	public void setUpdate(Node node) {
+        contentarea.getChildren().setAll(node);
+	}
+	
+	public void setDelete(Node node) {
+        contentarea.getChildren().setAll(node);
+	}
 }
     

@@ -20,11 +20,11 @@
                   <TableColumn fx:id="scodeColumn" prefWidth="93.0" text="SCode" />
                   <TableColumn fx:id="genderColumn" prefWidth="62.0" text="Gender" />
                   <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="86.0" text="date" />
-                  <TableColumn fx:id="sidColumn" prefWidth="61.0" text="ID" />
+                  <TableColumn fx:id="sidColumn" prefWidth="75" text="SID" />
               </columns>
             </TableView>
-            <Button fx:id="UpdateBTN" layoutX="538.0" layoutY="714.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="137.0" text="Update" />
-            <Button fx:id="DeleteBTN" layoutX="705.0" layoutY="714.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="137.0" text="Delete" />
+            <Button fx:id="UpdateBTN" layoutX="538.0" layoutY="714.0" mnemonicParsing="false" onAction="#update" prefHeight="52.0" prefWidth="137.0" text="Update" />
+            <Button fx:id="DeleteBTN" layoutX="705.0" layoutY="714.0" mnemonicParsing="false" onAction="#delete" prefHeight="52.0" prefWidth="137.0" text="Delete" />
          </children>
       </AnchorPane>
    </children>
