@@ -1,50 +1,128 @@
-#Borderpane{
+#Borderpane {
 	-fx-background-color: #eff0f3;
 }
 
-#upperNavlbl{
+#upperNavlbl {
 	-fx-background-color: #3c5199;
 	-fx-border-radius: 0 25 0 0;
 	-fx-background-radius: 0 25 0 0;
 }
 
-#Closeicon{
+#Closeicon {
 	-fx-background-color: #5d76dc;
 	-fx-border-radius: 5;
 	-fx-background-radius: 5;
 }
 
-#NavigationIcons{
+#NavigationIcons {
 	-fx-background-color: #5d76dc;
 	-fx-border-radius: 0 0 25 0;
 	-fx-background-radius: 0 0 0 0;
 }
 
-#NavigationLabelsPane{
+#NavigationLabelsPane {
 	-fx-background-color: #3c5199;
 	-fx-border-radius: 0 0 25 0;
 	-fx-background-radius: 0 0 25 0;
 }
 
-#Dbbtn:hover{
+#DashboardButton {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#DashboardButton:hover {
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#StudentProfButton:hover{
+#StudentProfButton {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#StudentProfButton:hover {
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#TimetablebtButton:hover{
+#TimetableButton {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#TimetableButton:hover {
 	-fx-background-color: #4b61ad;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#LogOutButton:hover{
+#ScheduleButton {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#ScheduleButton:hover {
+	-fx-background-color: #4b61ad;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#GradingButton {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#GradingButton:hover {
+	-fx-background-color: #4b61ad;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#NewStudButton {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#NewStudButton:hover {
+	-fx-background-color: #4b61ad;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#OldStudBtn {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#OldStudBtn:hover {
+	-fx-background-color: #4b61ad;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#StudentsBtn {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#StudentsBtn:hover {
+	-fx-background-color: #4b61ad;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#LogOutButton:hover {
 	-fx-background-color: red;
 	-fx-border-radius: 25;
 	-fx-background-radius: 25;
