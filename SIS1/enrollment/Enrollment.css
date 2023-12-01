@@ -20,3 +20,7 @@
 .user-name {
 	
 }
+
+#image {
+	-fx-background-image: url("src/imgs_icons/Insert.png");
+}

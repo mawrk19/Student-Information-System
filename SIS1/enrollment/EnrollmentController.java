@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import javafx.embed.swing.SwingFXUtils;
+
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -27,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -176,7 +180,7 @@ public class EnrollmentController implements Initializable {
 	}
 	
 	@FXML
-	private void enrollButtonClicked() throws SQLException {
+	private void enrollButtonClicked() throws SQLException, IOException {
 	    String selectedCourse = courseCMB.getValue();
 	    String enrollmentDate = dateTF.getText();
 	    String firstName = fNameTF.getText();
@@ -191,7 +195,7 @@ public class EnrollmentController implements Initializable {
 	        String sql;
 
 	        if (image != null) {
-	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, image_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        } else {
 	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        }
@@ -208,9 +212,8 @@ public class EnrollmentController implements Initializable {
 	            preparedStatement.setString(9, year);
 
 	            if (image != null) {
-	                // Convert the image to a byte array and set it in the prepared statement
-	                byte[] imageData = convertImageToByteArray(image);
-	                preparedStatement.setBytes(10, imageData);
+	                InputStream imageStream = convertImageToInputStream(image);
+	                preparedStatement.setBlob(10, imageStream);
 	            }
 
 	            int rowsInserted = preparedStatement.executeUpdate();
@@ -238,20 +241,16 @@ public class EnrollmentController implements Initializable {
 	        throw e; // Re-throw the exception after handling
 	    }
 	}
-
-	private byte[] convertImageToByteArray(Image image) {
-	    // Convert the Image to a BufferedImage
-	    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
-
-	    // Convert the BufferedImage to a byte array
-	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	    try {
-	        ImageIO.write(bufferedImage, "png", baos);
-	    } catch (IOException e) {
-	        e.printStackTrace();
+	
+	private InputStream convertImageToInputStream(Image image) throws IOException {
+	    if (image == null) {
+	        return null; // or handle the case accordingly
 	    }
 
-	    return baos.toByteArray();
+	    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+	    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	    ImageIO.write(bufferedImage, "png", outputStream);
+	    return new ByteArrayInputStream(outputStream.toByteArray());
 	}
 
 
@@ -313,4 +312,5 @@ public class EnrollmentController implements Initializable {
 	        image = newImage;
 	    }
 	}
+	
 }
