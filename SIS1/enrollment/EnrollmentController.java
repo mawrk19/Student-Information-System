@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import javafx.embed.swing.SwingFXUtils;
+
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -27,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -175,8 +179,16 @@ public class EnrollmentController implements Initializable {
 	    }
 	}
 	
+	private InputStream convertImageToInputStream(Image image) throws IOException {
+        // Convert Image to InputStream
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", outputStream);
+        return new ByteArrayInputStream(outputStream.toByteArray());
+    }
+	
 	@FXML
-	private void enrollButtonClicked() throws SQLException {
+	private void enrollButtonClicked(InputStream image) throws SQLException, IOException {
 	    String selectedCourse = courseCMB.getValue();
 	    String enrollmentDate = dateTF.getText();
 	    String firstName = fNameTF.getText();
@@ -187,13 +199,16 @@ public class EnrollmentController implements Initializable {
 	    String section = secCMB.getValue();
 	    String year = "2023";
 
+	    UserSession session = UserSession.getInstance();
+	    String username = session.getUsername(); // Assuming you have a method to get the username
+
 	    try (Connection con = DatabaseManager.getConnection()) {
 	        String sql;
 
 	        if (image != null) {
-	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, image_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, image, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        } else {
-	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	            sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        }
 
 	        try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -208,50 +223,30 @@ public class EnrollmentController implements Initializable {
 	            preparedStatement.setString(9, year);
 
 	            if (image != null) {
-	                // Convert the image to a byte array and set it in the prepared statement
-	                byte[] imageData = convertImageToByteArray(image);
-	                preparedStatement.setBytes(10, imageData);
+	                // Assuming image is a byte array
+	            	preparedStatement.setBlob(10, image); // Use setBlob for InputStream
+	                preparedStatement.setString(11, username); // Set encoder for the image case
+	            } else {
+	                preparedStatement.setString(10, username); // Set encoder for the non-image case
 	            }
 
-	            int rowsInserted = preparedStatement.executeUpdate();
+	            int rowsAffected = preparedStatement.executeUpdate();
 
-	            if (rowsInserted > 0) {
-	                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-	                if (generatedKeys.next()) {
-	                    int generatedId = generatedKeys.getInt(1);
-	                    String formattedId = String.format("%s%04d", year, generatedId);
-
-	                    // Use Platform.runLater() for UI updates
-	                    Platform.runLater(() -> {
-	                        sidTF.setText(formattedId);
-
-	                        // Clear other UI components
-	                        clearFields();
-	                    });
-
-	                    System.out.println("Enrollment successful!");
+	            if (rowsAffected > 0) {
+	                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+	                    if (generatedKeys.next()) {
+	                        int generatedId = generatedKeys.getInt(1);
+	                        System.out.println("Student with ID " + generatedId + " inserted successfully.");
+	                    }
 	                }
+	            } else {
+	                System.out.println("No rows affected. Insertion failed.");
 	            }
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        throw e; // Re-throw the exception after handling
+	        // Handle the exception as needed
 	    }
-	}
-
-	private byte[] convertImageToByteArray(Image image) {
-	    // Convert the Image to a BufferedImage
-	    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
-
-	    // Convert the BufferedImage to a byte array
-	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	    try {
-	        ImageIO.write(bufferedImage, "png", baos);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-
-	    return baos.toByteArray();
 	}
 
 
@@ -312,5 +307,10 @@ public class EnrollmentController implements Initializable {
 	        // Set the global 'image' variable for later use in enrollment
 	        image = newImage;
 	    }
+	}
+	
+	@FXML
+	private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
+	    enrollButtonClicked(convertImageToInputStream(image));
 	}
 }

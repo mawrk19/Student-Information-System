@@ -77,10 +77,10 @@ public class FormController {
 				session.setId(sessionId);
 				session.setUsername(sessionUsername);
 
-				messLabel.setText("Yun oh nakapasok si Idok");
+				messLabel.setText("Logging in...");
 				openMF(stage); // Pass the stage
 			} else {
-				messLabel.setText("Boba mali credentials mo -,- ");
+				messLabel.setText("Wrong Credentials");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

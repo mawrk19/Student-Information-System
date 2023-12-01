@@ -30,7 +30,7 @@
 				</AnchorPane>
 				<AnchorPane layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" styleClass="Containers" stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
 					<children>
-						<ImageView fx:id="insertIMG" fitHeight="188.0" fitWidth="201.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+						<ImageView id="image" fx:id="imageView" fitHeight="188.0" fitWidth="201.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
 						<HBox layoutX="237.0" layoutY="13.0" prefHeight="197.0" prefWidth="575.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="237.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="13.0">
 							<children>
 								<VBox prefHeight="188.0" prefWidth="189.0" HBox.hgrow="ALWAYS">
@@ -120,7 +120,7 @@
 						<HBox prefHeight="46.0" prefWidth="825.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
 								<Button fx:id="subjectsBTN" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #DFE2ED;" text="Subjects" HBox.hgrow="ALWAYS" />
-								<Button fx:id="enrollBTN1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#enrollButtonClicked" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #DFE2ED;" text="Enroll" HBox.hgrow="ALWAYS" />
+								<Button fx:id="enrollBTN1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#enrollButtonClickedAction" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #DFE2ED;" text="Enroll" HBox.hgrow="ALWAYS" />
 							</children>
 						</HBox>
 					</children>
