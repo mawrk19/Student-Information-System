@@ -161,6 +161,8 @@ public class ScheduleController implements Initializable{
 		    	mainFrameController.Enrollment.setTextFill(Color.WHITE);
 		    	mainFrameController.oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		    	mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
+		    	mainFrameController.Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		    	mainFrameController.Students.setTextFill(Color.WHITE);
 		        
 
 		        mainFrameController.setContent(timetable);

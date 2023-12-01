@@ -1,5 +1,6 @@
 package com.login;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,6 +48,7 @@ public class FormController {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
 			Scene scene = new Scene(root, 1200, 850);
+			scene.getStylesheets().add(getClass().getResource("/application/MainFrame.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 			stage.isResizable();
