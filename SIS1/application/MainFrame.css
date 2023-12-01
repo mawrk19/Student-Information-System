@@ -14,6 +14,10 @@
 	-fx-background-radius: 5;
 }
 
+#Closeicon:hover {
+	-fx-background-color:#718AF0;
+}
+
 #NavigationIcons {
 	-fx-background-color: #5d76dc;
 	-fx-border-radius: 0 0 25 0;
