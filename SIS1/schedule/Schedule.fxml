@@ -24,7 +24,7 @@
                <children>
             		<AnchorPane id="BtnTimetable" prefHeight="280.0" prefWidth="465.0" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
             			<children>
-            				<Button id="BtnTimetable" fx:id="BtnTimetable" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" prefHeight="280.0" prefWidth="457.0" stylesheets="@Schedule.css" text=" BUTTON TO TIMETABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            				<Button id="BtnTimetable" fx:id="BtnTimetable" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" onAction="#gotoTimetable" prefHeight="280.0" prefWidth="457.0" stylesheets="@Schedule.css" text=" BUTTON TO TIMETABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             					<cursor>
             						<Cursor fx:constant="HAND" />
             					</cursor>
