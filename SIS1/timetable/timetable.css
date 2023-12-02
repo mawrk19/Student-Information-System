@@ -55,3 +55,7 @@
 	-fx-border-color: #797AA8;
 	-fx-border-width: 2px;
 }
+
+.tablecolumn {
+	-fx-background-color: #C9CAD9;
+}

@@ -16,76 +16,83 @@
 
 <AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
    <children>
-      <AnchorPane prefHeight="790.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="760.0" prefWidth="828.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="10.0">
          <children>
-            <VBox layoutX="20.0" layoutY="74.0" prefHeight="701.0" prefWidth="575.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="74.0">
+            <HBox prefHeight="45.0" prefWidth="828.0" spacing="15.0">
                <children>
-                  <AnchorPane id="greeting" fx:id="Greeting" prefHeight="182.0" prefWidth="575.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
+                  <AnchorPane prefHeight="59.0" prefWidth="571.0" HBox.hgrow="ALWAYS" />
+                  <AnchorPane prefHeight="59.0" prefWidth="251.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label id="admin" fx:id="adminName" layoutX="14.0" layoutY="117.0" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css" AnchorPane.leftAnchor="26.0">
-                           <font>
-                              <Font name="Arial Rounded MT Bold" size="30.0" />
-                           </font></Label>
-                        <ImageView fitHeight="174.0" fitWidth="316.0" layoutX="245.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../Downloads/Greeting.png" />
-                           </image></ImageView>
-                        <Label id="text" fx:id="Hello" layoutX="26.0" layoutY="57.0" prefHeight="31.0" prefWidth="280.0" stylesheets="@Dashboard.css" text="Welcome," textAlignment="CENTER" textFill="#dadfe3" AnchorPane.leftAnchor="26.0">
-                           <font>
-                              <Font name="Arial Rounded MT Bold" size="37.0" />
-                           </font>
-                        </Label>
+                        <TextField layoutY="3.0" prefHeight="40.0" prefWidth="250.0" promptText="Type to search..." AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0" />
                      </children>
                   </AnchorPane>
-                  <HBox prefHeight="456.0" prefWidth="574.0" spacing="10.0" VBox.vgrow="ALWAYS">
+               </children>
+            </HBox>
+            <HBox prefHeight="701.0" prefWidth="836.0" spacing="15.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="701.0" prefWidth="575.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <VBox prefHeight="470.0" prefWidth="309.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                        <AnchorPane id="greeting" fx:id="Greeting" prefHeight="182.0" prefWidth="575.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                            <children>
-                              <AnchorPane id="greeting" fx:id="Graph" prefHeight="285.0" prefWidth="303.0" style="-fx-background-color: gray;" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <PieChart id="pie" fx:id="pieChart" prefHeight="400.0" prefWidth="500.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane id="progress" prefHeight="95.0" prefWidth="304.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label id="stud" layoutX="28.0" layoutY="11.0" prefHeight="48.0" prefWidth="249.0" stylesheets="@Dashboard.css" text="Student Enrollment Progress">
-                                       <font>
-                                          <Font name="Arial Rounded MT Bold" size="21.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="label" layoutX="110.0" layoutY="72.0" stylesheets="@Dashboard.css" text="Percentage" />
-                                    <ProgressBar layoutX="52.0" layoutY="99.0" mouseTransparent="true" opacity="0.78" prefHeight="17.0" prefWidth="200.0" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </VBox>
-                        <AnchorPane id="bar" fx:id="Data" prefHeight="470.0" prefWidth="266.0" stylesheets="@Dashboard.css" HBox.hgrow="ALWAYS">
-                           <children>
-                              <BarChart id="bar" prefHeight="410.0" prefWidth="260.0" stylesheets="@Dashboard.css" title="Student Enrollees" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
-                                </xAxis>
-                                <yAxis>
-                                  <NumberAxis prefHeight="178.0" prefWidth="18.0" side="LEFT" />
-                                </yAxis>
-                              </BarChart>
+                              <Label id="admin" fx:id="adminName" layoutX="14.0" layoutY="117.0" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css" AnchorPane.leftAnchor="26.0">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="30.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="174.0" fitWidth="316.0" layoutX="245.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../Downloads/Greeting.png" />
+                                 </image>
+                              </ImageView>
+                              <Label id="text" fx:id="Hello" layoutX="26.0" layoutY="57.0" prefHeight="31.0" prefWidth="280.0" stylesheets="@Dashboard.css" text="Welcome," textAlignment="CENTER" textFill="#dadfe3" AnchorPane.leftAnchor="26.0">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="37.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
+                        <HBox prefHeight="456.0" prefWidth="574.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox prefHeight="470.0" prefWidth="309.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <AnchorPane id="greeting" fx:id="Graph" prefHeight="285.0" prefWidth="303.0" style="-fx-background-color: gray;" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <PieChart id="pie" fx:id="pieChart" prefHeight="400.0" prefWidth="500.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane id="progress" prefHeight="95.0" prefWidth="304.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Label id="stud" layoutX="28.0" layoutY="11.0" prefHeight="48.0" prefWidth="249.0" stylesheets="@Dashboard.css" text="Student Enrollment Progress">
+                                             <font>
+                                                <Font name="Arial Rounded MT Bold" size="21.0" />
+                                             </font>
+                                          </Label>
+                                          <Label id="label" layoutX="110.0" layoutY="72.0" stylesheets="@Dashboard.css" text="Percentage" />
+                                          <ProgressBar layoutX="52.0" layoutY="99.0" mouseTransparent="true" opacity="0.78" prefHeight="17.0" prefWidth="200.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                              <AnchorPane id="bar" fx:id="Data" prefHeight="470.0" prefWidth="266.0" stylesheets="@Dashboard.css" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <BarChart id="bar" prefHeight="410.0" prefWidth="260.0" stylesheets="@Dashboard.css" title="Student Enrollees" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis prefHeight="178.0" prefWidth="18.0" side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
+                  <VBox id="task" prefHeight="701.0" prefWidth="255.0" stylesheets="@Dashboard.css" HBox.hgrow="ALWAYS" />
                </children>
-            </VBox>
-            <AnchorPane layoutX="611.0" layoutY="70.0" prefHeight="701.0" prefWidth="239.0">
-               <children>
-                  <VBox prefHeight="701.0" prefWidth="239.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutY="14.0" prefHeight="60.0" prefWidth="870.0">
-               <children>
-                  <TextField layoutX="605.0" layoutY="12.0" prefHeight="32.0" prefWidth="239.0" promptText="Type to Search" />
-               </children>
-            </AnchorPane>
+            </HBox>
          </children>
-      </AnchorPane>
+      </VBox>
    </children>
 </AnchorPane>
