@@ -122,8 +122,14 @@
 	-fx-background-radius: 25 0 0 25;
 }
 
-#LogOutButton:hover {
-	-fx-background-color: red;
+#OUT {
+	-fx-background-color: #3c5199;
+	-fx-border-radius: 25 0 0 25;
+	-fx-background-radius: 25 0 0 25;
+}
+
+#OUT:hover {
+	-fx-background-color: white;
 	-fx-border-radius: 25;
 	-fx-background-radius: 25;
 }

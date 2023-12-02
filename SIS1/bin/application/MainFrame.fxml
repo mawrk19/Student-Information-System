@@ -243,7 +243,7 @@
                               <Insets bottom="15.0" left="15.0" />
                            </VBox.margin>
                         </Button>
-                        <Button id="LogOutButton" fx:id="Logout" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" stylesheets="@MainFrame.css" text="Log Out" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Button id="OUT" fx:id="Logout" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;" stylesheets="@MainFrame.css" text="Log Out" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>

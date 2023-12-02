@@ -2,29 +2,37 @@
 
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
    <children>
       <AnchorPane prefHeight="790.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox layoutY="25.0" prefHeight="740.0" prefWidth="574.0" spacing="10.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="25.0">
+            <VBox layoutX="20.0" layoutY="74.0" prefHeight="701.0" prefWidth="575.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="74.0">
                <children>
-                  <AnchorPane id="greeting" fx:id="Greeting" prefHeight="200.0" prefWidth="575.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
+                  <AnchorPane id="greeting" fx:id="Greeting" prefHeight="182.0" prefWidth="575.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label id="admin" fx:id="adminName" layoutX="14.0" layoutY="117.0" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css" AnchorPane.leftAnchor="26.0" />
-                        <ImageView fitHeight="147.0" fitWidth="156.0" layoutX="360.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="Hello" layoutX="26.0" layoutY="57.0" prefHeight="31.0" prefWidth="280.0" text="HELLO" textAlignment="CENTER" AnchorPane.leftAnchor="26.0">
+                        <Label id="admin" fx:id="adminName" layoutX="14.0" layoutY="117.0" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css" AnchorPane.leftAnchor="26.0">
                            <font>
-                              <Font name="Verdana" size="40.0" />
+                              <Font name="Arial Rounded MT Bold" size="30.0" />
+                           </font></Label>
+                        <ImageView fitHeight="174.0" fitWidth="316.0" layoutX="245.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../Downloads/Greeting.png" />
+                           </image></ImageView>
+                        <Label id="text" fx:id="Hello" layoutX="26.0" layoutY="57.0" prefHeight="31.0" prefWidth="280.0" stylesheets="@Dashboard.css" text="Welcome," textAlignment="CENTER" textFill="#dadfe3" AnchorPane.leftAnchor="26.0">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="37.0" />
                            </font>
                         </Label>
                      </children>
@@ -35,26 +43,25 @@
                            <children>
                               <AnchorPane id="greeting" fx:id="Graph" prefHeight="285.0" prefWidth="303.0" style="-fx-background-color: gray;" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <PieChart id="pie" prefHeight="400.0" prefWidth="500.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <PieChart id="pie" fx:id="pieChart" prefHeight="400.0" prefWidth="500.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane id="greeting" fx:id="Graph1" prefHeight="198.0" prefWidth="303.0" style="-fx-background-color: gray;" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
+                              <AnchorPane id="progress" prefHeight="95.0" prefWidth="304.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <LineChart layoutX="-1.0" prefHeight="181.0" prefWidth="245.0">
-                                      <xAxis>
-                                        <CategoryAxis side="BOTTOM" />
-                                      </xAxis>
-                                      <yAxis>
-                                        <NumberAxis side="LEFT" />
-                                      </yAxis>
-                                    </LineChart>
+                                    <Label id="stud" layoutX="28.0" layoutY="11.0" prefHeight="48.0" prefWidth="249.0" stylesheets="@Dashboard.css" text="Student Enrollment Progress">
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="21.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="label" layoutX="110.0" layoutY="72.0" stylesheets="@Dashboard.css" text="Percentage" />
+                                    <ProgressBar layoutX="52.0" layoutY="99.0" mouseTransparent="true" opacity="0.78" prefHeight="17.0" prefWidth="200.0" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </VBox>
-                        <AnchorPane id="greeting" fx:id="Data" prefHeight="470.0" prefWidth="266.0" stylesheets="@Dashboard.css" HBox.hgrow="ALWAYS">
+                        <AnchorPane id="bar" fx:id="Data" prefHeight="470.0" prefWidth="266.0" stylesheets="@Dashboard.css" HBox.hgrow="ALWAYS">
                            <children>
-                              <BarChart id="bar" prefHeight="410.0" prefWidth="260.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <BarChart id="bar" prefHeight="410.0" prefWidth="260.0" stylesheets="@Dashboard.css" title="Student Enrollees" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />
                                 </xAxis>
@@ -66,10 +73,18 @@
                         </AnchorPane>
                      </children>
                   </HBox>
-                  <AnchorPane id="marquee" fx:id="marquee" prefHeight="65.0" prefWidth="574.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <AnchorPane id="preview" fx:id="Preview" layoutX="605.0" layoutY="25.0" prefHeight="710.0" prefWidth="245.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="25.0" />
+            <AnchorPane layoutX="611.0" layoutY="70.0" prefHeight="701.0" prefWidth="239.0">
+               <children>
+                  <VBox prefHeight="701.0" prefWidth="239.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="14.0" prefHeight="60.0" prefWidth="870.0">
+               <children>
+                  <TextField layoutX="605.0" layoutY="12.0" prefHeight="32.0" prefWidth="239.0" promptText="Type to Search" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
