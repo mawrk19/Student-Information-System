@@ -9,7 +9,7 @@
 }
 
 #EnrollStatPane{
-	-fx-background-color: #DFE2ED;
+	-fx-background-color: linear-gradient(to left, #2675e3, #3C5199);
 	-fx-background-radius: 25;
 	-fx-border-radius: 25;
 }
@@ -20,11 +20,29 @@
 	-fx-border-radius: 25;
 }
 
+#SchedContainer{
+	-fx-border-color: #C9CAD9;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
 #GradesPane{
 	-fx-background-color: #DFE2ED;
 	-fx-background-radius: 25;
 	-fx-border-radius: 25;
-	
+}
+
+
+#GradesContainer{
+	-fx-border-color: #C9CAD9;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#label {
+	-fx-text-fill: #23212C; 
+	-fx-font-size:17px;
+	-fx-font-family: "Arial Rounded MT Bold";
 }
 
 #SidePane{
@@ -34,9 +52,12 @@
 }
 
 #EditStudProfLbl{
-	-fx-border-color: black;
+	-fx-border-color: #23212C;
 	-fx-background-radius: 25;
 	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	
 }
 
 #EditStudProfBtn{
@@ -49,4 +70,29 @@
 	-fx-background-color: #3C5199;
 	-fx-background-radius: 25;
 	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#StudentName {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+}
+
+#EnrollmentSts {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 25 px;
+	-fx-text-fill: #DFE2ED;
+
+	}
+
+#ScheduleLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20 px;
+}
+
+#GradesLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20 px;
 }

@@ -98,7 +98,7 @@ public class StudentsController {
                     String middleName = resultSet.getString("Middle_name");
                     String lastName = resultSet.getString("last_name");
                     String course1 = resultSet.getString("course");
-                    int year1 = resultSet.getInt("year");
+                    String year1 = resultSet.getString("year");
                     String section1 = resultSet.getString("section");
                     String location1 = resultSet.getString("location");
                     int scode1 = resultSet.getInt("scode");
@@ -127,7 +127,7 @@ public class StudentsController {
 
         private String fullname;
         private String course;
-        private int year;
+        private String year;
         private String section;
         private String location;
         private int scode;
@@ -135,7 +135,7 @@ public class StudentsController {
         private int sid;
         private String gender;
 
-        public Students(String fullname, String course, int year, String section, String location, int scode,
+        public Students(String fullname, String course, String year, String section, String location, int scode,
                 String date, int sid, String gender) {
             this.fullname = fullname;
             this.course = course;
@@ -156,7 +156,7 @@ public class StudentsController {
             return course;
         }
 
-        public int getYear() {
+        public String getYear() {
             return year;
         }
 
@@ -204,8 +204,7 @@ public class StudentsController {
         boolean confirmed = showConfirmationDialog("Update Confirmation", "Are you sure you want to update these students?");
         if (confirmed) {
             try (Connection con = DatabaseManager.getConnection()) {
-                StringBuilder updateQuery = new StringBuilder("UPDATE student SET " +
-                        "First_name = CASE sid ");
+                StringBuilder updateQuery = new StringBuilder("UPDATE student SET First_name = CASE sid ");
 
                 for (Students student : studentList) {
                     updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
@@ -271,7 +270,7 @@ public class StudentsController {
                         stmt.setString(parameterIndex++, names.length > 1 ? names[1] : null);
                         stmt.setString(parameterIndex++, names.length > 2 ? names[2] : null);
                         stmt.setString(parameterIndex++, student.getCourse());
-                        stmt.setInt(parameterIndex++, student.getYear());
+                        stmt.setString(parameterIndex++, student.getYear());
                         stmt.setString(parameterIndex++, student.getSection());
                         stmt.setString(parameterIndex++, student.getLocation());
                         stmt.setInt(parameterIndex++, student.getScode());
@@ -313,7 +312,7 @@ public class StudentsController {
             stmt.setString(2, names.length > 1 ? names[1] : null);
             stmt.setString(3, names.length > 2 ? names[2] : null);
             stmt.setString(4, student.getCourse());
-            stmt.setInt(5, student.getYear());
+            stmt.setString(5, student.getYear());
             stmt.setString(6, student.getSection());
             stmt.setString(7, student.getLocation());
             stmt.setInt(8, student.getScode());
