@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.ProfileController" />
+<AnchorPane id="bodyRock" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Profile.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.ProfileController">
+   <children>
+      <AnchorPane layoutX="25.0" layoutY="138.0" prefHeight="624.0" prefWidth="821.0" style="-fx-background-color: white;">
+         <children>
+            <AnchorPane id="profileImageView" layoutX="33.0" layoutY="-113.0" prefHeight="213.0" prefWidth="224.0" style="-fx-background-color: grey;">
+               <children>
+                  <ImageView id="profileImageView" fitHeight="225.0" fitWidth="224.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" style="-fx-clip-shape: circle; -fx-background-radius: 50%;" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

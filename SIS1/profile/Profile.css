@@ -1,0 +1,9 @@
+#bodyRock{
+	-fx-background-radius:0;
+	-fx-background-color: linear-gradient(to left, #2675e3, #3C5199)
+}
+
+#profileImageView{
+	-fx-clip-shape: circle;
+    -fx-background-radius: 50%;
+}
