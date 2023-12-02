@@ -96,3 +96,10 @@
 	-fx-font-family: "Arial Rounded MT Bold";
 	-fx-font-size: 20 px;
 }
+
+#dp {
+	-fx-border-color: #3C5199;
+	-fx-border-width: 5;
+	-fx-background-radius: 100;
+	-fx-border-radius: 100;
+}
