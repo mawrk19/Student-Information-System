@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane id="Borderpane" fx:id="Borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@Encoder.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="encoderui.EncoderController">
+   <left>
+      <AnchorPane prefHeight="836.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="850.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox id="NavigationIcons" prefHeight="900.0" prefWidth="70.0" spacing="30.0" stylesheets="@Encoder.css" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold Italic" size="35.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/Dashboard.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/Stud_Profile.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/add%20stud.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/existing%20stud.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/students.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/Logoff.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="15.0" top="15.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox id="NavigationLabelsPane" prefHeight="900.0" prefWidth="230.0" spacing="30.0" stylesheets="@Encoder.css">
+                     <children>
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="230.0" stylesheets="@Encoder.css" text="SIS" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold Italic" size="35.0" />
+                           </font>
+                        </Label>
+                        <Button id="DashboardButton" fx:id="Dashboard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Dashboardbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@Encoder.css" text="Dashboard" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button id="StudentProfButton" fx:id="StudentProf" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#StudentProfbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@Encoder.css" text="Student Profile" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button id="NewStudButton" fx:id="Enrollment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Enrollmentbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@Encoder.css" text="New Student" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button id="OldStudBtn" fx:id="oldEnrollment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#oldEnrollmentbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@Encoder.css" text="Old Student" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button id="StudentsBtn" fx:id="Students" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#studentsbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@Encoder.css" text="Students" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="15.0" left="15.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button id="LogOutButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="buttonnav" stylesheets="@Encoder.css" text="Log Out" textFill="WHITE" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="60.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="900.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox prefHeight="50.0" prefWidth="300.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #5d76dc;">
+                           <children>
+                              <Button fx:id="Profileicn" alignment="CENTER" mnemonicParsing="false" onAction="#profileicnbtn" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #5d76dc;" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../src/imgs_icons/Userprofile.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <Pane id="upperNavlbl" prefHeight="50.0" prefWidth="230.0" stylesheets="@Encoder.css" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" prefHeight="60.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label id="Closeicon" fx:id="Minimize" alignment="CENTER" onMouseClicked="#Minimizebtn" prefHeight="25.0" prefWidth="25.0" stylesheets="@Encoder.css" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../src/imgs_icons/Minimize.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="Closeicon" fx:id="Maximize" alignment="CENTER" onMouseClicked="#Maximizebtn" prefHeight="30.0" prefWidth="30.0" stylesheets="@Encoder.css">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../src/imgs_icons/Maximize.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="Closeicon" fx:id="Exit" alignment="CENTER" prefHeight="25.0" prefWidth="25.0" stylesheets="@Encoder.css" HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../src/imgs_icons/Close.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="15.0" top="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane fx:id="contentarea" prefHeight="790.0" prefWidth="870.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </BorderPane.margin>
+      </AnchorPane>
+   </center>
+</BorderPane>
