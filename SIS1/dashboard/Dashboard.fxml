@@ -5,6 +5,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -57,6 +58,20 @@
                                     <AnchorPane id="greeting" fx:id="Graph" prefHeight="285.0" prefWidth="303.0" style="-fx-background-color: gray;" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                                        <children>
                                           <PieChart id="pie" fx:id="pieChart" prefHeight="400.0" prefWidth="500.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane id="progress" prefHeight="200.0" prefWidth="200.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <VBox alignment="CENTER" layoutX="50.0" layoutY="70.0" spacing="20.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="70.0">
+                                             <children>
+                                                <Label id="progress" stylesheets="@Dashboard.css" text="For Entertainment Only" textFill="WHITE">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <ProgressBar prefWidth="200.0" progress="0.0" />
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                                  </children>
