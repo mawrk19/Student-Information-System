@@ -308,19 +308,14 @@ public class EnrollmentController implements Initializable {
 	}
 
 	private void clearFields() {
-	    courseCMB.setValue(null);
-	    dateTF.clear();
-	    fNameTF.clear();
-	    genderCMB.setValue(null);
-	    locCMB.setValue(null);
-	    lNameTF.clear();
-	    mNameTF.clear();
-	    secCMB.setValue(null);
-	    semCMB.setValue(null);
-	    yrCMB.setValue(null);
-	    statCMB.setValue(null);
-	    imageView.setImage(null);
-	    image = null; // Set the 'image' variable to null
+		courseCMB.setValue(null);
+		dateTF.clear();
+		fNameTF.clear();
+		genderCMB.setValue(null);
+		locCMB.setValue(null);
+		lNameTF.clear();
+		mNameTF.clear();
+		secCMB.setValue(null);
 	}
 	
 
