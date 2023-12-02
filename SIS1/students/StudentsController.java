@@ -24,274 +24,261 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 public class StudentsController {
 
-    @FXML
-    private Button DeleteBTN;
+	@FXML
+	private Button DeleteBTN;
 
-    @FXML
-    private Button UpdateBTN;
+	@FXML
+	private Button UpdateBTN;
 
-    @FXML
-    private TableColumn<Students, String> courseColumn;
+	@FXML
+	private TableColumn<Students, String> courseColumn;
 
-    @FXML
-    private TableColumn<Students, Integer> sidColumn;
+	@FXML
+	private TableColumn<Students, Integer> sidColumn;
 
-    @FXML
-    private TableColumn<Students, String> dateColumn;
+	@FXML
+	private TableColumn<Students, String> dateColumn;
 
-    @FXML
-    private TableColumn<Students, String> fullnameColumn;
+	@FXML
+	private TableColumn<Students, String> fullnameColumn;
 
-    @FXML
-    private TableColumn<Students, String> genderColumn;
+	@FXML
+	private TableColumn<Students, String> genderColumn;
 
-    @FXML
-    private TableColumn<Students, String> locationColumn;
+	@FXML
+	private TableColumn<Students, String> locationColumn;
 
-    @FXML
-    private TableColumn<Students, Integer> scodeColumn;
+	@FXML
+	private TableColumn<Students, Integer> scodeColumn;
 
-    @FXML
-    private TableColumn<Students, String> sectionColumn;
+	@FXML
+	private TableColumn<Students, String> sectionColumn;
 
-    @FXML
-    private TableColumn<Students, Integer> yearColumn;
+	@FXML
+	private TableColumn<Students, Integer> yearColumn;
 
-    @FXML
-    private TableView<Students> studentTableView;
+	@FXML
+	private TableView<Students> studentTableView;
 
-    private ObservableList<Students> studentList = FXCollections.observableArrayList();
+	@FXML
+	private TableColumn<Students, String> firstNameColumn;
 
-    @FXML
-    private void initialize() {
-        setStudents();
-        configureTable();
-        courseColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
-        fullnameColumn.setCellValueFactory(new PropertyValueFactory<>("fullname"));
-        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
-        sectionColumn.setCellValueFactory(new PropertyValueFactory<>("section"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        scodeColumn.setCellValueFactory(new PropertyValueFactory<>("scode"));
-        genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        sidColumn.setCellValueFactory(new PropertyValueFactory<>("sid"));
-    }
+	@FXML
+	private TableColumn<Students, String> middleNameColumn;
 
-    @FXML
-    private void setStudents() {
-        try (Connection con = DatabaseManager.getConnection();
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM student")) {
+	@FXML
+	private TableColumn<Students, String> lastNameColumn;
 
-            try (ResultSet resultSet = stmt.executeQuery()) {
-                clearStudentsTable(); // Clear existing items before adding new ones
-                while (resultSet.next()) {
+	private ObservableList<Students> studentList = FXCollections.observableArrayList();
 
-                    String firstName = resultSet.getString("First_name");
-                    String middleName = resultSet.getString("Middle_name");
-                    String lastName = resultSet.getString("last_name");
-                    String course1 = resultSet.getString("course");
-                    String year1 = resultSet.getString("year");
-                    String section1 = resultSet.getString("section");
-                    String location1 = resultSet.getString("location");
-                    int scode1 = resultSet.getInt("scode");
-                    String date1 = resultSet.getString("date");
-                    int sid1 = resultSet.getInt("sid");
-                    String gender1 = resultSet.getString("gender");
+	@FXML
+	private void initialize() {
+		setStudents();
+		configureTable();
+		courseColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
+		firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+		middleNameColumn.setCellValueFactory(new PropertyValueFactory<>("middleName"));
+		lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+		yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+		sectionColumn.setCellValueFactory(new PropertyValueFactory<>("section"));
+		locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+		scodeColumn.setCellValueFactory(new PropertyValueFactory<>("scode"));
+		genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
+		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+		sidColumn.setCellValueFactory(new PropertyValueFactory<>("sid"));
+	}
 
-                    String fullname = firstName + " " + middleName + " " + lastName;
+	@FXML
+	private void setStudents() {
+		try (Connection con = DatabaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement("SELECT * FROM student")) {
 
-                    Students studentObj = new Students(fullname, course1, year1, section1, location1, scode1, date1,
-                            sid1, gender1);
-                    studentList.add(studentObj);
-                }
-                studentTableView.setItems(studentList);
+			try (ResultSet resultSet = stmt.executeQuery()) {
+				clearStudentsTable(); // Clear existing items before adding new ones
+				while (resultSet.next()) {
 
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception as needed
-        }
-    }
+					String firstName = resultSet.getString("First_name");
+					String middleName = resultSet.getString("Middle_name");
+					String lastName = resultSet.getString("last_name");
+					String course1 = resultSet.getString("course");
+					String year1 = resultSet.getString("year");
+					String section1 = resultSet.getString("section");
+					String location1 = resultSet.getString("location");
+					int scode1 = resultSet.getInt("scode");
+					String date1 = resultSet.getString("date");
+					int sid1 = resultSet.getInt("sid");
+					String gender1 = resultSet.getString("gender");
 
-    private void clearStudentsTable() {
-        studentList.clear();
-    }
+					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
+							location1, scode1, date1, sid1, gender1);
+					studentList.add(studentObj);
+				}
+				studentTableView.setItems(studentList);
 
-    
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle the exception as needed
+		}
+	}
 
-    private void configureTable() {
-        // Make the TableView editable
-        studentTableView.setEditable(true);
+	private void clearStudentsTable() {
+		studentList.clear();
+	}
 
-        // Make specific columns editable
-        fullnameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        courseColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        sectionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        locationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        genderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+	private void configureTable() {
+		// Make the TableView editable
+		studentTableView.setEditable(true);
 
-        // Set up event handlers for editing
-        setupCellValueFactoryAndEditing(fullnameColumn);
-        setupCellValueFactoryAndEditing(courseColumn);
-        setupCellValueFactoryAndEditing(sectionColumn);
-        setupCellValueFactoryAndEditing(locationColumn);
-        setupCellValueFactoryAndEditing(genderColumn);
-        setupCellValueFactoryAndEditing(dateColumn);
-    }
+		// Make specific columns editable
+		firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		middleNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		courseColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		sectionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		locationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		genderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+		dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-    private void setupCellValueFactoryAndEditing(TableColumn<Students, String> column) {
-        column.setCellValueFactory(new PropertyValueFactory<>(getPropertyName(column)));
+		// Set up event handlers for editing
+		setupCellValueFactoryAndEditing(firstNameColumn);
+		setupCellValueFactoryAndEditing(middleNameColumn);
+		setupCellValueFactoryAndEditing(lastNameColumn);
+		setupCellValueFactoryAndEditing(courseColumn);
+		setupCellValueFactoryAndEditing(sectionColumn);
+		setupCellValueFactoryAndEditing(locationColumn);
+		setupCellValueFactoryAndEditing(genderColumn);
+		setupCellValueFactoryAndEditing(dateColumn);
+	}
 
-        // Set up editing handlers
-        column.setOnEditCommit((TableColumn.CellEditEvent<Students, String> t) -> {
-            Students student = t.getTableView().getItems().get(t.getTablePosition().getRow());
-            String newValue = t.getNewValue();
-            setPropertyValue(column, student, newValue);
-        });
-    }
+	private void setupCellValueFactoryAndEditing(TableColumn<Students, String> column) {
+		column.setCellValueFactory(new PropertyValueFactory<>(getPropertyName(column)));
 
-    private void setPropertyValue(TableColumn<Students, String> column, Students student, String newValue) {
-        String propertyName = getPropertyName(column);
-        switch (propertyName) {
-            case "fullname" -> student.setFullname(newValue);
-            case "course" -> student.setCourse(newValue);
-            case "section" -> student.setSection(newValue);
-            case "location" -> student.setLocation(newValue);
-            case "gender" -> student.setGender(newValue);
-            case "date" -> student.setDate(newValue);
-        }
-    }
+		// Set up editing handlers
+		column.setOnEditCommit((TableColumn.CellEditEvent<Students, String> t) -> {
+			Students student = t.getTableView().getItems().get(t.getTablePosition().getRow());
+			String newValue = t.getNewValue();
+			setPropertyValue(column, student, newValue);
+		});
+	}
 
-    private String getPropertyName(TableColumn<Students, ?> column) {
-        String columnName = column.getText().toLowerCase();
-        return switch (columnName) {
-            case "full name" -> "fullname";
-            case "course" -> "course";
-            case "section" -> "section";
-            case "location" -> "location";
-            case "gender" -> "gender";
-            case "date" -> "date";
-            default -> "";
-        };
-    }
+	private void setPropertyValue(TableColumn<Students, String> column, Students student, String newValue) {
+		String propertyName = getPropertyName(column);
+		switch (propertyName) {
+		case "firstName" -> student.setFirstName(newValue);
+		case "middleName" -> student.setMiddleName(newValue);
+		case "lastName" -> student.setLastName(newValue);
+		case "course" -> student.setCourse(newValue);
+		case "section" -> student.setSection(newValue);
+		case "location" -> student.setLocation(newValue);
+		case "gender" -> student.setGender(newValue);
+		case "date" -> student.setDate(newValue);
+		}
+	}
 
-    private void updateStudentsInDatabase(ObservableList<Students> students) {
-        try (Connection con = DatabaseManager.getConnection();
-                PreparedStatement stmt = con.prepareStatement("UPDATE student SET "
-                        + "First_name = ?, Middle_name = ?, last_name = ?, course = ?, "
-                        + "year = ?, section = ?, location = ?, scode = ?, date = ?, gender = ? "
-                        + "WHERE sid = ?")) {
+	private String getPropertyName(TableColumn<Students, ?> column) {
+		String columnName = column.getText().toLowerCase();
+		return switch (columnName) {
+		case "first name" -> "firstName";
+		case "middle name" -> "middleName";
+		case "last name" -> "lastName";
+		case "course" -> "course";
+		case "section" -> "section";
+		case "location" -> "location";
+		case "gender" -> "gender";
+		case "date" -> "date";
+		default -> "";
+		};
+	}
 
-            for (Students student : students) {
-                String[] names = student.getFullname().split("\\s+");
-                stmt.setString(1, names.length > 0 ? names[0] : null);
-                stmt.setString(2, names.length > 1 ? names[1] : null);
-                stmt.setString(3, names.length > 2 ? names[2] : null);
-                stmt.setString(4, student.getCourse());
-                stmt.setString(5, student.getYear());
-                stmt.setString(6, student.getSection());
-                stmt.setString(7, student.getLocation());
-                stmt.setInt(8, student.getScode());
-                stmt.setString(9, student.getDate());
-                stmt.setString(10, student.getGender());
-                stmt.setInt(11, student.getSid());
+	private void updateStudentsInDatabase(ObservableList<Students> students) {
+		try (Connection con = DatabaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement("UPDATE student SET "
+						+ "First_name = ?, Middle_name = ?, last_name = ?, course = ?, "
+						+ "year = ?, section = ?, location = ?, scode = ?, date = ?, gender = ? " + "WHERE sid = ?")) {
 
-                String query = stmt.toString(); // Get the string representation of the prepared statement
-                System.out.println("Executing query: " + query); // Print the query
+			for (Students student : students) {
 
-                stmt.addBatch(); // Add each update as a batch operation
-            }
+				stmt.setString(1, student.getFirstName());
+				stmt.setString(2, student.getMiddleName());
+				stmt.setString(3, student.getLastName());
+				stmt.setString(4, student.getCourse());
+				stmt.setString(5, student.getYear());
+				stmt.setString(6, student.getSection());
+				stmt.setString(7, student.getLocation());
+				stmt.setInt(8, student.getScode());
+				stmt.setString(9, student.getDate());
+				stmt.setString(10, student.getGender());
+				stmt.setInt(11, student.getSid());
 
-            // Execute the batch update
-            int[] updateCounts = stmt.executeBatch();
+				String query = stmt.toString(); // Get the string representation of the prepared statement
+				System.out.println("Executing query: " + query); // Print the query
 
-            // Check the update counts or handle success/failure as needed
-            for (int i = 0; i < updateCounts.length; i++) {
-                if (updateCounts[i] <= 0) {
-                    // Handle failure for the update at index i
-                    System.out.println("Update failed for student with SID: " + students.get(i).getSid());
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+				stmt.addBatch(); // Add each update as a batch operation
+			}
 
-    @FXML
-    private void handleUpdateButton() {
-        boolean confirmed = showConfirmationDialog("Update Confirmation",
-                "Are you sure you want to update these students?");
-        if (confirmed) {
-            updateStudentsInDatabase(studentList);
-        }
-    }
+			// Execute the batch update
+			int[] updateCounts = stmt.executeBatch();
 
-    @FXML
-    private void handleDeleteButton() {
-        Students selectedStudent = studentTableView.getSelectionModel().getSelectedItem();
-        if (selectedStudent != null) {
-            boolean confirmed = showConfirmationDialog("Delete Confirmation",
-                    "Are you sure you want to delete this student?");
-            if (confirmed) {
-                deleteStudentFromDatabase(selectedStudent);
-                studentList.remove(selectedStudent);
-            }
-        }
-    }
+			// Check the update counts or handle success/failure as needed
+			for (int i = 0; i < updateCounts.length; i++) {
+				if (updateCounts[i] <= 0) {
+					// Handle failure for the update at index i
+					System.out.println("Update failed for student with SID: " + students.get(i).getSid());
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
-    private void updateStudentInDatabase(Students student) {
-        try (Connection con = DatabaseManager.getConnection();
-                PreparedStatement stmt = con.prepareStatement("UPDATE student SET "
-                        + "First_name = ?, Middle_name = ?, last_name = ?, course = ?, "
-                        + "year = ?, section = ?, location = ?, scode = ?, date = ?, gender = ? "
-                        + "WHERE sid = ?")) {
+	@FXML
+	private void handleUpdateButton() {
+		boolean confirmed = showConfirmationDialog("Update Confirmation",
+				"Are you sure you want to update these students?");
+		if (confirmed) {
+			updateStudentsInDatabase(studentList);
+		}
+	}
 
-            String[] names = student.getFullname().split("\\s+");
-            stmt.setString(1, names.length > 0 ? names[0] : null);
-            stmt.setString(2, names.length > 1 ? names[1] : null);
-            stmt.setString(3, names.length > 2 ? names[2] : null);
-            stmt.setString(4, student.getCourse());
-            stmt.setString(5, student.getYear());
-            stmt.setString(6, student.getSection());
-            stmt.setString(7, student.getLocation());
-            stmt.setInt(8, student.getScode());
-            stmt.setString(9, student.getDate());
-            stmt.setString(10, student.getGender());
-            stmt.setInt(11, student.getSid());
+	@FXML
+	private void handleDeleteButton() {
+		Students selectedStudent = studentTableView.getSelectionModel().getSelectedItem();
+		if (selectedStudent != null) {
+			boolean confirmed = showConfirmationDialog("Delete Confirmation",
+					"Are you sure you want to delete this student?");
+			if (confirmed) {
+				deleteStudentFromDatabase(selectedStudent);
+				studentList.remove(selectedStudent);
+			}
+		}
+	}
 
-            stmt.executeUpdate();
+	private void deleteStudentFromDatabase(Students student) {
+		try (Connection con = DatabaseManager.getConnection();
+				PreparedStatement stmt = con.prepareStatement("DELETE FROM student WHERE sid = ?")) {
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+			stmt.setInt(1, student.getSid());
+			stmt.executeUpdate();
 
-    private void deleteStudentFromDatabase(Students student) {
-        try (Connection con = DatabaseManager.getConnection();
-                PreparedStatement stmt = con.prepareStatement("DELETE FROM student WHERE sid = ?")) {
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
-            stmt.setInt(1, student.getSid());
-            stmt.executeUpdate();
+	private boolean showConfirmationDialog(String title, String message) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+		// Add buttons to the alert
+		ButtonType buttonTypeYes = new ButtonType("Yes");
+		ButtonType buttonTypeNo = new ButtonType("No");
+		alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
-    private boolean showConfirmationDialog(String title, String message) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
+		// Show the alert and wait for the user's response
+		Optional<ButtonType> result = alert.showAndWait();
 
-        // Add buttons to the alert
-        ButtonType buttonTypeYes = new ButtonType("Yes");
-        ButtonType buttonTypeNo = new ButtonType("No");
-        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-
-        // Show the alert and wait for the user's response
-        Optional<ButtonType> result = alert.showAndWait();
-
-        return result.isPresent() && result.get() == buttonTypeYes;
-    }
+		return result.isPresent() && result.get() == buttonTypeYes;
+	}
 }

@@ -2,107 +2,117 @@ package students;
 
 public class Students {
 
-	private String fullname;
-	private String course;
-	private String year;
-	private String section;
-	private String location;
-	private int scode;
-	private String date;
-	private int sid;
-	private String gender;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+    private String course;
+    private String year;
+    private String section;
+    private String location;
+    private int scode;
+    private String date;
+    private int sid;
+    private String gender;
 
-	public Students(String fullname, String course, String year, String section, String location, int scode,
-			String date, int sid, String gender) {
-		this.fullname = fullname;
-		this.course = course;
-		this.year = year;
-		this.section = section;
-		this.location = location;
-		this.scode = scode;
-		this.date = date;
-		this.sid = sid;
-		this.gender = gender;
-	}
+    public Students(String firstName, String middleName, String lastName, String course, String year, String section, String location, int scode, String date, int sid, String gender) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.course = course;
+        this.year = year;
+        this.section = section;
+        this.location = location;
+        this.scode = scode;
+        this.date = date;
+        this.sid = sid;
+        this.gender = gender;
+    }
 
-	public String getFullname() {
-		return fullname;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setFullname(String fullname) {
-		// Allow up to 4 first names
-		String[] names = fullname.split("\\s+");
-		StringBuilder truncatedName = new StringBuilder();
-		for (int i = 0; i < Math.min(names.length, 4); i++) {
-			truncatedName.append(names[i]);
-			if (i < 3) {
-				truncatedName.append(" ");
-			}
-		}
-		this.fullname = truncatedName.toString();
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getCourse() {
-		return course;
-	}
+    public String getMiddleName() {
+        return middleName;
+    }
 
-	public void setCourse(String course) {
-		this.course = course;
-	}
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
 
-	public String getYear() {
-		return year;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setYear(String year) {
-		this.year = year;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
+    public String getCourse() {
+        return course;
+    }
 
-	public String getSection() {
-		return section;
-	}
+    public void setCourse(String course) {
+        this.course = course;
+    }
 
-	public void setSection(String section) {
-		this.section = section;
-	}
+    public String getYear() {
+        return year;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public void setYear(String year) {
+        this.year = year;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public String getSection() {
+        return section;
+    }
 
-	public int getScode() {
-		return scode;
-	}
+    public void setSection(String section) {
+        this.section = section;
+    }
 
-	public void setScode(int scode) {
-		this.scode = scode;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public int getScode() {
+        return scode;
+    }
 
-	public int getSid() {
-		return sid;
-	}
+    public void setScode(int scode) {
+        this.scode = scode;
+    }
 
-	public void setSid(int sid) {
-		this.sid = sid;
-	}
+    public String getDate() {
+        return date;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public int getSid() {
+        return sid;
+    }
+
+    public void setSid(int sid) {
+        this.sid = sid;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }

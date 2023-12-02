@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.StudentsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.StudentsController">
    <children>
       <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
          <children>
             <TableView fx:id="studentTableView" layoutX="11.0" layoutY="20.0" prefHeight="675.0" prefWidth="848.0">
 
               <columns>
-                <TableColumn fx:id="fullnameColumn" prefWidth="221.0" text="Full Name" />
-                  <TableColumn fx:id="courseColumn" prefWidth="106.0" text="Course" />
-                  <TableColumn fx:id="yearColumn" prefWidth="79.0" text="Year" />
-                  <TableColumn minWidth="0.0" prefWidth="0.0" text="Column X" />
-                  <TableColumn fx:id="sectionColumn" prefWidth="54.0" text="Section" />
-                  <TableColumn fx:id="locationColumn" prefWidth="88.0" text="Location" />
-                  <TableColumn fx:id="scodeColumn" prefWidth="90.0" text="SCode" />
-                  <TableColumn fx:id="genderColumn" prefWidth="73.0" text="Gender" />
-                  <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="95.0" text="date" />
-                  <TableColumn fx:id="sidColumn" prefWidth="41.0" text="SID" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="90.0" text="First Name" />
+                  <TableColumn fx:id="middleNameColumn" prefWidth="121.0" text="Middle Name" />
+                  <TableColumn fx:id="lastNameColumn" prefWidth="35.0" text="Last Name" />
+                  <TableColumn fx:id="courseColumn" prefWidth="45.0" text="Course" />
+                  <TableColumn fx:id="yearColumn" prefWidth="21.0" text="Year" />
+                  <TableColumn fx:id="sectionColumn" prefWidth="39.0" text="Section" />
+                  <TableColumn fx:id="locationColumn" prefWidth="40.0" text="Location" />
+                  <TableColumn fx:id="scodeColumn" prefWidth="48.0" text="SCode" />
+                  <TableColumn fx:id="genderColumn" prefWidth="41.0" text="Gender" />
+                  <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="49.0" text="date" />
+                  <TableColumn fx:id="sidColumn" prefWidth="52.0" text="SID" />
                   
               </columns>
                <columnResizePolicy>
