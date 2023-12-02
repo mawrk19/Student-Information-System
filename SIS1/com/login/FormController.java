@@ -93,15 +93,14 @@ public class FormController {
 				UserSession session = UserSession.getInstance();
 				session.setId(sessionId);
 				session.setUsername(sessionUsername);
-				
 
 				messLabel.setText("Logging in...");
 				
-//				if(sessionType == "admin")
-//				openMF(stage); // Pass the stage
-//				else {
-//				openEI(stage);	
-//				}
+				if ("admin".equals(sessionType)) {
+				    openMF(stage); // Pass the stage
+				} else {
+				    openEI(stage);
+				}
 				
 			} else {
 				messLabel.setText("Wrong Credentials");
