@@ -195,7 +195,8 @@ public class EnrollmentController implements Initializable {
 		String lastName = lNameTF.getText();
 		String middleName = mNameTF.getText();
 		String section = secCMB.getValue();
-		String year = "2023";
+		String year1 = yrCMB.getValue();
+		String sy = "2023";
 
 		UserSession session = UserSession.getInstance();
 		String username = session.getUsername(); // Assuming you have a method to get the username
@@ -204,9 +205,9 @@ public class EnrollmentController implements Initializable {
 			String sql;
 
 			if (image != null) {
-				sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, image, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, image, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			} else {
-				sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, year, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			}
 
 			try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -218,14 +219,16 @@ public class EnrollmentController implements Initializable {
 				preparedStatement.setString(6, lastName);
 				preparedStatement.setString(7, middleName);
 				preparedStatement.setString(8, section);
-				preparedStatement.setString(9, year);
+				preparedStatement.setString(9, sy);
+				preparedStatement.setString(10, year1);
+				
 
 				if (image != null) {
 					// Assuming image is a byte array
-					preparedStatement.setBlob(10, image); // Use setBlob for InputStream
-					preparedStatement.setString(11, username); // Set encoder for the image case
+					preparedStatement.setBlob(11, image); // Use setBlob for InputStream
+					preparedStatement.setString(12, username); // Set encoder for the image case
 				} else {
-					preparedStatement.setString(10, username); // Set encoder for the non-image case
+					preparedStatement.setString(11, username); // Set encoder for the non-image case
 				}
 
 				int rowsAffected = preparedStatement.executeUpdate();
@@ -239,7 +242,7 @@ public class EnrollmentController implements Initializable {
                             // Format generatedId as a four-digit number
                             String formattedId = String.format("%04d", generatedId);
 
-                            String studCode = year + formattedId;
+                            String studCode = sy + formattedId;
 
                             String sql1 = "update student set scode = (?) where sid ="+ generatedId + "";
 

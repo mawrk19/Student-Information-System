@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import application.DatabaseManager;
 import application.MainFrameController;
@@ -16,10 +17,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -67,6 +72,7 @@ public class StudentsController {
     @FXML
     private void initialize() {
         setStudents();
+        configureTable();
         courseColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
         fullnameColumn.setCellValueFactory(new PropertyValueFactory<>("fullname"));
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
@@ -77,7 +83,8 @@ public class StudentsController {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         sidColumn.setCellValueFactory(new PropertyValueFactory<>("sid"));
     }
-
+   
+    
     @FXML
     private void setStudents() {
         try (Connection con = DatabaseManager.getConnection();
@@ -178,115 +185,176 @@ public class StudentsController {
         }
     }
     
-    public void update(ActionEvent event) throws IOException{
-    	try {
-	    	
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/students/Update.fxml"));
-	        Parent timetable = loader.load();
-	        
-	        AnchorPane.setLeftAnchor(timetable, 10.0);
-			AnchorPane.setRightAnchor(timetable, 10.0);
-			AnchorPane.setTopAnchor(timetable, 10.0);
-			AnchorPane.setBottomAnchor(timetable, 20.0);
+    private void configureTable() {
+        // Make the TableView editable
+        studentTableView.setEditable(true);
 
-	        FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
-	        Parent mainFrame = mainFrameLoader.load();
-	        MainFrameController mainFrameController = mainFrameLoader.getController();
-	        
-	        mainFrameController.Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Dashboard.setTextFill(Color.WHITE);
-	    	mainFrameController.StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.StudentProf.setTextFill(Color.WHITE);
-	    	mainFrameController.Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Timetable.setTextFill(Color.BLACK);
-	    	mainFrameController.Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Schedule.setTextFill(Color.WHITE);
-	    	mainFrameController.Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Enrollment.setTextFill(Color.WHITE);
-	    	mainFrameController.oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
-	    	mainFrameController.Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Students.setTextFill(Color.WHITE);
-	        
-
-	        mainFrameController.setContent(timetable);
-
-	        Scene scene = new Scene(mainFrame);
-	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        stage.setScene(scene);
-	        stage.show();
-	        
-	        double windowWidth = stage.getWidth();
-	        double windowHeight = stage.getHeight();
-
-	        // ... (your code to load the new FXML view)
-
-	        // After loading the new view, set the window's dimensions back
-	        stage.setWidth(windowWidth);
-	        stage.setHeight(windowHeight);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+        // Make specific columns editable
+        fullnameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        courseColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        sectionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        locationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        genderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        dateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
     
-    public void delete(ActionEvent event) throws IOException{
-    	try {
-	    	
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/students/Update.fxml"));
-	        Parent timetable = loader.load();
-	        
-	        AnchorPane.setLeftAnchor(timetable, 10.0);
-			AnchorPane.setRightAnchor(timetable, 10.0);
-			AnchorPane.setTopAnchor(timetable, 10.0);
-			AnchorPane.setBottomAnchor(timetable, 20.0);
+    
+    @FXML
+    private void handleUpdateButton() {
+        boolean confirmed = showConfirmationDialog("Update Confirmation", "Are you sure you want to update these students?");
+        if (confirmed) {
+            try (Connection con = DatabaseManager.getConnection()) {
+                StringBuilder updateQuery = new StringBuilder("UPDATE student SET " +
+                        "First_name = CASE sid ");
 
-	        FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
-	        Parent mainFrame = mainFrameLoader.load();
-	        MainFrameController mainFrameController = mainFrameLoader.getController();
-	        
-	        mainFrameController.Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Dashboard.setTextFill(Color.WHITE);
-	    	mainFrameController.StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.StudentProf.setTextFill(Color.WHITE);
-	    	mainFrameController.Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Timetable.setTextFill(Color.BLACK);
-	    	mainFrameController.Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Schedule.setTextFill(Color.WHITE);
-	    	mainFrameController.Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Enrollment.setTextFill(Color.WHITE);
-	    	mainFrameController.oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
-	    	mainFrameController.Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-	    	mainFrameController.Students.setTextFill(Color.WHITE);
-	        
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
 
-	        mainFrameController.setContent(timetable);
+                updateQuery.append("END, Middle_name = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
 
-	        Scene scene = new Scene(mainFrame);
-	        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        stage.setScene(scene);
-	        stage.show();
-	        
-	        double windowWidth = stage.getWidth();
-	        double windowHeight = stage.getHeight();
+                updateQuery.append("END, last_name = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
 
-	        // ... (your code to load the new FXML view)
+                updateQuery.append(", course = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
 
-	        // After loading the new view, set the window's dimensions back
-	        stage.setWidth(windowWidth);
-	        stage.setHeight(windowHeight);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+                updateQuery.append(", year = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
+
+                updateQuery.append(", section = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
+
+                updateQuery.append(", location = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
+
+                updateQuery.append(", scode = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
+
+                updateQuery.append(", date = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
+
+                updateQuery.append(", gender = CASE sid ");
+                for (Students student : studentList) {
+                    updateQuery.append("WHEN ").append(student.getSid()).append(" THEN ?");
+                }
+
+                updateQuery.append("END WHERE sid IN (");
+                for (Students student : studentList) {
+                    updateQuery.append(student.getSid()).append(",");
+                }
+                updateQuery.deleteCharAt(updateQuery.length() - 1); // Remove the trailing comma
+                updateQuery.append(")");
+
+                try (PreparedStatement stmt = con.prepareStatement(updateQuery.toString())) {
+                    int parameterIndex = 1;
+                    for (Students student : studentList) {
+                        String[] names = student.getFullname().split("\\s+");
+                        stmt.setString(parameterIndex++, names.length > 0 ? names[0] : null);
+                        stmt.setString(parameterIndex++, names.length > 1 ? names[1] : null);
+                        stmt.setString(parameterIndex++, names.length > 2 ? names[2] : null);
+                        stmt.setString(parameterIndex++, student.getCourse());
+                        stmt.setInt(parameterIndex++, student.getYear());
+                        stmt.setString(parameterIndex++, student.getSection());
+                        stmt.setString(parameterIndex++, student.getLocation());
+                        stmt.setInt(parameterIndex++, student.getScode());
+                        stmt.setString(parameterIndex++, student.getDate());
+                        stmt.setString(parameterIndex++, student.getGender());
+                        // Add more set statements for other columns if needed
+                    }
+
+                    stmt.executeUpdate();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     
-    private void exeUpdate() {
-    	
+    @FXML
+    private void handleDeleteButton() {
+        // Handle the delete button action
+        Students selectedStudent = studentTableView.getSelectionModel().getSelectedItem();
+        if (selectedStudent != null) {
+            boolean confirmed = showConfirmationDialog("Delete Confirmation", "Are you sure you want to delete this student?");
+            if (confirmed) {
+                deleteStudentFromDatabase(selectedStudent);
+                studentList.remove(selectedStudent);
+            }
+        }
     }
     
-    private void exeDelete() {
-    	
+    private void updateStudentInDatabase(Students student) {
+        try (Connection con = DatabaseManager.getConnection();
+             PreparedStatement stmt = con.prepareStatement("UPDATE student SET " +
+                     "First_name = ?, Middle_name = ?, last_name = ?, course = ?, " +
+                     "year = ?, section = ?, location = ?, scode = ?, date = ?, gender = ? " +
+                     "WHERE sid = ?")) {
+
+            String[] names = student.getFullname().split("\\s+");
+            stmt.setString(1, names.length > 0 ? names[0] : null);
+            stmt.setString(2, names.length > 1 ? names[1] : null);
+            stmt.setString(3, names.length > 2 ? names[2] : null);
+            stmt.setString(4, student.getCourse());
+            stmt.setInt(5, student.getYear());
+            stmt.setString(6, student.getSection());
+            stmt.setString(7, student.getLocation());
+            stmt.setInt(8, student.getScode());
+            stmt.setString(9, student.getDate());
+            stmt.setString(10, student.getGender());
+            stmt.setInt(11, student.getSid());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
     }
     
+    private void deleteStudentFromDatabase(Students student) {
+        try (Connection con = DatabaseManager.getConnection();
+             PreparedStatement stmt = con.prepareStatement("DELETE FROM student WHERE sid = ?")) {
+
+            stmt.setInt(1, student.getSid());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        }
+    }
+       
+    private boolean showConfirmationDialog(String title, String message) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        // Add buttons to the alert
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        // Show the alert and wait for the user's response
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.isPresent() && result.get() == buttonTypeYes;
+    }
     
 }
