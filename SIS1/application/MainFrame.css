@@ -14,10 +14,6 @@
 	-fx-background-radius: 5;
 }
 
-#Closeicon:hover {
-	-fx-background-color:#718AF0;
-}
-
 #NavigationIcons {
 	-fx-background-color: #5d76dc;
 	-fx-border-radius: 0 0 25 0;
@@ -126,14 +122,14 @@
 	-fx-background-radius: 25 0 0 25;
 }
 
-#OUT {
+#LogOutButton {
 	-fx-background-color: #3c5199;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
 
-#OUT:hover {
-	-fx-background-color: white;
+#LogOutButton:hover {
+	-fx-background-color: #FF6565;
 	-fx-border-radius: 25;
 	-fx-background-radius: 25;
 }

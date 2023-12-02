@@ -18,7 +18,7 @@
 
 <AnchorPane id="Apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" style="-fx-background-color: #DFE2ED;" stylesheets="@Schedule.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schedule.ScheduleController">
 	<children>
-      <VBox layoutX="13.0" layoutY="30.0" prefWidth="845.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="30.0">
+      <VBox layoutX="13.0" layoutY="12.0" prefHeight="773.0" prefWidth="845.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
          <children>
             <HBox prefHeight="280.0" prefWidth="845.0">
                <children>
@@ -188,7 +188,7 @@
             </HBox>
       		<AnchorPane id="bgpane" prefHeight="367.0" prefWidth="845.0" stylesheets="@Schedule.css" VBox.vgrow="ALWAYS">
       			<children>
-      				<TreeTableView id="table" layoutX="10.0" layoutY="12.0" prefHeight="385.0" prefWidth="825.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0">
+      				<TreeTableView id="table" layoutX="5.0" layoutY="6.0" prefHeight="398.0" prefWidth="835.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
       					<columns>
       						<TreeTableColumn prefWidth="97.0" text="SUBJECT CODE" />
       						<TreeTableColumn prefWidth="85.0" text="DESCRIPTION" />

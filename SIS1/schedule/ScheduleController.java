@@ -175,9 +175,6 @@ public class ScheduleController implements Initializable{
 		        double windowWidth = stage.getWidth();
 		        double windowHeight = stage.getHeight();
 
-		        // ... (your code to load the new FXML view)
-
-		        // After loading the new view, set the window's dimensions back
 		        stage.setWidth(windowWidth);
 		        stage.setHeight(windowHeight);
 		    } catch (IOException e) {
