@@ -1,5 +1,7 @@
 package students;
 
+import java.sql.Blob;
+
 public class Students {
 
     private String firstName;
@@ -13,8 +15,11 @@ public class Students {
     private String date;
     private int sid;
     private String gender;
+    private Blob studentImage;
 
-    public Students(String firstName, String middleName, String lastName, String course, String year, String section, String location, int scode, String date, int sid, String gender) {
+    public Students(String firstName, String middleName, String lastName, String course, String year, String section,
+            String location, int scode, String date, int sid, String gender, Blob studentImage) {
+
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -26,6 +31,15 @@ public class Students {
         this.date = date;
         this.sid = sid;
         this.gender = gender;
+        this.studentImage = studentImage;
+    }
+
+    public Blob getStudentImage() {
+        return studentImage;
+    }
+
+    public void setStudentImage(Blob studentImage) {
+        this.studentImage = studentImage;
     }
 
     public String getFirstName() {
@@ -51,7 +65,7 @@ public class Students {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
     public String getCourse() {
         return course;
     }

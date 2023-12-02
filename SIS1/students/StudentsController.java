@@ -110,7 +110,7 @@ public class StudentsController {
 					String gender1 = resultSet.getString("gender");
 
 					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
-							location1, scode1, date1, sid1, gender1);
+							location1, scode1, date1, sid1, gender1, null);
 					studentList.add(studentObj);
 				}
 				studentTableView.setItems(studentList);
