@@ -123,7 +123,7 @@ public class EncoderController implements Initializable{
         Students.setBackground(new Background(ube));
         Students.setTextFill(Color.WHITE);
 		 
-		 Pane profilestage = FXMLLoader.load(getClass().getResource("/profile/Profile.fxml"));
+		 Pane profilestage = FXMLLoader.load(getClass().getResource("/profile/EncoderProfile.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(profilestage);
 		 AnchorPane.setLeftAnchor(profilestage, 10.0);

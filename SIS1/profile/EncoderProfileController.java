@@ -31,7 +31,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
-public class ProfileController implements Initializable {
+public class EncoderProfileController implements Initializable {
 
     @FXML
     private Label countLBL;
@@ -106,42 +106,18 @@ public class ProfileController implements Initializable {
         });
         
         setFullnameLabel();
-        updateTotalEnrolledStudentsLabel();
     }
 
     private void setFullnameLabel() {
         UserSession session = UserSession.getInstance();
         String username = session.getUsername();
-        String lastname = session.getLastname(); 
+        String lastname = session.getLastname(); // Assuming there is a getLastname method in your UserSession class
         String fullname = username + " " + lastname;
-        String id = String.valueOf(session.getId()); 
+        String id = String.valueOf(session.getId()); // Convert id to String
 
         fullnameLBL.setText(fullname);
         idLBL.setText(id);
-        
     }
-
-    private void updateTotalEnrolledStudentsLabel() {
-    	UserSession session = UserSession.getInstance();
-        String username = session.getUsername();
-        try (Connection con = DatabaseManager.getConnection();
-             PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM student WHERE encoder = ?")) {
-
-            stmt.setString(1, username);
-
-            try (ResultSet resultSet = stmt.executeQuery()) {
-                if (resultSet.next()) {
-                    int count = resultSet.getInt(1);
-                    countLBL.setText("Total students enrolled: " + count);
-                    System.out.println(username);
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception according to your needs
-        }
-    }
-
 
     
     @FXML
