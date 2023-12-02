@@ -12,6 +12,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -37,6 +38,7 @@ public class DashboardController implements Initializable {
     
     @FXML
     private PieChart pieChart;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -136,7 +138,5 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    
     
 }

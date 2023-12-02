@@ -88,7 +88,7 @@
                <children>
                   <Label id="dp" alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="138.0" prefWidth="250.0" stylesheets="@StudentProf.css" VBox.vgrow="ALWAYS">
                      <graphic>
-                        <ImageView fx:id="studIMG" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="studIMG" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="dpule" />
                      </graphic>
                   </Label>
                   <Label id="StudentName" fx:id="fullnameLBL" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="250.0" stylesheets="@StudentProf.css" text="SURNAME, FIRST NAME MIDDLE NAME" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
