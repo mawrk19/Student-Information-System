@@ -24,7 +24,7 @@
                <children>
             		<AnchorPane id="BtnTimetable" prefHeight="280.0" prefWidth="465.0" stylesheets="@Schedule.css" HBox.hgrow="ALWAYS">
             			<children>
-            				<Button id="BtnTimetable" fx:id="BtnTimetable" alignment="CENTER" graphicTextGap="5.0" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#gotoTimetable" prefHeight="280.0" prefWidth="457.0" stylesheets="@Schedule.css" text="GO TO TIMETABLE     " textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            				<Button id="BtnTimetable" fx:id="BtnTimetable" alignment="CENTER" ellipsisString="" graphicTextGap="5.0" layoutX="4.099998474121094" layoutY="3.1000003814697266" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#gotoTimetable" prefHeight="280.0" prefWidth="457.0" stylesheets="@Schedule.css" text="GO TO TIMETABLE     " textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             					<cursor>
             						<Cursor fx:constant="HAND" />
             					</cursor>
@@ -32,9 +32,9 @@
                               <Font name="Berlin Sans FB" size="25.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="140.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../src/imgs_icons/Timetable_to_Sched.png" />
+                                    <Image url="@../src/imgs_icons/gototimetable1.png" />
                                  </image>
                               </ImageView>
                            </graphic>

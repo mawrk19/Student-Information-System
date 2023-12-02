@@ -62,13 +62,13 @@
                                     </AnchorPane>
                                     <AnchorPane id="progress" prefHeight="95.0" prefWidth="304.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label id="stud" layoutX="28.0" layoutY="11.0" prefHeight="48.0" prefWidth="249.0" stylesheets="@Dashboard.css" text="Student Enrollment Progress">
+                                          <Label id="stud" layoutX="28.0" layoutY="11.0" prefHeight="48.0" prefWidth="249.0" stylesheets="@Dashboard.css" text="Student Enrollment Progress" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="22.0">
                                              <font>
                                                 <Font name="Arial Rounded MT Bold" size="21.0" />
                                              </font>
                                           </Label>
-                                          <Label id="label" layoutX="110.0" layoutY="72.0" stylesheets="@Dashboard.css" text="Percentage" />
-                                          <ProgressBar layoutX="52.0" layoutY="99.0" mouseTransparent="true" opacity="0.78" prefHeight="17.0" prefWidth="200.0" />
+                                          <Label id="label" layoutX="110.0" layoutY="72.0" stylesheets="@Dashboard.css" text="Percentage" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="104.0" />
+                                          <ProgressBar layoutX="52.0" layoutY="99.0" mouseTransparent="true" opacity="0.78" prefHeight="17.0" prefWidth="200.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="47.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
