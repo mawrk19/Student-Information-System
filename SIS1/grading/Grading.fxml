@@ -1,8 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="grading.GradingController">
-	<!-- TODO Add Nodes -->
+<AnchorPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Grading.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grading.GradingController">
+   <children>
+      <HBox layoutX="168.0" layoutY="16.0" prefHeight="34.0" prefWidth="458.0" spacing="10.0">
+         <children>
+            <TextField fx:id="inputSearch" alignment="CENTER" prefHeight="55.0" prefWidth="510.0" promptText="Search Student" HBox.hgrow="ALWAYS" />
+            <Label id="SearchIcon" fx:id="btnSearch" alignment="CENTER" maxHeight="1.7976931348623157E308" onMouseClicked="#searchStudentFunc" prefHeight="50.0" prefWidth="50.0" stylesheets="@../studentprof/StudentProf.css" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../src/imgs_icons/Search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+      </HBox>
+      <AnchorPane id="StudPane" layoutX="38.0" layoutY="64.0" prefHeight="116.0" prefWidth="794.0" stylesheets="@Grading.css">
+         <children>
+            <Label layoutX="51.0" layoutY="41.0" text="Student Name:" />
+            <Label layoutX="23.0" layoutY="14.0" text="Student Details:">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="59.0" text="Course:" />
+            <Label layoutX="51.0" layoutY="77.0" text="Year &amp; Sec:" />
+            <Label fx:id="labelFullname" layoutX="147.0" layoutY="43.0" text="StudentName" />
+            <Label fx:id="labelCourse" layoutX="147.0" layoutY="61.0" text="Course" />
+            <Label fx:id="labelYrSec" layoutX="147.0" layoutY="79.0" text="Year &amp; Sec" />
+         </children>
+      </AnchorPane>
+      <AnchorPane id="StudPane" layoutX="38.0" layoutY="193.0" prefHeight="510.0" prefWidth="794.0" stylesheets="@Grading.css">
+         <children>
+            <TableView fx:id="tableView" layoutX="31.0" layoutY="27.0" prefHeight="462.0" prefWidth="538.0">
+              <columns>
+                <TableColumn fx:id="subjCode" prefWidth="101.60000610351562" text="Subject Code" />
+                <TableColumn fx:id="subjName" prefWidth="188.00001525878906" text="Subject Name" />
+                  <TableColumn fx:id="units" minWidth="0.0" prefWidth="83.199951171875" text="Units" />
+                  <TableColumn fx:id="grades" prefWidth="44.800048828125" text="Grade" />
+                  <TableColumn fx:id="status" prefWidth="166.4000244140625" text="Status" />
+              </columns>
+            </TableView>
+            <AnchorPane id="UpdateGrades" layoutX="595.0" layoutY="308.0" prefHeight="182.0" prefWidth="186.0" stylesheets="@Grading.css">
+               <children>
+                  <Label layoutX="14.0" layoutY="42.0" text="GWA:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="66.0" layoutY="42.0" text="1.25" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="65.0" text="Status:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="66.0" layoutY="65.0" text="Passed" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="20.0" text="Total Unit:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="91.0" layoutY="19.0" text="25" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="13.0" layoutY="100.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Compute" />
+                  <Button layoutX="14.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Save" />
+               </children>
+            </AnchorPane>
+            <AnchorPane id="UpdateGrades" layoutX="591.0" layoutY="27.0" prefHeight="268.0" prefWidth="186.0" stylesheets="@Grading.css">
+               <children>
+                  <TextField disable="true" layoutX="20.0" layoutY="123.0" promptText="Units" />
+                  <TextField disable="true" layoutX="20.0" layoutY="79.0" promptText="Subject Name" />
+                  <TextField disable="true" layoutX="20.0" layoutY="35.0" promptText="Subject Code" />
+                  <TextField layoutX="20.0" layoutY="169.0" promptText="Grades" />
+                  <Button layoutX="18.0" layoutY="219.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Update Grade" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
-
