@@ -1,0 +1,21 @@
+#BorderPane{
+	-fx-background-color: #EFF0F3;
+}
+
+#SearchIcon{
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#UpdateGrades{
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#StudPane{
+	-fx-background-color: #DFE2ED;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}

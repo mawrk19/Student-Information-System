@@ -34,7 +34,7 @@
                            <graphic>
                               <ImageView fitHeight="140.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../src/imgs_icons/gototimetable1.png" />
+                                    <Image url="@../src/imgs_icons/gototimetable.png" />
                                  </image>
                               </ImageView>
                            </graphic>
