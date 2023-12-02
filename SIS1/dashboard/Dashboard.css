@@ -1,10 +1,16 @@
 #background {
-	-fx-background-color:#eff0f3;
+	-fx-background-color:#EFF0F3;
 }
 
 #greeting {
 	-fx-background-color: #3C5199;
 	-fx-background-radius: 24;
+}
+
+#text {
+	-fx-text-fill: #DFE2ED; 
+	-fx-font-size:40px;
+	-fx-font-family: "Arial Rounded MT Bold";
 }
 
 #preview {
@@ -14,23 +20,62 @@
 }
 
 #pie {
-	-fx-background-color: #C9CAD9;
+	-fx-background-color:#C9CAD9;
 	-fx-opacity: 0.82;
 	-fx-background-radius: 24;
 }
 
 #bar {
-	-fx-background-color: #3C5199;
-	-fx-background-radius: 24;
-}
-
-#marquee {
 	-fx-background-color: #C9CAD9;
 	-fx-background-radius: 24;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-text-fill: #DFE2ED; 	
+}
+
+#label {
+	-fx-text-fill: #DFE2ED; 
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15px;
+	}
+	
+#stud {
+	-fx-text-fill: #DFE2ED; 
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 17px bold;
+	}
+
+#task{
+	-fx-background-color: #4D5E9B;
+	-fx-background-radius: 24;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15px;
+	-fx-text-fill: #DFE2ED; 	
+	-fx-font-weight: bold;
+}
+
+#button {
+	-fx-background-color: #4D5E9B;
+}
+
+#seperator {
+	-fx-background-color: #4D5E9B;
+	
+}
+
+#header {
+	-fx-text-fill: #DFE2ED; 
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15px;
+}
+#progress {
+	-fx-background-color: #444BAF;
+	-fx-background-radius: 24;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-text-fill: #DFE2ED; 
 }
 
 #admin {
-	-fx-color: #000000;
-	-fx-font-family: Verdana;
-	-fx-font-size:40px;
+	-fx-color: #DFE2ED;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:35px;
 }

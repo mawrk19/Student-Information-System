@@ -5,11 +5,7 @@
 
 #bgpane {
 	-fx-background-color:#3C5199;
-}
-
-#table{
-	-fx-background-radius: 15;
-	-fx-border-radius: 15;
+	-fx-background-radius: 5;
 }
 
 #EditBG {
