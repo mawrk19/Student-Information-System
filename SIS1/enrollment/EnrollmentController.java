@@ -177,12 +177,19 @@ public class EnrollmentController implements Initializable {
 		}
 	}
 
+
 	private InputStream convertImageToInputStream(Image image) throws IOException {
-		// Convert Image to InputStream
-		BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		ImageIO.write(bufferedImage, "png", outputStream);
-		return new ByteArrayInputStream(outputStream.toByteArray());
+	    if (image != null) {
+	        // Convert Image to InputStream
+	        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+	        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	        ImageIO.write(bufferedImage, "png", outputStream);
+	        return new ByteArrayInputStream(outputStream.toByteArray());
+	    } else {
+	        // Return InputStream for default image (adjust the path accordingly)
+	        InputStream defaultImageStream = getClass().getResourceAsStream("src/img_icons/NoPeep.png");
+	        return defaultImageStream;
+	    }
 	}
 
 	@FXML
@@ -197,7 +204,7 @@ public class EnrollmentController implements Initializable {
 		String section = secCMB.getValue();
 		String year1 = yrCMB.getValue();
 		String sy = "2023";
-
+		
 		UserSession session = UserSession.getInstance();
 		String username = session.getUsername(); // Assuming you have a method to get the username
 
@@ -301,19 +308,21 @@ public class EnrollmentController implements Initializable {
 	}
 
 	private void clearFields() {
-		courseCMB.setValue(null);
-		dateTF.clear();
-		fNameTF.clear();
-		genderCMB.setValue(null);
-		locCMB.setValue(null);
-		lNameTF.clear();
-		mNameTF.clear();
-		secCMB.setValue(null);
-		semCMB.setValue(null);
-		yrCMB.setValue(null);
-		statCMB.setValue(null);
-		imageView.setImage(null);
+	    courseCMB.setValue(null);
+	    dateTF.clear();
+	    fNameTF.clear();
+	    genderCMB.setValue(null);
+	    locCMB.setValue(null);
+	    lNameTF.clear();
+	    mNameTF.clear();
+	    secCMB.setValue(null);
+	    semCMB.setValue(null);
+	    yrCMB.setValue(null);
+	    statCMB.setValue(null);
+	    imageView.setImage(null);
+	    image = null; // Set the 'image' variable to null
 	}
+	
 
 	private void insertIMG() {
 		// Open a FileChooser to allow the user to select an image file
