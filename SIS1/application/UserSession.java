@@ -6,6 +6,7 @@ public class UserSession {
 	private static UserSession instance;
     private String username;
     private int id;
+    private String type;
 
     private UserSession() {
         // Private constructor to prevent direct instantiation
@@ -36,5 +37,9 @@ public class UserSession {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public void setString(String type) {
+		this.type = type;
 	}
 }

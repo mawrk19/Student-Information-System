@@ -7,3 +7,7 @@
 	-fx-clip-shape: circle;
     -fx-background-radius: 50%;
 }
+
+#background1{
+	-fx-background-radius: 6%;
+}
