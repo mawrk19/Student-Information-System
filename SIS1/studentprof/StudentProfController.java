@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -59,6 +60,7 @@ public class StudentProfController {
     
     @FXML
     private ImageView studIMG;
+
     
     private Image image;
     

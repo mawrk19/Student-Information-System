@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -63,7 +66,27 @@
                                     </Label>
                                  </children>
                               </VBox>
-                              <Pane id="SchedContainer" layoutX="10.0" layoutY="40.0" prefHeight="463.0" prefWidth="260.0" stylesheets="@StudentProf.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0" />
+                              <Pane id="SchedContainer" layoutX="5.0" layoutY="40.0" prefHeight="463.0" prefWidth="260.0" stylesheets="@StudentProf.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">
+                                 <children>
+                                    <ScrollPane layoutX="7.0" layoutY="6.0" prefHeight="459.0" prefWidth="240.0">
+                                       <content>
+                                          <TableView fx:id="Table" prefHeight="468.0" prefWidth="762.0">
+                                            <columns>
+                                              <TableColumn fx:id="subject" prefWidth="75.0" text="SUBJECT CODE" />
+                                              <TableColumn fx:id="description" prefWidth="75.0" text="DESCRIPTION" />
+                                                <TableColumn fx:id="cred" prefWidth="75.0" text="CRED. UNIT" />
+                                                <TableColumn fx:id="sectionn" prefWidth="75.0" text="SECTION" />
+                                                <TableColumn fx:id="day" prefWidth="75.0" text="DAY" />
+                                                <TableColumn fx:id="time" prefWidth="75.0" text="TIME" />
+                                                <TableColumn fx:id="professor" prefWidth="75.0" text="PROFESSOR" />
+                                                <TableColumn fx:id="schedule" prefWidth="75.0" text="SCHEDULE" />
+                                                <TableColumn fx:id="slots" prefWidth="75.0" text="SLOTS" />
+                                            </columns>
+                                          </TableView>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </Pane>
                            </children>
                         </AnchorPane>
                         <AnchorPane id="GradesPane" prefHeight="535.0" prefWidth="350.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
