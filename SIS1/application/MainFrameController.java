@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +21,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Background;
 
 public class MainFrameController implements Initializable{
 
@@ -33,7 +37,7 @@ public class MainFrameController implements Initializable{
     private AnchorPane contentarea;
     
     @FXML
-    private Button Dashboard,  StudentProf, Timetable, Enrollment, Schedule, oldEnrollment, Grading, Profileicn;
+    public Button Dashboard, StudentProf, Timetable, Enrollment, Schedule, oldEnrollment, Grading, Profileicn, Students;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -44,18 +48,34 @@ public class MainFrameController implements Initializable{
 		});
 		
 		try {
-			 Dashboard.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-			 Dashboard.setTextFill(Color.BLACK);
-			 StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-			 StudentProf.setTextFill(Color.WHITE);
-			 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-			 Timetable.setTextFill(Color.WHITE);
-			 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-			 Schedule.setTextFill(Color.WHITE);
-			 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-			 Enrollment.setTextFill(Color.WHITE);
-			 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-			 oldEnrollment.setTextFill(Color.WHITE);
+			BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+			
+			Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+			
+			Dashboard.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+			Dashboard.setTextFill(Color.BLACK);
+			StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+	        StudentProf.setBackground(new Background(ube));
+	        StudentProf.setTextFill(Color.WHITE);
+	        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+	        Timetable.setBackground(new Background(ube));
+	        Timetable.setTextFill(Color.WHITE);
+	        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+	        Schedule.setBackground(new Background(ube));
+	        Schedule.setTextFill(Color.WHITE);
+	        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+	        Grading.setBackground(new Background(ube));
+	        Grading.setTextFill(Color.WHITE);
+	        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+	        Enrollment.setBackground(new Background(ube));
+	        Enrollment.setTextFill(Color.WHITE);
+	        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+	        oldEnrollment.setBackground(new Background(ube));
+	        oldEnrollment.setTextFill(Color.WHITE);
+	        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+	        Students.setBackground(new Background(ube));
+	        Students.setTextFill(Color.WHITE);
+			
 			 
 			 Parent dashboardstage = FXMLLoader.load(getClass().getResource("/dashboard/Dashboard.fxml"));
 			 contentarea.getChildren().removeAll();
@@ -89,21 +109,35 @@ public class MainFrameController implements Initializable{
 	}
 	
 	public void profileicnbtn(ActionEvent event) throws IOException {
-		 Profileicn.setStyle("-fx-background-color: #20273E; -fx-border-radius: 50; -fx-background-radius: 25;");
-		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Dashboard.setTextFill(Color.WHITE);
-		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 StudentProf.setTextFill(Color.WHITE);
-		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Timetable.setTextFill(Color.WHITE);
-		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Schedule.setTextFill(Color.WHITE);
-		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Grading.setTextFill(Color.WHITE);
-		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Enrollment.setTextFill(Color.WHITE);
-		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 oldEnrollment.setTextFill(Color.WHITE);
+		
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #3C3A44; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-background-radius: 25 0 0 25;");
+		Dashboard.setTextFill(Color.WHITE);
+		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+        StudentProf.setBackground(new Background(ube));
+        StudentProf.setTextFill(Color.WHITE);
+        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+        Timetable.setBackground(new Background(ube));
+        Timetable.setTextFill(Color.WHITE);
+        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+        Schedule.setBackground(new Background(ube));
+        Schedule.setTextFill(Color.WHITE);
+        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+        Grading.setBackground(new Background(ube));
+        Grading.setTextFill(Color.WHITE);
+        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        Enrollment.setBackground(new Background(ube));
+        Enrollment.setTextFill(Color.WHITE);
+        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setTextFill(Color.WHITE);
+        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+        Students.setBackground(new Background(ube));
+        Students.setTextFill(Color.WHITE);
 		 
 		 Pane profilestage = FXMLLoader.load(getClass().getResource("/profile/Profile.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -113,25 +147,39 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setTopAnchor(profilestage, 10.0);
 		 AnchorPane.setBottomAnchor(profilestage, 20.0);
 		 
-}
+	}
 	
 	@FXML
 	public void Dashboardbtn(ActionEvent event) throws IOException {
-		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-		 Dashboard.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Dashboard.setTextFill(Color.BLACK);
-		 StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 StudentProf.setTextFill(Color.WHITE);
-		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Timetable.setTextFill(Color.WHITE);
-		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Schedule.setTextFill(Color.WHITE);
-		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Grading.setTextFill(Color.WHITE);
-		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Enrollment.setTextFill(Color.WHITE);
-		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 oldEnrollment.setTextFill(Color.WHITE);
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		Dashboard.setTextFill(Color.BLACK);
+		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+        StudentProf.setBackground(new Background(ube));
+        StudentProf.setTextFill(Color.WHITE);
+        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+        Timetable.setBackground(new Background(ube));
+        Timetable.setTextFill(Color.WHITE);
+        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+        Schedule.setBackground(new Background(ube));
+        Schedule.setTextFill(Color.WHITE);
+        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+        Grading.setBackground(new Background(ube));
+        Grading.setTextFill(Color.WHITE);
+        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        Enrollment.setBackground(new Background(ube));
+        Enrollment.setTextFill(Color.WHITE);
+        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setTextFill(Color.WHITE);
+        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+        Students.setBackground(new Background(ube));
+        Students.setTextFill(Color.WHITE);
+		
 		 
 		 Pane dashboardstage = FXMLLoader.load(getClass().getResource("/dashboard/Dashboard.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -147,21 +195,35 @@ public class MainFrameController implements Initializable{
 	
 	@FXML
 	public void StudentProfbtn(ActionEvent event) throws IOException {
-		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Dashboard.setTextFill(Color.WHITE);
-		 StudentProf.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 StudentProf.setTextFill(Color.BLACK);
-		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Timetable.setTextFill(Color.WHITE);
-		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Schedule.setTextFill(Color.WHITE);
-		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Grading.setTextFill(Color.WHITE);
-		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Enrollment.setTextFill(Color.WHITE);
-		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 oldEnrollment.setTextFill(Color.WHITE);
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		Dashboard.setBackground(new Background(ube));
+		Dashboard.setTextFill(Color.WHITE);
+		StudentProf.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+        StudentProf.setTextFill(Color.BLACK);
+        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+        Timetable.setBackground(new Background(ube));
+        Timetable.setTextFill(Color.WHITE);
+        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+        Schedule.setBackground(new Background(ube));
+        Schedule.setTextFill(Color.WHITE);
+        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+        Grading.setBackground(new Background(ube));
+        Grading.setTextFill(Color.WHITE);
+        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        Enrollment.setBackground(new Background(ube));
+        Enrollment.setTextFill(Color.WHITE);
+        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setTextFill(Color.WHITE);
+        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+        Students.setBackground(new Background(ube));
+        Students.setTextFill(Color.WHITE);
+		
 		 
 		 Pane studprofstage = FXMLLoader.load(getClass().getResource("/studentprof/StudentProfile.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -174,21 +236,35 @@ public class MainFrameController implements Initializable{
     }
     
 	public void Timetablebtn(ActionEvent event) throws IOException {
-		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Dashboard.setTextFill(Color.WHITE);
-		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 StudentProf.setTextFill(Color.WHITE);
-		 Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Timetable.setTextFill(Color.BLACK);
-		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Schedule.setTextFill(Color.WHITE);
-		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Grading.setTextFill(Color.WHITE);
-		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Enrollment.setTextFill(Color.WHITE);
-		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 oldEnrollment.setTextFill(Color.WHITE);
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		Dashboard.setBackground(new Background(ube));
+		Dashboard.setTextFill(Color.WHITE);
+		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+        StudentProf.setBackground(new Background(ube));
+        StudentProf.setTextFill(Color.WHITE);
+        Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+        Timetable.setTextFill(Color.BLACK);
+        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+        Schedule.setBackground(new Background(ube));
+        Schedule.setTextFill(Color.WHITE);
+        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+        Grading.setBackground(new Background(ube));
+        Grading.setTextFill(Color.WHITE);
+        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        Enrollment.setBackground(new Background(ube));
+        Enrollment.setTextFill(Color.WHITE);
+        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setTextFill(Color.WHITE);
+        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+        Students.setBackground(new Background(ube));
+        Students.setTextFill(Color.WHITE);
+		
 		 
 		 Pane timetablestage = FXMLLoader.load(getClass().getResource("/timetable/Timetable.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -202,21 +278,35 @@ public class MainFrameController implements Initializable{
    }
 	
 	public void Schedulebtn(ActionEvent event) throws IOException {
-		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Dashboard.setTextFill(Color.WHITE);
-		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 StudentProf.setTextFill(Color.WHITE);
-		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Timetable.setTextFill(Color.WHITE);
-		 Schedule.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Schedule.setTextFill(Color.BLACK);
-		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Grading.setTextFill(Color.WHITE);
-		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Enrollment.setTextFill(Color.WHITE);
-		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 oldEnrollment.setTextFill(Color.WHITE);
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		Dashboard.setBackground(new Background(ube));
+		Dashboard.setTextFill(Color.WHITE);
+		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+        StudentProf.setBackground(new Background(ube));
+        StudentProf.setTextFill(Color.WHITE);
+        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+        Timetable.setBackground(new Background(ube));
+        Timetable.setTextFill(Color.WHITE);
+        Schedule.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+        Schedule.setTextFill(Color.BLACK);
+        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+        Grading.setBackground(new Background(ube));
+        Grading.setTextFill(Color.WHITE);
+        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        Enrollment.setBackground(new Background(ube));
+        Enrollment.setTextFill(Color.WHITE);
+        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setTextFill(Color.WHITE);
+        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+        Students.setBackground(new Background(ube));
+        Students.setTextFill(Color.WHITE);
+		
 		 
 		 Pane schedulestage = FXMLLoader.load(getClass().getResource("/schedule/Schedule.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -226,24 +316,38 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setTopAnchor(schedulestage, 10.0);
 		 AnchorPane.setBottomAnchor(schedulestage, 20.0);
 		 
- }
+	}
 	
 	public void Gradingbtn(ActionEvent event) throws IOException {
-		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Dashboard.setTextFill(Color.WHITE);
-		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 StudentProf.setTextFill(Color.WHITE);
-		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Timetable.setTextFill(Color.WHITE);
-		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Schedule.setTextFill(Color.WHITE);
-		 Grading.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Grading.setTextFill(Color.BLACK);
-		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Enrollment.setTextFill(Color.WHITE);
-		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 oldEnrollment.setTextFill(Color.WHITE);
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		Dashboard.setBackground(new Background(ube));
+		Dashboard.setTextFill(Color.WHITE);
+		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+        StudentProf.setBackground(new Background(ube));
+        StudentProf.setTextFill(Color.WHITE);
+        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+        Timetable.setBackground(new Background(ube));
+        Timetable.setTextFill(Color.WHITE);
+        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+        Schedule.setBackground(new Background(ube));
+        Schedule.setTextFill(Color.WHITE);
+        Grading.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+        Grading.setTextFill(Color.BLACK);
+        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        Enrollment.setBackground(new Background(ube));
+        Enrollment.setTextFill(Color.WHITE);
+        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setTextFill(Color.WHITE);
+        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+        Students.setBackground(new Background(ube));
+        Students.setTextFill(Color.WHITE);
+		
 		 
 		 Pane gradingstage = FXMLLoader.load(getClass().getResource("/grading/Grading.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -253,26 +357,40 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setTopAnchor(gradingstage, 10.0);
 		 AnchorPane.setBottomAnchor(gradingstage, 20.0);
 		 
-}
+	}
 
 	
 	public void Enrollmentbtn(ActionEvent event) throws IOException {
-		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Dashboard.setTextFill(Color.WHITE);
-		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 StudentProf.setTextFill(Color.WHITE);
-		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Timetable.setTextFill(Color.WHITE);
-		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Schedule.setTextFill(Color.WHITE);
-		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Grading.setTextFill(Color.WHITE);
-		 Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Enrollment.setTextFill(Color.BLACK);
-		 oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 oldEnrollment.setTextFill(Color.WHITE);
-		 
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		Dashboard.setBackground(new Background(ube));
+		Dashboard.setTextFill(Color.WHITE);
+		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+        StudentProf.setBackground(new Background(ube));
+        StudentProf.setTextFill(Color.WHITE);
+        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+        Timetable.setBackground(new Background(ube));
+        Timetable.setTextFill(Color.WHITE);
+        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+        Schedule.setBackground(new Background(ube));
+        Schedule.setTextFill(Color.WHITE);
+        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+        Grading.setBackground(new Background(ube));
+        Grading.setTextFill(Color.WHITE);
+        Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+        Enrollment.setTextFill(Color.BLACK);
+        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setTextFill(Color.WHITE);
+        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+        Students.setBackground(new Background(ube));
+        Students.setTextFill(Color.WHITE);
+		
+
 		 Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(enrollmentstage);
@@ -282,24 +400,38 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setBottomAnchor(enrollmentstage, 20.0);
 		 
 		 
-  }
+	}
 	
 	public void oldEnrollmentbtn(ActionEvent event) throws IOException {
-		 Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-		 Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Dashboard.setTextFill(Color.WHITE);
-		 StudentProf.setStyle("-fx-background-color:  #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 StudentProf.setTextFill(Color.WHITE);
-		 Timetable.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Timetable.setTextFill(Color.WHITE);
-		 Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Schedule.setTextFill(Color.WHITE);
-		 Grading.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Grading.setTextFill(Color.WHITE);
-		 Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 Enrollment.setTextFill(Color.WHITE);
-		 oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		 oldEnrollment.setTextFill(Color.BLACK);
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		Dashboard.setBackground(new Background(ube));
+		Dashboard.setTextFill(Color.WHITE);
+		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+        StudentProf.setBackground(new Background(ube));
+        StudentProf.setTextFill(Color.WHITE);
+        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+        Timetable.setBackground(new Background(ube));
+        Timetable.setTextFill(Color.WHITE);
+        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+        Schedule.setBackground(new Background(ube));
+        Schedule.setTextFill(Color.WHITE);
+        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+        Grading.setBackground(new Background(ube));
+        Grading.setTextFill(Color.WHITE);
+        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        Enrollment.setBackground(new Background(ube));
+        Enrollment.setTextFill(Color.WHITE);
+        oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+        oldEnrollment.setTextFill(Color.BLACK);
+        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+        Students.setBackground(new Background(ube));
+        Students.setTextFill(Color.WHITE);
+        
 		 
 		 Pane oldenrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/OldEnrollment.fxml"));
 		 contentarea.getChildren().removeAll();
@@ -309,7 +441,59 @@ public class MainFrameController implements Initializable{
 		 AnchorPane.setTopAnchor(oldenrollmentstage, 10.0);
 		 AnchorPane.setBottomAnchor(oldenrollmentstage, 20.0);
 		 
- }
+	}
+	
+	public void studentsbtn(ActionEvent event) throws IOException {
+		
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		
+		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		Dashboard.setBackground(new Background(ube));
+		Dashboard.setTextFill(Color.WHITE);
+		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+        StudentProf.setBackground(new Background(ube));
+        StudentProf.setTextFill(Color.WHITE);
+        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+        Timetable.setBackground(new Background(ube));
+        Timetable.setTextFill(Color.WHITE);
+        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+        Schedule.setBackground(new Background(ube));
+        Schedule.setTextFill(Color.WHITE);
+        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+        Grading.setBackground(new Background(ube));
+        Grading.setTextFill(Color.WHITE);
+        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        Enrollment.setBackground(new Background(ube));
+        Enrollment.setTextFill(Color.WHITE);
+        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setTextFill(Color.WHITE);
+        Students.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+        Students.setTextFill(Color.BLACK);
+		
+		 
+		 Pane studentsstage = FXMLLoader.load(getClass().getResource("/students/Students.fxml"));
+		 contentarea.getChildren().removeAll();
+		 contentarea.getChildren().setAll(studentsstage);
+		 AnchorPane.setLeftAnchor(studentsstage, 10.0);
+		 AnchorPane.setRightAnchor(studentsstage, 10.0);
+		 AnchorPane.setTopAnchor(studentsstage, 10.0);
+		 AnchorPane.setBottomAnchor(studentsstage, 20.0);
+		 
+	}
+	
+	public void setContent(Node node) {
+        contentarea.getChildren().setAll(node);
+	}
    
+	public void setUpdate(Node node) {
+        contentarea.getChildren().setAll(node);
+	}
+	
+	public void setDelete(Node node) {
+        contentarea.getChildren().setAll(node);
+	}
 }
     

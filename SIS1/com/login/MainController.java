@@ -30,7 +30,7 @@ public class MainController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
+        TranslateTransition t = new TranslateTransition(Duration.seconds(.2), vbox);
         t.setToX(vbox.getLayoutX() * 20);
         t.play();
         t.setOnFinished((e) ->{

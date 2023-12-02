@@ -13,7 +13,7 @@
 }
 
 .trans-btn-white-border:hover{
-    -fx-background-color:#2196f3 ;
+    -fx-background-color:#97B3DE ;
     -fx-background-radius:6px;
     -fx-border-color: white;
     -fx-border-radius: 5px;
@@ -26,43 +26,58 @@
 .sign_panel{
     -fx-background-color: #454a60;
 }
+
+
+
 .tf_box{
-    -fx-background-color: transparent;
-    -fx-border-color: #000000;
-    -fx-border-width: 0px 0px 1px 0px;
+    -fx-background-color:#e0e0e0;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-prompt-text-fill:#454a60 ;
+    -fx-font-size: 14px;
 }
-.tf{
-    -fx-background-color: transparent;    
+
+
+.tf_box:armed,
+.tf_box:focused{
+    -fx-background-color: #e0e0e0;
+    -fx-effect: dropshadow(gaussian,#7496F9, 2, 0.5, 0, 0);
+    -fx-border-color: #7496F9;
+    -fx-border-radius:3px;
+    -fx-padding: 10px;
+    -fx-prompt-text-fill: transparent;
+    -fx-font-size: 14px;
 }
+
 .blue-btn{
-    -fx-background-color: #2196f3;
+    -fx-background-color: #5d76dc;
     -fx-text-fill:white;
     -fx-background-radius: 5px;
-    -fx-border-color: #2196f3;
+    -fx-border-color: #5d76dc;
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
 }
 
 .blue-btn:hover{
     -fx-background-color:transparent;
-    -fx-text-fill: #00BFFF;
+    -fx-text-fill: #7496F9;
     -fx-background-radius: 5px;
-    -fx-border-color: #2196f3;
+    -fx-border-color: #5d76dc;
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
 }
+
+
+
 
 .Label {
 	-fx-font-family: "Quicksand";
 	-fx-font-size: 40px ;
 	-fx-color: #2589bd ;
+	-fx-text-fill: #7496F9;
 }
 
-.prompt{
-	-fx-font-family: "Quicksand";
-	-fx-font-size: 20px ;
-	-fx-prompt-text-fill: #2589bd;
-}
 
 
 .mainLabel {

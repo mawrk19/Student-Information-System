@@ -1,11 +1,11 @@
 #BtnTimetable {
 	-fx-background-radius:15;
-	-fx-background-color: linear-gradient(to right, #2675e3, #3C5199)
+	-fx-background-color: linear-gradient(to left, #2675e3, #3C5199)
 }
 
 #bgpane {
-	-fx-background-radius:15;
 	-fx-background-color:#3C5199;
+	-fx-background-radius: 5;
 }
 
 #EditBG {

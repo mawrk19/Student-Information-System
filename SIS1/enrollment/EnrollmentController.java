@@ -2,10 +2,10 @@ package enrollment;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -43,278 +43,260 @@ import application.UserSession;
 
 public class EnrollmentController implements Initializable {
 
-	@FXML
-	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, statCMB, semCMB;
+    @FXML
+    private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, statCMB, semCMB;
 
-	@FXML
-	private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
+    @FXML
+    private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
 
-	@FXML
-	private Button enrollBTN;
+    @FXML
+    private Button enrollBTN;
 
-	@FXML
-	private ImageView insertIMG;
+    @FXML
+    private ImageView insertIMG;
 
-	@FXML
-	private TableView<Subject> subjectsTableView;
+    @FXML
+    private TableView<Subject> subjectsTableView;
 
-	@FXML
-	private TableColumn<Subject, Integer> idColumn;
+    @FXML
+    private TableColumn<Subject, Integer> idColumn;
 
-	@FXML
-	private TableColumn<Subject, String> subCodeColumn;
+    @FXML
+    private TableColumn<Subject, String> subCodeColumn;
 
-	@FXML
-	private TableColumn<Subject, Integer> unitsColumn;
+    @FXML
+    private TableColumn<Subject, Integer> unitsColumn;
 
-	@FXML
-	private TableColumn<Subject, String> subjectColumn;
-	
-	@FXML
-	private ImageView imageView; 
+    @FXML
+    private TableColumn<Subject, String> subjectColumn;
 
-	private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
-	
-	private Image image;
+    @FXML
+    private ImageView imageView;
 
+    private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
 
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
-		ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
-		courseCMB.setItems(courses);
+    private Image image;
 
-		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
-		genderCMB.setItems(genders);
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
+        courseCMB.setItems(courses);
 
-		ObservableList<String> locations = FXCollections.observableArrayList("Camarin", "Congress", "South");
-		locCMB.setItems(locations);
+        ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
+        genderCMB.setItems(genders);
 
-		ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
-		secCMB.setItems(sections);
+        ObservableList<String> locations = FXCollections.observableArrayList("Camarin", "Congress", "South");
+        locCMB.setItems(locations);
 
-		ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
-		yrCMB.setItems(years);
+        ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
+        secCMB.setItems(sections);
 
-		ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
-		semCMB.setItems(sem);
+        ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
+        yrCMB.setItems(years);
 
-		ObservableList<String> type = FXCollections.observableArrayList("Regular", "Irregular");
-		statCMB.setItems(type);
+        ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
+        semCMB.setItems(sem);
 
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			dateTF.setText(LocalDateTime.now().format(formatter));
-		}));
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.play();
+        ObservableList<String> type = FXCollections.observableArrayList("Regular", "Irregular");
+        statCMB.setItems(type);
 
-		idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-		subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subCode"));
-		unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
-		subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            dateTF.setText(LocalDateTime.now().format(formatter));
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
 
-		courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	    yrCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	    secCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	    semCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	    statCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	    
-	    imageView.setOnMouseClicked(event -> {
-	        if (event.getButton() == MouseButton.PRIMARY) {
-	            // Handle primary (left) mouse click
-	            insertIMG();
-	        }
-	    });
-	}
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subCode"));
+        unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
+        subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
 
-	private void setSubjectsBasedOnSelection() {
-	    String selectedCourse = courseCMB.getValue();
-	    String selectedYear = yrCMB.getValue();
-	    String selectedSection = secCMB.getValue();
-	    String selectedSemester = semCMB.getValue();
-	    String selectedType = statCMB.getValue();
+        courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+        yrCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+        secCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+        semCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+        statCMB.setOnAction(event -> setSubjectsBasedOnSelection());
 
-	    if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
-	            && "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
-	        setSubjectsForSemester("BSCS1A1st", 1, 9);
-	    } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
-	            && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
-	        setSubjectsForSemester("BSCS1A2nd", 10, 17);
-	    } else {
-	        clearSubjectsTable();
-	    }
-	}
-	
+        imageView.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                // Handle primary (left) mouse click
+                insertIMG();
+            }
+        });
+    }
 
-	private void clearSubjectsTable() {
-	    subjectsTableView.getItems().clear();
-	}
-	
-	private void setSubjectsForSemester(String semester, int startId, int endId) {
-	    try (Connection connection = DatabaseManager.getConnection();
-	         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
+    private void setSubjectsBasedOnSelection() {
+        String selectedCourse = courseCMB.getValue();
+        String selectedYear = yrCMB.getValue();
+        String selectedSection = secCMB.getValue();
+        String selectedSemester = semCMB.getValue();
+        String selectedType = statCMB.getValue();
 
-	        preparedStatement.setInt(1, startId);
-	        preparedStatement.setInt(2, endId);
+        if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+                && "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+            setSubjectsForSemester("BSCS1A1st", 1, 9);
+        } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+                && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+            setSubjectsForSemester("BSCS1A2nd", 10, 17);
+        } else {
+            clearSubjectsTable();
+        }
+    }
 
-	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-	            clearSubjectsTable(); // Clear existing items before adding new ones
-	            while (resultSet.next()) {
-	                int id = resultSet.getInt("id");
-	                String subCode = resultSet.getString("sub_code");
-	                int units = resultSet.getInt("units");
-	                String subject = resultSet.getString("subject");
+    private void clearSubjectsTable() {
+        subjectsTableView.getItems().clear();
+    }
 
-	                Subject subjectObj = new Subject(id, subCode, units, subject);
-	                subjectsList.add(subjectObj);
-	            }
-	            subjectsTableView.setItems(subjectsList);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace(); // Handle the exception as needed
-	    }
-	}
-	
-	@FXML
-	private void enrollButtonClicked() throws SQLException {
-	    String selectedCourse = courseCMB.getValue();
-	    String enrollmentDate = dateTF.getText();
-	    String firstName = fNameTF.getText();
-	    String gender = genderCMB.getValue();
-	    String location = locCMB.getValue();
-	    String lastName = lNameTF.getText();
-	    String middleName = mNameTF.getText();
-	    String section = secCMB.getValue();
-	    String year = "2023";
+    private void setSubjectsForSemester(String semester, int startId, int endId) {
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
 
-	    try (Connection con = DatabaseManager.getConnection()) {
-	        String sql;
+            preparedStatement.setInt(1, startId);
+            preparedStatement.setInt(2, endId);
 
-	        if (image != null) {
-	            sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year, image_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	        } else {
-	            sql = "INSERT INTO students (course, date, First_name, gender, location, last_name, Middle_name, section, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	        }
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                clearSubjectsTable(); // Clear existing items before adding new ones
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String subCode = resultSet.getString("sub_code");
+                    int units = resultSet.getInt("units");
+                    String subject = resultSet.getString("subject");
 
-	        try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-	            preparedStatement.setString(1, selectedCourse);
-	            preparedStatement.setString(2, enrollmentDate);
-	            preparedStatement.setString(3, firstName);
-	            preparedStatement.setString(4, gender);
-	            preparedStatement.setString(5, location);
-	            preparedStatement.setString(6, lastName);
-	            preparedStatement.setString(7, middleName);
-	            preparedStatement.setString(8, section);
-	            preparedStatement.setString(9, year);
-
-	            if (image != null) {
-	                // Convert the image to a byte array and set it in the prepared statement
-	                byte[] imageData = convertImageToByteArray(image);
-	                preparedStatement.setBytes(10, imageData);
-	            }
-
-	            int rowsInserted = preparedStatement.executeUpdate();
-
-	            if (rowsInserted > 0) {
-	                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-	                if (generatedKeys.next()) {
-	                    int generatedId = generatedKeys.getInt(1);
-	                    String formattedId = String.format("%s%04d", year, generatedId);
-
-	                    // Use Platform.runLater() for UI updates
-	                    Platform.runLater(() -> {
-	                        sidTF.setText(formattedId);
-
-	                        // Clear other UI components
-	                        clearFields();
-	                    });
-
-	                    System.out.println("Enrollment successful!");
-	                }
-	            }
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        throw e; // Re-throw the exception after handling
-	    }
-	}
-
-	private byte[] convertImageToByteArray(Image image) {
-	    // Convert the Image to a BufferedImage
-	    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
-
-	    // Convert the BufferedImage to a byte array
-	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	    try {
-	        ImageIO.write(bufferedImage, "png", baos);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-
-	    return baos.toByteArray();
-	}
+                    Subject subjectObj = new Subject(id, subCode, units, subject);
+                    subjectsList.add(subjectObj);
+                }
+                subjectsTableView.setItems(subjectsList);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception as needed
+        }
+    }
 
 
-	public class Subject {
-		private int id;
-		private String subCode;
-		private int units;
-		private String subject;
+    private InputStream convertImageToInputStream(Image image) throws IOException {
+        if (image != null && image.getPixelReader() != null) {
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", outputStream);
+            return new ByteArrayInputStream(outputStream.toByteArray());
+        } else {
+            InputStream defaultImageStream = getClass().getResourceAsStream("/img_icons/NoPeep.png");
+            return defaultImageStream;
+        }
+    }
 
-		public Subject(int id, String subCode, int units, String subject) {
-			this.id = id;
-			this.subCode = subCode;
-			this.units = units;
-			this.subject = subject;
-		}
 
-		public int getId() {
-			return id;
-		}
+    @FXML
+    private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
+        enrollButtonClicked(convertImageToInputStream(image));
+    }
 
-		public String getSubCode() {
-			return subCode;
-		}
+    private void enrollButtonClicked(InputStream imageStream) throws SQLException, IOException {
+        String selectedCourse = courseCMB.getValue();
+        String enrollmentDate = dateTF.getText();
+        String firstName = fNameTF.getText();
+        String gender = genderCMB.getValue();
+        String location = locCMB.getValue();
+        String lastName = lNameTF.getText();
+        String middleName = mNameTF.getText();
+        String section = secCMB.getValue();
+        String year1 = yrCMB.getValue();
+        String sy = "2023";
 
-		public int getUnits() {
-			return units;
-		}
+        UserSession session = UserSession.getInstance();
+        String username = session.getUsername();
 
-		public String getSubject() {
-			return subject;
-		}
-	}
+        try (Connection con = DatabaseManager.getConnection()) {
+            String sql;
 
-	private void clearFields() {
-		courseCMB.setValue(null);
-		dateTF.clear();
-		fNameTF.clear();
-		genderCMB.setValue(null);
-		locCMB.setValue(null);
-		lNameTF.clear();
-		mNameTF.clear();
-		secCMB.setValue(null);
-	}
+            if (image != null) {
+                sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, image, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            } else {
+                sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            }
 
-	void setSubCS1A() {
-		// para sa subject button sa baba
-	} 
-	
-	private void insertIMG() {
-	    // Open a FileChooser to allow the user to select an image file
-	    FileChooser fileChooser = new FileChooser();
-	    fileChooser.setTitle("Select Image File");
-	    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp"));
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setString(1, selectedCourse);
+                preparedStatement.setString(2, enrollmentDate);
+                preparedStatement.setString(3, firstName);
+                preparedStatement.setString(4, gender);
+                preparedStatement.setString(5, location);
+                preparedStatement.setString(6, lastName);
+                preparedStatement.setString(7, middleName);
+                preparedStatement.setString(8, section);
+                preparedStatement.setString(9, sy);
+                preparedStatement.setString(10, year1);
 
-	    File selectedFile = fileChooser.showOpenDialog(null);
+                if (image != null) {
+                    preparedStatement.setBlob(11, imageStream);
+                    preparedStatement.setString(12, username);
+                } else {
+                    preparedStatement.setString(11, username);
+                }
 
-	    if (selectedFile != null) {
-	        // Load the selected image into the ImageView
-	        Image newImage = new Image(selectedFile.toURI().toString());
-	        imageView.setImage(newImage);
+                int rowsAffected = preparedStatement.executeUpdate();
 
-	        // Set the global 'image' variable for later use in enrollment
-	        image = newImage;
-	    }
-	}
+                if (rowsAffected > 0) {
+                    try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int generatedId = generatedKeys.getInt(1);
+                            System.out.println("Student with ID " + generatedId + " inserted successfully.");
+
+                            String formattedId = String.format("%04d", generatedId);
+
+                            String studCode = sy + formattedId;
+
+                            String sql1 = "update student set scode = (?) where sid =" + generatedId + "";
+
+                            try (PreparedStatement scodeStatement = con.prepareStatement(sql1)) {
+                                scodeStatement.setString(1, studCode);
+                                int scodeRowsAffected = scodeStatement.executeUpdate();
+
+                                if (scodeRowsAffected > 0) {
+                                    System.out.println("Scode inserted successfully.");
+                                    clearFields();
+                                } else {
+                                    System.out.println("Failed to insert scode.");
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("No rows affected. Insertion failed.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearFields() {
+        courseCMB.setValue(null);
+        dateTF.clear();
+        fNameTF.clear();
+        genderCMB.setValue(null);
+        locCMB.setValue(null);
+        lNameTF.clear();
+        mNameTF.clear();
+        secCMB.setValue(null);
+    }
+
+
+    @FXML
+    private void insertIMG() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            Image newImage = new Image(selectedFile.toURI().toString());
+            imageView.setImage(newImage);
+            image = newImage;
+        }
+    }
+
+
+    
 }
