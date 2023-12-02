@@ -39,7 +39,11 @@ public class UserSession {
 		this.id = id;
 	}
 	
-	public void setString(String type) {
+	public String getType() {
+        return type;
+    }
+	
+	public void setType(String type) {
 		this.type = type;
 	}
 }

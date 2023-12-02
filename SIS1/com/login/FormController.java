@@ -40,7 +40,7 @@ public class FormController {
 			messLabel.setText("Incorrect username or password");
 		} else {
 			messLabel.setText("No inputs taken");
-		}
+		}	
 		ValidateCon((Stage) signInBTN.getScene().getWindow()); // Pass the stage
 	}
 
@@ -49,6 +49,20 @@ public class FormController {
 			Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
 			Scene scene = new Scene(root, 1200, 850);
 			scene.getStylesheets().add(getClass().getResource("/application/MainFrame.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+			stage.isResizable();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Handle any exceptions that may occur during FXML loading
+		}
+	}
+	
+	public void openEI(Stage stage) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/encoderui/Encoder.fxml"));
+			Scene scene = new Scene(root, 1200, 850);
+			scene.getStylesheets().add(getClass().getResource("/encoderui/Encoder.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 			stage.isResizable();
@@ -74,13 +88,21 @@ public class FormController {
 				// gets username
 				int sessionId = result.getInt("ID");
 				String sessionUsername = result.getString("fname");
+				String sessionType = result.getString("type");
 
 				UserSession session = UserSession.getInstance();
 				session.setId(sessionId);
 				session.setUsername(sessionUsername);
+				
 
 				messLabel.setText("Logging in...");
-				openMF(stage); // Pass the stage
+				
+//				if(sessionType == "admin")
+//				openMF(stage); // Pass the stage
+//				else {
+//				openEI(stage);	
+//				}
+				
 			} else {
 				messLabel.setText("Wrong Credentials");
 			}
