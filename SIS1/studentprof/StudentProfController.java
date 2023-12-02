@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,18 +15,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.mysql.cj.xdevapi.Table;
 
 import java.sql.Blob;
 
 import application.DatabaseManager;
 
 public class StudentProfController {
-  
-	@FXML
+    @FXML
     private Label addressLBL;
 
     @FXML
@@ -52,6 +47,7 @@ public class StudentProfController {
     
     @FXML
     private ImageView studIMG;
+
     
     @FXML
     private void initialize() {
@@ -163,7 +159,7 @@ public class StudentProfController {
             studIMG.setImage(null);
         }
     }
-}
+
 
 //    private void shawerla() {
 //    	Blob imageBlob = Students.getStudentImage();
@@ -172,84 +168,4 @@ public class StudentProfController {
 //        Image image = new Image(bis, 129, 173, false, true);
 //        studIMG.setImage(image);
 //    }
-class Table {	  
-@FXML
-	private String subject;
-	   @FXML
-	   private String description;
-	   @FXML
-	   private String cred;
-	   @FXML
-	   private String section;
-	   @FXML
-	   private String day;
-	   @FXML
-	   private String time;
-	   @FXML
-	   private String professor;
-	   @FXML
-	   private String schedule;
-	   @FXML
-	   private String slots;
-	   
- 
-
- public Table(String subject, String description, String cred, String section, String day, String time,
-              String professor, String schedule, String slots) {
-     this.subject = subject;
-     this.description = description;
-     this.cred = cred;
-     this.section = section;
-     this.day = day;
-     this.time = time;
-     this.professor = professor;
-     this.schedule = schedule;
-     this.slots = slots;
- }
-
- // Getters and setters (you can generate them using your IDE)
-
- public String getSubject() {
-     return subject;
- }
-
- public void setSubject(String subject) {
-     this.subject = subject;
- }
-
- // Add getters and setters for other properties
-
-
-// Your method
-
- public List<Table> getTables() throws SQLException {
-     List<Table> tables = new ArrayList<>();
-
-     try (Connection con = DatabaseManager.getConnection();
-          PreparedStatement stmt = con.prepareStatement("SELECT * FROM subjects where id =?");
-          ResultSet resultSet = stmt.executeQuery()) {
-
-         while (resultSet.next()) {
-             String subject = resultSet.getString("sub_code");
-             String description = resultSet.getString("subject");
-             String cred = resultSet.getString("units");
-             String section = resultSet.getString("section");
-             String day = resultSet.getString("day");
-             String units = resultSet.getString("units");
-             String professor = resultSet.getString("professor");
-             String schedule = resultSet.getString("schedule");
-             String slots = resultSet.getString("slots");
-
-             Table table = new Table(subject, description, cred, section, day, units,
-                     professor, schedule, slots);
-
-             tables.add(table);
-         }
-     }
-
-     return tables.isEmpty() ? null : tables;
- }
 }
-
-
-   
