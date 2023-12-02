@@ -329,8 +329,5 @@ public class EnrollmentController implements Initializable {
     }
 
 
-    @FXML
-    private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
-        enrollButtonClicked(convertImageToInputStream(image));
-    }
+    
 }
