@@ -309,6 +309,10 @@ public class EnrollmentController implements Initializable {
 		lNameTF.clear();
 		mNameTF.clear();
 		secCMB.setValue(null);
+		semCMB.setValue(null);
+		yrCMB.setValue(null);
+		statCMB.setValue(null);
+		imageView.setImage(null);
 	}
 
 	private void insertIMG() {
