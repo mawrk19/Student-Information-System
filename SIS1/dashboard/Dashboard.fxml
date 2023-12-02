@@ -69,7 +69,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <ProgressBar prefWidth="200.0" progress="0.0" />
+                                                <ProgressBar prefWidth="200.0" />
                                              </children>
                                           </VBox>
                                        </children>
