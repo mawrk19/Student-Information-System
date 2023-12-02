@@ -20,7 +20,7 @@
          <children>
             <VBox prefHeight="753.0" prefWidth="546.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox prefHeight="55.0" prefWidth="552.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                  <HBox prefHeight="55.0" prefWidth="552.0" spacing="10.0">
                      <children>
                         <TextField alignment="CENTER" prefHeight="40.0" prefWidth="456.0" promptText="Type to Search..." HBox.hgrow="ALWAYS" />
                         <Button id="SearchIcon" mnemonicParsing="false" prefHeight="40.0" prefWidth="50.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
@@ -41,14 +41,14 @@
                      <children>
                         <VBox alignment="CENTER" layoutY="58.0" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0">
                            <children>
-                              <Label id="EnrollmentSts" stylesheets="@StudentProf.css" text="Enrollment Status">
+                              <Label id="EnrollmentSts" stylesheets="@StudentProf.css" text="Enrollment Status" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
+                              <ComboBox prefHeight="25.0" prefWidth="175.0" promptText="Status" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
-                        <ComboBox layoutX="203.0" layoutY="101.0" prefHeight="25.0" prefWidth="175.0" promptText="Status" />
                      </children>
                   </AnchorPane>
                   <HBox prefHeight="508.0" prefWidth="525.0" spacing="20.0" VBox.vgrow="ALWAYS">
