@@ -68,6 +68,8 @@ public class StudentsController {
 
 	@FXML
 	private TableColumn<Students, String> lastNameColumn;
+	@FXML
+	private TableColumn<Students, String> subject;
 
 	private ObservableList<Students> studentList = FXCollections.observableArrayList();
 
