@@ -66,21 +66,6 @@
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../src/imgs_icons/Timetable.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </Label>
-                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@MainFrame.css" textFill="WHITE" VBox.vgrow="ALWAYS">
-                           <font>
-                              <Font name="Berlin Sans FB" size="20.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
                                     <Image url="@../src/imgs_icons/Schedule.png" />
                                  </image></ImageView>
                            </graphic>
@@ -194,14 +179,6 @@
                            </font>
                         </Button>
                         <Button id="StudentProfButton" fx:id="StudentProf" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#StudentProfbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@MainFrame.css" text="Student Profile" textFill="WHITE" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets left="15.0" />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Berlin Sans FB" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button id="TimetableButton" fx:id="Timetable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Timetablebtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@MainFrame.css" text="Timetable" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets left="15.0" />
                            </VBox.margin>

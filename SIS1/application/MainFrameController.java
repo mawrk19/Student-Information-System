@@ -66,9 +66,9 @@ public class MainFrameController implements Initializable{
 			StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
 	        StudentProf.setBackground(new Background(ube));
 	        StudentProf.setTextFill(Color.WHITE);
-	        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-	        Timetable.setBackground(new Background(ube));
-	        Timetable.setTextFill(Color.WHITE);
+//	        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//	        Timetable.setBackground(new Background(ube));
+//	        Timetable.setTextFill(Color.WHITE);
 	        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
 	        Schedule.setBackground(new Background(ube));
 	        Schedule.setTextFill(Color.WHITE);
@@ -129,9 +129,9 @@ public class MainFrameController implements Initializable{
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
         StudentProf.setBackground(new Background(ube));
         StudentProf.setTextFill(Color.WHITE);
-        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-        Timetable.setBackground(new Background(ube));
-        Timetable.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Timetable.setBackground(new Background(ube));
+//        Timetable.setTextFill(Color.WHITE);
         Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
         Schedule.setBackground(new Background(ube));
         Schedule.setTextFill(Color.WHITE);
@@ -170,9 +170,9 @@ public class MainFrameController implements Initializable{
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
         StudentProf.setBackground(new Background(ube));
         StudentProf.setTextFill(Color.WHITE);
-        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-        Timetable.setBackground(new Background(ube));
-        Timetable.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Timetable.setBackground(new Background(ube));
+//        Timetable.setTextFill(Color.WHITE);
         Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
         Schedule.setBackground(new Background(ube));
         Schedule.setTextFill(Color.WHITE);
@@ -214,9 +214,9 @@ public class MainFrameController implements Initializable{
 		Dashboard.setTextFill(Color.WHITE);
 		StudentProf.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
         StudentProf.setTextFill(Color.BLACK);
-        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-        Timetable.setBackground(new Background(ube));
-        Timetable.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Timetable.setBackground(new Background(ube));
+//        Timetable.setTextFill(Color.WHITE);
         Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
         Schedule.setBackground(new Background(ube));
         Schedule.setTextFill(Color.WHITE);
@@ -244,47 +244,47 @@ public class MainFrameController implements Initializable{
 		 
     }
     
-	public void Timetablebtn(ActionEvent event) throws IOException {
-		
-		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
-		
-		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-		
-		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
-		Dashboard.setBackground(new Background(ube));
-		Dashboard.setTextFill(Color.WHITE);
-		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-        StudentProf.setBackground(new Background(ube));
-        StudentProf.setTextFill(Color.WHITE);
-        Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-        Timetable.setTextFill(Color.BLACK);
-        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
-        Schedule.setBackground(new Background(ube));
-        Schedule.setTextFill(Color.WHITE);
-        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
-        Grading.setBackground(new Background(ube));
-        Grading.setTextFill(Color.WHITE);
-        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        Enrollment.setBackground(new Background(ube));
-        Enrollment.setTextFill(Color.WHITE);
-        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        oldEnrollment.setBackground(new Background(ube));
-        oldEnrollment.setTextFill(Color.WHITE);
-        Students.setStyle("-fx-border-radius: 25 0 0 25;");
-        Students.setBackground(new Background(ube));
-        Students.setTextFill(Color.WHITE);
-		
-		 
-		 Pane timetablestage = FXMLLoader.load(getClass().getResource("/timetable/Timetable.fxml"));
-		 contentarea.getChildren().removeAll();
-		 contentarea.getChildren().setAll(timetablestage);
-		 AnchorPane.setLeftAnchor(timetablestage, 10.0);
-		 AnchorPane.setRightAnchor(timetablestage, 10.0);
-		 AnchorPane.setTopAnchor(timetablestage, 10.0);
-		 AnchorPane.setBottomAnchor(timetablestage, 20.0);
-		 
-		 
-   }
+//	public void Timetablebtn(ActionEvent event) throws IOException {
+//		
+//		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+//		
+//		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+//		
+//		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+//		Dashboard.setBackground(new Background(ube));
+//		Dashboard.setTextFill(Color.WHITE);
+//		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+//        StudentProf.setBackground(new Background(ube));
+//        StudentProf.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+//        Timetable.setTextFill(Color.BLACK);
+//        Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Schedule.setBackground(new Background(ube));
+//        Schedule.setTextFill(Color.WHITE);
+//        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Grading.setBackground(new Background(ube));
+//        Grading.setTextFill(Color.WHITE);
+//        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Enrollment.setBackground(new Background(ube));
+//        Enrollment.setTextFill(Color.WHITE);
+//        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+//        oldEnrollment.setBackground(new Background(ube));
+//        oldEnrollment.setTextFill(Color.WHITE);
+//        Students.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Students.setBackground(new Background(ube));
+//        Students.setTextFill(Color.WHITE);
+//		
+//		 
+//		 Pane timetablestage = FXMLLoader.load(getClass().getResource("/timetable/Timetable.fxml"));
+//		 contentarea.getChildren().removeAll();
+//		 contentarea.getChildren().setAll(timetablestage);
+//		 AnchorPane.setLeftAnchor(timetablestage, 10.0);
+//		 AnchorPane.setRightAnchor(timetablestage, 10.0);
+//		 AnchorPane.setTopAnchor(timetablestage, 10.0);
+//		 AnchorPane.setBottomAnchor(timetablestage, 20.0);
+//		 
+//		 
+//   }
 	
 	public void Schedulebtn(ActionEvent event) throws IOException {
 		
@@ -298,9 +298,9 @@ public class MainFrameController implements Initializable{
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
         StudentProf.setBackground(new Background(ube));
         StudentProf.setTextFill(Color.WHITE);
-        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-        Timetable.setBackground(new Background(ube));
-        Timetable.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Timetable.setBackground(new Background(ube));
+//        Timetable.setTextFill(Color.WHITE);
         Schedule.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
         Schedule.setTextFill(Color.BLACK);
         Grading.setStyle("-fx-border-radius: 25 0 0 25;");
@@ -339,9 +339,9 @@ public class MainFrameController implements Initializable{
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
         StudentProf.setBackground(new Background(ube));
         StudentProf.setTextFill(Color.WHITE);
-        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-        Timetable.setBackground(new Background(ube));
-        Timetable.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Timetable.setBackground(new Background(ube));
+//        Timetable.setTextFill(Color.WHITE);
         Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
         Schedule.setBackground(new Background(ube));
         Schedule.setTextFill(Color.WHITE);
@@ -381,9 +381,9 @@ public class MainFrameController implements Initializable{
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
         StudentProf.setBackground(new Background(ube));
         StudentProf.setTextFill(Color.WHITE);
-        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-        Timetable.setBackground(new Background(ube));
-        Timetable.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Timetable.setBackground(new Background(ube));
+//        Timetable.setTextFill(Color.WHITE);
         Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
         Schedule.setBackground(new Background(ube));
         Schedule.setTextFill(Color.WHITE);
@@ -423,9 +423,9 @@ public class MainFrameController implements Initializable{
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
         StudentProf.setBackground(new Background(ube));
         StudentProf.setTextFill(Color.WHITE);
-        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-        Timetable.setBackground(new Background(ube));
-        Timetable.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Timetable.setBackground(new Background(ube));
+//        Timetable.setTextFill(Color.WHITE);
         Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
         Schedule.setBackground(new Background(ube));
         Schedule.setTextFill(Color.WHITE);
@@ -464,9 +464,9 @@ public class MainFrameController implements Initializable{
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
         StudentProf.setBackground(new Background(ube));
         StudentProf.setTextFill(Color.WHITE);
-        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
-        Timetable.setBackground(new Background(ube));
-        Timetable.setTextFill(Color.WHITE);
+//        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//        Timetable.setBackground(new Background(ube));
+//        Timetable.setTextFill(Color.WHITE);
         Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
         Schedule.setBackground(new Background(ube));
         Schedule.setTextFill(Color.WHITE);
@@ -493,9 +493,9 @@ public class MainFrameController implements Initializable{
 		 
 	}
 	
-	public void setContent(Node node) {
-        contentarea.getChildren().setAll(node);
-	}
+//	public void setContent(Node node) {
+//        contentarea.getChildren().setAll(node);
+//	}
    
 	public void setUpdate(Node node) {
         contentarea.getChildren().setAll(node);
