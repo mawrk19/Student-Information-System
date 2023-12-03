@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="Borderpane" fx:id="Borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
+<BorderPane id="Borderpane" fx:id="Borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainFrameController">
    <left>
       <AnchorPane prefHeight="836.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
@@ -163,7 +163,7 @@
                               <Font name="System Bold Italic" size="35.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="149.0" fitWidth="1233.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../src/imgs_icons/SIS_LOGO.png" />
                                  </image>

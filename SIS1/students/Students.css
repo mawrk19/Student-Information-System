@@ -1,0 +1,37 @@
+#updateBtn {
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#sortBtn {
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#deleteBtn {
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#background {
+	-fx-background-color:#D1D7EB;
+}
+
+.columnHeader {
+	-fx-background-color:#6476B4;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-text-fill: #EFF0F3;
+	
+}

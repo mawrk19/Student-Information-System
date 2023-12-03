@@ -115,12 +115,14 @@ public class StudentProfController {
                     String date1 = resultSet.getString("date");
                     int sid1 = resultSet.getInt("sid");
                     String gender1 = resultSet.getString("gender");
+                    int start = resultSet.getInt("eSubjectsStart");
+                    int end = resultSet.getInt("eSubjectsEnd");
 
                     // Retrieve the image as a java.sql.Blob
                     Blob studentImageBlob = resultSet.getBlob("image");
 
                     Students student = new Students(firstName, middleName, lastName, course1, year1, section1,
-                            location1, scode1, date1, sid1, gender1, studentImageBlob);
+                            location1, scode1, date1, sid1, gender1, studentImageBlob, start, end);
 
                     // Set the image in the Students object
                     student.setStudentImage(studentImageBlob);
@@ -162,7 +164,8 @@ public class StudentProfController {
         }
         
         try (Connection con = DatabaseManager.getConnection();
-                PreparedStatement stmt = con.prepareStatement("SELECT s.* FROM subjects s INNER JOIN student st ON s.scode = st.scode WHERE st.scode = ?")) {
+        			
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM subjects")) {
 
             String studentCode = search.getText(); // Assuming the student code is retrieved from a text field
             if (!studentCode.isEmpty()) {
