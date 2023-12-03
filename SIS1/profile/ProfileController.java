@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -65,84 +64,20 @@ public class ProfileController implements Initializable {
     
     private Image image;
 
-    Connection con = DatabaseManager.getConnection();
-    		
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Load the default image
-        Image defaultImage = new Image(getClass().getResourceAsStream("..\\src\\imgs_icons\\Insert.png"));
-        profileImageView.setImage(defaultImage);
+    	Image image = new Image(getClass().getResourceAsStream("..\\src\\imgs_icons\\Insert.png"));
+        profileImageView.setImage(image);
         profileImageView.setClip(createClip(profileImageView));
         centerImage(profileImageView);
-
-        // Check if there is a saved image in the database
-        try (Connection con = DatabaseManager.getConnection();
-             PreparedStatement stmt = con.prepareStatement("SELECT userImg FROM users WHERE id = ?")) {
-
-            stmt.setInt(1, UserSession.getInstance().getId());
-            ResultSet resultSet = stmt.executeQuery();
-
-            if (resultSet.next()) {
-                // If there is a saved image, load it
-                InputStream imageStream = resultSet.getBinaryStream("userImg");
-                if (imageStream != null) {
-                    Image savedImage = new Image(imageStream);
-                    profileImageView.setImage(savedImage);
-                    profileImageView.setClip(createClip(profileImageView));
-                    centerImage(profileImageView);
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the exception as needed
-        }
-
-        // Set up the click event to change the image
+        
         profileImageView.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
+                // Handle primary (left) mouse click
                 insertIMG(null);
             }
         });
-        
-        setFullnameLabel();
-        updateTotalEnrolledStudentsLabel();
     }
-
-    private void setFullnameLabel() {
-        UserSession session = UserSession.getInstance();
-        String username = session.getUsername();
-        String lastname = session.getLastname(); 
-        String fullname = username + " " + lastname;
-        String id = String.valueOf(session.getId()); 
-
-        fullnameLBL.setText(fullname);
-        idLBL.setText(id);
-        
-    }
-
-    private void updateTotalEnrolledStudentsLabel() {
-    	UserSession session = UserSession.getInstance();
-        String username = session.getUsername();
-        try (Connection con = DatabaseManager.getConnection();
-             PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM student WHERE encoder = ?")) {
-
-            stmt.setString(1, username);
-
-            try (ResultSet resultSet = stmt.executeQuery()) {
-                if (resultSet.next()) {
-                    int count = resultSet.getInt(1);
-                    countLBL.setText("Total students enrolled: " + count);
-                    System.out.println(username);
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception according to your needs
-        }
-    }
-
-
     
     @FXML
     private void insertIMG(ActionEvent event) {
@@ -170,10 +105,8 @@ public class ProfileController implements Initializable {
     }
     
     private void saveImageToDatabase(File imageFile) {
-        Connection con = null;
-        try {
-            con = DatabaseManager.getConnection();
-            con.setAutoCommit(false);
+        try (Connection con = DatabaseManager.getConnection();
+             PreparedStatement stmt = con.prepareStatement("UPDATE your_table_name SET image_column_name = ? WHERE user_id = ?")) {
 
             // Convert Image to BufferedImage
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(profileImageView.getImage(), null);
@@ -183,38 +116,23 @@ public class ProfileController implements Initializable {
             ImageIO.write(bufferedImage, "png", baos);
             byte[] imageData = baos.toByteArray();
 
-            try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET userImg = ? WHERE id = ?")) {
-                // Set parameters for the PreparedStatement
-                stmt.setBytes(1, imageData);
-                stmt.setInt(2, UserSession.getInstance().getId());  // Use the user ID from UserSession
+            // Set parameters for the PreparedStatement
+            stmt.setBytes(1, imageData);
+            stmt.setInt(2, UserSession.getInstance().getId());  // Use the user ID from UserSession
 
-                // Execute the update
-                stmt.executeUpdate();
+            // Execute the update
+            stmt.executeUpdate();
 
-                // Commit the transaction
-                con.commit();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Handle the exception as needed
-                con.rollback();
-            }
+            // Commit the transaction
+            con.commit();
+
         } catch (SQLException | IOException e) {
             e.printStackTrace();
             // Handle the exception as needed
-        } finally {
-            try {
-                if (con != null) {
-                    if (!con.getAutoCommit()) {
-                        con.setAutoCommit(true); // Reset autocommit to true
-                    }
-                }
-            } catch (SQLException rollbackException) {
-                rollbackException.printStackTrace();
-                // Handle the rollback exception as needed
-            }
         }
     }
 
+    
     private InputStream convertImageToInputStream(Image image) throws IOException {
         if (image != null && image.getPixelReader() != null) {
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);

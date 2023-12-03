@@ -89,12 +89,10 @@ public class FormController {
 				int sessionId = result.getInt("ID");
 				String sessionUsername = result.getString("fname");
 				String sessionType = result.getString("type");
-				String sessionLastname = result.getString("lname");
 
 				UserSession session = UserSession.getInstance();
 				session.setId(sessionId);
 				session.setUsername(sessionUsername);
-				session.setLastname(sessionLastname);
 
 				messLabel.setText("Logging in...");
 				

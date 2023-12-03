@@ -5,7 +5,6 @@ import application.UserSession;
 public class UserSession {
 	private static UserSession instance;
     private String username;
-    private String lastname;
     private int id;
     private String type;
 
@@ -23,16 +22,9 @@ public class UserSession {
     public void setUsername(String username) {
         this.username = username;
     }
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 
     public String getUsername() {
         return username;
-    }
-    
-    public String getLastname() {
-        return lastname;
     }
 
     public void clearSession() {
