@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import students.Students;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -133,22 +134,77 @@ public class EnrollmentController implements Initializable {
         String selectedSemester = semCMB.getValue();
         String selectedType = statCMB.getValue();
 
+        int startId;
+        int endId;
+
         if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
                 && "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
-            setSubjectsForSemester("BSCS1A1st", 1, 9);
+            startId = 1;
+            endId = 9;
         } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
                 && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
-            setSubjectsForSemester("BSCS1A2nd", 10, 17);
+            startId = 10;
+            endId = 17;
+        } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+                && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+            startId = 1;
+            endId = 9;
+        } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+                && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+            startId = 10;
+            endId = 17;
         } else {
+            // Clear the subjects table if none of the conditions are met
             clearSubjectsTable();
+            return;
         }
+
+        // Set subjects for the specified conditions
+        setSubjectsForSemester(createStudentsObject());
     }
+
+
+
+    private Students createStudentsObject() {
+        String selectedCourse = courseCMB.getValue();
+        String selectedYear = yrCMB.getValue();
+        String selectedSection = secCMB.getValue();
+        String selectedSemester = semCMB.getValue();
+        String selectedType = statCMB.getValue();
+
+        int startId = 1; // Default values
+        int endId = 9;   // Default values
+
+        if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+                && "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+            startId = 1;
+            endId = 9;
+        } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+                && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+            startId = 10;
+            endId = 17;
+        } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+                && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+            startId = 1;
+            endId = 9;
+        } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+                && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+            startId = 10;
+            endId = 17;
+        }
+
+        return new Students(selectedType, selectedYear, selectedSection, selectedType, selectedType, selectedType, selectedType, endId, selectedType, endId, selectedType, null, startId, endId);
+    }
+
 
     private void clearSubjectsTable() {
         subjectsTableView.getItems().clear();
     }
 
-    private void setSubjectsForSemester(String semester, int startId, int endId) {
+    private void setSubjectsForSemester(Students student) {
+        int startId = student.getStart();
+        int endId = student.getEnd();
+        
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement preparedStatement = connection
                      .prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
@@ -174,7 +230,6 @@ public class EnrollmentController implements Initializable {
         }
     }
 
-
     private InputStream convertImageToInputStream(Image image) throws IOException {
         if (image != null && image.getPixelReader() != null) {
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
@@ -187,13 +242,12 @@ public class EnrollmentController implements Initializable {
         }
     }
 
-
     @FXML
     private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
-        enrollButtonClicked(convertImageToInputStream(image));
+        enrollButtonClicked(convertImageToInputStream(image), createStudentsObject());
     }
 
-    private void enrollButtonClicked(InputStream imageStream) throws SQLException, IOException {
+    private void enrollButtonClicked(InputStream imageStream, Students student) throws SQLException, IOException {
         String selectedCourse = courseCMB.getValue();
         String enrollmentDate = dateTF.getText();
         String firstName = fNameTF.getText();
@@ -204,6 +258,8 @@ public class EnrollmentController implements Initializable {
         String section = secCMB.getValue();
         String year1 = yrCMB.getValue();
         String sy = "2023";
+        String startID = String.valueOf(student.getStart());
+        String endID = String.valueOf(student.getEnd());
 
         UserSession session = UserSession.getInstance();
         String username = session.getUsername();
@@ -212,9 +268,9 @@ public class EnrollmentController implements Initializable {
             String sql;
 
             if (image != null) {
-                sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, image, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, eSubjectsStart, eSubjectsEnd, image, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             } else {
-                sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, eSubjectsStart, eSubjectsEnd, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             }
 
             try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -230,10 +286,14 @@ public class EnrollmentController implements Initializable {
                 preparedStatement.setString(10, year1);
 
                 if (image != null) {
-                    preparedStatement.setBlob(11, imageStream);
-                    preparedStatement.setString(12, username);
+                    preparedStatement.setString(11, startID);
+                    preparedStatement.setString(12, endID);
+                    preparedStatement.setBlob(13, imageStream);
+                    preparedStatement.setString(14, username);
                 } else {
-                    preparedStatement.setString(11, username);
+                    preparedStatement.setString(11, startID);
+                    preparedStatement.setString(12, endID);
+                    preparedStatement.setString(13, username);
                 }
 
                 int rowsAffected = preparedStatement.executeUpdate();
@@ -245,13 +305,12 @@ public class EnrollmentController implements Initializable {
                             System.out.println("Student with ID " + generatedId + " inserted successfully.");
 
                             String formattedId = String.format("%04d", generatedId);
-
                             String studCode = sy + formattedId;
 
-                            String sql1 = "update student set scode = (?) where sid =" + generatedId + "";
-
+                            String sql1 = "UPDATE student SET scode = ? WHERE sid = ?";
                             try (PreparedStatement scodeStatement = con.prepareStatement(sql1)) {
                                 scodeStatement.setString(1, studCode);
+                                scodeStatement.setInt(2, generatedId);
                                 int scodeRowsAffected = scodeStatement.executeUpdate();
 
                                 if (scodeRowsAffected > 0) {
@@ -271,7 +330,8 @@ public class EnrollmentController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    
+    
     private void clearFields() {
         courseCMB.setValue(null);
         dateTF.clear();
@@ -282,7 +342,6 @@ public class EnrollmentController implements Initializable {
         mNameTF.clear();
         secCMB.setValue(null);
     }
-
 
     @FXML
     private void insertIMG() {
@@ -296,7 +355,4 @@ public class EnrollmentController implements Initializable {
             image = newImage;
         }
     }
-
-
-    
 }

@@ -6,6 +6,7 @@ public class UserSession {
 	private static UserSession instance;
     private String username;
     private String lastname;
+    private String firstname;
     private int id;
     private String type;
 
@@ -28,12 +29,20 @@ public class UserSession {
         this.lastname = lastname;
     }
 
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+    
     public String getUsername() {
         return username;
     }
     
     public String getLastname() {
         return lastname;
+    }
+    
+    public String getFirstname() {
+        return firstname;
     }
 
     public void clearSession() {
