@@ -10,13 +10,10 @@ import javafx.stage.StageStyle;
 
 
 public class Main extends Application {
-
+	private Stage stage;
     @Override
     public void start(Stage stage) throws Exception {
     	Parent root = FXMLLoader.load(getClass().getResource("/com/login/MainLogin.fxml"));  
-//   		Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
-    	
-//    	Parent root = FXMLLoader.load(getClass().getResource("/encoderui/Encoder.fxml"));
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
@@ -26,5 +23,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

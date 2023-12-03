@@ -42,8 +42,8 @@ public class MainFrameController implements Initializable{
     @FXML 
     private AnchorPane contentarea;
     
-    @FXML 
-    private Button loogout;
+    @FXML
+    private Button logoutButton;
 
     @FXML
     public Button Dashboard, StudentProf, Timetable, Enrollment, Schedule, oldEnrollment, Grading, Profileicn, Students;
@@ -506,20 +506,28 @@ public class MainFrameController implements Initializable{
 	}
 Stage stage;
 
+@FXML
 public void logout(ActionEvent event) throws IOException {
-    Alert alert = new Alert(AlertType.CONFIRMATION);
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Logout");
     alert.setHeaderText("You're about to log out");
     alert.setContentText("Do you want to save before you logout?");
 
     Optional<ButtonType> result = alert.showAndWait();
-    if 
-    (result.isPresent() && result.get() == ButtonType.OK) {
-    	Parent root = FXMLLoader.load(getClass().getResource("/com/login/MainLogin.fxml"));
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+        // Load the MainLogin.fxml file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/login/MainLogin.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller of the MainLogin.fxml file
+        Main mainLoginController = loader.getController();
+
+        // Set the stage of the MainLoginController
+        mainLoginController.setStage(stage);
+
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     } else {
         System.out.println("Logout canceled");
