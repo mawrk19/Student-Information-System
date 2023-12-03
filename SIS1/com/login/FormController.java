@@ -15,6 +15,7 @@ import application.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,7 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class FormController {
+public class FormController implements Initializable{
 
 	@FXML
 	TextField emailField, regFname, regLname, regUser, regPass;
@@ -33,6 +34,8 @@ public class FormController {
 	PasswordField passField;
 	@FXML
 	Button signInBTN;
+    @FXML
+    private Label Exit;
 	
 	@FXML
 	Label messLabel,tbox;
@@ -158,6 +161,14 @@ public class FormController {
 			ex.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+        Exit.setOnMouseClicked(event -> {
+			System.exit(0);
+		});
+		
 	}
 
 }

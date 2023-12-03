@@ -28,9 +28,6 @@ public class MainController implements Initializable {
     private VBox vbox;    
     private Parent fxml;
     
-    @FXML
-    private Label Exit;
-    
     private Stage stage;
   
     
@@ -48,6 +45,7 @@ public class MainController implements Initializable {
                 
             }
         });
+        
         
     }
     

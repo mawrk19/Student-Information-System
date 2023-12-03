@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #3C5199;" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EnrollmentController">
+   <children>
+      <AnchorPane layoutX="13.0" layoutY="13.0" prefHeight="425.0" prefWidth="800.0" style="-fx-background-color: #f9f9f9;">
+         <children>
+            <ComboBox fx:id="MOPCMB" layoutX="56.0" layoutY="52.0" prefHeight="37.0" prefWidth="193.0" promptText="Mode of payment" />
+            <TextField fx:id="amtDueTF" layoutX="284.0" layoutY="52.0" prefHeight="37.0" prefWidth="170.0" text="amount due" />
+            <Label layoutX="56.0" layoutY="164.0" prefHeight="37.0" prefWidth="193.0" text="Miscellanous Fee">
+               <font>
+                  <Font name="Verdana" size="22.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="libCB" layoutX="50.0" layoutY="213.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Library Fee 30" />
+            <CheckBox fx:id="medCB" layoutX="50.0" layoutY="239.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Medical Fee 40" />
+            <CheckBox fx:id="sciCB" layoutX="50.0" layoutY="265.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Science Lab Fee 100" />
+            <CheckBox fx:id="comCB" layoutX="50.0" layoutY="291.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Computer Lab Fee 100" />
+            <CheckBox fx:id="athCB" layoutX="50.0" layoutY="317.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Athletic Fee 30" />
+            <CheckBox fx:id="mediaCB" layoutX="50.0" layoutY="343.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Media Fee 40" />
+            <TextField fx:id="amtTF" layoutX="284.0" layoutY="114.0" prefHeight="37.0" prefWidth="170.0" text="amount" />
+            <ComboBox fx:id="lateCMB" layoutX="284.0" layoutY="164.0" prefHeight="37.0" prefWidth="170.0" promptText="Late Enrolee" />
+            <TextField fx:id="totalTF" layoutX="284.0" layoutY="213.0" prefHeight="37.0" prefWidth="170.0" text="total" />
+            <TextField fx:id="balanceTF" layoutX="284.0" layoutY="273.0" prefHeight="37.0" prefWidth="170.0" text="balance" />
+            <TextField fx:id="tuitionTF" layoutX="284.0" layoutY="325.0" prefHeight="37.0" prefWidth="170.0" text="Tuition total" />
+            <TextField fx:id="miscTF" layoutX="497.0" layoutY="325.0" prefHeight="37.0" prefWidth="170.0" text="Miscellanous total" />
+            <TextField fx:id="transacIDTF" layoutX="56.0" layoutY="114.0" prefHeight="37.0" prefWidth="193.0" text="transaction ID" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
