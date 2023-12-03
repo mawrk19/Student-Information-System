@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.ByteArrayInputStream;
 import java.sql.Connection;
@@ -88,6 +89,13 @@ public class StudentProfController {
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception according to your needs
         }
+        
+        subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
+        credColumn.setCellValueFactory(new PropertyValueFactory<>("creditUnits"));
+        secColumn.setCellValueFactory(new PropertyValueFactory<>("section"));
+        dayColumn.setCellValueFactory(new PropertyValueFactory<>("day"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+        professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
     }
 
     private Students getStudent(int sid) throws SQLException {
@@ -154,21 +162,22 @@ public class StudentProfController {
         }
         
         try (Connection con = DatabaseManager.getConnection();
-                PreparedStatement stmt = con.prepareStatement("SELECT * FROM subjects WHERE scode = ?")) {
+                PreparedStatement stmt = con.prepareStatement("SELECT s.* FROM subjects s INNER JOIN student st ON s.scode = st.scode WHERE st.scode = ?")) {
 
-            String scode = search.getText();
-            if (!scode.isEmpty()) {
-                stmt.setString(1, scode);
+            String studentCode = search.getText(); // Assuming the student code is retrieved from a text field
+            if (!studentCode.isEmpty()) {
+                stmt.setString(1, studentCode);
 
                 try (ResultSet resultSet = stmt.executeQuery()) {
                     ObservableList<Subject> subjectList = FXCollections.observableArrayList();
                     while (resultSet.next()) {
                         Subject subject = new Subject(
+                            // Extract data from ResultSet and create a Subject object
                             resultSet.getString("sub_code"),
-                            resultSet.getInt("units"), // Assuming 'units' column corresponds to credits
+                            resultSet.getInt("units"),
                             resultSet.getString("subject"),
                             resultSet.getString("day"),
-                            resultSet.getString("schedule"), // Assuming 'schedule' column corresponds to time
+                            resultSet.getString("schedule"),
                             resultSet.getString("professor")
                         );
 
@@ -178,6 +187,7 @@ public class StudentProfController {
 
                     // Set the items in the TableView
                     Table.setItems(subjectList);
+                    
                 }
             }
         } catch (SQLException ex) {
