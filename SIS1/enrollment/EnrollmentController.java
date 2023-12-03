@@ -7,7 +7,10 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -70,6 +73,9 @@ public class EnrollmentController implements Initializable {
 
     @FXML
     private TableColumn<Subject, String> subjectColumn;
+    
+    @FXML
+    private AnchorPane newContentAnchorPane;
 
     @FXML
     private ImageView imageView;
@@ -329,6 +335,8 @@ public class EnrollmentController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        replaceTableViewContent();
     }
     
     
@@ -353,6 +361,37 @@ public class EnrollmentController implements Initializable {
             Image newImage = new Image(selectedFile.toURI().toString());
             imageView.setImage(newImage);
             image = newImage;
+        }
+    }
+    
+    private void replaceTableViewContent() {
+    	try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Transaction.fxml"));
+            AnchorPane newTableAnchorPane = loader.load();
+
+            // Get the parent of the TableView AnchorPane
+            AnchorPane tableViewParent = (AnchorPane) subjectsTableView.getParent();
+
+            // Retrieve layout constraints for the TableView
+            Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
+            Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
+            Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
+            Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
+
+            // Remove the TableView from the parent
+            tableViewParent.getChildren().remove(subjectsTableView);
+
+            // Set layout constraints for the new table view content
+            AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
+            AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
+            AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
+            AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
+
+            // Add the new table view content to the parent
+            tableViewParent.getChildren().add(newTableAnchorPane);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

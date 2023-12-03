@@ -18,7 +18,7 @@
 		<AnchorPane prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
 
-				<AnchorPane layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #3C5199;" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="260.0">
+				<AnchorPane fx:id="newContentAnchorPane" layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #3C5199;" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="260.0">
 					<children>
 						<TableView fx:id="subjectsTableView" fixedCellSize="0.0" layoutX="12.0" layoutY="12.0" prefHeight="424.0" prefWidth="800.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="12.0">
 							<columns>
