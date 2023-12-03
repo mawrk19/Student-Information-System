@@ -157,7 +157,7 @@ public class StudentProfController {
         
         try (Connection con = DatabaseManager.getConnection();
         			
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM subjects")) {
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM subjects where scode =")) {
 
             String scode = search.getText();
             if (!scode.isEmpty()) {
@@ -220,15 +220,5 @@ public class StudentProfController {
             studIMG.setImage(null);
         }
     }
-    
-    
 
-
-//    private void shawerla() {
-//    	Blob imageBlob = Students.getStudentImage();
-//        byte[] imageBytes = imageBlob.getBytes(1, (int) imageBlob.length());
-//        ByteArrayInputStream bis = new ByteArrayInputStream(imageBytes);
-//        Image image = new Image(bis, 129, 173, false, true);
-//        studIMG.setImage(image);
-//    }
 }
