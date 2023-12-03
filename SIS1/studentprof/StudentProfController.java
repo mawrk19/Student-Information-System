@@ -8,6 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import students.Students;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 import java.io.ByteArrayInputStream;
 import java.sql.Connection;
@@ -18,6 +22,7 @@ import java.sql.SQLException;
 import java.sql.Blob;
 
 import application.DatabaseManager;
+import studentprof.Subject;
 
 public class StudentProfController {
     @FXML
@@ -46,6 +51,28 @@ public class StudentProfController {
     
     @FXML
     private ImageView studIMG;
+    
+    @FXML
+    private TableView<Subject> Table;
+    
+    @FXML
+    private TableColumn<Subject, String> subjectColumn;
+    
+    @FXML
+    private TableColumn<Subject, Integer> credColumn;
+    
+    @FXML
+    private TableColumn<Subject, String> secColumn;
+    
+    @FXML
+    private TableColumn<Subject, String> dayColumn;
+    
+    @FXML
+    private TableColumn<Subject, String> timeColumn;
+    
+    @FXML
+    private TableColumn<Subject, String> professorColumn;
+    
     
     @FXML
     private void initialize() {
@@ -123,6 +150,37 @@ public class StudentProfController {
         } catch (SQLException ex) {
             ex.printStackTrace(); // Handle the exception according to your needs
         }
+        
+        try (Connection con = DatabaseManager.getConnection();
+                PreparedStatement stmt = con.prepareStatement("SELECT * FROM subjects WHERE scode = ?")) {
+
+            String scode = search.getText();
+            if (!scode.isEmpty()) {
+                stmt.setString(1, scode);
+
+                try (ResultSet resultSet = stmt.executeQuery()) {
+                    ObservableList<Subject> subjectList = FXCollections.observableArrayList();
+                    while (resultSet.next()) {
+                        Subject subject = new Subject(
+                            resultSet.getString("sub_code"),
+                            resultSet.getInt("units"), // Assuming 'units' column corresponds to credits
+                            resultSet.getString("subject"),
+                            resultSet.getString("day"),
+                            resultSet.getString("schedule"), // Assuming 'schedule' column corresponds to time
+                            resultSet.getString("professor")
+                        );
+
+                        // Add the subject to the ObservableList
+                        subjectList.add(subject);
+                    }
+
+                    // Set the items in the TableView
+                    Table.setItems(subjectList);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Handle the exception according to your needs
+        }
     }
     
 
@@ -157,6 +215,8 @@ public class StudentProfController {
             studIMG.setImage(null);
         }
     }
+    
+    
 
 
 //    private void shawerla() {
