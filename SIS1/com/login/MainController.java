@@ -26,6 +26,9 @@ public class MainController implements Initializable {
     @FXML
     private VBox vbox;    
     private Parent fxml;
+    
+    @FXML
+    private Label Exit;
   
     
     @Override
@@ -42,6 +45,7 @@ public class MainController implements Initializable {
                 
             }
         });
+        
     }
     @FXML
     private void open_signin(ActionEvent event){
