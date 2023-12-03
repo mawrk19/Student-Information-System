@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -32,8 +33,11 @@ public class FormController {
 	PasswordField passField;
 	@FXML
 	Button signInBTN;
+	
 	@FXML
 	Label messLabel,tbox;
+	
+	
 
 	public void LogIn(ActionEvent e) {
 		if (!emailField.getText().isBlank() && !passField.getText().isBlank()) {

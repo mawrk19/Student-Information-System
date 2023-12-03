@@ -45,8 +45,8 @@ public class ScheduleController implements Initializable{
 	    @FXML
 	    private Button prev;
 	    
-	    @FXML
-	    private Button BtnTimetable;
+//	    @FXML
+//	    private Button BtnTimetable;
 	    
 	    @FXML
 	    private FlowPane calendar;
