@@ -1,13 +1,65 @@
-#bodyRock{
-	-fx-background-radius:0;
-	-fx-background-color: linear-gradient(to left, #2675e3, #3C5199)
+#Container {
+	-fx-background-color:#6476B4;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
 }
 
-#profileImageView{
-	-fx-clip-shape: circle;
-    -fx-background-radius: 50%;
+#background {
+	-fx-background-color:#D1D7EB;
 }
 
-#background1{
-	-fx-background-radius: 6%;
+#Cover {
+	-fx-background-color: linear-gradient(to right, #2675e3, #3C5199);
+}
+
+#EditBtn {
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#InformationPane {
+	-fx-background-color:#DFE2ED;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+}
+
+#ProfileLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:30 px;
+	-fx-text-fill: #EFF0F3;
+	
+}
+
+#PersonalInfo {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 22 px;
+}
+
+#InfoLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15 px;
+}
+
+#LblInfo {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 18 px;
+	-fx-text-fill: #DFE2ED;
+}
+
+#CPLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15 px;
+}
+
+#UpdateBtn {
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
 }

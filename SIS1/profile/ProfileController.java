@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -37,18 +38,42 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Label fullnameLBL;
+    
+    @FXML
+    private Label firstnameLBL;
+    
+    @FXML
+    private Label lastnameLBL;
+    
+    @FXML
+    private Label usernameLBL;
 
     @FXML
     private Label idLBL;
 
     @FXML
     private TextField idTF;
+    
+    @FXML
+    private TextField firstTF;
+    
+    @FXML
+    private TextField lastTF;
+    
+    @FXML
+    private TextField userTF;
 
     @FXML
     private Button makeBTN;
+    
+    @FXML
+    private Button saveBTN;
 
     @FXML
     private TextField passwordTF;
+    
+    @FXML
+    private TextField newPasswordTF;
 
     @FXML
     private ImageView profileImageView;
@@ -58,25 +83,53 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Button updateBTN;
-
-    @FXML
-    private TextField usernameTF;
     
     private Image image;
+    
+    Connection con = DatabaseManager.getConnection();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    	Image image = new Image(getClass().getResourceAsStream("..\\src\\imgs_icons\\Insert.png"));
-        profileImageView.setImage(image);
-        profileImageView.setClip(createClip(profileImageView));
-        centerImage(profileImageView);
-        
-        profileImageView.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                // Handle primary (left) mouse click
-                insertIMG(null);
+        try {
+            // Check if the user has a saved image in the database
+            InputStream imageStream = getUserImageFromDatabase();
+            if (imageStream != null) {
+                // Load the user image from the database
+                Image userImage = new Image(imageStream);
+                profileImageView.setImage(userImage);
+                profileImageView.setClip(createClip(profileImageView));
+                centerImage(profileImageView);
+            } else {
+                // Use the default image
+                Image defaultImage = new Image(getClass().getResourceAsStream("/img_icons/NoPeep.png"));
+                profileImageView.setImage(defaultImage);
+                profileImageView.setClip(createClip(profileImageView));
+                centerImage(profileImageView);
             }
-        });
+
+            profileImageView.setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    // Handle primary (left) mouse click
+                    insertIMG(null);
+                }
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        insertLBL();
+    }
+    
+    private InputStream getUserImageFromDatabase() throws SQLException {
+        try (PreparedStatement stmt = con.prepareStatement("SELECT userIMG FROM users WHERE id = ?")) {
+            stmt.setInt(1, UserSession.getInstance().getId());
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                // Return the input stream containing the user image
+                return resultSet.getBinaryStream("userIMG");
+            }
+        }
+        return null; // Return null if no image is found
     }
     
     @FXML
@@ -105,30 +158,39 @@ public class ProfileController implements Initializable {
     }
     
     private void saveImageToDatabase(File imageFile) {
-        try (Connection con = DatabaseManager.getConnection();
-             PreparedStatement stmt = con.prepareStatement("UPDATE your_table_name SET image_column_name = ? WHERE user_id = ?")) {
+        try (Connection con = DatabaseManager.getConnection()) {
+            // Set autocommit to false
+            con.setAutoCommit(false);
 
-            // Convert Image to BufferedImage
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(profileImageView.getImage(), null);
+            try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET userIMG = ? WHERE id = ?")) {
+                // Convert Image to BufferedImage
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(profileImageView.getImage(), null);
 
-            // Convert BufferedImage to byte array
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", baos);
-            byte[] imageData = baos.toByteArray();
+                // Convert BufferedImage to byte array
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(bufferedImage, "png", baos);
+                byte[] imageData = baos.toByteArray();
 
-            // Set parameters for the PreparedStatement
-            stmt.setBytes(1, imageData);
-            stmt.setInt(2, UserSession.getInstance().getId());  // Use the user ID from UserSession
+                // Set parameters for the PreparedStatement
+                stmt.setBytes(1, imageData);
+                stmt.setInt(2, UserSession.getInstance().getId());  // Use the user ID from UserSession
 
-            // Execute the update
-            stmt.executeUpdate();
+                // Execute the update
+                stmt.executeUpdate();
 
-            // Commit the transaction
-            con.commit();
+                // Commit the transaction
+                con.commit();
 
-        } catch (SQLException | IOException e) {
+            } catch (SQLException | IOException e) {
+                e.printStackTrace();
+                // Rollback the transaction in case of an exception
+                con.rollback();
+            } finally {
+                // Set autocommit back to true
+                con.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
-            // Handle the exception as needed
         }
     }
 
@@ -184,5 +246,20 @@ public class ProfileController implements Initializable {
         }
     }
     
-    
+    private void insertLBL() {
+        UserSession session = UserSession.getInstance();
+
+        // Assuming that you have appropriate getters in UserSession
+        String firstName = session.getFirstname();
+        String lastName = session.getLastname();
+        String username = session.getUsername();
+
+        // Set the labels
+        firstnameLBL.setText(firstName);
+        lastnameLBL.setText(lastName);
+        usernameLBL.setText(username);
+        firstTF.setText(firstName);
+        lastTF.setText(lastName);
+        userTF.setText(username);
+    }
 }
