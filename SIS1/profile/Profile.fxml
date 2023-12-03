@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -24,7 +23,6 @@
       <AnchorPane prefHeight="78.0" prefWidth="870.0">
          <children>
             <Label id="ProfileLbl" layoutX="32.0" layoutY="20.0" prefHeight="51.0" prefWidth="150.0" stylesheets="@Profile.css" text="Profile" />
-            <ComboBox id="encoderCMB" layoutX="681.0" layoutY="27.0" prefHeight="27.0" prefWidth="163.0" promptText="encoders" />
             <ImageView fitHeight="51.0" fitWidth="54.0" layoutX="621.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
