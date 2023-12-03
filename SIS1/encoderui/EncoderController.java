@@ -191,7 +191,7 @@ public class EncoderController implements Initializable{
         Students.setTextFill(Color.WHITE);
 		
 		 
-		 Pane studprofstage = FXMLLoader.load(getClass().getResource("/studentprof/StudentProfile.fxml"));
+		 Pane studprofstage = FXMLLoader.load(getClass().getResource("/studentprof/EncStudentProfile.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(studprofstage);
 		 AnchorPane.setLeftAnchor(studprofstage, 10.0);

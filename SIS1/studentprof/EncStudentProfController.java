@@ -26,7 +26,7 @@ import java.sql.Blob;
 import application.DatabaseManager;
 import studentprof.Subject;
 
-public class StudentProfController {
+public class EncStudentProfController {
     @FXML
     private Label addressLBL;
 
