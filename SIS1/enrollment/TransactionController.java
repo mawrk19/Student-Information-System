@@ -71,7 +71,7 @@ public class TransactionController {
 
   
 	public void initialize(URL url, ResourceBundle rb) {
-    	ObservableList<String> mop = FXCollections.observableArrayList("Scholar", "Full", "Installment");
+    	ObservableList<String> mop = FXCollections.observableArrayList("Scholar", "Full");
 		MOPCMB.setItems(mop);
 		
 		ObservableList<String> late = FXCollections.observableArrayList("Yes", "No");
