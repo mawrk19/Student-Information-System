@@ -84,6 +84,8 @@ public class EnrollmentController implements Initializable {
 	private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
 
 	private Image image;
+	
+	private String studCode;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -134,6 +136,43 @@ public class EnrollmentController implements Initializable {
 		});
 	}
 
+	@FXML
+    private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
+        String studCode = enrollButtonClicked(convertImageToInputStream(image), createStudentsObject());
+        System.out.println("Enrolled student with studCode: " + studCode);
+    }
+	
+	private void replaceTableViewContent() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Transaction.fxml"));
+            AnchorPane newTableAnchorPane = loader.load();
+
+            AnchorPane tableViewParent = (AnchorPane) subjectsTableView.getParent();
+            Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
+            Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
+            Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
+            Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
+
+            tableViewParent.getChildren().remove(subjectsTableView);
+
+            AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
+            AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
+            AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
+            AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
+
+            tableViewParent.getChildren().add(newTableAnchorPane);
+
+            TransactionController transactionController = loader.getController();
+            transactionController.setStudCode(this.studCode);
+
+            System.out.println("Stud code from enrollment: " + studCode);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+	
 	private void setSubjectsBasedOnSelection() {
 		String selectedCourse = courseCMB.getValue();
 		String selectedYear = yrCMB.getValue();
@@ -246,13 +285,8 @@ public class EnrollmentController implements Initializable {
 			return defaultImageStream;
 		}
 	}
-
-	@FXML
-	private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
-		enrollButtonClicked(convertImageToInputStream(image), createStudentsObject());
-	}
-
-	private void enrollButtonClicked(InputStream imageStream, Students student) throws SQLException, IOException {
+	
+	private String enrollButtonClicked(InputStream imageStream, Students student) throws SQLException, IOException {
 		String selectedCourse = courseCMB.getValue();
 		String enrollmentDate = dateTF.getText();
 		String firstName = fNameTF.getText();
@@ -265,6 +299,8 @@ public class EnrollmentController implements Initializable {
 		String sy = "2023";
 		String startID = String.valueOf(student.getStart());
 		String endID = String.valueOf(student.getEnd());
+
+		String studCode = null;
 
 		UserSession session = UserSession.getInstance();
 		String username = session.getUsername();
@@ -314,17 +350,21 @@ public class EnrollmentController implements Initializable {
 								System.out.println("Student with ID " + generatedId + " inserted successfully.");
 
 								String formattedId = String.format("%04d", generatedId);
-								String studCode = sy + formattedId;
+								studCode = sy + formattedId; // Set studCode here
 
+								System.out.println(studCode + " vs. alfredy");
+								
+								TransactionController transacCon = TransactionController.getInstance();
+								transacCon.setStudCode(studCode);
+								
 								String sql1 = "UPDATE student SET scode = ? WHERE sid = ?";
 								try (PreparedStatement scodeStatement = con.prepareStatement(sql1)) {
 									scodeStatement.setString(1, studCode);
 									scodeStatement.setInt(2, generatedId);
-									int scodeRowsAffected = scodeStatement.executeUpdate();
-
+									int scodeRowsAffected = scodeStatement.executeUpdate();		
+			
 									if (scodeRowsAffected > 0) {
 										System.out.println("Scode inserted successfully.");
-										clearFields();
 									} else {
 										System.out.println("Failed to insert scode.");
 									}
@@ -341,7 +381,9 @@ public class EnrollmentController implements Initializable {
 		} else {
 			// Form is not filled, display an error message or take appropriate action
 			System.out.println("Form is not filled. Please fill in all required fields.");
+
 		}
+		return studCode;
 	}
 
 	private void clearFields() {
@@ -369,55 +411,29 @@ public class EnrollmentController implements Initializable {
 		}
 	}
 
-	private void replaceTableViewContent() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Transaction.fxml"));
-			AnchorPane newTableAnchorPane = loader.load();
-
-			// Get the parent of the TableView AnchorPane
-			AnchorPane tableViewParent = (AnchorPane) subjectsTableView.getParent();
-
-			// Retrieve layout constraints for the TableView
-			Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
-			Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
-			Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
-			Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
-
-			// Remove the TableView from the parent
-			tableViewParent.getChildren().remove(subjectsTableView);
-
-			// Set layout constraints for the new table view content
-			AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
-			AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
-			AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
-			AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
-
-			// Add the new table view content to the parent
-			tableViewParent.getChildren().add(newTableAnchorPane);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void setStudCode(String studCode) {
+        this.studCode = studCode;
+    }
+	
+	public String getStudCode() {
+	    return this.studCode;
 	}
-
+	
 	private boolean isFormFilled() {
-		if (courseCMB.getValue() == null || dateTF.getText().isEmpty() || fNameTF.getText().isEmpty()
-				|| genderCMB.getValue() == null || locCMB.getValue() == null || lNameTF.getText().isEmpty()
-				|| mNameTF.getText().isEmpty() || secCMB.getValue() == null || semCMB.getValue() == null
-				|| statCMB.getValue() == null || yrCMB.getValue() == null) {
+        if (courseCMB.getValue() == null || dateTF.getText().isEmpty() || fNameTF.getText().isEmpty()
+                || genderCMB.getValue() == null || locCMB.getValue() == null || lNameTF.getText().isEmpty()
+                || mNameTF.getText().isEmpty() || secCMB.getValue() == null || semCMB.getValue() == null
+                || statCMB.getValue() == null || yrCMB.getValue() == null) {
 
-			// Display an alert or message indicating that all fields must be filled
-			Alert alert = new Alert(Alert.AlertType.WARNING);
-			alert.setTitle("Incomplete Form");
-			alert.setHeaderText(null);
-			alert.setContentText("Please fill in all the required fields.");
-			alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Incomplete Form");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all the required fields.");
+            alert.showAndWait();
 
-			return false;
-		}
+            return false;
+        }
 
-		// Add any additional checks or validations as needed
-
-		return true;
-	}
+        return true;
+    }
 }

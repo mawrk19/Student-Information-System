@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import students.Students;
 
 public class Transaction {
-	
+
 	private int transacID;
 	private String MOP;
 	private int amountDue;
@@ -21,27 +21,25 @@ public class Transaction {
 	private int miscTotal;
 	private int tuitionTotal;
 	private String encoder;
+	private String studCode;
 
-	// Constructors, if needed
-
-	public int getTransacID() {
-		return transacID;
-	}
-
-	public void setTransacID(int transacID) {
+	public Transaction(int transacID, String MOP, int amountDue, int amount, String late, int total, int balance,
+			int miscTotal, int tuitionTotal, String encoder, String studCode) {
 		this.transacID = transacID;
-	}
-
-	public String getMOP() {
-		return MOP;
-	}
-
-	public void setMOP(String MOP) {
 		this.MOP = MOP;
+		this.amountDue = amountDue;
+		this.amount = amount;
+		this.late = late;
+		this.total = total;
+		this.balance = balance;
+		this.miscTotal = miscTotal;
+		this.tuitionTotal = tuitionTotal;
+		this.encoder = encoder;
+		this.studCode = studCode;
 	}
 
-
-	@FXML void setTransaction() {
+	@FXML
+	void setTransaction() {
 		try (Connection con = DatabaseManager.getConnection();
 				PreparedStatement stmt = con.prepareStatement("SELECT * FROM transaction")) {
 
@@ -59,6 +57,7 @@ public class Transaction {
 					setMiscTotal(resultSet.getInt("misc_total"));
 					setTuitionTotal(resultSet.getInt("tuition_total"));
 					setEncoder(resultSet.getString("encoder"));
+					setStudCode(resultSet.getString("scode"));
 				}
 			}
 		} catch (SQLException e) {
@@ -66,7 +65,22 @@ public class Transaction {
 		}
 	}
 
-	// Getter and Setter for amountDue
+	public int getTransacID() {
+		return transacID;
+	}
+
+	public void setTransacID(int transacID) {
+		this.transacID = transacID;
+	}
+
+	public String getMOP() {
+		return MOP;
+	}
+
+	public void setMOP(String MOP) {
+		this.MOP = MOP;
+	}
+
 	public int getAmountDue() {
 		return amountDue;
 	}
@@ -74,7 +88,7 @@ public class Transaction {
 	public void setAmountDue(int amountDue) {
 		this.amountDue = amountDue;
 	}
-	
+
 	public int getAmount() {
 		return amount;
 	}
@@ -86,39 +100,39 @@ public class Transaction {
 	public String getLate() {
 		return late;
 	}
-	
+
 	public void setLate(String late) {
 		this.late = late;
 	}
-	
+
 	public int getTotal() {
 		return total;
 	}
-	
+
 	public void setTotal(int total) {
 		this.total = total;
 	}
-	
+
 	public int getBalance() {
 		return balance;
 	}
-	
+
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-	
+
 	public int getMiscTotal() {
 		return miscTotal;
 	}
-	
+
 	public void setMiscTotal(int miscTotal) {
 		this.miscTotal = miscTotal;
 	}
-	
+
 	public int getTuitionTotal() {
 		return tuitionTotal;
 	}
-	
+
 	public void setTuitionTotal(int tuitionTotal) {
 		this.tuitionTotal = tuitionTotal;
 	}
@@ -130,4 +144,13 @@ public class Transaction {
 	public void setEncoder(String encoder) {
 		this.encoder = encoder;
 	}
+
+	public String getStudCode() {
+		return studCode;
+	}
+
+	public void setStudCode(String studCode) {
+		this.studCode = studCode;
+	}
+
 }

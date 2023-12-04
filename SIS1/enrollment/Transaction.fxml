@@ -18,7 +18,7 @@
             <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <ComboBox fx:id="MOPCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="Mode of payment" VBox.vgrow="ALWAYS" />
-                  <TextField fx:id="transacIDTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" text="transaction ID" VBox.vgrow="ALWAYS" />
+                  <TextField fx:id="transacIDTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="transaction ID" VBox.vgrow="ALWAYS" />
                   <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" text="Miscellanous Fee" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="Verdana" size="22.0" />
@@ -36,17 +36,17 @@
                <children>
                   <ComboBox fx:id="schemeCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Scheme" />
                   <Label fx:id="amtDueLBL" prefHeight="47.0" prefWidth="182.0" text="amount due" />
-                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" text="amount" />
+                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="amount" />
                   <ComboBox fx:id="lateCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Late Enrolee" />
-                  <Label fx:id="amtLBL" prefHeight="48.0" prefWidth="189.0" text="total" />
+                  <Label fx:id="totalLBL" prefHeight="48.0" prefWidth="189.0" text="total" />
                   <Label fx:id="balanceLBL" prefHeight="48.0" prefWidth="189.0" text="balance" />
-                  <Label fx:id="balanceLBL" prefHeight="48.0" prefWidth="189.0" text="tuition" />
+                  <Label fx:id="tuitionLBL" prefHeight="48.0" prefWidth="189.0" text="tuition" />
                </children>
             </VBox>
             <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="miscLBL" prefHeight="48.0" prefWidth="189.0" text="miscellanous" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Save and Enroll">
+                  <Button fx:id="saveAndPrint" mnemonicParsing="false" onAction="#saveAndPrintClicked" prefHeight="25.0" prefWidth="114.0" text="Save and Enroll">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
