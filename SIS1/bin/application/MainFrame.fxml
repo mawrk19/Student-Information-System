@@ -195,7 +195,7 @@
                            </font>
                         </Button>
 
-                        <Button id="GradingButton" fx:id="Grading" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Gradingbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@MainFrame.css" text="Grading" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Button id="GradingButton" fx:id="Evaluation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Evaluationbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@MainFrame.css" text="Evaluation" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="Berlin Sans FB" size="20.0" />
                            </font>
