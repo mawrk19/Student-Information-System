@@ -12,14 +12,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import application.DatabaseManager;
+import application.MainFrameController;
 import application.UserSession;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -112,11 +122,23 @@ public class TransactionController {
         comCB.setOnAction(event -> setTransactionBasedOnSelection());
         athCB.setOnAction(event -> setTransactionBasedOnSelection());
         mediaCB.setOnAction(event -> setTransactionBasedOnSelection());
-        saveAndPrint.setOnAction(this::saveAndPrintClicked);
+        saveAndPrint.setOnAction(arg0 -> {
+			try {
+				saveAndPrintClicked(arg0);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
         
         saveAndPrint.setOnAction(event -> {
             continuousUpdate = false; // Stop continuous updates
-            saveAndPrintClicked(event);
+            try {
+				saveAndPrintClicked(event);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         });
         new Thread(() -> {
             continuousUpdate = true;
@@ -242,7 +264,7 @@ public class TransactionController {
 	}
 	
 	@FXML
-	private void saveAndPrintClicked(ActionEvent event) {
+	private void saveAndPrintClicked(ActionEvent event) throws IOException {
 	    continuousUpdate = false; // Stop continuous updates
 	    TransactionController trans = TransactionController.getInstance();
 	    String studCode1 = trans.getStudCode();
@@ -255,6 +277,7 @@ public class TransactionController {
 
 	    if (validateInputs()) {
 	        saveAndPrint();
+	        returnToEnrollment(event );
 	    }
 	}
 	
@@ -385,4 +408,61 @@ public class TransactionController {
 		return studCode;
 	}
 	
+	private void returnToEnrollment(ActionEvent event) throws IOException {
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Enrollment.fxml"));
+		Parent timetable = loader.load();
+
+		AnchorPane.setLeftAnchor(timetable, 10.0);
+		AnchorPane.setRightAnchor(timetable, 10.0);
+		AnchorPane.setTopAnchor(timetable, 10.0);
+		AnchorPane.setBottomAnchor(timetable, 20.0);
+
+		FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
+		Parent mainFrame = mainFrameLoader.load();
+		MainFrameController mainFrameController = mainFrameLoader.getController();
+
+		mainFrameController.Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+
+		mainFrameController.Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		mainFrameController.Dashboard.setBackground(new Background(ube));
+		mainFrameController.Dashboard.setTextFill(Color.WHITE);
+		mainFrameController.StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+		mainFrameController.StudentProf.setBackground(new Background(ube));
+		mainFrameController.StudentProf.setTextFill(Color.WHITE);
+//	        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
+//	        Timetable.setBackground(new Background(ube));
+//	        Timetable.setTextFill(Color.WHITE);
+		mainFrameController.Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+		mainFrameController.Schedule.setBackground(new Background(ube));
+		mainFrameController.Schedule.setTextFill(Color.WHITE);
+		mainFrameController.Evaluation.setStyle("-fx-border-radius: 25 0 0 25;");
+		mainFrameController.Evaluation.setBackground(new Background(ube));
+		mainFrameController.Evaluation.setTextFill(Color.WHITE);
+//	        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
+//	        Grading.setBackground(new Background(ube));
+//	        Grading.setTextFill(Color.WHITE);
+		mainFrameController.Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+		mainFrameController.Enrollment.setBackground(new Background(ube));
+		mainFrameController.Enrollment.setTextFill(Color.WHITE);
+		mainFrameController.oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		mainFrameController.oldEnrollment.setTextFill(Color.BLACK);
+		mainFrameController.Students.setStyle("-fx-border-radius: 25 0 0 25;");
+		mainFrameController.Students.setBackground(new Background(ube));
+		mainFrameController.Students.setTextFill(Color.WHITE);
+
+		mainFrameController.setContent(timetable);
+
+		Scene scene = new Scene(mainFrame);
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
+
+		double windowWidth = stage.getWidth();
+		double windowHeight = stage.getHeight();
+
+		stage.setWidth(windowWidth);
+		stage.setHeight(windowHeight);
+	}
 }
