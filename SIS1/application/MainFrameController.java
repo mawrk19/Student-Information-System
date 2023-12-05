@@ -511,16 +511,23 @@ public void logout(ActionEvent event) throws IOException {
     alert.setTitle("Logout");
     alert.setHeaderText("You're about to log out");
     alert.setContentText("Do you want to save before you logout?");
+    
+    // Set the current window as the owner of the alert
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    alert.initOwner(stage);
 
     Optional<ButtonType> result = alert.showAndWait();
-    if 
-    (result.isPresent() && result.get() == ButtonType.OK) {
-    	Parent root = FXMLLoader.load(getClass().getResource("/com/login/MainLogin.fxml"));
-        Scene scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.show();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/login/MainLogin.fxml"));
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
     } else {
         System.out.println("Logout canceled");
     }
