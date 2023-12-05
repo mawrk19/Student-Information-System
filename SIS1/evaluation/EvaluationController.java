@@ -76,7 +76,7 @@ public class EvaluationController {
         String searchedCode = searchbar.getText();
 
         try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "SELECT * FROM student WHERE Scode = ?";
+            String query = "SELECT * FROM student WHERE scode = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, searchedCode);
 
@@ -299,17 +299,19 @@ public class EvaluationController {
             try {
                 double gwa = Double.parseDouble(gwaText);
 
-                if (gwa < 2.25) {
-                    try (Connection connection = DatabaseManager.getConnection()) {
-                        String query = "UPDATE student SET gwa = ? WHERE Scode = ?";
-                        PreparedStatement preparedStatement = connection.prepareStatement(query);
-                        preparedStatement.setDouble(1, gwa);
-                        preparedStatement.setString(2, studentCode);
+                try (Connection connection = DatabaseManager.getConnection()) {
+                    String query = "UPDATE student SET gwa = ? WHERE scode = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setDouble(1, gwa);
+                    preparedStatement.setString(2, studentCode);
 
-                        int rowsUpdated = preparedStatement.executeUpdate();
+                    int rowsUpdated = preparedStatement.executeUpdate();
 
-                        if (rowsUpdated > 0) {
-                        	Label label = new Label("GWA successfully updated");
+                    if (rowsUpdated > 0) {
+                        if (gwa > 2.25) {
+                            showAlert("Failed", "GWA Too Low", "GWA is Lower than 2.25. GWA added to Database.");
+                        } else {
+                            Label label = new Label("GWA successfully updated");
                             label.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/src/imgs_icons/checkicon.png"))));
 
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -317,19 +319,16 @@ public class EvaluationController {
                             alert.setHeaderText(null);
                             alert.getDialogPane().setContent(label);
                             alert.showAndWait();
-
-                            clearAllFields();  // Clear all fields only on successful update
-                        } else {
-                            showAlert("Error", "Update Failed", "Failed to update GWA in the database.");
                         }
-
-                        preparedStatement.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        showAlert("Error", "Database Error", "An error occurred while accessing the database.");
+                        clearAllFields(); // Clear all fields only on successful update
+                    } else {
+                        showAlert("Error", "Update Failed", "Failed to update GWA in the database.");
                     }
-                } else {
-                    showAlert("Error", "GWA Too Low", "GWA should be greater than 2.25 to update the database.");
+
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    showAlert("Error", "Database Error", "An error occurred while accessing the database.");
                 }
             } catch (NumberFormatException e) {
                 showAlert("Error", "Invalid GWA", "Please enter a valid numeric GWA.");

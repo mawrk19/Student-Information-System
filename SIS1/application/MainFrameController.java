@@ -507,7 +507,7 @@ public class MainFrameController implements Initializable{
         Students.setTextFill(Color.WHITE);
         
 		 
-		 Pane oldenrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/OldEnrollment.fxml"));
+		 Pane oldenrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/BeforeOldEnrollment.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(oldenrollmentstage);
 		 AnchorPane.setLeftAnchor(oldenrollmentstage, 10.0);
@@ -561,9 +561,9 @@ public class MainFrameController implements Initializable{
 		 
 	}
 	
-//	public void setContent(Node node) {
-//        contentarea.getChildren().setAll(node);
-//	}
+	public void setContent(Node node) {
+        contentarea.getChildren().setAll(node);
+	}
    
 	public void setUpdate(Node node) {
         contentarea.getChildren().setAll(node);
