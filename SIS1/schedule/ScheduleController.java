@@ -2,6 +2,8 @@ package schedule;
 
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -32,6 +35,13 @@ public class ScheduleController implements Initializable{
 
 		ZonedDateTime dateFocus;
 	    ZonedDateTime today;
+	   
+	    
+	    @FXML
+	    private ComboBox<String> CYS;
+	    
+	    @FXML
+	    private ComboBox<String> semesterCMB;
 	    
 	    @FXML
 	    private Text month;
@@ -56,6 +66,13 @@ public class ScheduleController implements Initializable{
 			// TODO Auto-generated method stub
 			dateFocus = ZonedDateTime.now();
 	        today = ZonedDateTime.now();
+	        
+	        
+	        ObservableList<String> cys = FXCollections.observableArrayList("BSCS/1st/A","BSCS/1st/B","BSCS/2nd/A","BSCS/3rd/A","BSCS/4th/A", "BSIT/1st/A","BSIT/1st/B","BSIT/2nd/A","BSIT/2nd/b","BSIT/3rd/A","BSIT/4th/A", "BSIS/1st/A","BSIS/2nd/A","BSIS/3rd/A","BSIS/4th/A","BSEMC/1st/A","BSEMC/2nd/A","BSEMC/2nd/B","BSEMC/3rd/A","BSEMC/4th/A");
+	        CYS.setItems(cys);
+	        
+	        ObservableList<String> semester = FXCollections.observableArrayList("1st SEMESTER", "2nd SEMESTER");
+	        semesterCMB.setItems(semester);
 	        
 	        drawCalendar();
 		}
@@ -182,4 +199,8 @@ public class ScheduleController implements Initializable{
 //		    }
 //		}
 	       
-	   }
+
+
+
+
+}

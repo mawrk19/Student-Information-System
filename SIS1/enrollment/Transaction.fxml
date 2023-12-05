@@ -18,7 +18,7 @@
             <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <ComboBox fx:id="MOPCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="Mode of payment" VBox.vgrow="ALWAYS" />
-                  <TextField fx:id="transacIDTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" text="transaction ID" VBox.vgrow="ALWAYS" />
+                  <TextField fx:id="transacIDTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="transaction ID" VBox.vgrow="ALWAYS" />
                   <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" text="Miscellanous Fee" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="Verdana" size="22.0" />
@@ -34,18 +34,18 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TextField fx:id="amtDueTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" text="amount due" />
-                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" text="amount" />
+                  <ComboBox fx:id="schemeCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Scheme" />
+                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="amount" />
                   <ComboBox fx:id="lateCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Late Enrolee" />
-                  <TextField fx:id="totalTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" text="total" />
-                  <TextField fx:id="balanceTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" text="balance" />
-                  <TextField fx:id="tuitionTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" text="Tuition total" />
+                  <Label fx:id="totalLBL" prefHeight="48.0" prefWidth="189.0" text="total" />
+                  <Label fx:id="balanceLBL" prefHeight="48.0" prefWidth="189.0" text="balance" />
+                  <Label fx:id="tuitionLBL" prefHeight="48.0" prefWidth="189.0" text="tuition" />
                </children>
             </VBox>
             <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                <children>
-                  <TextField fx:id="miscTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" text="Miscellanous total" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Save and Enroll">
+                  <Label fx:id="miscLBL" prefHeight="48.0" prefWidth="189.0" text="miscellanous" />
+                  <Button fx:id="saveAndPrint" mnemonicParsing="false" onAction="#saveAndPrintClicked" prefHeight="25.0" prefWidth="114.0" text="Save and Enroll">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>

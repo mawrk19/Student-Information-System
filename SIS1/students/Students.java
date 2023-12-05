@@ -11,6 +11,7 @@ public class Students {
     private String year;
     private String section;
     private String location;
+    private String sem;
     private int scode;
     private String date;
     private int sid;
@@ -22,7 +23,7 @@ public class Students {
     // Students( firstName,  middleName,  lastName,  course,  year,  section, location,  scode,  date,  sid,  gender,  studentImage,  start, end)
 
     public Students(String firstName, String middleName, String lastName, String course, String year, String section,
-            String location, int scode, String date, int sid, String gender, Blob studentImage, int start, int end) {
+            String location, int scode, String date, int sid, String gender, Blob studentImage, int start, int end, String sem) {
 
         this.firstName = firstName;
         this.middleName = middleName;
@@ -38,6 +39,7 @@ public class Students {
         this.studentImage = studentImage;
         this.start = start;
         this.end = end;
+        this.sem = sem;
     }
 
     public Blob getStudentImage() {
@@ -150,5 +152,13 @@ public class Students {
 
     public void setEnd(int end) {
         this.end = end;
+    }
+
+	public String getSem() {
+		return sem;	
+	}
+	
+	public void setSem(String sem) {
+        this.sem = sem;
     }
 }
