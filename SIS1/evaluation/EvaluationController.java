@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.layout.HBox;
@@ -74,7 +76,7 @@ public class EvaluationController {
         String searchedCode = searchbar.getText();
 
         try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "SELECT * FROM student WHERE Scode = ?";
+            String query = "SELECT * FROM student WHERE scode = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, searchedCode);
 
@@ -140,6 +142,7 @@ public class EvaluationController {
         HBox.setHgrow(label, Priority.ALWAYS);
 
         TextField unit = new TextField();
+        unit.setAlignment(Pos.CENTER);
         unit.setPrefWidth(15.0);
         unit.setPrefHeight(30.0);
         unit.setMaxWidth(Double.MAX_VALUE);
@@ -151,6 +154,7 @@ public class EvaluationController {
         colon.setPrefHeight(20.0);
 
         TextField grade = new TextField();
+        grade.setAlignment(Pos.CENTER);
         grade.setPrefWidth(15.0);
         grade.setPrefHeight(30.0);
         grade.setMaxWidth(Double.MAX_VALUE);
@@ -185,8 +189,17 @@ public class EvaluationController {
     }
     
     private void calculateGWA() {
+        int rowCount = vBoxContainer.getChildren().size();
+
+        if (rowCount == 0) {
+            // Display an error pop-up when no rows are added
+            showAlert("Error", "No rows added", "Please add rows before computing.");
+            return;
+        }
+
         double totalUnits = 0;
         double totalGradePoints = 0;
+        boolean hasError = false;
 
         for (Node node : vBoxContainer.getChildren()) {
             if (node instanceof HBox) {
@@ -202,26 +215,54 @@ public class EvaluationController {
                     totalUnits += units;
                     totalGradePoints += units * grade;
                 } catch (NumberFormatException ignored) {
-                    // Handle invalid input if necessary
+                    // Handle invalid input (non-numeric values)
+                    hasError = true;
                 }
             }
         }
 
-        double gwa = totalGradePoints / totalUnits;
+        if (!hasError) {
+            if (totalUnits != 0) {
+                double gwa = totalGradePoints / totalUnits;
 
-        // Display the computed GWA in the Total TextField
-        totalgwa.setText(String.valueOf(gwa));
+                // Round off to 2 decimal places
+                double roundedGWA = Math.round(gwa * 100.0) / 100.0;
+
+                // Display the computed GWA in the Total TextField
+                totalgwa.setText(String.format("%.2f", roundedGWA));
+            } else {
+                // Handle the case where totalUnits is zero to avoid division by zero
+                totalgwa.setText("0.00");
+            }
+        } else {
+            // Display an error pop-up for non-numeric input
+            showAlert("Error", "Invalid Input", "Please enter valid numeric grades.");
+        }
     }
 
     @FXML
     void computegwa(ActionEvent event) {
-    	boolean hasEmptyGrades = checkForEmptyGrades();
-        
-        if (hasEmptyGrades) {
-            showAlert("Error", "Empty Grades", "Please fill in all grade fields before computing.");
+    	
+    	if (essentialFieldsEmpty()) {
+            showAlert("Error", "Empty Fields", "Please fill in all required fields before computing.");
         } else {
-            calculateGWA();
+            boolean hasEmptyGrades = checkForEmptyGrades();
+
+            if (hasEmptyGrades) {
+                showAlert("Error", "Empty Units or Grades", "Please fill in all grade and unit fields before computing.");
+            } else {
+                calculateGWA();
+                sendGWAtoDatabase();
+            }
         }
+    }
+    
+    private boolean essentialFieldsEmpty() {
+        // Check if any of the essential fields are empty
+        return Name.getText().isEmpty() || YearLevel.getText().isEmpty() ||
+               Section.getText().isEmpty() || Course.getText().isEmpty() ||
+               Semester.getText().isEmpty() || Scode.getText().isEmpty() ||
+               Campus.getText().isEmpty() || Type.getText().isEmpty();
     }
     
     private boolean checkForEmptyGrades() {
@@ -241,10 +282,75 @@ public class EvaluationController {
     }
     
     private void showAlert(String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    	Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
+        
         alert.showAndWait();
+
     }
+    
+    private void sendGWAtoDatabase() {
+        String studentCode = Scode.getText();
+        String gwaText = totalgwa.getText().trim(); // Trim leading/trailing whitespaces
+
+        if (!gwaText.isEmpty()) {
+            try {
+                double gwa = Double.parseDouble(gwaText);
+
+                try (Connection connection = DatabaseManager.getConnection()) {
+                    String query = "UPDATE student SET gwa = ? WHERE scode = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setDouble(1, gwa);
+                    preparedStatement.setString(2, studentCode);
+
+                    int rowsUpdated = preparedStatement.executeUpdate();
+
+                    if (rowsUpdated > 0) {
+                        if (gwa > 2.25) {
+                            showAlert("Failed", "GWA Too Low", "GWA is Lower than 2.25. GWA added to Database.");
+                        } else {
+                            Label label = new Label("GWA successfully updated");
+                            label.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/src/imgs_icons/checkicon.png"))));
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Success");
+                            alert.setHeaderText(null);
+                            alert.getDialogPane().setContent(label);
+                            alert.showAndWait();
+                        }
+                        clearAllFields(); // Clear all fields only on successful update
+                    } else {
+                        showAlert("Error", "Update Failed", "Failed to update GWA in the database.");
+                    }
+
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    showAlert("Error", "Database Error", "An error occurred while accessing the database.");
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Error", "Invalid GWA", "Please enter a valid numeric GWA.");
+            }
+        } else {
+            showAlert("Error", "Empty GWA", "Please compute GWA before updating.");
+        }
+    }
+    
+    private void clearAllFields() {
+    	Name.clear();
+        YearLevel.clear();
+        Section.clear();
+        Course.clear();
+        Semester.clear();
+        Scode.clear();
+        Campus.clear();
+        Type.clear();
+        totalgwa.clear();
+        searchbar.clear();
+
+        vBoxContainer.getChildren().clear();
+    }
+
 }
