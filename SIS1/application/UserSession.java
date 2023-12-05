@@ -5,7 +5,10 @@ import application.UserSession;
 public class UserSession {
 	private static UserSession instance;
     private String username;
+    private String lastname;
+    private String firstname;
     private int id;
+    private String type;
 
     private UserSession() {
         // Private constructor to prevent direct instantiation
@@ -21,9 +24,25 @@ public class UserSession {
     public void setUsername(String username) {
         this.username = username;
     }
+    
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+    
     public String getUsername() {
         return username;
+    }
+    
+    public String getLastname() {
+        return lastname;
+    }
+    
+    public String getFirstname() {
+        return firstname;
     }
 
     public void clearSession() {
@@ -36,5 +55,13 @@ public class UserSession {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getType() {
+        return type;
+    }
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 }

@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainController implements Initializable {   
@@ -26,6 +27,8 @@ public class MainController implements Initializable {
     @FXML
     private VBox vbox;    
     private Parent fxml;
+    
+    private Stage stage;
   
     
     @Override
@@ -42,7 +45,10 @@ public class MainController implements Initializable {
                 
             }
         });
+        
+        
     }
+    
     @FXML
     private void open_signin(ActionEvent event){
           TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
@@ -74,6 +80,9 @@ public class MainController implements Initializable {
         });
     } 
     
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }
     
 

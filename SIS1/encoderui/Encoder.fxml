@@ -20,7 +20,7 @@
                <children>
                   <VBox id="NavigationIcons" prefHeight="900.0" prefWidth="70.0" spacing="30.0" stylesheets="@Encoder.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="145.0" prefWidth="195.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold Italic" size="35.0" />
                            </font>
@@ -122,13 +122,20 @@
                   </VBox>
                   <VBox id="NavigationLabelsPane" prefHeight="900.0" prefWidth="230.0" spacing="30.0" stylesheets="@Encoder.css">
                      <children>
-                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="230.0" stylesheets="@Encoder.css" text="SIS" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <Label id="Titleproj" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="145.0" prefWidth="230.0" stylesheets="@Encoder.css" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                            <font>
                               <Font name="System Bold Italic" size="35.0" />
                            </font>
+                           <graphic>
+                              <ImageView fitHeight="145.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/SIS_LOGO.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Label>
                         <Button id="DashboardButton" fx:id="Dashboard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#Dashboardbtn" prefHeight="40.0" prefWidth="215.0" styleClass="buttonnav" stylesheets="@Encoder.css" text="Dashboard" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>

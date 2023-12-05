@@ -64,7 +64,7 @@ public class DashboardController implements Initializable {
             populateSeries(barcon, secondYearQuery, "2nd Year");
             
             String thirdYearQuery = "SELECT year, COUNT(sid) AS count_sid FROM student WHERE year = '3rd' GROUP BY year";
-            populateSeries(barcon, thirdYearQuery, "3nd Year");
+            populateSeries(barcon, thirdYearQuery, "3rd Year");
             
             String fourthYearQuery = "SELECT year, COUNT(sid) AS count_sid FROM student WHERE year = '4th' GROUP BY year";
             populateSeries(barcon, fourthYearQuery, "4th Year");

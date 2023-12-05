@@ -6,7 +6,6 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,16 +17,6 @@
    <children>
       <VBox prefHeight="760.0" prefWidth="828.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="10.0">
          <children>
-            <HBox prefHeight="45.0" prefWidth="828.0" spacing="15.0">
-               <children>
-                  <AnchorPane prefHeight="59.0" prefWidth="571.0" HBox.hgrow="ALWAYS" />
-                  <AnchorPane prefHeight="59.0" prefWidth="251.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <TextField layoutY="3.0" prefHeight="40.0" prefWidth="250.0" promptText="Type to search..." AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0" />
-                     </children>
-                  </AnchorPane>
-               </children>
-            </HBox>
             <HBox prefHeight="701.0" prefWidth="836.0" spacing="15.0" VBox.vgrow="ALWAYS">
                <children>
                   <VBox prefHeight="701.0" prefWidth="575.0" spacing="10.0" HBox.hgrow="ALWAYS">

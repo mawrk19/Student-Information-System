@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #EFF0F3;" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.TransactionController">
+   <children>
+      <HBox alignment="CENTER" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ComboBox fx:id="MOPCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="Mode of payment" VBox.vgrow="ALWAYS" />
+                  <TextField fx:id="transacIDTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="transaction ID" VBox.vgrow="ALWAYS" />
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" text="Miscellanous Fee" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="Verdana" size="22.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="libCB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="199.0" text="Library Fee 30" VBox.vgrow="ALWAYS" />
+                  <CheckBox fx:id="medCB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Medical Fee 40" VBox.vgrow="ALWAYS" />
+                  <CheckBox fx:id="sciCB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Science Lab Fee 100" VBox.vgrow="ALWAYS" />
+                  <CheckBox fx:id="comCB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Computer Lab Fee 100" VBox.vgrow="ALWAYS" />
+                  <CheckBox fx:id="athCB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Athletic Fee 30" VBox.vgrow="ALWAYS" />
+                  <CheckBox fx:id="mediaCB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Media Fee 40" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ComboBox fx:id="schemeCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Scheme" />
+                  <Label fx:id="amtDueLBL" prefHeight="47.0" prefWidth="182.0" text="amount due" />
+                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="amount" />
+                  <ComboBox fx:id="lateCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Late Enrolee" />
+                  <Label fx:id="totalLBL" prefHeight="48.0" prefWidth="189.0" text="total" />
+                  <Label fx:id="balanceLBL" prefHeight="48.0" prefWidth="189.0" text="balance" />
+                  <Label fx:id="tuitionLBL" prefHeight="48.0" prefWidth="189.0" text="tuition" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="miscLBL" prefHeight="48.0" prefWidth="189.0" text="miscellanous" />
+                  <Button fx:id="saveAndPrint" mnemonicParsing="false" onAction="#saveAndPrintClicked" prefHeight="25.0" prefWidth="114.0" text="Save and Enroll">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

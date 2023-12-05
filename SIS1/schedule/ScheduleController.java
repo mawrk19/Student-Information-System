@@ -2,6 +2,8 @@ package schedule;
 
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -32,6 +35,10 @@ public class ScheduleController implements Initializable{
 
 		ZonedDateTime dateFocus;
 	    ZonedDateTime today;
+	   
+	    
+	    @FXML
+	    private ComboBox<String> CYS;
 	    
 	    @FXML
 	    private Text month;
@@ -45,8 +52,8 @@ public class ScheduleController implements Initializable{
 	    @FXML
 	    private Button prev;
 	    
-	    @FXML
-	    private Button BtnTimetable;
+//	    @FXML
+//	    private Button BtnTimetable;
 	    
 	    @FXML
 	    private FlowPane calendar;
@@ -56,6 +63,10 @@ public class ScheduleController implements Initializable{
 			// TODO Auto-generated method stub
 			dateFocus = ZonedDateTime.now();
 	        today = ZonedDateTime.now();
+	        
+	        
+	        ObservableList<String> cys = FXCollections.observableArrayList("BSCS/1st/A","BSCS/1st/B","BSCS/2nd/A","BSCS/3rd/A","BSCS/4th/A", "BSIT/1st/A","BSIT/1st/B","BSIT/2nd/A","BSIT/2nd/b","BSIT/3rd/A","BSIT/4th/A", "BSIS/1st/A","BSIS/2nd/A","BSIS/3rd/A","BSIS/4th/A","BSEMC/1st/A","BSEMC/2nd/A","BSEMC/2nd/B","BSEMC/3rd/A","BSEMC/4th/A");
+	        CYS.setItems(cys);
 	        
 	        drawCalendar();
 		}
@@ -134,53 +145,56 @@ public class ScheduleController implements Initializable{
 	        }
 	    }
 		
-		public void gotoTimetable(ActionEvent event) throws IOException {
-		    try {
-		    	
-		        FXMLLoader loader = new FXMLLoader(getClass().getResource("/timetable/Timetable.fxml"));
-		        Parent timetable = loader.load();
-		        
-		        AnchorPane.setLeftAnchor(timetable, 10.0);
-				AnchorPane.setRightAnchor(timetable, 10.0);
-				AnchorPane.setTopAnchor(timetable, 10.0);
-				AnchorPane.setBottomAnchor(timetable, 20.0);
-
-		        FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
-		        Parent mainFrame = mainFrameLoader.load();
-		        MainFrameController mainFrameController = mainFrameLoader.getController();
-		        
-		        mainFrameController.Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		    	mainFrameController.Dashboard.setTextFill(Color.WHITE);
-		    	mainFrameController.StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		    	mainFrameController.StudentProf.setTextFill(Color.WHITE);
-		    	mainFrameController.Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		    	mainFrameController.Timetable.setTextFill(Color.BLACK);
-		    	mainFrameController.Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		    	mainFrameController.Schedule.setTextFill(Color.WHITE);
-		    	mainFrameController.Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		    	mainFrameController.Enrollment.setTextFill(Color.WHITE);
-		    	mainFrameController.oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		    	mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
-		    	mainFrameController.Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		    	mainFrameController.Students.setTextFill(Color.WHITE);
-		        
-
-		        mainFrameController.setContent(timetable);
-
-		        Scene scene = new Scene(mainFrame);
-		        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		        stage.setScene(scene);
-		        stage.show();
-		        
-		        double windowWidth = stage.getWidth();
-		        double windowHeight = stage.getHeight();
-
-		        stage.setWidth(windowWidth);
-		        stage.setHeight(windowHeight);
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		}
-
+//		public void gotoTimetable(ActionEvent event) throws IOException {
+//		    try {
+//		    	
+//		        FXMLLoader loader = new FXMLLoader(getClass().getResource("/timetable/Timetable.fxml"));
+//		        Parent timetable = loader.load();
+//		        
+//		        AnchorPane.setLeftAnchor(timetable, 10.0);
+//				AnchorPane.setRightAnchor(timetable, 10.0);
+//				AnchorPane.setTopAnchor(timetable, 10.0);
+//				AnchorPane.setBottomAnchor(timetable, 20.0);
+//
+//		        FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
+//		        Parent mainFrame = mainFrameLoader.load();
+//		        MainFrameController mainFrameController = mainFrameLoader.getController();
+//		        
+//		        mainFrameController.Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+//		    	mainFrameController.Dashboard.setTextFill(Color.WHITE);
+//		    	mainFrameController.StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+//		    	mainFrameController.StudentProf.setTextFill(Color.WHITE);
+//		    	mainFrameController.Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+//		    	mainFrameController.Timetable.setTextFill(Color.BLACK);
+//		    	mainFrameController.Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+//		    	mainFrameController.Schedule.setTextFill(Color.WHITE);
+//		    	mainFrameController.Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+//		    	mainFrameController.Enrollment.setTextFill(Color.WHITE);
+//		    	mainFrameController.oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+//		    	mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
+//		    	mainFrameController.Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+//		    	mainFrameController.Students.setTextFill(Color.WHITE);
+//		        
+//
+//		        mainFrameController.setContent(timetable);
+//
+//		        Scene scene = new Scene(mainFrame);
+//		        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//		        stage.setScene(scene);
+//		        stage.show();
+//		        
+//		        double windowWidth = stage.getWidth();
+//		        double windowHeight = stage.getHeight();
+//
+//		        stage.setWidth(windowWidth);
+//		        stage.setHeight(windowHeight);
+//		    } catch (IOException e) {
+//		        e.printStackTrace();
+//		    }
+//		}
 	       
-	   }
+
+
+
+
+}

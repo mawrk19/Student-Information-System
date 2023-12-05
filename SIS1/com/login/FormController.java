@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -14,6 +15,7 @@ import application.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,7 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class FormController {
+public class FormController implements Initializable{
 
 	@FXML
 	TextField emailField, regFname, regLname, regUser, regPass;
@@ -32,15 +34,20 @@ public class FormController {
 	PasswordField passField;
 	@FXML
 	Button signInBTN;
+    @FXML
+    private Label Exit;
+	
 	@FXML
 	Label messLabel,tbox;
+	
+	
 
 	public void LogIn(ActionEvent e) {
 		if (!emailField.getText().isBlank() && !passField.getText().isBlank()) {
 			messLabel.setText("Incorrect username or password");
 		} else {
 			messLabel.setText("No inputs taken");
-		}
+		}	
 		ValidateCon((Stage) signInBTN.getScene().getWindow()); // Pass the stage
 	}
 
@@ -49,6 +56,20 @@ public class FormController {
 			Parent root = FXMLLoader.load(getClass().getResource("/application/MainFrame.fxml"));
 			Scene scene = new Scene(root, 1200, 850);
 			scene.getStylesheets().add(getClass().getResource("/application/MainFrame.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+			stage.isResizable();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Handle any exceptions that may occur during FXML loading
+		}
+	}
+	
+	public void openEI(Stage stage) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/encoderui/Encoder.fxml"));
+			Scene scene = new Scene(root, 1200, 850);
+			scene.getStylesheets().add(getClass().getResource("/encoderui/Encoder.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 			stage.isResizable();
@@ -73,14 +94,26 @@ public class FormController {
 			if (result.next()) {
 				// gets username
 				int sessionId = result.getInt("ID");
-				String sessionUsername = result.getString("fname");
+				String sessionUsername = result.getString("username");
+				String sessionType = result.getString("type");
+				String sessionLastname = result.getString("lname");
+				String sessionFirstname = result.getString("fname");
 
 				UserSession session = UserSession.getInstance();
 				session.setId(sessionId);
 				session.setUsername(sessionUsername);
+				session.setLastname(sessionLastname);
+				session.setFirstname(sessionFirstname);
+				session.setType(sessionType);
 
 				messLabel.setText("Logging in...");
-				openMF(stage); // Pass the stage
+				
+				if ("admin".equals(sessionType)) {
+				    openMF(stage); // Pass the stage
+				} else {
+				    openEI(stage);
+				}
+				
 			} else {
 				messLabel.setText("Wrong Credentials");
 			}
@@ -129,5 +162,15 @@ public class FormController {
 		}
 
 	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+        Exit.setOnMouseClicked(event -> {
+			System.exit(0);
+		});
+		
+	}
+
+	
 
 }
