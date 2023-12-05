@@ -54,18 +54,22 @@
                                     </Label>
                                     <ScrollPane prefHeight="459.0" prefWidth="244.0" VBox.vgrow="ALWAYS">
                                        <content>
-                                          <TableView fx:id="Table" prefHeight="366.0" prefWidth="524.0">
-                                            <columns>
-                                              <TableColumn fx:id="subjectColumn" prefWidth="75.0" text="SUBJECT CODE" />
-                                                <TableColumn fx:id="credColumn" prefWidth="75.0" text="CRED. UNIT" />
-                                                <TableColumn fx:id="dayColumn" prefWidth="75.0" text="DAY" />
-                                                <TableColumn fx:id="timeColumn" prefWidth="75.0" text="TIME" />
-                                                <TableColumn fx:id="professorColumn" prefWidth="75.0" text="PROFESSOR" />
-                                            </columns>
-                                             <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                             </columnResizePolicy>
-                                          </TableView>
+                                          <AnchorPane>
+                                             <children>
+                                                <TableView fx:id="Table" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="428.0" prefWidth="524.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="subjectColumn" prefWidth="75.0" text="SUBJECT CODE" />
+                                                      <TableColumn fx:id="credColumn" prefWidth="75.0" text="CRED. UNIT" />
+                                                      <TableColumn fx:id="dayColumn" prefWidth="75.0" text="DAY" />
+                                                      <TableColumn fx:id="timeColumn" prefWidth="75.0" text="TIME" />
+                                                      <TableColumn fx:id="professorColumn" prefWidth="75.0" text="PROFESSOR" />
+                                                  </columns>
+                                                   <columnResizePolicy>
+                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                   </columnResizePolicy>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
                                        </content>
                                     </ScrollPane>
                                  </children>

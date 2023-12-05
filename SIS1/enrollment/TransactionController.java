@@ -105,9 +105,8 @@ public class TransactionController {
 
 			try (Connection con = DatabaseManager.getConnection()) {
 				String sql;
-
-			
-					sql = "INSERT INTO student (transaction_ID, payment_mode, amt_due, amount, late, total, balance, misc_total, tuition_total, encoder, date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		
+					sql = "INSERT INTO transaction (transaction_ID, payment_mode, amt_due, amount, late, total, balance, misc_total, tuition_total, encoder, date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 				try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 					preparedStatement.setString(1, transacID);
