@@ -35,6 +35,7 @@ public class Schedule {
     
     public void setDescriptionCLMN(String descriptionCLMN) {
         this.descriptionCLMN = descriptionCLMN;
+    }
     
     public int getSdidCLMN() {
         return sdidCLMN;
