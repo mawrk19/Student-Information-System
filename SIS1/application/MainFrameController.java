@@ -572,33 +572,45 @@ public class MainFrameController implements Initializable{
 	public void setDelete(Node node) {
         contentarea.getChildren().setAll(node);
 	}
-Stage stage;
+
 
 @FXML
 public void logout(ActionEvent event) throws IOException {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    Alert alert = new Alert(AlertType.CONFIRMATION);
     alert.setTitle("Logout");
     alert.setHeaderText("You're about to log out");
     alert.setContentText("Do you want to save before you logout?");
 
     Optional<ButtonType> result = alert.showAndWait();
     if (result.isPresent() && result.get() == ButtonType.OK) {
-        // Load the MainLogin.fxml file
+        // Load the new FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/login/MainLogin.fxml"));
         Parent root = loader.load();
 
-        // Get the controller of the MainLogin.fxml file
-        Main mainLoginController = loader.getController();
-
-        // Set the stage of the MainLoginController
-        mainLoginController.setStage(stage);
-
+        // Create a new scene or stage and set the new FXML file
         Scene scene = new Scene(root);
+        Stage newStage = new Stage();
+
+        // Set the stage style to TRANSPARENT
+        newStage.initStyle(StageStyle.TRANSPARENT);
+
+        // Set the scene fill to TRANSPARENT
         scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
-        stage.show();
+        newStage.setScene(scene);
+
+        // Close the current stage if available
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if (currentStage != null) {
+            currentStage.close();
+        } else {
+            System.out.println("Unable to close the current stage");
+        }
+
+        // Show the new stage
+        newStage.show();
     } else {
         System.out.println("Logout canceled");
     }
 }
+
 }
