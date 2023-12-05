@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.layout.HBox;
@@ -280,40 +282,76 @@ public class EvaluationController {
     }
     
     private void showAlert(String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    	Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
+        
         alert.showAndWait();
+
     }
     
     private void sendGWAtoDatabase() {
         String studentCode = Scode.getText();
-        double gwa = Double.parseDouble(totalgwa.getText());
+        String gwaText = totalgwa.getText().trim(); // Trim leading/trailing whitespaces
 
-        if (gwa < 2.25) {
-            try (Connection connection = DatabaseManager.getConnection()) {
-                String query = "UPDATE student SET gwa = ? WHERE Scode = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setDouble(1, gwa);
-                preparedStatement.setString(2, studentCode);
+        if (!gwaText.isEmpty()) {
+            try {
+                double gwa = Double.parseDouble(gwaText);
 
-                int rowsUpdated = preparedStatement.executeUpdate();
+                if (gwa < 2.25) {
+                    try (Connection connection = DatabaseManager.getConnection()) {
+                        String query = "UPDATE student SET gwa = ? WHERE Scode = ?";
+                        PreparedStatement preparedStatement = connection.prepareStatement(query);
+                        preparedStatement.setDouble(1, gwa);
+                        preparedStatement.setString(2, studentCode);
 
-                if (rowsUpdated > 0) {
-                    showAlert("Success", "GWA Updated", "GWA successfully updated in the database.");
+                        int rowsUpdated = preparedStatement.executeUpdate();
+
+                        if (rowsUpdated > 0) {
+                        	Label label = new Label("GWA successfully updated");
+                            label.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/src/imgs_icons/checkicon.png"))));
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Success");
+                            alert.setHeaderText(null);
+                            alert.getDialogPane().setContent(label);
+                            alert.showAndWait();
+
+                            clearAllFields();  // Clear all fields only on successful update
+                        } else {
+                            showAlert("Error", "Update Failed", "Failed to update GWA in the database.");
+                        }
+
+                        preparedStatement.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        showAlert("Error", "Database Error", "An error occurred while accessing the database.");
+                    }
                 } else {
-                    showAlert("Error", "Update Failed", "Failed to update GWA in the database.");
+                    showAlert("Error", "GWA Too Low", "GWA should be greater than 2.25 to update the database.");
                 }
-
-                preparedStatement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                showAlert("Error", "Database Error", "An error occurred while accessing the database.");
+            } catch (NumberFormatException e) {
+                showAlert("Error", "Invalid GWA", "Please enter a valid numeric GWA.");
             }
         } else {
-            showAlert("Error", "GWA Too Low", "GWA should be greater than 2.25 to update the database.");
+            showAlert("Error", "Empty GWA", "Please compute GWA before updating.");
         }
+    }
+    
+    private void clearAllFields() {
+    	Name.clear();
+        YearLevel.clear();
+        Section.clear();
+        Course.clear();
+        Semester.clear();
+        Scode.clear();
+        Campus.clear();
+        Type.clear();
+        totalgwa.clear();
+        searchbar.clear();
+
+        vBoxContainer.getChildren().clear();
     }
 
 }
