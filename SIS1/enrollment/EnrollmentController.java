@@ -299,6 +299,7 @@ public class EnrollmentController implements Initializable {
 		String sy = "2023";
 		String startID = String.valueOf(student.getStart());
 		String endID = String.valueOf(student.getEnd());
+		String sem = semCMB.getValue();
 
 		String studCode = null;
 
@@ -313,9 +314,9 @@ public class EnrollmentController implements Initializable {
 				String sql;
 
 				if (image != null) {
-					sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, eSubjectsStart, eSubjectsEnd, image, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, sem, eSubjectsStart, eSubjectsEnd, image, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				} else {
-					sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, eSubjectsStart, eSubjectsEnd, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, sem, eSubjectsStart, eSubjectsEnd, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				}
 
 				try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -329,16 +330,17 @@ public class EnrollmentController implements Initializable {
 					preparedStatement.setString(8, section);
 					preparedStatement.setString(9, sy);
 					preparedStatement.setString(10, year1);
+					preparedStatement.setString(11, sem);
 
 					if (image != null) {
-						preparedStatement.setString(11, startID);
-						preparedStatement.setString(12, endID);
-						preparedStatement.setBlob(13, imageStream);
-						preparedStatement.setString(14, username);
+						preparedStatement.setString(12, startID);
+						preparedStatement.setString(13, endID);
+						preparedStatement.setBlob(14, imageStream);
+						preparedStatement.setString(15, username);
 					} else {
-						preparedStatement.setString(11, startID);
-						preparedStatement.setString(12, endID);
-						preparedStatement.setString(13, username);
+						preparedStatement.setString(12, startID);
+						preparedStatement.setString(13, endID);
+						preparedStatement.setString(14, username);
 					}
 
 					int rowsAffected = preparedStatement.executeUpdate();
