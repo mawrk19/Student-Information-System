@@ -572,7 +572,7 @@ public class MainFrameController implements Initializable{
 	public void setDelete(Node node) {
         contentarea.getChildren().setAll(node);
 	}
-Stage stage;
+
 
 @FXML
 public void logout(ActionEvent event) throws IOException {
@@ -590,6 +590,12 @@ public void logout(ActionEvent event) throws IOException {
         // Create a new scene or stage and set the new FXML file
         Scene scene = new Scene(root);
         Stage newStage = new Stage();
+
+        // Set the stage style to TRANSPARENT
+        newStage.initStyle(StageStyle.TRANSPARENT);
+
+        // Set the scene fill to TRANSPARENT
+        scene.setFill(Color.TRANSPARENT);
         newStage.setScene(scene);
 
         // Close the current stage if available
@@ -606,4 +612,5 @@ public void logout(ActionEvent event) throws IOException {
         System.out.println("Logout canceled");
     }
 }
+
 }
