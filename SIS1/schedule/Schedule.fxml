@@ -163,7 +163,6 @@
             </AnchorPane>
             <AnchorPane prefHeight="72.0" prefWidth="446.0" VBox.vgrow="ALWAYS">
                <children>
-                  <ComboBox id="CYS" fx:id="CYS" layoutX="8.0" layoutY="8.0" prefHeight="27.0" prefWidth="219.0" promptText="COURSE/YEAR/SECTION" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0" />
                   <ComboBox id="semester" fx:id="semesterCMB" layoutX="9.0" layoutY="45.0" prefHeight="27.0" prefWidth="219.0" promptText="SEMESTER" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="45.0" />
                   <Button id="submitBTN" fx:id="submitBTN" layoutX="250.0" layoutY="9.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="92.0" style="-fx-background-color: #3C5199; -fx-background-radius: 12px;" stylesheets="@Schedule.css" text="SUBMIT" textFill="#fffdfd" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="9.0" />
                   <TextField layoutX="481.0" layoutY="27.0" prefHeight="36.0" prefWidth="312.0" promptText="Search SID..." AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="27.0" />
@@ -177,17 +176,21 @@
                      </graphic>
                   </Label>
                   <Label layoutX="344.0" prefHeight="72.0" prefWidth="137.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="344.0" AnchorPane.rightAnchor="359.0" AnchorPane.topAnchor="0.0" />
+                  <TextField id="CYS" fx:id="CYS" layoutX="8.0" layoutY="9.0" prefHeight="26.0" prefWidth="219.0" promptText="COURSE/YEAR/SECTION" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="9.0">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </TextField>
                </children>
             </AnchorPane>
       		<AnchorPane id="bgpane" prefHeight="370.0" prefWidth="840.0" stylesheets="@Schedule.css">
       			<children>
-      				<TreeTableView id="table" layoutX="5.0" layoutY="6.0" prefHeight="398.0" prefWidth="830.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      				<TreeTableView id="table" fx:id="scheduleTTV" layoutX="5.0" layoutY="6.0" prefHeight="398.0" prefWidth="830.0" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
       					<columns>
-      						<TreeTableColumn prefWidth="113.0" text="SUBJECT CODE" />
-      						<TreeTableColumn prefWidth="166.0" text="DESCRIPTION" />
-      						<TreeTableColumn prefWidth="412.0" text="SUBJECT" />
-      						<TreeTableColumn prefWidth="91.0" text="CRED. UNIT" />
-                        <TreeTableColumn prefWidth="74.0" text="SDID" />
+      						<TreeTableColumn fx:id="subcodeCLMN" prefWidth="127.0" text="SUBJECT CODE" />
+      						<TreeTableColumn fx:id="descriptionCLMN" prefWidth="518.0" text="DESCRIPTION" />
+      						<TreeTableColumn fx:id="credunitCLMN" prefWidth="104.0" text="CREDIT UNIT" />
+                        <TreeTableColumn fx:id="sdidCLMN" prefWidth="52.0" text="SDID" />
       					</columns>
                      <columnResizePolicy>
                         <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
