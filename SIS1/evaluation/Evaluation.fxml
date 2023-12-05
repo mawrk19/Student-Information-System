@@ -172,55 +172,40 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="12.0" prefWidth="330.0" spacing="10.0" style="-fx-background-color: #C9CAD9;">
                            <children>
-                              <Label alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" text="Subject" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="65.0" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" maxHeight="40.0" maxWidth="10.0" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="50.0" text="Units" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" maxHeight="40.0" maxWidth="10.0" prefHeight="30.0" prefWidth="10.0" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
-                                 <padding>
-                                    <Insets right="30.0" />
-                                 </padding>
                               </Label>
-                              <Label alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" text="Grades" HBox.hgrow="ALWAYS">
+                              <Label alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="50.0" text="Grades" HBox.hgrow="ALWAYS">
                                  <font>
-                                    <Font size="20.0" />
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button maxHeight="30.0" maxWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
+                              <Button maxHeight="30.0" maxWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                            </padding>
                         </HBox>
-                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minViewportWidth="340.0" prefHeight="361.0" prefWidth="365.0" VBox.vgrow="ALWAYS">
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="360.0" prefWidth="365.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                           <content>
-                            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="404.0" prefWidth="348.0" style="-fx-background-color: #C9CAD9;">
+                            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="679.0" prefWidth="350.0" style="-fx-background-color: #C9CAD9;">
                                  <children>
                                     <VBox fx:id="vBoxContainer" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" style="-fx-background-color: #C9CAD9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="330.0" spacing="10.0">
-                                             <children>
-                                                <TextField maxHeight="30.0" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                                                <Label maxHeight="40.0" prefHeight="19.0" prefWidth="5.0" text=":" HBox.hgrow="ALWAYS">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField maxHeight="30.0" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
-                                                <Button maxHeight="30.0" maxWidth="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Delete" HBox.hgrow="ALWAYS" />
-                                             </children>
-                                             <VBox.margin>
-                                                <Insets />
-                                             </VBox.margin>
-                                          </HBox>
-                                       </children>
                                        <padding>
                                           <Insets bottom="20.0" top="20.0" />
                                        </padding>
@@ -232,7 +217,7 @@
                         <HBox alignment="CENTER" prefHeight="6.0" prefWidth="365.0" spacing="20.0" VBox.vgrow="ALWAYS">
                            <children>
                               <Button fx:id="addbtn" maxHeight="50.0" maxWidth="120.0" mnemonicParsing="false" onAction="#addrow" prefHeight="30.0" prefWidth="100.0" text="Add" HBox.hgrow="ALWAYS" />
-                              <Button maxHeight="50.0" maxWidth="120.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Compute" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="ComputeBtn" maxHeight="50.0" maxWidth="120.0" mnemonicParsing="false" onAction="#computegwa" prefHeight="30.0" prefWidth="100.0" text="Compute" HBox.hgrow="ALWAYS" />
                            </children>
                            <VBox.margin>
                               <Insets top="20.0" />
@@ -247,7 +232,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="30.0" />
+                        <TextField fx:id="totalgwa" editable="false" prefHeight="30.0" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="30.0" />

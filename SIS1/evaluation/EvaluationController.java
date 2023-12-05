@@ -6,12 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.control.Label;
 
 import java.sql.Connection;
@@ -59,6 +62,11 @@ public class EvaluationController {
     @FXML
     private VBox vBoxContainer;
     
+    @FXML 
+    private TextField totalgwa;
+    
+    @FXML
+    private Button ComputeBtn;
     
 
     @FXML
@@ -122,41 +130,121 @@ public class EvaluationController {
 
     private HBox createNewRow() {
         // Create TextFields and Label for the new row
-        TextField textField1 = new TextField();
-        TextField textField2 = new TextField();
-        Label label = new Label(":");
+    	
+    	Label label = new Label("Subject");
+    	label.setAlignment(Pos.CENTER);
+    	label.setPrefWidth(30.0);
+        label.setFont(new Font(15.0));
+        label.setMaxWidth(Double.MAX_VALUE);
+        label.setPrefHeight(30.0);
+        HBox.setHgrow(label, Priority.ALWAYS);
 
-        // Set properties for TextFields and Label
-        textField1.setMaxHeight(40);
-        textField1.setMaxWidth(Double.MAX_VALUE);
-        textField2.setMaxHeight(40);
-        textField2.setMaxWidth(Double.MAX_VALUE);
-        label.setMaxHeight(40);
-        label.setFont(new Font(20));
+        TextField unit = new TextField();
+        unit.setPrefWidth(15.0);
+        unit.setPrefHeight(30.0);
+        unit.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(unit, Priority.ALWAYS);
 
-        // Create a Delete button with specific properties
+        Label colon = new Label(":");
+        colon.setFont(new Font(20.0));
+        colon.setPrefWidth(5.0);
+        colon.setPrefHeight(20.0);
+
+        TextField grade = new TextField();
+        grade.setPrefWidth(15.0);
+        grade.setPrefHeight(30.0);
+        grade.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(grade, Priority.ALWAYS);
+
         Button deleteButton = new Button("Delete");
-        deleteButton.setPrefSize(100, 30); // Set specific width and height for the Delete button
+        deleteButton.setPrefWidth(20.0);
+        deleteButton.setPrefHeight(30.0);
+        deleteButton.setMaxWidth(100);
+        HBox.setHgrow(deleteButton, Priority.ALWAYS);
         deleteButton.setOnAction(e -> {
-            // Get the parent of the Delete button (HBox) and remove it from the VBox
             vBoxContainer.getChildren().remove(((Button) e.getSource()).getParent());
         });
 
-        // Create an HBox to hold the components in a specific structure
         HBox newRow = new HBox(10); // Spacing between elements, adjust as needed
-        newRow.setAlignment(Pos.CENTER);
-        newRow.setPrefHeight(12);
-        newRow.setPrefWidth(330);
-        newRow.setSpacing(10);
-        newRow.getChildren().addAll(textField1, label, textField2, deleteButton);
-
-        // Set HBox and TextField properties similar to your FXML
-        HBox.setHgrow(textField1, javafx.scene.layout.Priority.ALWAYS);
-        HBox.setHgrow(textField2, javafx.scene.layout.Priority.ALWAYS);
+        newRow.setAlignment(Pos.TOP_CENTER);
+        newRow.setPrefHeight(30.0);
+        newRow.setPrefWidth(330.0);
+        newRow.setSpacing(10.0);
+        newRow.getChildren().addAll(label, unit, colon, grade, deleteButton);
 
         // Set VBox.margin for the new row
         VBox.setMargin(newRow, new Insets(0, 0, 0, 0)); // Set margins if needed
+        
+        unit.textProperty().addListener((observable, oldValue, newValue) -> {
+        });
+
+        grade.textProperty().addListener((observable, oldValue, newValue) -> {
+        });
 
         return newRow;
+    }
+    
+    private void calculateGWA() {
+        double totalUnits = 0;
+        double totalGradePoints = 0;
+
+        for (Node node : vBoxContainer.getChildren()) {
+            if (node instanceof HBox) {
+                HBox row = (HBox) node;
+
+                TextField unitTextField = (TextField) row.getChildren().get(1);
+                TextField gradeTextField = (TextField) row.getChildren().get(3);
+
+                try {
+                    double units = Double.parseDouble(unitTextField.getText());
+                    double grade = Double.parseDouble(gradeTextField.getText());
+
+                    totalUnits += units;
+                    totalGradePoints += units * grade;
+                } catch (NumberFormatException ignored) {
+                    // Handle invalid input if necessary
+                }
+            }
+        }
+
+        double gwa = totalGradePoints / totalUnits;
+
+        // Display the computed GWA in the Total TextField
+        totalgwa.setText(String.valueOf(gwa));
+    }
+
+    @FXML
+    void computegwa(ActionEvent event) {
+    	boolean hasEmptyGrades = checkForEmptyGrades();
+        
+        if (hasEmptyGrades) {
+            showAlert("Error", "Empty Grades", "Please fill in all grade fields before computing.");
+        } else {
+            calculateGWA();
+        }
+    }
+    
+    private boolean checkForEmptyGrades() {
+        for (Node node : vBoxContainer.getChildren()) {
+            if (node instanceof HBox) {
+                HBox row = (HBox) node;
+
+                TextField gradeTextField = (TextField) row.getChildren().get(3);
+                String grade = gradeTextField.getText().trim();
+
+                if (grade.isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    private void showAlert(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
