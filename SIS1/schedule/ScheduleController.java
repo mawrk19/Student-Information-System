@@ -41,6 +41,9 @@ public class ScheduleController implements Initializable{
 	    private ComboBox<String> CYS;
 	    
 	    @FXML
+	    private ComboBox<String> semesterCMB;
+	    
+	    @FXML
 	    private Text month;
 	    
 	    @FXML
@@ -67,6 +70,9 @@ public class ScheduleController implements Initializable{
 	        
 	        ObservableList<String> cys = FXCollections.observableArrayList("BSCS/1st/A","BSCS/1st/B","BSCS/2nd/A","BSCS/3rd/A","BSCS/4th/A", "BSIT/1st/A","BSIT/1st/B","BSIT/2nd/A","BSIT/2nd/b","BSIT/3rd/A","BSIT/4th/A", "BSIS/1st/A","BSIS/2nd/A","BSIS/3rd/A","BSIS/4th/A","BSEMC/1st/A","BSEMC/2nd/A","BSEMC/2nd/B","BSEMC/3rd/A","BSEMC/4th/A");
 	        CYS.setItems(cys);
+	        
+	        ObservableList<String> semester = FXCollections.observableArrayList("1st SEMESTER", "2nd SEMESTER");
+	        semesterCMB.setItems(semester);
 	        
 	        drawCalendar();
 		}
