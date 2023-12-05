@@ -6,8 +6,19 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
 	<classpathentry kind="lib" path="C:/Users/PC/git/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-19"/>
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-18">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVA_FXFX"/>
+	<classpathentry kind="lib" path="C:/Users/user/git/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
+>>>>>>> 90f2d0e90ea075ffbeeaa22477eac3017ace0b0a
 	<classpathentry kind="output" path="bin"/>
 </classpath>
