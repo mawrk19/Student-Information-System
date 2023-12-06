@@ -64,8 +64,6 @@
                                         <TableColumn fx:id="subjectColumn" prefWidth="75.0" text="SUBJECT CODE" />
                                           <TableColumn fx:id="credColumn" prefWidth="75.0" text="CRED. UNIT" />
                                           <TableColumn fx:id="dayColumn" prefWidth="75.0" text="DAY" />
-                                          <TableColumn fx:id="timeColumn" prefWidth="75.0" text="TIME" />
-                                          <TableColumn fx:id="professorColumn" prefWidth="75.0" text="PROFESSOR" />
                                       </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

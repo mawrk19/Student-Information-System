@@ -66,27 +66,27 @@ public class EncStudentProfController {
     @FXML
     private TableColumn<Subject, Integer> credColumn;
     
-    @FXML
-    private TableColumn<Subject, String> secColumn;
+//    @FXML
+//    private TableColumn<Subject, String> secColumn;
     
     @FXML
     private TableColumn<Subject, String> dayColumn;
     
-    @FXML
-    private TableColumn<Subject, String> timeColumn;
-    
-    @FXML
-    private TableColumn<Subject, String> professorColumn;
+//    @FXML
+//    private TableColumn<Subject, String> timeColumn;
+//    
+//    @FXML
+//    private TableColumn<Subject, String> professorColumn;
     
     
     @FXML
     private void initialize() {
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
         credColumn.setCellValueFactory(new PropertyValueFactory<>("creditUnits"));
-        secColumn.setCellValueFactory(new PropertyValueFactory<>("section"));
+//        secColumn.setCellValueFactory(new PropertyValueFactory<>("section"));
         dayColumn.setCellValueFactory(new PropertyValueFactory<>("day"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-        professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
+//        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+//        professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
 
         // Load data for the student with scode 20230001
         loadStudentProfile("20230001");
