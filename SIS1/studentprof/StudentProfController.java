@@ -1,4 +1,4 @@
-package studentprof;
+	package studentprof;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

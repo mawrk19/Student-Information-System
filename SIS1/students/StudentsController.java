@@ -32,7 +32,7 @@ public class StudentsController {
 	private Button UpdateBTN;
 	
 	@FXML 
-	private TextField searchbar;
+	private TextField searchTF;
 
 	@FXML
 	private TableColumn<Students, String> courseColumn;
@@ -290,70 +290,52 @@ public class StudentsController {
 		return result.isPresent() && result.get() == buttonTypeYes;
 	}
 	
-	public class Table {
+	@FXML
+	private void searchActionPerformed(ActionEvent event) {
+	    try (Connection con = DatabaseManager.getConnection();
+	         PreparedStatement stmt = con.prepareStatement("SELECT * FROM student WHERE scode LIKE ? OR First_name LIKE ? OR last_name LIKE ?")) {
 
-	    private String sub_code;
-	    private String subject;
-	    private String professor;
-	    private String schedule;
-	    private String day;
-	    private int units;
+	        String searchText = searchTF.getText();
 
-	    public Table(String sub_code, String subject, String professor, String schedule, String day, int units) {
-	        this.sub_code = sub_code;
-	        this.subject = subject;
-	        this.professor = professor;
-	        this.schedule = schedule;
-	        this.day = day;
-	        this.units = units;
-	    }
+	        if (searchText.length() > 0) {
+	            String searchPattern = "%" + searchText + "%";
+	            stmt.setString(1, searchPattern);
+	            stmt.setString(2, searchPattern);
+	            stmt.setString(3, searchPattern);
 
-	    public String getSub_code() {
-	        return sub_code;
-	    }
+	            try (ResultSet resultSet = stmt.executeQuery()) {
+	                clearStudentsTable(); // Clear existing items before adding new ones
 
-	    public void setSub_code(String sub_code) {
-	        this.sub_code = sub_code;
-	    }
-
-	    public String getSubject() {
-	        return subject;
-	    }
-
-	    public void setSubject(String subject) {
-	        this.subject = subject;
-	    }
-
-	    public String getProfessor() {
-	        return professor;
-	    }
-
-	    public void setProfessor(String professor) {
-	        this.professor = professor;
-	    }
-
-	    public String getSchedule() {
-	        return schedule;
-	    }
-
-	    public void setSchedule(String schedule) {
-	        this.schedule = schedule;
-	    }
-
-	    public String getDay() {
-	        return day;
-	    }
-
-	    public void setDay(String day) {
-	        this.day = day;
-	    }
-
-	    public int getUnits() {
-	        return units;
-	    }
-
-	    public void setUnits(int units) {
-	        this.units = units;
+	                while (resultSet.next()) {
+	                    Students studentObj = createStudentFromResultSet(resultSet);
+	                    studentList.add(studentObj);
+	                }
+	                studentTableView.setItems(studentList);
+	            }
+	        } else {
+	            // If the search text is empty, show all students
+	            setStudents();
+	        }
+	    } catch (SQLException ex) {
+	        ex.printStackTrace(); // Handle the exception according to your needs
 	    }
 	}
+
+	// This method creates a Students object from the current row of the ResultSet
+	private Students createStudentFromResultSet(ResultSet resultSet) throws SQLException {
+	    String firstName = resultSet.getString("First_name");
+	    String middleName = resultSet.getString("Middle_name");
+	    String lastName = resultSet.getString("last_name");
+	    String course1 = resultSet.getString("course");
+	    String year1 = resultSet.getString("year");
+	    String section1 = resultSet.getString("section");
+	    String location1 = resultSet.getString("location");
+	    int scode1 = resultSet.getInt("scode");
+	    String date1 = resultSet.getString("date");
+	    int sid1 = resultSet.getInt("sid");
+	    String gender1 = resultSet.getString("gender");
+
+	    return new Students(firstName, middleName, lastName, course1, year1, section1, location1, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+	}
+
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@students.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.StudentsController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@students.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.StudentsController">
    <children>
       <HBox prefHeight="790.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -66,10 +66,10 @@
                <children>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <TextField fx:id="searchbar" prefHeight="33.0" prefWidth="224.0" />
-                        <Button id="SearchIcon" fx:id="searchbtn" mnemonicParsing="false" onAction="#searchscodebtn" prefHeight="38.0" prefWidth="48.0" stylesheets="@../studentprof/StudentProf.css">
+                        <TextField fx:id="searchTF" onAction="#searchActionPerformed" prefHeight="33.0" prefWidth="224.0" />
+                        <Button id="SearchIcon" fx:id="searchbtn" mnemonicParsing="false" prefHeight="38.0" prefWidth="48.0" stylesheets="@../studentprof/StudentProf.css">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#searchActionPerformed" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../src/imgs_icons/Search.png" />
                                  </image>
