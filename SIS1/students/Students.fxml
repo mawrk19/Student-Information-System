@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -63,6 +64,20 @@
             </AnchorPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="ALWAYS">
                <children>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <TextField fx:id="searchbar" prefHeight="33.0" prefWidth="224.0" />
+                        <Button id="SearchIcon" fx:id="searchbtn" mnemonicParsing="false" onAction="#searchscodebtn" prefHeight="38.0" prefWidth="48.0" stylesheets="@../studentprof/StudentProf.css">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/Search.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
                   <Button id="updateBtn" fx:id="UpdateBTN" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="52.0" prefWidth="137.0" stylesheets="@students.css" text="Update" />
                   <Button id="deleteBtn" fx:id="DeleteBTN" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="52.0" prefWidth="137.0" stylesheets="@students.css" text="Delete" />
                   <Button id="sortBtn" fx:id="sortBTN" mnemonicParsing="false" prefHeight="52.0" prefWidth="137.0" stylesheets="@students.css" text="Sort by" />

@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -29,6 +30,9 @@ public class StudentsController {
 
 	@FXML
 	private Button UpdateBTN;
+	
+	@FXML 
+	private TextField searchbar;
 
 	@FXML
 	private TableColumn<Students, String> courseColumn;
