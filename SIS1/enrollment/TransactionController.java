@@ -143,7 +143,7 @@ public class TransactionController {
             while (continuousUpdate) {
                 setTransactionBasedOnSelection();
                 try {
-                    Thread.sleep(1000); // Adjust the sleep duration as needed
+                    Thread.sleep(1); // Adjust the sleep duration as needed
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -168,10 +168,10 @@ public class TransactionController {
             tuitionTotal = calculateTuitionTotal(mop, scheme, late);
             miscTotal = calculateMiscAmount();
 
-            totalLBL.setText(String.valueOf("Total: " + total));
-            balanceLBL.setText(String.valueOf("Balance: " + balance));
-            tuitionLBL.setText(String.valueOf("Tuition " + tuitionTotal));
-            miscLBL.setText(String.valueOf("Miscellaneous " + miscTotal));
+            totalLBL.setText(String.valueOf(total));
+            balanceLBL.setText(String.valueOf(balance));
+            tuitionLBL.setText(String.valueOf(tuitionTotal));
+            miscLBL.setText(String.valueOf(miscTotal));
         });
     }
 
@@ -274,9 +274,14 @@ public class TransactionController {
 
 	    if (validateInputs()) {
 	        saveAndPrint();
-	        returnToEnrollment(event );
+	        returnToEnrollment(event);
+	        
+	        // Re-enable continuous updates after save operation
+	        continuousUpdate = true;
+	        
 	    }
 	}
+
 	
 	private boolean validateInputs() {
 	    String mop = MOPCMB.getValue();
@@ -293,7 +298,15 @@ public class TransactionController {
 	        return false;
 	    }
 
-	    // Additional validation if needed
+	    double balance = Double.parseDouble(balanceLBL.getText().replace("Balance: ", ""));
+	    if (balance < 0) {
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.setTitle("Warning");
+	        alert.setHeaderText("Overpayment");
+	        alert.setContentText("You have entered more than the total amount. Please review your payment.");
+	        alert.showAndWait();
+	        return false;
+	    }
 
 	    return true;
 	}
