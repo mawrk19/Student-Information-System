@@ -18,7 +18,6 @@
             <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <ComboBox fx:id="MOPCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="Mode of payment" VBox.vgrow="ALWAYS" />
-                  <TextField fx:id="transacIDTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="transaction ID" VBox.vgrow="ALWAYS" />
                   <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" text="Miscellanous Fee" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="Verdana" size="22.0" />
