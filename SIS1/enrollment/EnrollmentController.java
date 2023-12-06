@@ -316,7 +316,7 @@ public class EnrollmentController implements Initializable {
 		String endID = String.valueOf(student.getEnd());
 		String sem = semCMB.getValue();
 		String type = statCMB.getValue();
-
+		String status = "enrolled";
 		String studCode = null;
 
 		UserSession session = UserSession.getInstance();
@@ -330,9 +330,9 @@ public class EnrollmentController implements Initializable {
 				String sql;
 
 				if (image != null) {
-					sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, sem, type,eSubjectsStart, eSubjectsEnd, image, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, sem, type, status, eSubjectsStart, eSubjectsEnd, image, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				} else {
-					sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, sem, type, eSubjectsStart, eSubjectsEnd, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, sem, type, status, eSubjectsStart, eSubjectsEnd, encoder) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				}
 
 				try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -348,16 +348,17 @@ public class EnrollmentController implements Initializable {
 					preparedStatement.setString(10, year1);
 					preparedStatement.setString(11, sem);
 					preparedStatement.setString(12, type);
+					preparedStatement.setString(13, status);
 
 					if (image != null) {
-						preparedStatement.setString(13, startID);
-						preparedStatement.setString(14, endID);
-						preparedStatement.setBlob(15, imageStream);
-						preparedStatement.setString(16, username);
+						preparedStatement.setString(14, startID);
+						preparedStatement.setString(15, endID);
+						preparedStatement.setBlob(16, imageStream);
+						preparedStatement.setString(17, username);
 					} else {
-						preparedStatement.setString(13, startID);
-						preparedStatement.setString(14, endID);
-						preparedStatement.setString(15, username);
+						preparedStatement.setString(14, startID);
+						preparedStatement.setString(15, endID);
+						preparedStatement.setString(16, username);
 					}
 
 					int rowsAffected = preparedStatement.executeUpdate();
