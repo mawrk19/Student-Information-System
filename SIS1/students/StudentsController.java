@@ -93,7 +93,7 @@ public class StudentsController {
 	@FXML
 	private void setStudents() {
 		try (Connection con = DatabaseManager.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT * FROM student")) {
+				PreparedStatement stmt = con.prepareStatement("SELECT * FROM student where status = 'enrolled'")) {
 
 			try (ResultSet resultSet = stmt.executeQuery()) {
 				clearStudentsTable(); // Clear existing items before adding new ones
@@ -256,16 +256,18 @@ public class StudentsController {
 	}
 
 	private void deleteStudentFromDatabase(Students student) {
-		try (Connection con = DatabaseManager.getConnection();
-				PreparedStatement stmt = con.prepareStatement("DELETE FROM student WHERE sid = ?")) {
+	    String sql = "UPDATE student SET status = 'unenrolled' WHERE sid = ?";
+	    try (Connection con = DatabaseManager.getConnection();
+	         PreparedStatement stmt = con.prepareStatement(sql)) {
 
-			stmt.setInt(1, student.getSid());
-			stmt.executeUpdate();
+	        stmt.setInt(1, student.getSid());
+	        stmt.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 
 	private boolean showConfirmationDialog(String title, String message) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);

@@ -102,7 +102,7 @@ public class EnrollmentController implements Initializable {
 		ObservableList<String> locations = FXCollections.observableArrayList("Congress", "South");
 		locCMB.setItems(locations);
 
-		ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
+		ObservableList<String> sections = FXCollections.observableArrayList("A", "B");
 		secCMB.setItems(sections);
 
 		ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
@@ -138,6 +138,8 @@ public class EnrollmentController implements Initializable {
 				insertIMG();
 			}
 		});
+		sidTF.setEditable(false);
+		sidTF.setDisable(true);
 	}
 
 	@FXML
@@ -176,7 +178,57 @@ public class EnrollmentController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	private void replaceTableViewIrregular() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Irregular.fxml"));
+			AnchorPane newTableAnchorPane = loader.load();
 
+			AnchorPane tableViewParent = (AnchorPane) subjectsTableView.getParent();
+			Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
+			Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
+			Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
+			Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
+
+			tableViewParent.getChildren().remove(subjectsTableView);
+
+			AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
+			AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
+			AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
+			AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
+
+			tableViewParent.getChildren().add(newTableAnchorPane);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void replaceTableViewRegular() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Enrollments.fxml"));
+			AnchorPane newTableAnchorPane = loader.load();
+
+			AnchorPane tableViewParent = (AnchorPane) subjectsTableView.getParent();
+			Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
+			Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
+			Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
+			Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
+
+			tableViewParent.getChildren().remove(subjectsTableView);
+
+			AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
+			AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
+			AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
+			AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
+
+			tableViewParent.getChildren().add(newTableAnchorPane);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void newEnrollment() throws IOException {
 		Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
 		contentarea.getChildren().removeAll();
@@ -199,22 +251,264 @@ public class EnrollmentController implements Initializable {
 
 		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
 				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			replaceTableViewRegular();
 			startId = 1;
 			endId = 9;
 		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
 				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+		
 			startId = 10;
 			endId = 17;
 		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
-				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
 			startId = 1;
 			endId = 9;
 		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
 				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
 			startId = 10;
 			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
+			startId = 10;
+			endId = 17;
 		} else {
-			// Clear the subjects table if none of the conditions are met
+			replaceTableViewIrregular();
 			clearSubjectsTable();
 			return;
 		}
@@ -222,6 +516,7 @@ public class EnrollmentController implements Initializable {
 		// Set subjects for the specified conditions
 		setSubjectsForSemester(createStudentsObject());
 	}
+	
 
 	private Students createStudentsObject() {
 		String selectedCourse = courseCMB.getValue();

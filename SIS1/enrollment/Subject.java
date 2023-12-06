@@ -13,7 +13,11 @@ public class Subject {
         this.subject = subject;
     }
 
-    public int getId() {
+    public Subject(String string, int int1, String string2, String string3, String string4, String string5) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getId() {
         return id;
     }
 
