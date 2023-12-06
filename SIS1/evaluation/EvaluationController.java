@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -23,6 +24,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.function.UnaryOperator;
 
 import application.DatabaseManager;
 
@@ -83,10 +85,10 @@ public class EvaluationController {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-            	String firstName = resultSet.getString("First_name");
+                String firstName = resultSet.getString("First_name");
                 String middleName = resultSet.getString("Middle_name");
                 String lastName = resultSet.getString("Last_name");
-                
+
                 String fullName = firstName + " " + middleName + " " + lastName;
                 Name.setText(fullName);
                 YearLevel.setText(resultSet.getString("year"));
@@ -96,17 +98,44 @@ public class EvaluationController {
                 Scode.setText(resultSet.getString("scode"));
                 Campus.setText(resultSet.getString("location"));
                 Type.setText(resultSet.getString("type"));
+
+                int subjectsStart = resultSet.getInt("eSubjectsStart");
+                int subjectsEnd = resultSet.getInt("eSubjectsEnd");
+
+                // Clear existing rows in the VBox
+                vBoxContainer.getChildren().clear();
+
+                // Fetch subjects for the student using the start and end IDs
+                String subjectsQuery = "SELECT sub_code, units FROM subjects WHERE id BETWEEN ? AND ?";
+                PreparedStatement subjectsStatement = connection.prepareStatement(subjectsQuery);
+                subjectsStatement.setInt(1, subjectsStart);
+                subjectsStatement.setInt(2, subjectsEnd);
+
+                ResultSet subjectsResultSet = subjectsStatement.executeQuery();
+
+                while (subjectsResultSet.next()) {
+                    String subjectName = subjectsResultSet.getString("sub_code");
+                    int subjectUnits = subjectsResultSet.getInt("units");
+                    // Create a new row (HBox) with subject label and required fields
+                    HBox newRow;
+                    if (subjectUnits >= 0) {
+                        newRow = createNewRowdatabase(subjectName, subjectUnits);
+                    } else {
+                        newRow = createNewRowdatabase(subjectName);
+                    }
+                    vBoxContainer.getChildren().add(newRow);
+                }
+
+                subjectsResultSet.close();
+                subjectsStatement.close();
             } else {
-                // Handle case when no student with entered code is found
                 clearFields();
-                // You can also display an alert or message to inform the user about no matching student code
             }
 
             resultSet.close();
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Handle any database connection or query errors
         }
     }
 
@@ -121,31 +150,31 @@ public class EvaluationController {
         Type.clear();
     }
     
-    @FXML
-    void addrow(ActionEvent event) {
-        // Create a new row (HBox) similar to the structure in your FXML
-        HBox newRow = createNewRow();
-
-        // Add the new row (HBox) to the VBox
-        vBoxContainer.getChildren().add(newRow);
+    private HBox createNewRowdatabase(String sub_code) {
+        return createNewRowdatabase(sub_code); // Call the main createNewRow method with a default value for units
     }
 
-    private HBox createNewRow() {
-        // Create TextFields and Label for the new row
+    private HBox createNewRowdatabase(String sub_code, int units) {
+        // Create Labels and TextFields for the new row
     	
-    	Label label = new Label("Subject");
-    	label.setAlignment(Pos.CENTER);
-    	label.setPrefWidth(30.0);
-        label.setFont(new Font(15.0));
-        label.setMaxWidth(Double.MAX_VALUE);
-        label.setPrefHeight(30.0);
-        HBox.setHgrow(label, Priority.ALWAYS);
+        Label subject = new Label(sub_code);
+        subject.setAlignment(Pos.CENTER);
+        subject.setPrefWidth(30.0);
+        subject.setFont(new Font(15.0));
+        subject.setMaxWidth(Double.MAX_VALUE);
+        subject.setPrefHeight(30.0);
+        HBox.setHgrow(subject, Priority.ALWAYS);
 
-        TextField unit = new TextField();
+        TextField unit = new TextField(String.valueOf(units));
         unit.setAlignment(Pos.CENTER);
         unit.setPrefWidth(15.0);
         unit.setPrefHeight(30.0);
         unit.setMaxWidth(Double.MAX_VALUE);
+        unit.setEditable(false); // Set unit TextField as uneditable
+        if (units >= 0) {
+            unit.setText(String.valueOf(units)); // Set the units value if it's provided
+            unit.setEditable(false); // Make the unit TextField uneditable
+        }
         HBox.setHgrow(unit, Priority.ALWAYS);
 
         Label colon = new Label(":");
@@ -159,6 +188,23 @@ public class EvaluationController {
         grade.setPrefHeight(30.0);
         grade.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(grade, Priority.ALWAYS);
+        
+        int maxLength = 4; // Maximum length for the grade, including the decimal point and two decimal places
+        grade.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Check if the new text is a valid decimal number or a whole number
+            if (newValue.isEmpty() || (newValue.matches("^\\d+(\\.\\d{1,2})?$") && newValue.length() <= maxLength)) {
+                // Allow the change or if the field is empty
+            } else {
+                // Deny the change
+                // Reset the text to the previous value
+                grade.setText(oldValue);
+                // Show an error message if the field is not empty and the input is invalid
+                if (!newValue.isEmpty()) {
+                    showAlert("Error", "Invalid Grade Format", "Please enter a valid grade format: X.X or X.XX or X (whole number)");
+                }
+            }
+        });
+        
 
         Button deleteButton = new Button("Delete");
         deleteButton.setPrefWidth(20.0);
@@ -174,11 +220,11 @@ public class EvaluationController {
         newRow.setPrefHeight(30.0);
         newRow.setPrefWidth(330.0);
         newRow.setSpacing(10.0);
-        newRow.getChildren().addAll(label, unit, colon, grade, deleteButton);
+        newRow.getChildren().addAll(subject, unit, colon, grade, deleteButton);
 
         // Set VBox.margin for the new row
         VBox.setMargin(newRow, new Insets(0, 0, 0, 0)); // Set margins if needed
-        
+
         unit.textProperty().addListener((observable, oldValue, newValue) -> {
         });
 
@@ -187,6 +233,103 @@ public class EvaluationController {
 
         return newRow;
     }
+    
+    private HBox createNewRow() {
+        // Create Labels and TextFields for the new row
+        Label subject = new Label("Sub Code");
+        subject.setAlignment(Pos.CENTER);
+        subject.setPrefWidth(30.0);
+        subject.setFont(new Font(15.0));
+        subject.setMaxWidth(Double.MAX_VALUE);
+        subject.setPrefHeight(30.0);
+        HBox.setHgrow(subject, Priority.ALWAYS);
+
+        TextField unit = new TextField();
+        unit.setAlignment(Pos.CENTER);
+        unit.setPrefWidth(15.0);
+        unit.setPrefHeight(30.0);
+        unit.setMaxWidth(Double.MAX_VALUE);
+        unit.setEditable(true);
+        HBox.setHgrow(unit, Priority.ALWAYS);
+        
+        unit.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Check if the new text is a valid whole number
+            if (newValue.isEmpty() || newValue.matches("^\\d+$")) {
+                // Allow the change or if the field is empty
+            } else {
+                // Deny the change
+                // Reset the text to the previous value
+                unit.setText(oldValue);
+                // Show an error message if the field is not empty and the input is invalid
+                if (!newValue.isEmpty()) {
+                    showAlert("Error", "Invalid Units Format", "Please enter a valid X (whole number) for units.");
+                }
+            }
+        });
+
+        Label colon = new Label(":");
+        colon.setFont(new Font(20.0));
+        colon.setPrefWidth(5.0);
+        colon.setPrefHeight(20.0);
+
+        TextField grade = new TextField();
+        grade.setAlignment(Pos.CENTER);
+        grade.setPrefWidth(15.0);
+        grade.setPrefHeight(30.0);
+        grade.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(grade, Priority.ALWAYS);
+        
+        int grademaxLength = 4; // Maximum length for the grade, including the decimal point and two decimal places
+        grade.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Check if the new text is a valid decimal number or a whole number
+            if (newValue.isEmpty() || (newValue.matches("^\\d+(\\.\\d{1,2})?$") && newValue.length() <= grademaxLength)) {
+                // Allow the change or if the field is empty
+            } else {
+                // Deny the change
+                // Reset the text to the previous value
+                grade.setText(oldValue);
+                // Show an error message if the field is not empty and the input is invalid
+                if (!newValue.isEmpty()) {
+                    showAlert("Error", "Invalid Grade Format", "Please enter a valid grade format: X.X or X.XX or X (whole number)");
+                }
+            }
+        });
+        
+
+        Button deleteButton = new Button("Delete");
+        deleteButton.setPrefWidth(20.0);
+        deleteButton.setPrefHeight(30.0);
+        deleteButton.setMaxWidth(100);
+        HBox.setHgrow(deleteButton, Priority.ALWAYS);
+        deleteButton.setOnAction(e -> {
+            vBoxContainer.getChildren().remove(((Button) e.getSource()).getParent());
+        });
+
+        HBox newRow = new HBox(10); // Spacing between elements, adjust as needed
+        newRow.setAlignment(Pos.TOP_CENTER);
+        newRow.setPrefHeight(30.0);
+        newRow.setPrefWidth(330.0);
+        newRow.setSpacing(10.0);
+        newRow.getChildren().addAll(subject, unit, colon, grade, deleteButton);
+
+        // Set VBox.margin for the new row
+        VBox.setMargin(newRow, new Insets(0, 0, 0, 0)); // Set margins if needed
+
+        unit.textProperty().addListener((observable, oldValue, newValue) -> {
+        });
+
+        grade.textProperty().addListener((observable, oldValue, newValue) -> {
+        });
+
+        return newRow;
+    }
+    
+    @FXML
+    void addrow(ActionEvent event) {
+    	HBox newRow = createNewRow();
+        vBoxContainer.getChildren().add(newRow);
+    }
+    
     
     private void calculateGWA() {
         int rowCount = vBoxContainer.getChildren().size();
@@ -236,7 +379,7 @@ public class EvaluationController {
             }
         } else {
             // Display an error pop-up for non-numeric input
-            showAlert("Error", "Invalid Input", "Please enter valid numeric grades.");
+            showAlert("Error", "Invalid Input", "Please enter valid numeric unit and grades.");
         }
     }
 
