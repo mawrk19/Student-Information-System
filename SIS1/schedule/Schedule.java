@@ -13,7 +13,7 @@ public class Schedule {
         this.sdidCLMN = sdidCLMN;
     }
 
-    public String getsubcodeCLMN() {
+    public String getSubcodeCLMN() {
         return subcodeCLMN;
     }
 
@@ -25,7 +25,7 @@ public class Schedule {
         return credunitCLMN;
     }
 
-    public void setCredunitCLMNCLMN(String credunitCLMN) {
+    public void setCredunitCLMN(String credunitCLMN) {
         this.credunitCLMN = credunitCLMN;
     }
     
@@ -35,8 +35,15 @@ public class Schedule {
     
     public void setDescriptionCLMN(String descriptionCLMN) {
         this.descriptionCLMN = descriptionCLMN;
+    }
     
     public int getSdidCLMN() {
         return sdidCLMN;
+    }
+       
+    
+    public void setSdidCLMN(int sdidCLMN) {
+            this.sdidCLMN = sdidCLMN;
+    
     }
 }
