@@ -12,8 +12,18 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -26,10 +36,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.*;
 
+import application.DatabaseManager;
 import application.MainFrameController;
+import enrollment.Subject;
+
+
 
 public class ScheduleController implements Initializable{
 
@@ -38,7 +56,13 @@ public class ScheduleController implements Initializable{
 	   
 	    
 	    @FXML
-	    private ComboBox<String> CYS;
+	    private ComboBox<String> courseCMB;
+	    
+	    @FXML
+	    private ComboBox<String> yearCMB;
+	    
+	    @FXML
+	    private ComboBox<String> sectionCMB;
 	    
 	    @FXML
 	    private ComboBox<String> semesterCMB;
@@ -61,21 +85,42 @@ public class ScheduleController implements Initializable{
 	    @FXML
 	    private FlowPane calendar;
 		   
+	    private boolean dataLoaded = false;
+	    
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			// TODO Auto-generated method stub
 			dateFocus = ZonedDateTime.now();
 	        today = ZonedDateTime.now();
 	        
-	        
-	        ObservableList<String> cys = FXCollections.observableArrayList("BSCS/1st/A","BSCS/1st/B","BSCS/2nd/A","BSCS/3rd/A","BSCS/4th/A", "BSIT/1st/A","BSIT/1st/B","BSIT/2nd/A","BSIT/2nd/b","BSIT/3rd/A","BSIT/4th/A", "BSIS/1st/A","BSIS/2nd/A","BSIS/3rd/A","BSIS/4th/A","BSEMC/1st/A","BSEMC/2nd/A","BSEMC/2nd/B","BSEMC/3rd/A","BSEMC/4th/A");
-	        CYS.setItems(cys);
-	        
-	        ObservableList<String> semester = FXCollections.observableArrayList("1st SEMESTER", "2nd SEMESTER");
-	        semesterCMB.setItems(semester);
-	        
 	        drawCalendar();
-		}
+		
+	        ObservableList<String> course = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
+	        courseCMB.setItems(course);
+	        
+	        ObservableList<String> year = FXCollections.observableArrayList("1st YEAR", "2nd YEAR", "3rd YEAR", "4th YEAR");
+	        yearCMB.setItems(year);
+	        
+	        ObservableList<String> section = FXCollections.observableArrayList("A", "B");
+	        sectionCMB.setItems(section);
+	        
+		    ObservableList<String> semester = FXCollections.observableArrayList("1st SEMESTER", "2nd SEMESTER");
+	        semesterCMB.setItems(semester);
+	            
+	        courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	        yearCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	        sectionCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	        semesterCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	        
+			subcodeCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("subcodeCLMN"));
+			credunitCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("credunitCLMN"));
+		    descriptionCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("descriptionCLMN"));
+			sdidCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("sdidCLMN"));
+			
+		
+			submitBTN.setOnAction(ActionEvent -> handleShowDataButtonClick());
+
+}
 		
 		 @FXML
 		    void backOneMonth(ActionEvent event) {
@@ -198,9 +243,97 @@ public class ScheduleController implements Initializable{
 //		        e.printStackTrace();
 //		    }
 //		}
-	       
+	    
+		
+		@FXML
+		private Button deleteBTN;
+			 
+	    @FXML
+	    private Button updateBTN;
+	
+	    @FXML
+	    private Button submitBTN;
+	    
+	    @FXML
+		private TableColumn<Schedule, String> subcodeCLMNColumn;
 
+		@FXML
+		private TableColumn<Schedule, String> credunitCLMNColumn;
 
+		@FXML
+		private TableColumn<Schedule, String> descriptionCLMNColumn;
 
+		@FXML
+		private TableColumn<Schedule, Integer> sdidCLMNColumn;
+		
+		@FXML
+		private TableView<Schedule> scheduleTV;
+		
+		private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+	    
+		
+		private void setSubjectsBasedOnSelection() {
+		    dataLoaded = false; 
 
-}
+		    
+		    scheduleList.clear();
+		    scheduleTV.getItems().clear();
+		}
+
+		private void handleShowDataButtonClick() {
+		   
+		    if (!dataLoaded) {
+		    String selectedCourse = courseCMB.getValue();
+		    String selectedYear = yearCMB.getValue();
+		    String selectedSection = sectionCMB.getValue();
+		    String selectedSemester = semesterCMB.getValue();
+		    
+		    
+		    
+
+		    if ("BSCS".equals(selectedCourse) && "1st YEAR".equals(selectedYear) && "A".equals(selectedSection)
+		            && "1st SEMESTER".equals(selectedSemester)) {
+		        setSchedule("BSCS1A1stSEMESTER", 1, 9);
+		    } else if ("BSCS".equals(selectedCourse) && "1st YEAR".equals(selectedYear) && "A".equals(selectedSection)
+		            && "2nd SEMESTER".equals(selectedSemester)) {
+		        setSchedule("BSCS1A2ndSEMESTER", 10, 17);
+		        fetchDataForOptions(selectedCourse, selectedYear, selectedSemester, selectedSection);
+		    }
+		    dataLoaded = true;
+		}
+		}
+		private void setSchedule(String semester, int startId, int endId) {
+		    try (Connection connection = DatabaseManager.getConnection();
+		         PreparedStatement preparedStatement = connection
+		                 .prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
+
+		        preparedStatement.setInt(1, startId);
+		        preparedStatement.setInt(2, endId);
+
+		        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+		            while (resultSet.next()) {
+		                String subcode = resultSet.getString("sub_code");
+		                String credunit = resultSet.getString("units");
+		                String description = resultSet.getString("subject");
+		                int sdid = resultSet.getInt("id");
+
+		                Schedule scheduleObj = new Schedule(subcode, credunit, description, sdid);
+		                scheduleList.add(scheduleObj);
+		            }
+		            scheduleTV.setItems(scheduleList);
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace(); // Handle the exception as needed
+		    }
+		}
+
+		private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
+		        String selectedOption3, String selectedOption4) {
+		    // TODO: Implement your data fetching logic
+		    return null;
+		}
+	
+		
+		
+	}
