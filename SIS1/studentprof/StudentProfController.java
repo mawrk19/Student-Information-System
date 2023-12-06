@@ -66,17 +66,17 @@ public class StudentProfController {
     @FXML
     private TableColumn<Subject, Integer> credColumn;
     
-    @FXML
-    private TableColumn<Subject, String> secColumn;
+//    @FXML
+//    private TableColumn<Subject, String> secColumn;
     
     @FXML
     private TableColumn<Subject, String> dayColumn;
     
-    @FXML
-    private TableColumn<Subject, String> timeColumn;
-    
-    @FXML
-    private TableColumn<Subject, String> professorColumn;
+//    @FXML
+//    private TableColumn<Subject, String> timeColumn;
+//    
+//    @FXML
+//    private TableColumn<Subject, String> professorColumn;
     
     
     @FXML
@@ -84,8 +84,8 @@ public class StudentProfController {
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
         credColumn.setCellValueFactory(new PropertyValueFactory<>("creditUnits"));
         dayColumn.setCellValueFactory(new PropertyValueFactory<>("day"));
-        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-        professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
+//        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
+//        professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
 
         // Load data for the student with scode 20230001
         loadStudentProfile("20230001");
@@ -136,7 +136,7 @@ public class StudentProfController {
                     Blob studentImageBlob = resultSet.getBlob("image");
 
                     Students student = new Students(firstName, middleName, lastName, course1, year1, section1,
-                            location1, scode1, date1, sid1, gender1, studentImageBlob, start, end);
+                            location1, scode1, date1, sid1, gender1, studentImageBlob, start, end, gender1);
 
                     // Set the image in the Students object
                     student.setStudentImage(studentImageBlob);
@@ -194,7 +194,7 @@ public class StudentProfController {
         Blob studentImageBlob = resultSet.getBlob("image");
 
         Students student = new Students(firstName, middleName, lastName, course1, year1, section1,
-                location1, scode1, date1, sid1, gender1, studentImageBlob, start, end);
+                location1, scode1, date1, sid1, gender1, studentImageBlob, start, end, gender1);
 
         // Set the image in the Students object
         student.setStudentImage(studentImageBlob);
