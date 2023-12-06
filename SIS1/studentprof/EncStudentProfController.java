@@ -137,7 +137,7 @@ public class EncStudentProfController {
                     Blob studentImageBlob = resultSet.getBlob("image");
 
                     Students student = new Students(firstName, middleName, lastName, course1, year1, section1,
-                            location1, scode1, date1, sid1, gender1, studentImageBlob, start, end);
+                            location1, scode1, date1, sid1, gender1, studentImageBlob, start, end, gender1);
 
                     // Set the image in the Students object
                     student.setStudentImage(studentImageBlob);
@@ -195,7 +195,7 @@ public class EncStudentProfController {
         Blob studentImageBlob = resultSet.getBlob("image");
 
         Students student = new Students(firstName, middleName, lastName, course1, year1, section1,
-                location1, scode1, date1, sid1, gender1, studentImageBlob, start, end);
+                location1, scode1, date1, sid1, gender1, studentImageBlob, start, end, gender1);
 
         // Set the image in the Students object
         student.setStudentImage(studentImageBlob);

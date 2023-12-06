@@ -35,7 +35,6 @@
             <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <ComboBox fx:id="schemeCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Scheme" />
-                  <Label fx:id="amtDueLBL" prefHeight="47.0" prefWidth="182.0" text="amount due" />
                   <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="amount" />
                   <ComboBox fx:id="lateCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Late Enrolee" />
                   <Label fx:id="totalLBL" prefHeight="48.0" prefWidth="189.0" text="total" />
