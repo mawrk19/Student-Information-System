@@ -76,7 +76,7 @@
 								</VBox>
 								<VBox prefHeight="188.0" prefWidth="189.0" spacing="10.0" HBox.hgrow="ALWAYS">
 									<children>
-										<TextField fx:id="sidTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Generating SID" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+										<TextField fx:id="sidTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Generating SID..." style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
