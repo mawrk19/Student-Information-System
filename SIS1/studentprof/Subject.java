@@ -26,6 +26,10 @@ public class Subject {
     public String getSubjectCode() {
         return subjectCode;
     }
+    
+    public void setSubjectCode(String subjectCode) {
+        this.subjectCode = subjectCode;
+    }
 
     public void setSubject(String subject) {
         this.subject = subject;

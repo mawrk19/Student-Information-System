@@ -67,31 +67,17 @@ public class EncStudentProfController {
 	private TableColumn<Subject, Integer> credColumn;
 
 	@FXML
-	private TableColumn<Subject, String> subColumn;
-
-	@FXML
-	private TableColumn<Subject, String> dayColumn;
-
-//    @FXML
-//    private TableColumn<Subject, String> timeColumn;
-//    
-//    @FXML
-//    private TableColumn<Subject, String> professorColumn;
-
+	private TableColumn<Subject, String> subCodeColumn;
+	
 	@FXML
 	private void initialize() {
-		subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
-		credColumn.setCellValueFactory(new PropertyValueFactory<>("creditUnits"));
-		subColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
-//      secColumn.setCellValueFactory(new PropertyValueFactory<>("section"));
-// 		dayColumn.setCellValueFactory(new PropertyValueFactory<>("day"));
-//      timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
-//      professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
+	    subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
+	    credColumn.setCellValueFactory(new PropertyValueFactory<>("creditUnits"));
+	    subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));	
 
-		// Load data for the student with scode 20230001
-		loadStudentProfile("20230001");
+	    // Load data for the student with scode 20230001
+	    loadStudentProfile("20230001");
 	}
-
 	private void loadStudentProfile(String scode) {
 		try (Connection con = DatabaseManager.getConnection();
 				PreparedStatement stmt = con.prepareStatement("SELECT * FROM student WHERE scode = ?")) {

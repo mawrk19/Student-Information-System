@@ -83,7 +83,7 @@ public class StudentProfController {
     private void initialize() {
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
         credColumn.setCellValueFactory(new PropertyValueFactory<>("creditUnits"));
-        dayColumn.setCellValueFactory(new PropertyValueFactory<>("day"));
+        subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
 //        timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
 //        professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
 
