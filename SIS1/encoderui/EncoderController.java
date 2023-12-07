@@ -70,7 +70,7 @@ public class EncoderController implements Initializable{
 	        Students.setTextFill(Color.WHITE);
 			
 			 
-			 Parent dashboardstage = FXMLLoader.load(getClass().getResource("/dashboard/Dashboard.fxml"));
+			 Parent dashboardstage = FXMLLoader.load(getClass().getResource("/dashboard/EncDashboard.fxml"));
 			 contentarea.getChildren().removeAll();
 			 contentarea.getChildren().setAll(dashboardstage);
 			 AnchorPane.setLeftAnchor(dashboardstage, 10.0);
@@ -123,7 +123,7 @@ public class EncoderController implements Initializable{
         Students.setBackground(new Background(ube));
         Students.setTextFill(Color.WHITE);
 		 
-		 Pane profilestage = FXMLLoader.load(getClass().getResource("/profile/Profile.fxml"));
+		 Pane profilestage = FXMLLoader.load(getClass().getResource("/profile/EncProfile.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(profilestage);
 		 AnchorPane.setLeftAnchor(profilestage, 10.0);
