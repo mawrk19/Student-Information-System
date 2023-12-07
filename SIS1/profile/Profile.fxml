@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -7,23 +8,39 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Profile.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.ProfileController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.ProfileController">
    <children>
-      <AnchorPane id="Cover" layoutY="78.0" prefHeight="230.0" prefWidth="870.0">
+      <AnchorPane layoutY="-3.0" prefHeight="340.0" prefWidth="870.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="313.0" fitWidth="870.0" layoutY="-83.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../src/imgs_icons/cover.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
+            <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <ImageView fx:id="coverImage" fitHeight="340.0" fitWidth="870.0" pickOnBounds="true" HBox.hgrow="ALWAYS">
+                           <image>
+                              <Image url="@../src/imgs_icons/cover.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
       <AnchorPane prefHeight="78.0" prefWidth="870.0">
          <children>
-            <Label id="ProfileLbl" layoutX="32.0" layoutY="20.0" prefHeight="51.0" prefWidth="150.0" stylesheets="@Profile.css" text="Profile" />
-            <ImageView fitHeight="51.0" fitWidth="54.0" layoutX="621.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <AnchorPane layoutX="32.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label id="ProfileLbl" layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="150.0" stylesheets="@Profile.css" text="Profile" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane id="Container" layoutX="25.0" layoutY="177.0" prefHeight="593.0" prefWidth="258.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="21.0">

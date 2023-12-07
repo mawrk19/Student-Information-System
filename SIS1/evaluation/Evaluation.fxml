@@ -12,15 +12,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" style="-fx-background-color: #DFE2ED;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="evaluation.EvaluationController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Evaluation.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="evaluation.EvaluationController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="770.0" prefWidth="425.0" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="405.0" spacing="10.0" style="-fx-background-color: #C9CAD9;">
+                  <HBox id="searchCon" alignment="CENTER" prefHeight="60.0" prefWidth="405.0" spacing="10.0" style="-fx-background-color: #C9CAD9;" stylesheets="@Evaluation.css">
                      <children>
-                        <TextField fx:id="searchbar" alignment="CENTER" prefHeight="50.0" prefWidth="329.0" HBox.hgrow="ALWAYS" />
+                        <TextField id="searchBox" fx:id="searchbar" alignment="CENTER" prefHeight="50.0" prefWidth="329.0" stylesheets="@Evaluation.css" HBox.hgrow="ALWAYS" />
                         <Button id="SearchIcon" fx:id="searchbtn" mnemonicParsing="false" onAction="#searchscodebtn" prefHeight="50.0" prefWidth="48.0" stylesheets="@../studentprof/StudentProf.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -38,11 +38,11 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="584.0" prefWidth="405.0" spacing="20.0" style="-fx-background-color: #C9CAD9;" VBox.vgrow="ALWAYS">
+                  <HBox id="infoHbox" alignment="CENTER" prefHeight="584.0" prefWidth="405.0" spacing="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="692.0" prefWidth="205.0" spacing="30.0">
+                        <VBox id="infoBox" alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="692.0" prefWidth="205.0" spacing="30.0" stylesheets="@Evaluation.css">
                            <children>
-                              <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" text="Name:" VBox.vgrow="ALWAYS">
+                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Name:" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -50,7 +50,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" text="Year Level:" VBox.vgrow="ALWAYS">
+                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Year Level:" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -58,7 +58,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" text="Section:" VBox.vgrow="ALWAYS">
+                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Section:" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -66,7 +66,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" text="Course:" VBox.vgrow="ALWAYS">
+                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Course:" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -74,7 +74,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" text="Semester:" VBox.vgrow="ALWAYS">
+                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Semester:" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -82,7 +82,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" text="Student Code:" VBox.vgrow="ALWAYS">
+                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Student Code:" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -90,7 +90,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" text="Campus:" VBox.vgrow="ALWAYS">
+                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Campus:" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -98,7 +98,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" text="Type:" VBox.vgrow="ALWAYS">
+                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Type:" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -110,35 +110,35 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="492.0" prefWidth="292.0" spacing="30.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <TextField fx:id="Name" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="203.0" VBox.vgrow="ALWAYS">
+                              <TextField id="txtField" fx:id="Name" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="203.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <TextField fx:id="YearLevel" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" VBox.vgrow="ALWAYS">
+                              <TextField id="txtField" fx:id="YearLevel" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <TextField fx:id="Section" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" VBox.vgrow="ALWAYS">
+                              <TextField id="txtField" fx:id="Section" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <TextField fx:id="Course" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" VBox.vgrow="ALWAYS">
+                              <TextField id="txtField" fx:id="Course" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <TextField fx:id="Semester" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" VBox.vgrow="ALWAYS">
+                              <TextField id="txtField" fx:id="Semester" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <TextField fx:id="Scode" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" VBox.vgrow="ALWAYS">
+                              <TextField id="txtField" fx:id="Scode" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <TextField fx:id="Campus" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" VBox.vgrow="ALWAYS">
+                              <TextField id="txtField" fx:id="Campus" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <TextField fx:id="Type" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" VBox.vgrow="ALWAYS">
+                              <TextField id="txtField" fx:id="Type" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -163,21 +163,21 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="770.0" prefWidth="425.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="GWA Calculator" VBox.vgrow="ALWAYS">
+                  <Label id="GWALbl" alignment="CENTER" maxWidth="1.7976931348623157E308" stylesheets="@Evaluation.css" text="GWA Calculator" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                   <VBox prefHeight="400.0" prefWidth="365.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="12.0" prefWidth="330.0" spacing="10.0" style="-fx-background-color: #C9CAD9;">
+                        <HBox id="GWAheader" alignment="CENTER" prefHeight="12.0" prefWidth="330.0" spacing="10.0" style="-fx-background-color: #C9CAD9;" stylesheets="@Evaluation.css">
                            <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="65.0" HBox.hgrow="ALWAYS">
+                              <Label id="calcuLbl" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="65.0" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="50.0" text="Units" HBox.hgrow="ALWAYS">
+                              <Label id="calcuLbl" alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="50.0" stylesheets="@Evaluation.css" text="Units" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -190,7 +190,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </Label>
-                              <Label alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="50.0" text="Grades" HBox.hgrow="ALWAYS">
+                              <Label id="calcuLbl" alignment="CENTER" maxHeight="40.0" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="50.0" stylesheets="@Evaluation.css" text="Grades" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -201,11 +201,11 @@
                               <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                            </padding>
                         </HBox>
-                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="360.0" prefWidth="365.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+                        <ScrollPane id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="360.0" prefWidth="365.0" stylesheets="@Evaluation.css" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                           <content>
-                            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="679.0" prefWidth="350.0" style="-fx-background-color: #C9CAD9;">
+                            <AnchorPane id="anchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="679.0" prefWidth="350.0" style="-fx-background-color: #C9CAD9;" stylesheets="@Evaluation.css">
                                  <children>
-                                    <VBox fx:id="vBoxContainer" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" style="-fx-background-color: #C9CAD9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+                                    <VBox id="scrollPane" fx:id="vBoxContainer" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" style="-fx-background-color: #C9CAD9;" stylesheets="@Evaluation.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                                        <padding>
                                           <Insets bottom="20.0" top="20.0" />
                                        </padding>
@@ -216,8 +216,8 @@
                         </ScrollPane>
                         <HBox alignment="CENTER" prefHeight="6.0" prefWidth="365.0" spacing="20.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Button fx:id="addbtn" maxHeight="50.0" maxWidth="120.0" mnemonicParsing="false" onAction="#addrow" prefHeight="30.0" prefWidth="100.0" text="Add" HBox.hgrow="ALWAYS" />
-                              <Button fx:id="ComputeBtn" maxHeight="50.0" maxWidth="120.0" mnemonicParsing="false" onAction="#computegwa" prefHeight="30.0" prefWidth="100.0" text="Compute" HBox.hgrow="ALWAYS" />
+                              <Button id="addBtn" fx:id="addbtn" maxHeight="50.0" maxWidth="120.0" mnemonicParsing="false" onAction="#addrow" prefHeight="30.0" prefWidth="100.0" stylesheets="@Evaluation.css" text="Add" HBox.hgrow="ALWAYS" />
+                              <Button id="computeBtn" fx:id="ComputeBtn" maxHeight="50.0" maxWidth="120.0" mnemonicParsing="false" onAction="#computegwa" prefHeight="30.0" prefWidth="100.0" stylesheets="@Evaluation.css" text="Compute" HBox.hgrow="ALWAYS" />
                            </children>
                            <VBox.margin>
                               <Insets top="20.0" />
@@ -227,7 +227,7 @@
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="73.0" prefWidth="365.0" spacing="20.0">
                      <children>
-                        <Label text="Total:" HBox.hgrow="ALWAYS">
+                        <Label id="totalLbl" stylesheets="@Evaluation.css" text="Total:" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="20.0" />
                            </font>

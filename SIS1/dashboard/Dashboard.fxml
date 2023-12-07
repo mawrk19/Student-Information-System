@@ -96,7 +96,6 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox id="task" prefHeight="701.0" prefWidth="255.0" stylesheets="@Dashboard.css" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

@@ -360,18 +360,12 @@ public class TransactionController {
 
 	    double totalAmount = calculateTotalAmount();
 
-<<<<<<< HEAD
-			try (Connection con = DatabaseManager.getConnection()) {
-				String sql;
-		
-					sql = "INSERT INTO transaction (transaction_ID, payment_mode, amt_due, amount, late, total, balance, misc_total, tuition_total, encoder, date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-=======
+
 	    UserSession session = UserSession.getInstance();
 	    String encoder = session.getUsername();
 
 	    try (Connection con = DatabaseManager.getConnection()) {
 	        String sql = "UPDATE transaction SET payment_mode=?, amount=?, late=?, total=?, balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE scode=?";
->>>>>>> a42a7e0689459afcd5741c539341a9860d0036c5
 
 	        try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
 	            preparedStatement.setString(1, mop);
