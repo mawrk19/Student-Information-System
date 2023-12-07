@@ -114,9 +114,11 @@ public class EncStudentsController {
 					String date1 = resultSet.getString("date");
 					int sid1 = resultSet.getInt("sid");
 					String gender1 = resultSet.getString("gender");
+					String sy = resultSet.getString("sy");
+					String sem = resultSet.getString("sem");
 
-					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
-							location1, gender1, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+				             	//return new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
+					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1,location1,scode1, date1, sid1, gender1, null, sid1, sid1, sem);
 					studentList.add(studentObj);
 				}
 				studentTableView.setItems(studentList);
@@ -126,6 +128,7 @@ public class EncStudentsController {
 			e.printStackTrace(); // Handle the exception as needed
 		}
 	}
+
 
 	private void clearStudentsTable() {
 		studentList.clear();
@@ -321,21 +324,29 @@ public class EncStudentsController {
 	    }
 	}
 
-	// This method creates a Students object from the current row of the ResultSet
 	private Students createStudentFromResultSet(ResultSet resultSet) throws SQLException {
 	    String firstName = resultSet.getString("First_name");
 	    String middleName = resultSet.getString("Middle_name");
 	    String lastName = resultSet.getString("last_name");
 	    String course1 = resultSet.getString("course");
 	    String year1 = resultSet.getString("year");
-	    String section1 = resultSet.getString("section");
-	    String location1 = resultSet.getString("location");
+	    String section1 = resultSet.getString("location"); // set "section" from the "location" column
+	    String location1 = resultSet.getString("sy"); // set "location" from the "sy" column
 	    int scode1 = resultSet.getInt("scode");
 	    String date1 = resultSet.getString("date");
 	    int sid1 = resultSet.getInt("sid");
 	    String gender1 = resultSet.getString("gender");
+	    String sy = resultSet.getString("sy");
+	    String sem = resultSet.getString("sem");
+	    int start = resultSet.getInt("eSubjectsStart");
+	    int end = resultSet.getInt("eSubjectsEnd");
 
-	    return new Students(firstName, middleName, lastName, course1, year1, section1, location1, gender1, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+	    System.out.println("section1 from database: " + resultSet.getString("section"));
+	    System.out.println("location1 from database: " + resultSet.getString("location"));
+	    System.out.println("sy from database: " + resultSet.getString("sy"));
+
+
+	    return new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
 	}
 
 }

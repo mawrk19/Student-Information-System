@@ -750,7 +750,7 @@ public class EnrollmentController implements Initializable {
 									scodeStatement.setString(1, studCode);
 									scodeStatement.setInt(2, generatedId);
 									int scodeRowsAffected = scodeStatement.executeUpdate();
-
+//dito nagiging 6 digit yung id samle 20230001
 									if (scodeRowsAffected > 0) {
 										System.out.println("Scode inserted successfully.");
 

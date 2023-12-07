@@ -2,6 +2,7 @@ package enrollment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,6 +40,23 @@ import javafx.scene.control.TextField;
 import students.Students;
 
 public class TransactionController {
+	
+	private String firstName;
+    private String middleName;
+    private String lastName;
+    private String course;
+    private String year;
+    private String section;
+    private String location;
+    private String sem;
+    private int scode;
+    private String date;
+    private String sy;
+    private int sid;
+    private String gender;
+    private Blob studentImage;
+    private int start;
+    private int end;
 
     @FXML
     private ComboBox<String> MOPCMB;
@@ -264,9 +282,10 @@ public class TransactionController {
 					String gender1 = resultSet.getString("gender");
 					String sem = resultSet.getString("sem");
 					String sy = resultSet.getString("sy");
+					int start = resultSet.getInt("eSubjectsStart");
+					int end = resultSet.getInt("eSubjectsEnd");
 
-					Students studentObj = new Students(firstName, middleName, lastName, course1, year1,sy, section1,
-							location1, scode1, date1, sid1, gender1, null, sid1, sid1, sem);
+					Students( firstName,  middleName,  lastName,  course1,  year1,  sy, section1, location1,  scode1,  date1,  sid1,  gender1,  null,  start, end, sem);
 					// studentList.add(studentObj);
 				}
 				// studentTableView.setItems(studentList);
@@ -277,6 +296,30 @@ public class TransactionController {
 		}
 	}
 	
+	private void Students(String firstName, String middleName, String lastName, String course1, String year1, String sy,
+			String section1, String location1, int scode1, String date1, int sid1, String gender1, Object object,
+			int start, int end, String sem) {
+		
+		this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.course = course;
+        this.year = year;
+        this.sem = sem; // Added this line to set the 'sem' property
+        this.section = section;
+        this.location = location;
+        this.scode = scode;
+        this.date = date;
+        this.sid = sid;
+        this.gender = gender;
+        this.studentImage = studentImage;
+        this.start = start;
+        this.end = end;
+        this.sy = sy;
+		
+	}
+
+
 	@FXML
 	private void saveAndPrintClicked(ActionEvent event) throws IOException {
 	    continuousUpdate = false; // Stop continuous updates

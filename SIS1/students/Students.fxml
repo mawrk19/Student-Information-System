@@ -43,17 +43,17 @@
                   <TableView fx:id="studentTableView" prefHeight="498.0" prefWidth="844.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       
                                 <columns>
-                      <TableColumn fx:id="firstNameColumn" prefWidth="131.0" styleClass="columnHeader" text="First Name" />
-                        <TableColumn fx:id="middleNameColumn" prefWidth="135.0" styleClass="columnHeader" text="Middle Name" />
-                        <TableColumn fx:id="lastNameColumn" prefWidth="121.0" styleClass="columnHeader" text="Last Name" />
-                        <TableColumn fx:id="courseColumn" prefWidth="58.0" styleClass="columnHeader" text="Course" />
-                        <TableColumn fx:id="yearColumn" prefWidth="38.0" styleClass="columnHeader" text="Year" />
-                        <TableColumn fx:id="sectionColumn" prefWidth="62.0" styleClass="columnHeader" text="Section" />
-                        <TableColumn fx:id="locationColumn" prefWidth="62.0" style="-fx-text-fill: #EFF0F3;" styleClass="columnHeader" text="Location" />
-                        <TableColumn fx:id="scodeColumn" prefWidth="94.0" styleClass="columnHeader" text="SCode" />
-                        <TableColumn fx:id="genderColumn" prefWidth="52.0" styleClass="columnHeader" text="Gender" />
-                        <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="51.0" styleClass="columnHeader" text="date" />
-                        <TableColumn fx:id="sidColumn" prefWidth="42.0" styleClass="columnHeader" text="SID" />
+                      <TableColumn fx:id="firstNameColumn" prefWidth="106.0" resizable="false" styleClass="columnHeader" text="First Name" />
+                        <TableColumn fx:id="middleNameColumn" prefWidth="86.0" resizable="false" styleClass="columnHeader" text="Middle Name" />
+                        <TableColumn fx:id="lastNameColumn" resizable="false" styleClass="columnHeader" text="Last Name" />
+                        <TableColumn fx:id="courseColumn" prefWidth="66.0" resizable="false" styleClass="columnHeader" text="Course" />
+                        <TableColumn fx:id="yearColumn" prefWidth="50.0" resizable="false" styleClass="columnHeader" text="Year" />
+                        <TableColumn fx:id="sectionColumn" prefWidth="58.0" resizable="false" styleClass="columnHeader" text="Section" />
+                        <TableColumn fx:id="locationColumn" prefWidth="71.0" resizable="false" style="-fx-text-fill: #EFF0F3;" styleClass="columnHeader" text="Location" />
+                        <TableColumn fx:id="scodeColumn" prefWidth="97.0" resizable="false" styleClass="columnHeader" text="SCode" />
+                        <TableColumn fx:id="genderColumn" prefWidth="63.0" resizable="false" styleClass="columnHeader" text="Gender" />
+                        <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="102.0" resizable="false" styleClass="columnHeader" text="date" />
+                        <TableColumn fx:id="sidColumn" prefWidth="70.0" resizable="false" styleClass="columnHeader" text="SID" />
                         
                                 </columns>
                      <columnResizePolicy>

@@ -50,9 +50,6 @@ public class EvaluationController {
 
     @FXML
     private TextField YearLevel;
-    
-    @FXML
-    private TextField Type;
 
     @FXML
     private TextField searchbar;
@@ -97,7 +94,6 @@ public class EvaluationController {
                 Semester.setText(resultSet.getString("sem"));
                 Scode.setText(resultSet.getString("scode"));
                 Campus.setText(resultSet.getString("location"));
-                Type.setText(resultSet.getString("type"));
 
                 int subjectsStart = resultSet.getInt("eSubjectsStart");
                 int subjectsEnd = resultSet.getInt("eSubjectsEnd");
@@ -147,7 +143,6 @@ public class EvaluationController {
         Semester.clear();
         Scode.clear();
         Campus.clear();
-        Type.clear();
     }
     
     private HBox createNewRowdatabase(String sub_code) {
@@ -405,7 +400,7 @@ public class EvaluationController {
         return Name.getText().isEmpty() || YearLevel.getText().isEmpty() ||
                Section.getText().isEmpty() || Course.getText().isEmpty() ||
                Semester.getText().isEmpty() || Scode.getText().isEmpty() ||
-               Campus.getText().isEmpty() || Type.getText().isEmpty();
+               Campus.getText().isEmpty();
     }
     
     private boolean checkForEmptyGrades() {
@@ -489,7 +484,6 @@ public class EvaluationController {
         Semester.clear();
         Scode.clear();
         Campus.clear();
-        Type.clear();
         totalgwa.clear();
         searchbar.clear();
 
