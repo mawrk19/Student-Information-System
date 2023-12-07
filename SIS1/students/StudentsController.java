@@ -114,9 +114,10 @@ public class StudentsController {
 					String date1 = resultSet.getString("date");
 					int sid1 = resultSet.getInt("sid");
 					String gender1 = resultSet.getString("gender");
+					String sy = resultSet.getString("sy");
 
 					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
-							location1, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+							location1, sy, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
 					studentList.add(studentObj);
 				}
 				studentTableView.setItems(studentList);
@@ -321,7 +322,6 @@ public class StudentsController {
 	    }
 	}
 
-	// This method creates a Students object from the current row of the ResultSet
 	private Students createStudentFromResultSet(ResultSet resultSet) throws SQLException {
 	    String firstName = resultSet.getString("First_name");
 	    String middleName = resultSet.getString("Middle_name");
@@ -334,8 +334,10 @@ public class StudentsController {
 	    String date1 = resultSet.getString("date");
 	    int sid1 = resultSet.getInt("sid");
 	    String gender1 = resultSet.getString("gender");
+	    String sy = resultSet.getString("sy");
 
-	    return new Students(firstName, middleName, lastName, course1, year1, section1, location1, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+	    return new Students(firstName, middleName, lastName, course1, year1, section1, location1, sy, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
 	}
+
 
 }
