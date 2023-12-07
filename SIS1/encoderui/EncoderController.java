@@ -129,8 +129,7 @@ public class EncoderController implements Initializable{
 		 AnchorPane.setLeftAnchor(profilestage, 10.0);
 		 AnchorPane.setRightAnchor(profilestage, 10.0);
 		 AnchorPane.setTopAnchor(profilestage, 10.0);
-		 AnchorPane.setBottomAnchor(profilestage, 20.0);
-		 
+		 AnchorPane.setBottomAnchor(profilestage, 20.0);	 
 	}
 	
 	@FXML

@@ -21,7 +21,7 @@ public class Students {
     private int start;
     private int end;
     
-    // Students( firstName,  middleName,  lastName,  course,  year,  section, location,  scode,  date,  sid,  gender,  studentImage,  start, end)
+    // Students( firstName,  middleName,  lastName,  course,  year,  section, location,  scode,  date,  sid,  gender,  studentImage,  start, end, sem)
 
     public Students(String firstName, String middleName, String lastName, String course, String year, String sy, String section,
             String location, int scode, String date, int sid, String gender, Blob studentImage, int start, int end, String sem) {
