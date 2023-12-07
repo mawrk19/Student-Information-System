@@ -282,6 +282,7 @@ public class TransactionController {
 	    continuousUpdate = false; // Stop continuous updates
 	    TransactionController trans = TransactionController.getInstance();
 	    String studCode1 = trans.getStudCode();
+	    EnrollmentController enroll = new EnrollmentController();
 
 	    if (studCode1 == null || studCode1.isEmpty()) {
 	        System.out.println("StudCode is not available. Please check your implementation.");
