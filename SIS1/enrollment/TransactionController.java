@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import application.DatabaseManager;
 import application.MainFrameController;
 import application.UserSession;
+import encoderui.EncoderController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -285,7 +286,8 @@ public class TransactionController {
 					int start = resultSet.getInt("eSubjectsStart");
 					int end = resultSet.getInt("eSubjectsEnd");
 
-					Students( firstName,  middleName,  lastName,  course1,  year1,  sy, section1, location1,  scode1,  date1,  sid1,  gender1,  null,  start, end, sem);
+					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
+
 					// studentList.add(studentObj);
 				}
 				// studentTableView.setItems(studentList);
@@ -338,7 +340,6 @@ public class TransactionController {
 
 	        // Update the UI with the new values
 	        setTransactionBasedOnSelection();
-
 	        returnToEnrollment(event);
 
 	        // Re-enable continuous updates after save operation
@@ -547,4 +548,5 @@ public class TransactionController {
 		stage.setWidth(windowWidth);
 		stage.setHeight(windowHeight);
 	}
+	
 }

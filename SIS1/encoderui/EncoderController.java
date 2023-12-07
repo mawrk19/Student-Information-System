@@ -230,8 +230,7 @@ public class EncoderController implements Initializable{
 		 AnchorPane.setRightAnchor(enrollmentstage, 10.0);
 		 AnchorPane.setTopAnchor(enrollmentstage, 10.0);
 		 AnchorPane.setBottomAnchor(enrollmentstage, 20.0);
-		 
-		 
+	 
 	}
 	
 	public void oldEnrollmentbtn(ActionEvent event) throws IOException {
