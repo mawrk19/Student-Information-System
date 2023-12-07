@@ -217,8 +217,10 @@ public class StudentsController {
 				stmt.setString(10, student.getGender());
 				stmt.setInt(11, student.getSid());
 
-				String query = stmt.toString(); // Get the string representation of the prepared statement
-				System.out.println("Executing query: " + query); // Print the query
+				//di to specific i momodify pa sir kung makikita mo to
+				//Belated Happy Birthday Sir Pogi
+				//String query = stmt.toString(); // Get the string representation of the prepared statement
+				//System.out.println("Executing query: " + query); // Print the query
 
 				stmt.addBatch(); // Add each update as a batch operation
 			}
@@ -226,7 +228,7 @@ public class StudentsController {
 			// Execute the batch update
 			int[] updateCounts = stmt.executeBatch();
 
-			// Check the update counts or handle success/failure as needed
+			// Check the update counts or handle success/failure as needed 
 			for (int i = 0; i < updateCounts.length; i++) {
 				if (updateCounts[i] <= 0) {
 					// Handle failure for the update at index i

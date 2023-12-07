@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,8 +57,10 @@ public class MainFrameController implements Initializable{
 		// TODO Auto-generated method stub
 		
 		Exit.setOnMouseClicked(event -> {
-			System.exit(0);
+			
+			exitApplication(null);		   
 		});
+
 		
 		try {
 			BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
@@ -610,6 +613,22 @@ public void logout(ActionEvent event) throws IOException {
         newStage.show();
     } else {
         System.out.println("Logout canceled");
+    }
+}
+
+@FXML
+public void exitApplication(ActionEvent event) {
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Exit");
+    alert.setHeaderText("You're about to exit");
+    alert.setContentText("Do you want to save before you exit?");
+
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+        // Exit the application safely
+        Platform.exit();
+    } else {
+        System.out.println("Exit canceled");
     }
 }
 

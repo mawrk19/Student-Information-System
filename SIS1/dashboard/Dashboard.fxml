@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -23,22 +24,36 @@
                      <children>
                         <AnchorPane id="greeting" fx:id="Greeting" prefHeight="182.0" prefWidth="575.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                            <children>
-                              <Label id="admin" fx:id="adminName" layoutX="14.0" layoutY="117.0" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css" AnchorPane.leftAnchor="26.0">
-                                 <font>
-                                    <Font name="Arial Rounded MT Bold" size="30.0" />
-                                 </font>
-                              </Label>
-                              <ImageView fitHeight="174.0" fitWidth="316.0" layoutX="245.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../Downloads/Greeting.png" />
-                                 </image>
-                              </ImageView>
-                              <Label id="text" fx:id="Hello" layoutX="26.0" layoutY="57.0" prefHeight="31.0" prefWidth="280.0" stylesheets="@Dashboard.css" text="Welcome," textAlignment="CENTER" textFill="#dadfe3" AnchorPane.leftAnchor="26.0">
-                                 <font>
-                                    <Font name="Arial Rounded MT Bold" size="37.0" />
-                                 </font>
-                              </Label>
+                              <HBox layoutX="26.0" layoutY="32.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox spacing="15.0">
+                                       <children>
+                                          <Label id="text" fx:id="Hello" prefHeight="31.0" prefWidth="280.0" stylesheets="@Dashboard.css" text="Welcome," textAlignment="CENTER" textFill="#dadfe3">
+                                             <font>
+                                                <Font name="Arial Rounded MT Bold" size="37.0" />
+                                             </font>
+                                          </Label>
+                                          <Label id="admin" fx:id="adminName" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css">
+                                             <font>
+                                                <Font name="Arial Rounded MT Bold" size="30.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <ImageView fitHeight="171.0" fitWidth="322.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../src/imgs_icons/Greeting.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
                            </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
                         </AnchorPane>
                         <HBox prefHeight="456.0" prefWidth="574.0" spacing="10.0" VBox.vgrow="ALWAYS">
                            <children>
@@ -81,7 +96,6 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox id="task" prefHeight="701.0" prefWidth="255.0" stylesheets="@Dashboard.css" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

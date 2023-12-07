@@ -121,9 +121,9 @@ public class EncBeforeOldEnrollController {
 				AnchorPane.setTopAnchor(oldenrollment, 10.0);
 				AnchorPane.setBottomAnchor(oldenrollment, 20.0);
 	
-				FXMLLoader encoderLoader = new FXMLLoader(getClass().getResource("/encoderui/Encoder.fxml"));
-				Parent encoderui = encoderLoader.load();
-				EncoderController encoderController = encoderLoader.getController();
+				FXMLLoader encoderui = new FXMLLoader(getClass().getResource("/encoderui/Encoder.fxml"));
+				Parent encoder = encoderui.load();
+				EncoderController encoderController = encoderui.getController();
 	
 				encoderController.Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 	
@@ -150,7 +150,7 @@ public class EncBeforeOldEnrollController {
 	
 				encoderController.setContent(oldenrollment);
 	
-				Scene scene = new Scene(encoderui);
+				Scene scene = new Scene(encoder);
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				stage.setScene(scene);
 				stage.show();

@@ -74,6 +74,7 @@
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
+
                                     <TableView fx:id="Table" prefHeight="445.0" prefWidth="526.0" VBox.vgrow="ALWAYS">
                                       <columns>
                                         <TableColumn fx:id="subCodeColumn" prefWidth="102.0" text="SUBJECT CODE" />

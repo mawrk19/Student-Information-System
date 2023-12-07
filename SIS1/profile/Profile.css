@@ -8,9 +8,6 @@
 	-fx-background-color:#D1D7EB;
 }
 
-#Cover {
-	-fx-background-color: linear-gradient(to right, #2675e3, #3C5199);
-}
 
 #EditBtn {
 	-fx-background-color: #3C5199;
@@ -39,11 +36,16 @@
 	-fx-font-size: 22 px;
 }
 
+#Infobox {
+	-fx-background-color: #344685;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;	
+}
+
 #InfoLbl {
 	-fx-font-family: "Arial Rounded MT Bold";
 	-fx-font-size: 15 px;
 }
-
 #LblInfo {
 	-fx-font-family: "Arial Rounded MT Bold";
 	-fx-font-size: 18 px;
