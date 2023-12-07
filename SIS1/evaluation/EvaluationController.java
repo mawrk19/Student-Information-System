@@ -187,7 +187,7 @@ public class EvaluationController {
         int maxLength = 4; // Maximum length for the grade, including the decimal point and two decimal places
         grade.textProperty().addListener((observable, oldValue, newValue) -> {
             // Check if the new text is a valid decimal number or a whole number
-            if (newValue.isEmpty() || (newValue.matches("^\\d+(\\.\\d{1,2})?$") && newValue.length() <= maxLength)) {
+            if (newValue.isEmpty() || newValue.matches("^\\d+(\\.\\d{0,2})?$")) {
                 // Allow the change or if the field is empty
             } else {
                 // Deny the change

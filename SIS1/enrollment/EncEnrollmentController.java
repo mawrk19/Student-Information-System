@@ -752,7 +752,7 @@ private void replaceTableViewContent() {
 
 								System.out.println(studCode + " vs. alfredy");
 
-								TransactionController transacCon = TransactionController.getInstance();
+								EncTransactionController transacCon = EncTransactionController.getInstance();
 								transacCon.setStudCode(studCode);
 
 								String sql1 = "UPDATE student SET scode = ? WHERE sid = ?";
