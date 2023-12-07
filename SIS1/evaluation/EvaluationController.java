@@ -186,16 +186,17 @@ public class EvaluationController {
         
         int maxLength = 4; // Maximum length for the grade, including the decimal point and two decimal places
         grade.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Check if the new text is a valid decimal number or a whole number
-            if (newValue.isEmpty() || newValue.matches("^\\d+(\\.\\d{0,2})?$")) {
-                // Allow the change or if the field is empty
+            // Check if the new text is a valid decimal number or a whole number, within the maximum length, and matches the allowed values
+            if (newValue.isEmpty() ||
+                    (newValue.matches("^(1(\\.\\d{0,2})?|2(\\.\\d{0,2})?|3(\\.0{0,2})?|4|5)$") && newValue.length() <= maxLength)) {
+                // Allow the change or if the field is empty or within the length limit and matches allowed values
             } else {
                 // Deny the change
                 // Reset the text to the previous value
                 grade.setText(oldValue);
-                // Show an error message if the field is not empty and the input is invalid
+                // Show an error message if the field is not empty and the input is invalid or exceeds the length limit or not in the allowed values
                 if (!newValue.isEmpty()) {
-                    showAlert("Error", "Invalid Grade Format", "Please enter a valid grade format: X.X or X.XX or X (whole number)");
+                    showAlert("Error", "Invalid Grade Format", "Please enter a valid grade from the following options: 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3.0, 3, 4, 5 with a maximum length of " + maxLength + " characters");
                 }
             }
         });
