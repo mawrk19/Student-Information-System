@@ -19,6 +19,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -193,7 +194,7 @@ public class EnrollmentController implements Initializable {
 		AnchorPane.setBottomAnchor(enrollmentstage, 20.0);
 	}
 
-	private void setSubjectsBasedOnSelection() {
+	public void setSubjectsBasedOnSelection() {
 		String selectedCourse = courseCMB.getValue();
 		String selectedYear = yrCMB.getValue();
 		String selectedSection = secCMB.getValue();
@@ -628,7 +629,7 @@ public class EnrollmentController implements Initializable {
 		}
 
 		return new Students(selectedType, selectedYear, selectedSection, selectedType, selectedType, selectedType,
-				selectedType, endId, selectedType, endId, selectedType, null, startId, endId, selectedType);
+				selectedType, selectedType, endId, selectedType, endId, selectedType, null, startId, endId, selectedType);
 	}
 
 	private void clearSubjectsTable() {
@@ -849,10 +850,64 @@ public class EnrollmentController implements Initializable {
 	}
 	
 	private void populateIrregularTableView(Students student) {
-	    // Logic to populate irregularTableView based on student details
-	    // Fetch data from the database or generate dummy data based on conditions
-	    // Set the items for irregularTableView
-	}
+	    irregularTableView.getItems().clear(); // Clear existing items before adding new ones
 
+	    // Create TableColumn instances for your TableView
+	    TableColumn<Subject, Integer> subIDColumn = new TableColumn<>("id");
+	    TableColumn<Subject, String> subCodeColumn1 = new TableColumn<>("subCode");
+	    TableColumn<Subject, Integer> unitsColumn1 = new TableColumn<>("units");
+	    TableColumn<Subject, String> subColumn = new TableColumn<>("subject");
+
+	    // Make subCodeColumn1 editable
+	    subCodeColumn1.setCellFactory(TextFieldTableCell.forTableColumn());
+	    subCodeColumn1.setOnEditCommit(event -> {
+	        // Update the value in the TableView
+	        event.getTableView().getItems().get(event.getTablePosition().getRow()).setSubCode(event.getNewValue());
+
+	        // Perform any additional logic to update the database with the new value
+	        Subject selectedSubject = event.getRowValue();
+	        int subjectId = selectedSubject.getId();
+	        String newSubCode = event.getNewValue();
+
+	        // Perform database update here with subjectId and newSubCode
+	        // ...
+
+	        // Refresh the TableView to reflect the changes
+	        irregularTableView.refresh();
+	    });
+
+	    // Assuming Subject class has getters corresponding to these TableColumn types
+	    subIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+	    subCodeColumn1.setCellValueFactory(new PropertyValueFactory<>("subCode"));
+	    unitsColumn1.setCellValueFactory(new PropertyValueFactory<>("units"));
+	    subColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
+
+	    // Add the TableColumn instances to the TableView
+	    irregularTableView.getColumns().addAll(subIDColumn, subCodeColumn1, unitsColumn1, subColumn);
+
+	    try (Connection connection = DatabaseManager.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
+
+	        int startId = student.getStart();
+	        int endId = student.getEnd();
+
+	        preparedStatement.setInt(1, startId);
+	        preparedStatement.setInt(2, endId);
+
+	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	            while (resultSet.next()) {
+	                int id = resultSet.getInt("id");
+	                String subCode = resultSet.getString("sub_code");
+	                int units = resultSet.getInt("units");
+	                String subject = resultSet.getString("subject");
+
+	                Subject subjectObj = new Subject(id, subCode, units, subject);
+	                irregularTableView.getItems().add(subjectObj);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Handle the exception as needed
+	    }
+	}
 
 }

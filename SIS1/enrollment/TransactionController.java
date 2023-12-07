@@ -149,6 +149,22 @@ public class TransactionController {
                 }
             }
         }).start();
+        
+        amtTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                // Non-digit characters are not allowed
+                amtTF.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+
+            // Restrict the maximum value to 10,000
+            if (!amtTF.getText().isEmpty()) {
+                int amount = Integer.parseInt(amtTF.getText());
+                if (amount > 10000) {
+                    amtTF.setText("10000");
+                }
+            }
+            setTransactionBasedOnSelection();
+        });
     }
         
 
@@ -247,8 +263,9 @@ public class TransactionController {
 					int sid1 = resultSet.getInt("sid");
 					String gender1 = resultSet.getString("gender");
 					String sem = resultSet.getString("sem");
+					String sy = resultSet.getString("sy");
 
-					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
+					Students studentObj = new Students(firstName, middleName, lastName, course1, year1,sy, section1,
 							location1, scode1, date1, sid1, gender1, null, sid1, sid1, sem);
 					// studentList.add(studentObj);
 				}
@@ -274,11 +291,14 @@ public class TransactionController {
 
 	    if (validateInputs()) {
 	        saveAndPrint();
+
+	        // Update the UI with the new values
+	        setTransactionBasedOnSelection();
+
 	        returnToEnrollment(event);
-	        
+
 	        // Re-enable continuous updates after save operation
 	        continuousUpdate = true;
-	        
 	    }
 	}
 

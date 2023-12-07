@@ -14,6 +14,7 @@ public class Students {
     private String sem;
     private int scode;
     private String date;
+    private String sy;
     private int sid;
     private String gender;
     private Blob studentImage;
@@ -22,7 +23,7 @@ public class Students {
     
     // Students( firstName,  middleName,  lastName,  course,  year,  section, location,  scode,  date,  sid,  gender,  studentImage,  start, end)
 
-    public Students(String firstName, String middleName, String lastName, String course, String year, String section,
+    public Students(String firstName, String middleName, String lastName, String course, String year, String sy, String section,
             String location, int scode, String date, int sid, String gender, Blob studentImage, int start, int end, String sem) {
 
         this.firstName = firstName;
@@ -30,6 +31,7 @@ public class Students {
         this.lastName = lastName;
         this.course = course;
         this.year = year;
+        this.sem = sem; // Added this line to set the 'sem' property
         this.section = section;
         this.location = location;
         this.scode = scode;
@@ -39,8 +41,9 @@ public class Students {
         this.studentImage = studentImage;
         this.start = start;
         this.end = end;
-        this.sem = sem;
+        this.sy = sy;
     }
+
 
     public Blob getStudentImage() {
         return studentImage;
@@ -89,7 +92,13 @@ public class Students {
     public void setYear(String year) {
         this.year = year;
     }
+    public String getSy() {
+        return sy;
+    }
 
+    public void setSy(String sy) {
+        this.sy = sy;
+    }
     public String getSection() {
         return section;
     }

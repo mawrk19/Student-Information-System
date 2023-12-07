@@ -35,10 +35,6 @@ public class EncStudentProfController {
 
 	@FXML
 	private Label courseLBL;
-
-	@FXML
-	private Label emailLBL;
-
 	@FXML
 	private Label fullnameLBL;
 
@@ -46,11 +42,17 @@ public class EncStudentProfController {
 	private Button search;
 
 	@FXML
-	private Label syAndScodeLBL;
+	private Label scodeLBL;
 
 	@FXML
+	private Label syLBL;
+	
+	@FXML
+	private Label locationLBL;
+	
+	@FXML
 	private Label yrAnsSecLBL;
-
+	
 	@FXML
 	private ImageView studIMG;
 
@@ -118,12 +120,12 @@ public class EncStudentProfController {
 					String gender1 = resultSet.getString("gender");
 					int start = resultSet.getInt("eSubjectsStart");
 					int end = resultSet.getInt("eSubjectsEnd");
+					String sy = resultSet.getString("sy");
 
 					// Retrieve the image as a java.sql.Blob
 					Blob studentImageBlob = resultSet.getBlob("image");
 
-					Students student = new Students(firstName, middleName, lastName, course1, year1, section1,
-							location1, scode1, date1, sid1, gender1, studentImageBlob, start, end, gender1);
+					Students student = new Students(firstName, middleName, lastName, course1, year1, section1, location1, sy, scode1, date1, sid1, gender1, null, start, end, gender1);
 
 					// Set the image in the Students object
 					student.setStudentImage(studentImageBlob);
@@ -175,12 +177,12 @@ public class EncStudentProfController {
 		String gender1 = resultSet.getString("gender");
 		int start = resultSet.getInt("eSubjectsStart");
 		int end = resultSet.getInt("eSubjectsEnd");
+		String sy = resultSet.getString("sy");
 
 		// Retrieve the image as a java.sql.Blob
 		Blob studentImageBlob = resultSet.getBlob("image");
 
-		Students student = new Students(firstName, middleName, lastName, course1, year1, section1, location1, scode1,
-				date1, sid1, gender1, studentImageBlob, start, end, gender1);
+		Students student = new Students(firstName, middleName, lastName, course1, year1, section1, location1, sy, scode1, date1, sid1, gender1, null, start, end, gender1);
 
 		// Set the image in the Students object
 		student.setStudentImage(studentImageBlob);
@@ -203,9 +205,7 @@ public class EncStudentProfController {
 				while (resultSet.next()) {
 					Subject subject = new Subject(
 							// Extract data from ResultSet and create a Subject object
-							resultSet.getString("sub_code"), resultSet.getInt("units"), resultSet.getString("subject"),
-							resultSet.getString("day"), resultSet.getString("schedule"),
-							resultSet.getString("professor"));
+							resultSet.getString("sub_code"), resultSet.getInt("units"), resultSet.getString("subject"));
 
 					// Add the subject to the ObservableList
 					subjectList.add(subject);
@@ -220,23 +220,27 @@ public class EncStudentProfController {
 	}
 
 	private void setLabels(Students student) throws SQLException {
-		if (student != null) {
-			fullnameLBL.setText(student.getFirstName() + " " + student.getMiddleName() + " " + student.getLastName());
-			courseLBL.setText(student.getCourse());
-			yrAnsSecLBL.setText(student.getYear() + " " + student.getSection());
-			addressLBL.setText(student.getLocation());
+	    if (student != null) {
+	        fullnameLBL.setText(student.getFirstName() + " " + student.getMiddleName() + " " + student.getLastName());
+	        courseLBL.setText(student.getCourse());
+	        // sec and year nasa baba
+	        syLBL.setText(student.getYear()+ " - " + student.getSy());
+	        locationLBL.setText(student.getLocation());
+	        scodeLBL.setText(String.valueOf(student.getScode()));       
+	        yrAnsSecLBL.setText(student.getSection());
 
-			// Check if the student has an image
-			if (student.getStudentImage() != null) {
-				showImage(student.getStudentImage());
-			} else {
-				// Handle the case where no image is available
-				studIMG.setImage(null);
-			}
-		} else {
-			// Handle the case where the student is null
-		}
+	        // Check if the student has an image
+	        if (student.getStudentImage() != null) {
+	            showImage(student.getStudentImage());
+	        } else {
+	            // Handle the case where no image is available
+	            studIMG.setImage(null);
+	        }
+	    } else {
+	        // Handle the case where the student is null
+	    }
 	}
+
 
 	private void showImage(Blob imageBlob) throws SQLException {
 		if (imageBlob != null) {
