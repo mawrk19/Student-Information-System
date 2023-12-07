@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@students.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.StudentsController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@students.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.EncStudentsController">
    <children>
       <HBox prefHeight="790.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -78,9 +78,6 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button id="updateBtn" fx:id="UpdateBTN" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="52.0" prefWidth="137.0" stylesheets="@students.css" text="Update" />
-                  <Button id="deleteBtn" fx:id="DeleteBTN" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="52.0" prefWidth="137.0" stylesheets="@students.css" text="Delete" />
-                  <Button id="sortBtn" fx:id="sortBTN" mnemonicParsing="false" prefHeight="52.0" prefWidth="137.0" stylesheets="@students.css" text="Sort by" />
                </children>
             </HBox>
          </children>

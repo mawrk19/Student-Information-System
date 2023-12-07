@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-public class StudentsController {
+public class EncStudentsController {
 
 	@FXML
 	private Button DeleteBTN;
@@ -80,7 +80,7 @@ public class StudentsController {
 	@FXML
 	private void initialize() {
 		setStudents();
-		configureTable();
+		//configureTable();
 		courseColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
 		firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
 		middleNameColumn.setCellValueFactory(new PropertyValueFactory<>("middleName"));
@@ -114,10 +114,9 @@ public class StudentsController {
 					String date1 = resultSet.getString("date");
 					int sid1 = resultSet.getInt("sid");
 					String gender1 = resultSet.getString("gender");
-					String sy = resultSet.getString("sy");
 
 					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
-							location1, sy, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+							location1, gender1, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
 					studentList.add(studentObj);
 				}
 				studentTableView.setItems(studentList);
@@ -217,10 +216,8 @@ public class StudentsController {
 				stmt.setString(10, student.getGender());
 				stmt.setInt(11, student.getSid());
 
-				//di to specific i momodify pa sir kung makikita mo to
-				//Belated Happy Birthday Sir Pogi
-				//String query = stmt.toString(); // Get the string representation of the prepared statement
-				//System.out.println("Executing query: " + query); // Print the query
+				String query = stmt.toString(); // Get the string representation of the prepared statement
+				System.out.println("Executing query: " + query); // Print the query
 
 				stmt.addBatch(); // Add each update as a batch operation
 			}
@@ -228,7 +225,7 @@ public class StudentsController {
 			// Execute the batch update
 			int[] updateCounts = stmt.executeBatch();
 
-			// Check the update counts or handle success/failure as needed 
+			// Check the update counts or handle success/failure as needed
 			for (int i = 0; i < updateCounts.length; i++) {
 				if (updateCounts[i] <= 0) {
 					// Handle failure for the update at index i
@@ -324,6 +321,7 @@ public class StudentsController {
 	    }
 	}
 
+	// This method creates a Students object from the current row of the ResultSet
 	private Students createStudentFromResultSet(ResultSet resultSet) throws SQLException {
 	    String firstName = resultSet.getString("First_name");
 	    String middleName = resultSet.getString("Middle_name");
@@ -336,10 +334,8 @@ public class StudentsController {
 	    String date1 = resultSet.getString("date");
 	    int sid1 = resultSet.getInt("sid");
 	    String gender1 = resultSet.getString("gender");
-	    String sy = resultSet.getString("sy");
 
-	    return new Students(firstName, middleName, lastName, course1, year1, section1, location1, sy, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+	    return new Students(firstName, middleName, lastName, course1, year1, section1, location1, gender1, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
 	}
-
 
 }

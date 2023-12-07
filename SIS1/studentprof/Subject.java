@@ -13,18 +13,20 @@ public class Subject {
     private String schedule;
     private int slots;
 
-    public Subject(String subjectCode, int creditUnits, String subject, String day, String time, String professor) {
+    public Subject(String subjectCode, int creditUnits, String subject) {
         this.subjectCode = subjectCode;
         this.creditUnits = creditUnits;
         this.subject = subject;
-        this.professor = professor;
-        this.day = day;
-        this.time = time;
+ 
     }
     
 
     public String getSubjectCode() {
         return subjectCode;
+    }
+    
+    public void setSubjectCode(String subjectCode) {
+        this.subjectCode = subjectCode;
     }
 
     public void setSubject(String subject) {

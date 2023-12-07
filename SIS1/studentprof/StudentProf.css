@@ -77,12 +77,12 @@
 
 #StudentName {
 	-fx-font-family: "Arial Rounded MT Bold";
-	-fx-font-size:15 px;
+	-fx-font-size:13 px;
 }
 
 #EnrollmentSts {
 	-fx-font-family: "Arial Rounded MT Bold";
-	-fx-font-size: 25 px;
+	-fx-font-size: 30 px;
 	-fx-text-fill: #DFE2ED;
 
 	}
@@ -95,6 +95,11 @@
 #GradesLbl {
 	-fx-font-family: "Arial Rounded MT Bold";
 	-fx-font-size: 20 px;
+}
+
+#noShit {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 12 px;
 }
 
 /*#dp {

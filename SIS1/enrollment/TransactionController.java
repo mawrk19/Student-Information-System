@@ -143,12 +143,28 @@ public class TransactionController {
             while (continuousUpdate) {
                 setTransactionBasedOnSelection();
                 try {
-                    Thread.sleep(1000); // Adjust the sleep duration as needed
+                    Thread.sleep(1); // Adjust the sleep duration as needed
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+        
+        amtTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                // Non-digit characters are not allowed
+                amtTF.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+
+            // Restrict the maximum value to 10,000
+            if (!amtTF.getText().isEmpty()) {
+                int amount = Integer.parseInt(amtTF.getText());
+                if (amount > 10000) {
+                    amtTF.setText("10000");
+                }
+            }
+            setTransactionBasedOnSelection();
+        });
     }
         
 
@@ -168,10 +184,10 @@ public class TransactionController {
             tuitionTotal = calculateTuitionTotal(mop, scheme, late);
             miscTotal = calculateMiscAmount();
 
-            totalLBL.setText(String.valueOf("Total: " + total));
-            balanceLBL.setText(String.valueOf("Balance: " + balance));
-            tuitionLBL.setText(String.valueOf("Tuition " + tuitionTotal));
-            miscLBL.setText(String.valueOf("Miscellaneous " + miscTotal));
+            totalLBL.setText(String.valueOf(total));
+            balanceLBL.setText(String.valueOf(balance));
+            tuitionLBL.setText(String.valueOf(tuitionTotal));
+            miscLBL.setText(String.valueOf(miscTotal));
         });
     }
 
@@ -247,8 +263,9 @@ public class TransactionController {
 					int sid1 = resultSet.getInt("sid");
 					String gender1 = resultSet.getString("gender");
 					String sem = resultSet.getString("sem");
+					String sy = resultSet.getString("sy");
 
-					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
+					Students studentObj = new Students(firstName, middleName, lastName, course1, year1,sy, section1,
 							location1, scode1, date1, sid1, gender1, null, sid1, sid1, sem);
 					// studentList.add(studentObj);
 				}
@@ -265,6 +282,7 @@ public class TransactionController {
 	    continuousUpdate = false; // Stop continuous updates
 	    TransactionController trans = TransactionController.getInstance();
 	    String studCode1 = trans.getStudCode();
+	    EnrollmentController enroll = new EnrollmentController();
 
 	    if (studCode1 == null || studCode1.isEmpty()) {
 	        System.out.println("StudCode is not available. Please check your implementation.");
@@ -274,9 +292,17 @@ public class TransactionController {
 
 	    if (validateInputs()) {
 	        saveAndPrint();
-	        returnToEnrollment(event );
+
+	        // Update the UI with the new values
+	        setTransactionBasedOnSelection();
+
+	        returnToEnrollment(event);
+
+	        // Re-enable continuous updates after save operation
+	        continuousUpdate = true;
 	    }
 	}
+
 	
 	private boolean validateInputs() {
 	    String mop = MOPCMB.getValue();
@@ -293,7 +319,15 @@ public class TransactionController {
 	        return false;
 	    }
 
-	    // Additional validation if needed
+	    double balance = Double.parseDouble(balanceLBL.getText().replace("Balance: ", ""));
+	    if (balance < 0) {
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.setTitle("Warning");
+	        alert.setHeaderText("Overpayment");
+	        alert.setContentText("You have entered more than the total amount. Please review your payment.");
+	        alert.showAndWait();
+	        return false;
+	    }
 
 	    return true;
 	}

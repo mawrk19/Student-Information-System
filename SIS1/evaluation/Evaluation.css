@@ -1,0 +1,82 @@
+#background {
+	-fx-background-color:#d7dcef;
+}
+
+#GWAheader {
+	-fx-background-color:#6476B4;
+	-fx-border-radius: 25 25 0 0;
+	-fx-background-radius: 25 25 0 0;
+}
+
+#txtField {
+	-fx-background-color: transparent; 
+	-fx-text-fill: #EFF0F3; 
+	-fx-border-color: #EFF0F3;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#searchBox {
+	-fx-background-color: transparent; 
+	-fx-text-fill: #EFF0F3;
+	-fx-border-color: #EFF0F3;
+	-fx-border-radius: 25;
+}
+
+#anchor {
+	-fx-border-radius: 0 0 25 25;
+	-fx-background-radius: 0 0 25 25;
+}
+#addBtn {
+	-fx-background-color:#6476B4;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#computeBtn {
+	-fx-background-color:#6476B4;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#infoLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 18 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#calcuLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 14 px;
+}
+
+#totalLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 18 px;
+}
+
+#infoHbox {
+	-fx-background-color: #4158a6;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#GWALbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:30 px;
+}
+
+#searchCon {
+	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
