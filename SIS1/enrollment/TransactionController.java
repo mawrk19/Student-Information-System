@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import application.DatabaseManager;
@@ -78,8 +79,6 @@ public class TransactionController {
     @FXML
     private Label totalLBL;
 
-    @FXML
-    private TextField transacIDTF;
 
     @FXML
     private TextField amtTF;
@@ -114,7 +113,6 @@ public class TransactionController {
         MOPCMB.setOnAction(event -> setTransactionBasedOnSelection());
         schemeCMB.setOnAction(event -> setTransactionBasedOnSelection());
         lateCMB.setOnAction(event -> setTransactionBasedOnSelection());
-        transacIDTF.setOnAction(event -> setTransactionBasedOnSelection());
         amtTF.setOnAction(event -> setTransactionBasedOnSelection());
         libCB.setOnAction(event -> setTransactionBasedOnSelection());
         medCB.setOnAction(event -> setTransactionBasedOnSelection());
@@ -145,12 +143,28 @@ public class TransactionController {
             while (continuousUpdate) {
                 setTransactionBasedOnSelection();
                 try {
-                    Thread.sleep(1000); // Adjust the sleep duration as needed
+                    Thread.sleep(1); // Adjust the sleep duration as needed
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+        
+        amtTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                // Non-digit characters are not allowed
+                amtTF.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+
+            // Restrict the maximum value to 10,000
+            if (!amtTF.getText().isEmpty()) {
+                int amount = Integer.parseInt(amtTF.getText());
+                if (amount > 10000) {
+                    amtTF.setText("10000");
+                }
+            }
+            setTransactionBasedOnSelection();
+        });
     }
         
 
@@ -159,7 +173,6 @@ public class TransactionController {
             String mop = MOPCMB.getValue();
             String scheme = schemeCMB.getValue();
             String late = lateCMB.getValue();
-            String transacID = transacIDTF.getText();
             String amt = amtTF.getText();
 
             double balance = 0.0;  // Default balance value
@@ -171,10 +184,10 @@ public class TransactionController {
             tuitionTotal = calculateTuitionTotal(mop, scheme, late);
             miscTotal = calculateMiscAmount();
 
-            totalLBL.setText(String.valueOf("Total: " + total));
-            balanceLBL.setText(String.valueOf("Balance: " + balance));
-            tuitionLBL.setText(String.valueOf("Tuition " + tuitionTotal));
-            miscLBL.setText(String.valueOf("Miscellaneous " + miscTotal));
+            totalLBL.setText(String.valueOf(total));
+            balanceLBL.setText(String.valueOf(balance));
+            tuitionLBL.setText(String.valueOf(tuitionTotal));
+            miscLBL.setText(String.valueOf(miscTotal));
         });
     }
 
@@ -250,8 +263,9 @@ public class TransactionController {
 					int sid1 = resultSet.getInt("sid");
 					String gender1 = resultSet.getString("gender");
 					String sem = resultSet.getString("sem");
+					String sy = resultSet.getString("sy");
 
-					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
+					Students studentObj = new Students(firstName, middleName, lastName, course1, year1,sy, section1,
 							location1, scode1, date1, sid1, gender1, null, sid1, sid1, sem);
 					// studentList.add(studentObj);
 				}
@@ -277,18 +291,25 @@ public class TransactionController {
 
 	    if (validateInputs()) {
 	        saveAndPrint();
-	        returnToEnrollment(event );
+
+	        // Update the UI with the new values
+	        setTransactionBasedOnSelection();
+
+	        returnToEnrollment(event);
+
+	        // Re-enable continuous updates after save operation
+	        continuousUpdate = true;
 	    }
 	}
+
 	
 	private boolean validateInputs() {
 	    String mop = MOPCMB.getValue();
-	    String transacID = transacIDTF.getText();
 	    String late = lateCMB.getValue();
 	    String scheme = schemeCMB.getValue();
 	    String amt = amtTF.getText();
 
-	    if (mop == null || transacID.isEmpty() || late == null || scheme == null || amt.isEmpty()) {
+	    if (mop == null || late == null || scheme == null || amt.isEmpty()) {
 	        Alert alert = new Alert(AlertType.ERROR);
 	        alert.setTitle("Error");
 	        alert.setHeaderText("Invalid Inputs");
@@ -297,7 +318,15 @@ public class TransactionController {
 	        return false;
 	    }
 
-	    // Additional validation if needed
+	    double balance = Double.parseDouble(balanceLBL.getText().replace("Balance: ", ""));
+	    if (balance < 0) {
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.setTitle("Warning");
+	        alert.setHeaderText("Overpayment");
+	        alert.setContentText("You have entered more than the total amount. Please review your payment.");
+	        alert.showAndWait();
+	        return false;
+	    }
 
 	    return true;
 	}
@@ -344,55 +373,63 @@ public class TransactionController {
 	}
 
 	private void saveAndPrint() {
-	    TransactionController trans = TransactionController.getInstance();
-	    String studCode1 = trans.getStudCode();
-	    String mop = MOPCMB.getValue();
-	    String transacID = transacIDTF.getText();
-	    String late = lateCMB.getValue();
-	    String scheme = schemeCMB.getValue();
+        TransactionController trans = TransactionController.getInstance();
+        String studCode1 = trans.getStudCode();
+        String mop = MOPCMB.getValue();
+        String late = lateCMB.getValue();
+        String scheme = schemeCMB.getValue();
 
-	    System.out.println("has Transaction scode " + studCode1);
+        if (mop == null || late == null || scheme == null) {
+            System.out.println("Please fill in all required fields.");
+            return;
+        }
 
-	    if (mop == null || transacID.isEmpty() || late == null || scheme == null) {
-	        System.out.println("Please fill in all required fields.");
-	        return;
-	    }
+        // Generate a 6-digit transaction ID
+        String transactID = generateRandomTransactionID();
 
-	    double totalAmount = calculateTotalAmount();
+        System.out.println("has Transaction scode " + studCode1);
 
+        double totalAmount = calculateTotalAmount();
 
-	    UserSession session = UserSession.getInstance();
-	    String encoder = session.getUsername();
+        UserSession session = UserSession.getInstance();
+        String encoder = session.getUsername();
 
-	    try (Connection con = DatabaseManager.getConnection()) {
-	        String sql = "UPDATE transaction SET payment_mode=?, amount=?, late=?, total=?, balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE scode=?";
+        try (Connection con = DatabaseManager.getConnection()) {
+            String sql = "UPDATE transaction SET transaction_id =?, payment_mode=?, amount=?, late=?, total=?, balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE scode=?";
 
-	        try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
-	            preparedStatement.setString(1, mop);
-	            preparedStatement.setString(2, amtTF.getText());
-	            preparedStatement.setString(3, late);
-	            preparedStatement.setString(4, totalLBL.getText());
-	            preparedStatement.setString(5, balanceLBL.getText());
-	            preparedStatement.setDouble(6, calculateMiscAmount());
-	            preparedStatement.setString(7, tuitionLBL.getText());
-	            preparedStatement.setString(8, encoder);
-	            preparedStatement.setString(9, getCurrentDate());
-	            preparedStatement.setString(10, scheme);
-	            preparedStatement.setString(11, studCode1);
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.setString(1, transactID);
+                preparedStatement.setString(2, mop);
+                preparedStatement.setString(3, amtTF.getText());
+                preparedStatement.setString(4, late);
+                preparedStatement.setString(5, totalLBL.getText());
+                preparedStatement.setString(6, balanceLBL.getText());
+                preparedStatement.setDouble(7, calculateMiscAmount());
+                preparedStatement.setString(8, tuitionLBL.getText());
+                preparedStatement.setString(9, encoder);
+                preparedStatement.setString(10, getCurrentDate());
+                preparedStatement.setString(11, scheme);
+                preparedStatement.setString(12, studCode1);
 
-	            int rowsAffected = preparedStatement.executeUpdate();
+                int rowsAffected = preparedStatement.executeUpdate();
 
-	            if (rowsAffected > 0) {
-	                System.out.println("Transaction record updated successfully.");
-	            } else {
-	                System.out.println("No rows affected. Update failed.");
-	            }
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace(); // for development only, replace with proper logging
-	        System.out.println("An error occurred. Please contact support.");
-	    }
-	}
+                if (rowsAffected > 0) {
+                    System.out.println("Transaction record updated successfully.");
+                } else {
+                    System.out.println("No rows affected. Update failed.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // for development only, replace with proper logging
+            System.out.println("An error occurred. Please contact support.");
+        }
+    }
+	
+	private String generateRandomTransactionID() {
+        Random random = new Random();
+        int transactionID = random.nextInt(900000) + 100000; // Generates a random number between 100000 and 999999
+        return String.valueOf(transactionID);
+    }
 
 
 	private String getCurrentDate() {

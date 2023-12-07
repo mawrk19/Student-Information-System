@@ -20,7 +20,7 @@
                <children>
                   <HBox id="searchCon" alignment="CENTER" prefHeight="60.0" prefWidth="405.0" spacing="10.0" style="-fx-background-color: #C9CAD9;" stylesheets="@Evaluation.css">
                      <children>
-                        <TextField id="searchBox" fx:id="searchbar" alignment="CENTER" prefHeight="50.0" prefWidth="329.0" stylesheets="@Evaluation.css" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="searchbar" alignment="CENTER" prefHeight="50.0" prefWidth="329.0" promptText="Enter Student Code" HBox.hgrow="ALWAYS" />
                         <Button id="SearchIcon" fx:id="searchbtn" mnemonicParsing="false" onAction="#searchscodebtn" prefHeight="50.0" prefWidth="48.0" stylesheets="@../studentprof/StudentProf.css">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">

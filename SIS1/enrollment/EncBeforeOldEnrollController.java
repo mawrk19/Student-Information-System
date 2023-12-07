@@ -23,9 +23,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
-import application.MainFrameController;
+import encoderui.EncoderController;
 
-public class BeforeOldEnrollController {
+public class EncBeforeOldEnrollController {
 	@FXML
 	private Button searchbtn;
 
@@ -114,49 +114,43 @@ public class BeforeOldEnrollController {
 				BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
 	
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/OldEnrollment.fxml"));
-				Parent timetable = loader.load();
+				Parent oldenrollment = loader.load();
 	
-				AnchorPane.setLeftAnchor(timetable, 10.0);
-				AnchorPane.setRightAnchor(timetable, 10.0);
-				AnchorPane.setTopAnchor(timetable, 10.0);
-				AnchorPane.setBottomAnchor(timetable, 20.0);
+				AnchorPane.setLeftAnchor(oldenrollment, 10.0);
+				AnchorPane.setRightAnchor(oldenrollment, 10.0);
+				AnchorPane.setTopAnchor(oldenrollment, 10.0);
+				AnchorPane.setBottomAnchor(oldenrollment, 20.0);
 	
-				FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
-				Parent mainFrame = mainFrameLoader.load();
-				MainFrameController mainFrameController = mainFrameLoader.getController();
+				FXMLLoader encoderui = new FXMLLoader(getClass().getResource("/encoderui/Encoder.fxml"));
+				Parent encoder = encoderui.load();
+				EncoderController encoderController = encoderui.getController();
 	
-				mainFrameController.Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+				encoderController.Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 	
-				mainFrameController.Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
-				mainFrameController.Dashboard.setBackground(new Background(ube));
-				mainFrameController.Dashboard.setTextFill(Color.WHITE);
-				mainFrameController.StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-				mainFrameController.StudentProf.setBackground(new Background(ube));
-				mainFrameController.StudentProf.setTextFill(Color.WHITE);
+				encoderController.Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+				encoderController.Dashboard.setBackground(new Background(ube));
+				encoderController.Dashboard.setTextFill(Color.WHITE);
+				encoderController.StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+				encoderController.StudentProf.setBackground(new Background(ube));
+				encoderController.StudentProf.setTextFill(Color.WHITE);
 	//	        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
 	//	        Timetable.setBackground(new Background(ube));
 	//	        Timetable.setTextFill(Color.WHITE);
-				mainFrameController.Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
-				mainFrameController.Schedule.setBackground(new Background(ube));
-				mainFrameController.Schedule.setTextFill(Color.WHITE);
-				mainFrameController.Evaluation.setStyle("-fx-border-radius: 25 0 0 25;");
-				mainFrameController.Evaluation.setBackground(new Background(ube));
-				mainFrameController.Evaluation.setTextFill(Color.WHITE);
 	//	        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
 	//	        Grading.setBackground(new Background(ube));
 	//	        Grading.setTextFill(Color.WHITE);
-				mainFrameController.Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-				mainFrameController.Enrollment.setBackground(new Background(ube));
-				mainFrameController.Enrollment.setTextFill(Color.WHITE);
-				mainFrameController.oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-				mainFrameController.oldEnrollment.setTextFill(Color.BLACK);
-				mainFrameController.Students.setStyle("-fx-border-radius: 25 0 0 25;");
-				mainFrameController.Students.setBackground(new Background(ube));
-				mainFrameController.Students.setTextFill(Color.WHITE);
+				encoderController.Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+				encoderController.Enrollment.setBackground(new Background(ube));
+				encoderController.Enrollment.setTextFill(Color.WHITE);
+				encoderController.oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+				encoderController.oldEnrollment.setTextFill(Color.BLACK);
+				encoderController.Students.setStyle("-fx-border-radius: 25 0 0 25;");
+				encoderController.Students.setBackground(new Background(ube));
+				encoderController.Students.setTextFill(Color.WHITE);
 	
-				mainFrameController.setContent(timetable);
+				encoderController.setContent(oldenrollment);
 	
-				Scene scene = new Scene(mainFrame);
+				Scene scene = new Scene(encoder);
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				stage.setScene(scene);
 				stage.show();
