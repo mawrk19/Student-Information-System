@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentprof.EncStudentProfController">
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentprof.EncStudentProfController">
    <children>
       <HBox spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -21,7 +21,7 @@
                <children>
                   <HBox prefHeight="55.0" prefWidth="552.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="searchTF" alignment="CENTER" onAction="#searchActionPerformed" prefHeight="40.0" prefWidth="456.0" promptText="Type to Search..." HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="searchTF" alignment="CENTER" onAction="#searchActionPerformed" prefHeight="40.0" prefWidth="456.0" promptText="Enter Student Code" HBox.hgrow="ALWAYS" />
                         <Button id="SearchIcon" fx:id="search" mnemonicParsing="false" onAction="#searchActionPerformed" prefHeight="40.0" prefWidth="50.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">

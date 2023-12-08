@@ -1,5 +1,6 @@
 package enrollment;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Blob;
@@ -339,6 +340,15 @@ public class TransactionController {
 	        saveAndPrint();
 
 	        // Update the UI with the new values
+	        Itext printshit = new Itext();
+	        printshit.generatePDF(studCode1, miscTotal, end, null); // <- Missing semicolon
+
+	        try {
+	            printshit.generatePDF(transacID.toString(), totalAmount, balanceTotal, localdate);
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace(); // <- Log the exception or handle it appropriately
+	        }
+
 	        setTransactionBasedOnSelection();
 	        returnToEnrollment(event);
 
