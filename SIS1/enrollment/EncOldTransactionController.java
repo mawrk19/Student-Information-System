@@ -1,5 +1,6 @@
 package enrollment;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Blob;
@@ -465,6 +466,12 @@ public class EncOldTransactionController {
                     System.out.println("Transaction record updated successfully.");
                 } else {
                     System.out.println("No rows affected. Update failed.");
+                }
+                LocalDate localdate = LocalDate.now();
+                Itext PDFgenerator = new Itext();
+                try {
+                	PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText() , balanceLBL.getText(),localdate);
+                } catch (FileNotFoundException e) {
                 }
             }
         } catch (SQLException e) {
