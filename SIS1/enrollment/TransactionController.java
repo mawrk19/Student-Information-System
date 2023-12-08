@@ -477,7 +477,7 @@ public class TransactionController {
                 LocalDate localdate = LocalDate.now();
                 Itext PDFgenerator = new Itext();
                 try {
-                	PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText() , balanceLBL.getText(),localdate, libCB.isSelected(), medCB.isSelected(), sciCB.isSelected(),comCB.isSelected(),athCB.isSelected(),mediaCB.isSelected() );
+                	PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText() , balanceLBL.getText(),localdate, firstName.toString(), middleName.toString(), lastName.toString(),libCB.isSelected(), medCB.isSelected(), sciCB.isSelected(),comCB.isSelected(),athCB.isSelected(),mediaCB.isSelected() );
                 } catch (FileNotFoundException e) {
                 }
             }

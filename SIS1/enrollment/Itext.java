@@ -18,7 +18,7 @@ import com.itextpdf.layout.properties.UnitValue;
 
 
 public class Itext {
-	public void generatePDF(String transaction_id, String total, String balance,  LocalDate date, boolean libfee, boolean medfee, boolean scifee, boolean comlabfee, boolean athletefee, boolean mediafee) throws FileNotFoundException {
+	public void generatePDF(String transaction_id, String total, String balance,  LocalDate date, String firstName,String middleName,String lastName, boolean libfee, boolean medfee, boolean scifee, boolean comlabfee, boolean athletefee, boolean mediafee ) throws FileNotFoundException {
 		
 	//public void createPDF() throws FileNotFoundException{
 		// TODO Auto-generated method stub
@@ -60,7 +60,7 @@ public class Itext {
 	    TransacID.addCell(new Cell().add(new Paragraph("Transaction ID:" + transaction_id)).addStyle(header1));
 	    document.add(TransacID.setBorderBottom(separator));
 	    Table Name = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
-	    Name.addCell(new Cell().add(new Paragraph("Name:")).addStyle(header5));
+	    Name.addCell(new Cell().add(new Paragraph("Name:" + firstName + middleName + lastName)).addStyle(header5));
 	    Name.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
 	    document.add(Name);
 	    Table MiscFee = new Table(UnitValue.createPercentArray(1)).useAllAvailableWidth();
