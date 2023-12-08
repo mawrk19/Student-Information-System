@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentprof.EncStudentProfController">
+<AnchorPane id="encBackground" stylesheets="@../dashboard/Dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentprof.EncStudentProfController">
    <children>
       <HBox spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -21,8 +21,8 @@
                <children>
                   <HBox prefHeight="55.0" prefWidth="552.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="searchTF" alignment="CENTER" onAction="#searchActionPerformed" prefHeight="40.0" prefWidth="456.0" promptText="Enter Student Code" HBox.hgrow="ALWAYS" />
-                        <Button id="SearchIcon" fx:id="search" mnemonicParsing="false" onAction="#searchActionPerformed" prefHeight="40.0" prefWidth="50.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="searchTF" alignment="CENTER" onAction="#searchActionPerformed" prefHeight="40.0" prefWidth="456.0" promptText="Type to Search..." HBox.hgrow="ALWAYS" />
+                        <Button id="encSearchIcon" fx:id="search" mnemonicParsing="false" onAction="#searchActionPerformed" prefHeight="40.0" prefWidth="50.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -35,23 +35,23 @@
                         <Insets left="15.0" right="15.0" />
                      </padding>
                   </HBox>
-                  <AnchorPane id="EnrollStatPane" prefHeight="275.0" prefWidth="546.0" stylesheets="@StudentProf.css" VBox.vgrow="ALWAYS">
+                  <AnchorPane id="encEnrollStatPane" prefHeight="275.0" prefWidth="546.0" stylesheets="@StudentProf.css" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox alignment="CENTER" layoutY="10.0" prefHeight="218.0" prefWidth="546.0" spacing="10.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                            <children>
                               <HBox prefHeight="187.0" prefWidth="538.0">
                                  <children>
-                                    <Label id="EnrollmentSts" prefHeight="36.0" prefWidth="262.0" stylesheets="@StudentProf.css" text="Student Profile">
+                                    <Label id="EnrollmentSts" alignment="CENTER" prefHeight="148.0" prefWidth="282.0" stylesheets="@StudentProf.css" text="Student Profile" textAlignment="CENTER">
                                        <font>
-                                          <Font size="35.0" />
+                                          <Font name="Baskerville Old Face" size="35.0" />
                                        </font>
                                        <padding>
                                           <Insets left="30.0" top="80.0" />
                                        </padding>
                                     </Label>
-                                    <ImageView fitHeight="187.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="175.0" fitWidth="213.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../src/imgs_icons/gototimetable1.png" />
+                                          <Image url="@../src/imgs_icons/studprof.png" />
                                        </image>
                                        <HBox.margin>
                                           <Insets left="20.0" />
@@ -65,7 +65,7 @@
                   </AnchorPane>
                   <HBox prefHeight="508.0" prefWidth="525.0" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <AnchorPane id="SchedPane" prefHeight="535.0" prefWidth="786.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
+                        <AnchorPane id="encSchedPane" prefHeight="535.0" prefWidth="786.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
                            <children>
                               <VBox alignment="CENTER" layoutX="12.0" layoutY="-1.0" prefHeight="444.0" prefWidth="498.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                  <children>
@@ -93,7 +93,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox id="SidePane" alignment="CENTER" prefHeight="753.0" prefWidth="202.0" spacing="10.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
+            <VBox id="encSidePane" alignment="CENTER" prefHeight="753.0" prefWidth="202.0" spacing="10.0" stylesheets="@StudentProf.css" HBox.hgrow="ALWAYS">
                <children>
                   <Label id="dp" alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="138.0" prefWidth="250.0" stylesheets="@StudentProf.css" VBox.vgrow="ALWAYS">
                      <graphic>
