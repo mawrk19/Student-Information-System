@@ -1120,7 +1120,7 @@ public class EnrollmentController implements Initializable {
 						preparedStatement.setString(13, startID);
 						preparedStatement.setString(14, endID);
 						preparedStatement.setBlob(15, imageStream);
-						preparedStatement.setString(1, username);
+						preparedStatement.setString(16, username);
 					} else {
 						preparedStatement.setString(13, startID);
 						preparedStatement.setString(14, endID);

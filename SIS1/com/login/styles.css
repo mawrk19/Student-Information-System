@@ -91,3 +91,9 @@
 	-fx-font-size: 20px ;
 	-fx-prompt-text-fill: #2589bd;
 }
+
+#backkyy {
+	-fx-background-color: linear-gradient(to right , #322258, #33235a);
+	-fx-border-radius: 35 35 35 35;
+	-fx-background-radius: 35 35 35 35;
+}
