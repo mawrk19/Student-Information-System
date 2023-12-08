@@ -467,7 +467,7 @@ public class EncTransactionController {
                 LocalDate localdate = LocalDate.now();
                 Itext PDFgenerator = new Itext();
                 try {
-                	PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText() , balanceLBL.getText(),localdate, libCB.getText(), medCB.getText(), sciCB.getText(),comCB.getText(),athCB.getText(),mediaCB.getText() );
+                	PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText() , balanceLBL.getText(),localdate, libCB.isSelected(), medCB.isSelected(), sciCB.isSelected(),comCB.isSelected(),athCB.isSelected(),mediaCB.isSelected() );
                 } catch (FileNotFoundException e) {
                 }
             }

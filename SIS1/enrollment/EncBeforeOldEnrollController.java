@@ -64,39 +64,54 @@ public class EncBeforeOldEnrollController implements Initializable{
 
 	@FXML
 	void searchscodebtn(ActionEvent event) {
-		searchedCode = searchbar.getText();
-		SearchBarSingleton.getInstance().setSearchbarText(searchedCode);
-		 
-		 try (Connection connection = DatabaseManager.getConnection()) {
-		        String query = "SELECT gwa FROM student WHERE scode = ?";
-		        PreparedStatement preparedStatement = connection.prepareStatement(query);
-		        preparedStatement.setString(1, searchedCode);
+	    searchedCode = searchbar.getText();
+	    SearchBarSingleton.getInstance().setSearchbarText(searchedCode);
 
-		        ResultSet resultSet = preparedStatement.executeQuery();
+	    try (Connection connection = DatabaseManager.getConnection()) {
+	        String query = "SELECT gwa FROM student WHERE scode = ?";
+	        PreparedStatement preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setString(1, searchedCode);
 
-		        if (resultSet.next()) {
-		            String gwaString = resultSet.getString("gwa");
-		            gwaValue = Double.parseDouble(gwaString);
+	        ResultSet resultSet = preparedStatement.executeQuery();
 
-		            gwalbl.setText(gwaString);
-		        } else if (searchedCode.isEmpty()) {
-			        showAlert("Error", "Empty Input", "Please input a valid Student Code");
-			        return; // Stop further execution if the search bar is empty
-			    } else if (searchedCode.isEmpty() || !isValidStudentCode(searchedCode)) {
-			        showAlert("Error", "Invalid Student Code", "Please enter a valid Student Code");
-			        return; // Stop further execution if the student code is invalid or empty
-			    } else {
-		            showAlert("Error", "Invalid Student Code", "Please enter a valid Student Code");
-		            clearFields();
-		            // Display an alert or message to inform the user about an invalid student code
-		        }
+	        if (resultSet.next()) {
+	            String gwaString = resultSet.getString("gwa");
 
-		        resultSet.close();
-		        preparedStatement.close();
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		        // Handle any database connection or query errors
-		    }
+	            // Check for null or empty strings before parsing to Double
+	            if (gwaString != null && !gwaString.isEmpty()) {
+	                try {
+	                    gwaValue = Double.parseDouble(gwaString.trim());
+	                    gwalbl.setText(gwaString);
+	                } catch (NumberFormatException e) {
+	                    // Handle parsing errors
+	                    showAlert("Error", "Invalid GWA", "Invalid GWA format for the entered Student Code");
+	                    clearFields(); // Clear fields when an invalid GWA format is encountered
+	                    return; // Stop further execution due to invalid GWA format
+	                }
+	            } else {
+	                // Handle the case where the retrieved GWA is null or empty
+	                showAlert("Error", "No GWA Found", "No GWA found for the entered Student Code.");
+	                clearFields(); // Clear fields when no GWA is found
+	                return; // Stop further execution due to no GWA found
+	            }
+	        } else if (searchedCode.isEmpty()) {
+	            showAlert("Error", "Empty Input", "Please input a valid Student Code");
+	            return; // Stop further execution if the search bar is empty
+	        } else if (!isValidStudentCode(searchedCode)) {
+	            showAlert("Error", "Invalid Student Code", "Please enter a valid Student Code");
+	            return; // Stop further execution if the student code is invalid or empty
+	        } else {
+	            showAlert("Error", "No Grade Found", "No grade found for the entered Student Code");
+	            clearFields(); // Clear fields when no grade is found
+	            return; // Stop further execution due to no grade found
+	        }
+
+	        resultSet.close();
+	        preparedStatement.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Handle any database connection or query errors
+	    }
 	}
 
 	
