@@ -144,6 +144,7 @@ public class EvaluationController implements Initializable{
                 subjectsStatement.close();
             } else {
                 clearFields();
+                showAlert("Error", "Invalid scode", "The entered Studend Code does not exist.");
             }
 
             resultSet.close();
