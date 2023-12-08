@@ -235,7 +235,7 @@ public class EncOldEnrollmentController implements Initializable {
 
 	private void replaceTableViewContent() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/OldTransaction.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/EncOldTransaction.fxml"));
 			AnchorPane newTableAnchorPane = loader.load();
 
 			StackPane tableViewParent = (StackPane) subjectsTableView.getParent();

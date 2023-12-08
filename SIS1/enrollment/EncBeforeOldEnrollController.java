@@ -120,7 +120,7 @@ public class EncBeforeOldEnrollController {
 
 				BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
 	
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/OldEnrollment.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/EncOldEnrollment.fxml"));
 				Parent timetable = loader.load();
 	
 				AnchorPane.setLeftAnchor(timetable, 10.0);
