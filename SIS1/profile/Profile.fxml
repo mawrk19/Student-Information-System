@@ -37,7 +37,7 @@
                <children>
                   <AnchorPane layoutY="14.0" prefHeight="51.0" prefWidth="552.0">
                      <children>
-                        <Label id="PersonalInfo" layoutX="159.0" layoutY="12.0" stylesheets="@Profile.css" text="Personal Information" />
+                        <Label id="PersonalInfo" layoutX="122.0" layoutY="12.0" stylesheets="@Profile.css" text="Update Personal Information" />
                      </children>
                   </AnchorPane>
                   <TextField fx:id="firstTF" layoutX="14.0" layoutY="111.0" prefHeight="40.0" prefWidth="228.0" />
@@ -47,20 +47,25 @@
                   <Label id="InfoLbl" layoutX="18.0" layoutY="164.0" stylesheets="@Profile.css" text="Username" />
                   <TextField fx:id="userTF" layoutX="14.0" layoutY="190.0" prefHeight="40.0" prefWidth="228.0" />
                   <Separator layoutY="293.0" prefHeight="8.0" prefWidth="552.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="293.0" />
-                  <Label id="PersonalInfo" layoutX="14.0" layoutY="313.0" prefHeight="40.0" prefWidth="251.0" stylesheets="@../studentprof/StudentProf.css" text="Change your Password" />
+                  <Label id="PersonalInfo" layoutX="19.0" layoutY="313.0" prefHeight="40.0" prefWidth="251.0" stylesheets="@../studentprof/StudentProf.css" text="Change your Password" />
                   <Label id="CPLbl" layoutX="74.0" layoutY="362.0" stylesheets="@Profile.css" text="Current Password" />
                   <TextField fx:id="passwordTF" layoutX="22.0" layoutY="379.0" prefHeight="40.0" prefWidth="240.0" />
                   <Label id="CPLbl" layoutX="86.0" layoutY="419.0" stylesheets="@Profile.css" text="New Password" />
                   <Label id="CPLbl" layoutX="75.0" layoutY="476.0" stylesheets="@Profile.css" text="Confirm Password" />
-                  <Button id="UpdateBtn" fx:id="updateBTN" layoutX="68.0" layoutY="541.0" mnemonicParsing="false" stylesheets="@Profile.css" text="Update Password" />
+                  <Button id="UpdateBtn" fx:id="updateBTN" layoutX="27.0" layoutY="541.0" mnemonicParsing="false" onAction="#updatePassword" prefHeight="40.0" prefWidth="234.0" stylesheets="@Profile.css" text="Update Password" />
                   <TextField fx:id="newPasswordTF" layoutX="22.0" layoutY="436.0" prefHeight="40.0" prefWidth="240.0" />
                   <TextField fx:id="profileConfirmPass" layoutX="22.0" layoutY="493.0" prefHeight="40.0" prefWidth="240.0" />
                   <Label id="PersonalInfo" layoutX="327.0" layoutY="313.0" prefHeight="40.0" prefWidth="150.0" stylesheets="@../studentprof/StudentProf.css" text="Add as admin" />
-                  <TextField fx:id="passwordTF1" layoutX="282.0" layoutY="408.0" prefHeight="40.0" prefWidth="240.0" />
+                  <TextField fx:id="insertIdLBL" layoutX="282.0" layoutY="408.0" prefHeight="40.0" prefWidth="240.0" />
                   <Label id="CPLbl" layoutX="359.0" layoutY="391.0" stylesheets="@Profile.css" text="Insert ID" />
-                  <Label id="CPLbl" layoutX="348.0" layoutY="448.0" stylesheets="@Profile.css" text="Type Cofirm" />
-                  <TextField fx:id="passwordTF11" layoutX="282.0" layoutY="465.0" prefHeight="40.0" prefWidth="240.0" />
-                  <Button id="UpdateBtn" fx:id="updateBTN1" layoutX="322.0" layoutY="541.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" stylesheets="@Profile.css" text="Add" />
+                  <Label id="CPLbl" layoutX="340.0" layoutY="448.0" prefHeight="17.0" prefWidth="101.0" stylesheets="@Profile.css" text="Type Confirm" />
+                  <TextField fx:id="confirmLBL" layoutX="282.0" layoutY="465.0" prefHeight="40.0" prefWidth="240.0" />
+                  <Button id="UpdateBtn" fx:id="addBTN" layoutX="285.0" layoutY="541.0" mnemonicParsing="false" onAction="#addBTN" prefHeight="40.0" prefWidth="234.0" stylesheets="@Profile.css" text="Add" />
+                  <Button id="EditBtn" fx:id="saveBTN" alignment="CENTER" layoutX="276.0" layoutY="190.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveProfile" prefHeight="40.0" prefWidth="228.0" stylesheets="@Profile.css" text="Save" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="78.0" prefWidth="870.0">
@@ -89,11 +94,6 @@
                         <Label id="LblInfo" fx:id="lastnameLBL" alignment="CENTER" prefHeight="57.0" prefWidth="258.0" stylesheets="@../studentprof/StudentProf.css" text="LAST NAME" textAlignment="CENTER" />
                      </children>
                   </VBox>
-                  <Button id="EditBtn" fx:id="saveBTN" alignment="CENTER" layoutX="23.0" layoutY="522.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="51.0" prefWidth="200.0" stylesheets="@Profile.css" text="Save" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="10.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
          </children>

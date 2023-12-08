@@ -22,14 +22,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import javafx.util.converter.DefaultStringConverter;
 
 public class ProfileController implements Initializable {
 
@@ -70,10 +73,10 @@ public class ProfileController implements Initializable {
     private Button saveBTN;
 
     @FXML
-    private TextField passwordTF;
+    private TextField passwordTF,insertIdLBL,confirmLBL;
     
     @FXML
-    private TextField newPasswordTF;
+    private TextField newPasswordTF, profileConfirmPass;
 
     @FXML
     private ImageView profileImageView;
@@ -82,7 +85,7 @@ public class ProfileController implements Initializable {
     private Button removeBTN;
 
     @FXML
-    private Button updateBTN;
+    private Button updateBTN, addBTN;
         
     private Image image;
     
@@ -118,7 +121,52 @@ public class ProfileController implements Initializable {
         }
         
         insertLBL();
+        
+        setupTextFormatterWithValidation(firstTF, 15, "[a-zA-Z]+", "Only letters are allowed");
+        setupTextFormatterWithValidation(lastTF, 15, "[a-zA-Z]+", "Only letters are allowed");
+        setupTextFormatterWithValidation(userTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
+        setupTextFormatterWithValidation(passwordTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
+        setupTextFormatterWithValidation(newPasswordTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
+        setupTextFormatterWithValidation(profileConfirmPass, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
     }
+    
+    private void setupTextFormatterWithValidation(TextField textField, int maxLength, String regex, String alertMessage) {
+        TextFormatter<String> textFormatter = new TextFormatter<>(new DefaultStringConverter(), null,
+                change -> {
+                    String newText = change.getControlNewText();
+                    if (newText.length() <= maxLength && newText.matches(regex)) {
+                        return change;
+                    }
+                    return null; // reject the change if it exceeds the max length or doesn't match the regex
+                });
+
+        textField.setTextFormatter(textFormatter);
+        addValidationAlert(textField, alertMessage);
+    }
+
+    private void addValidationAlert(TextField textField, String message) {
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                validateAndShowAlert(textField, message);
+            }
+        });
+    }
+
+    private void validateAndShowAlert(TextField textField, String message) {
+        if (!textField.getText().matches("[a-zA-Z0-9]+")) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Input", message);
+            textField.clear();
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
     
     private InputStream getUserImageFromDatabase() throws SQLException {
         try (PreparedStatement stmt = con.prepareStatement("SELECT userIMG FROM users WHERE id = ?")) {
@@ -159,34 +207,21 @@ public class ProfileController implements Initializable {
     
     private void saveImageToDatabase(File imageFile) {
         try (Connection con = DatabaseManager.getConnection()) {
-            // Set autocommit to false
             con.setAutoCommit(false);
 
             try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET userIMG = ? WHERE id = ?")) {
-                // Convert Image to BufferedImage
                 BufferedImage bufferedImage = SwingFXUtils.fromFXImage(profileImageView.getImage(), null);
-
-                // Convert BufferedImage to byte array
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 ImageIO.write(bufferedImage, "png", baos);
                 byte[] imageData = baos.toByteArray();
-
-                // Set parameters for the PreparedStatement
                 stmt.setBytes(1, imageData);
                 stmt.setInt(2, UserSession.getInstance().getId());  // Use the user ID from UserSession
-
-                // Execute the update
                 stmt.executeUpdate();
-
-                // Commit the transaction
                 con.commit();
-
             } catch (SQLException | IOException e) {
-                e.printStackTrace();
-                // Rollback the transaction in case of an exception
+                e.printStackTrace();  
                 con.rollback();
             } finally {
-                // Set autocommit back to true
                 con.setAutoCommit(true);
             }
         } catch (SQLException e) {
@@ -194,7 +229,6 @@ public class ProfileController implements Initializable {
         }
     }
 
-    
     private InputStream convertImageToInputStream(Image image) throws IOException {
         if (image != null && image.getPixelReader() != null) {
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
@@ -253,6 +287,7 @@ public class ProfileController implements Initializable {
         String firstName = session.getFirstname();
         String lastName = session.getLastname();
         String username = session.getUsername();
+        String password = session.getPassword();
 
         // Set the labels
         firstnameLBL.setText(firstName);
@@ -261,5 +296,119 @@ public class ProfileController implements Initializable {
         firstTF.setText(firstName);
         lastTF.setText(lastName);
         userTF.setText(username);
+        passwordTF.setText(password);
+    }
+    
+    @FXML
+    private void saveProfile(ActionEvent event) {
+        try {
+            // Get the values from the text fields
+            String newFirstName = firstTF.getText();
+            String newLastName = lastTF.getText();
+            String newUsername = userTF.getText();
+
+            // Update the database with the new values
+            updateProfileInDatabase(newFirstName, newLastName, newUsername);
+
+            // Update the labels
+            firstnameLBL.setText(newFirstName);
+            lastnameLBL.setText(newLastName);
+            usernameLBL.setText(newUsername);
+
+            // Optionally, you may want to update the UserSession with the new values
+            UserSession.getInstance().setFirstname(newFirstName);
+            UserSession.getInstance().setLastname(newLastName);
+            UserSession.getInstance().setUsername(newUsername);
+
+            // Optionally, display a success message or perform other actions
+            System.out.println("Profile saved successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+
+    private void updateProfileInDatabase(String newFirstName, String newLastName, String newUsername) throws SQLException {
+        try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET fname = ?, lname = ?, username = ? WHERE id = ?")) {
+            stmt.setString(1, newFirstName);
+            stmt.setString(2, newLastName);
+            stmt.setString(3, newUsername);
+            stmt.setInt(4, UserSession.getInstance().getId()); // Use the user ID from UserSession
+
+            stmt.executeUpdate();
+        }
+    }
+    
+    @FXML
+    private void updatePassword(ActionEvent event) {
+        try {
+            // Get the values from the text fields
+            String currentPass = passwordTF.getText();
+            String newPass = newPasswordTF.getText();
+            String confirmPass = profileConfirmPass.getText();
+
+            // Update the database with the new values
+            updatePasswordDatabase(confirmPass);
+
+            // Update the labels
+            passwordTF.clear();
+            newPasswordTF.clear();
+            profileConfirmPass.clear();
+
+            // Optionally, you may want to update the UserSession with the new values
+            UserSession.getInstance().setPassword(confirmPass);
+
+            // Display a success message
+            showSuccessAlert("Password changed successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+
+    private void updatePasswordDatabase(String confirmPass) throws SQLException {
+        try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET password = ? WHERE id = ?")) {
+            stmt.setString(1, confirmPass);
+            stmt.setInt(2, UserSession.getInstance().getId()); // Use the user ID from UserSession
+
+            stmt.executeUpdate();
+        }
+    }
+
+    private void showSuccessAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void addBTN(ActionEvent event) {
+        try {
+            // Get the values from the text fields
+            String confirmValue = confirmLBL.getText();
+            String insertValue = insertIdLBL.getText();
+
+            // Update the database based on conditions
+            if ("Confirm".equalsIgnoreCase(confirmValue)) {
+            	 updateInsertValueInDatabase();
+            }
+            // Optionally, display a success message or perform other actions
+            System.out.println("Database updated successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+
+
+
+    private void updateInsertValueInDatabase() throws SQLException {
+        try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET type = 'admin' WHERE id = ?")) {
+            // Update based on your conditions
+            stmt.setInt(1, UserSession.getInstance().getId());
+            stmt.executeUpdate();
+        }
     }
 }
