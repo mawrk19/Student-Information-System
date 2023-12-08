@@ -14,84 +14,82 @@
 
 <AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Profile.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="profile.EncProfileController">
    <children>
-      <AnchorPane layoutY="-3.0" prefHeight="340.0" prefWidth="870.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="790.0" prefWidth="870.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefHeight="340.0" prefWidth="870.0">
                <children>
-                  <HBox alignment="CENTER">
+                  <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <ImageView fx:id="coverImage" fitHeight="340.0" fitWidth="870.0" pickOnBounds="true" HBox.hgrow="ALWAYS">
-                           <image>
-                              <Image url="@../src/imgs_icons/cover.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="78.0" prefWidth="870.0">
-         <children>
-            <AnchorPane layoutX="32.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label id="ProfileLbl" layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="150.0" stylesheets="@Profile.css" text="Profile" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane id="Container" layoutX="25.0" layoutY="177.0" prefHeight="593.0" prefWidth="258.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="21.0">
-         <children>
-            <VBox prefHeight="523.0" prefWidth="258.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <AnchorPane prefHeight="242.0" prefWidth="258.0">
-                     <children>
-                        <ImageView fx:id="profileImageView" fitHeight="200.0" fitWidth="200.0" layoutX="29.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <ImageView fx:id="coverImage" fitHeight="340.0" fitWidth="870.0" pickOnBounds="true" HBox.hgrow="ALWAYS">
+                                 <image>
+                                    <Image url="@../src/imgs_icons/cover.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
                      </children>
                   </AnchorPane>
-                  <Label id="LblInfo" fx:id="usernameLBL" alignment="CENTER" prefHeight="57.0" prefWidth="258.0" stylesheets="@../studentprof/StudentProf.css" text="USERNAME" textAlignment="CENTER" />
-                  <Label id="LblInfo" fx:id="firstnameLBL" alignment="CENTER" prefHeight="57.0" prefWidth="258.0" stylesheets="@../studentprof/StudentProf.css" text="FIRST NAME" textAlignment="CENTER" />
-                  <Label id="LblInfo" fx:id="lastnameLBL" alignment="CENTER" prefHeight="57.0" prefWidth="258.0" stylesheets="@../studentprof/StudentProf.css" text="LAST NAME" textAlignment="CENTER" />
-               </children>
-            </VBox>
-            <Button id="EditBtn" fx:id="saveBTN" alignment="CENTER" layoutX="23.0" layoutY="522.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="51.0" prefWidth="200.0" stylesheets="@Profile.css" text="Save" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="10.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane id="InformationPane" layoutX="296.0" layoutY="176.0" prefHeight="593.0" prefWidth="552.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="22.0">
-         <children>
-            <AnchorPane layoutY="14.0" prefHeight="51.0" prefWidth="552.0">
-               <children>
-                  <Label id="PersonalInfo" layoutX="159.0" layoutY="12.0" stylesheets="@Profile.css" text="Personal Information" />
                </children>
             </AnchorPane>
-            <TextField fx:id="firstTF" layoutX="14.0" layoutY="111.0" prefHeight="40.0" prefWidth="228.0" />
-            <Label id="InfoLbl" layoutX="16.0" layoutY="83.0" stylesheets="@Profile.css" text="First Name" />
-            <Label id="InfoLbl" layoutX="276.0" layoutY="83.0" stylesheets="@Profile.css" text="Last Name" />
-            <TextField fx:id="lastTF" layoutX="276.0" layoutY="111.0" prefHeight="40.0" prefWidth="228.0" />
-            <Label id="InfoLbl" layoutX="18.0" layoutY="164.0" stylesheets="@Profile.css" text="Username" />
-            <TextField fx:id="userTF" layoutX="14.0" layoutY="190.0" prefHeight="40.0" prefWidth="228.0" />
-            <Separator layoutY="293.0" prefHeight="8.0" prefWidth="552.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="293.0" />
-            <Label id="PersonalInfo" layoutX="14.0" layoutY="313.0" prefHeight="40.0" prefWidth="251.0" stylesheets="@../studentprof/StudentProf.css" text="Change your Password" />
-            <Label id="CPLbl" layoutX="74.0" layoutY="362.0" stylesheets="@Profile.css" text="Current Password" />
-            <TextField fx:id="passwordTF" layoutX="22.0" layoutY="379.0" prefHeight="40.0" prefWidth="240.0" />
-            <Label id="CPLbl" layoutX="86.0" layoutY="419.0" stylesheets="@Profile.css" text="New Password" />
-            <Label id="CPLbl" layoutX="75.0" layoutY="476.0" stylesheets="@Profile.css" text="Confirm Password" />
-            <Button id="UpdateBtn" fx:id="updateBTN" layoutX="68.0" layoutY="541.0" mnemonicParsing="false" stylesheets="@Profile.css" text="Update Password" />
-            <TextField fx:id="newPasswordTF" layoutX="22.0" layoutY="436.0" prefHeight="40.0" prefWidth="240.0" />
-            <TextField fx:id="profileConfirmPass" layoutX="22.0" layoutY="493.0" prefHeight="40.0" prefWidth="240.0" />
-            <Label id="PersonalInfo" layoutX="327.0" layoutY="313.0" prefHeight="40.0" prefWidth="150.0" stylesheets="@../studentprof/StudentProf.css" text="Add as admin" />
-            <TextField fx:id="passwordTF1" layoutX="282.0" layoutY="408.0" prefHeight="40.0" prefWidth="240.0" />
-            <Label id="CPLbl" layoutX="359.0" layoutY="391.0" stylesheets="@Profile.css" text="Insert ID" />
-            <Label id="CPLbl" layoutX="348.0" layoutY="448.0" stylesheets="@Profile.css" text="Type Cofirm" />
-            <TextField fx:id="passwordTF11" layoutX="282.0" layoutY="465.0" prefHeight="40.0" prefWidth="240.0" />
-            <Button id="UpdateBtn" fx:id="updateBTN1" layoutX="322.0" layoutY="541.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" stylesheets="@Profile.css" text="Add" />
+            <AnchorPane id="InformationPane" prefHeight="593.0" prefWidth="552.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="22.0">
+               <children>
+                  <AnchorPane layoutY="14.0" prefHeight="51.0" prefWidth="552.0">
+                     <children>
+                        <Label id="PersonalInfo" layoutX="122.0" layoutY="12.0" stylesheets="@Profile.css" text="Update Personal Information" />
+                     </children>
+                  </AnchorPane>
+                  <TextField fx:id="firstTF" layoutX="14.0" layoutY="111.0" prefHeight="40.0" prefWidth="228.0" />
+                  <Label id="InfoLbl" layoutX="16.0" layoutY="83.0" stylesheets="@Profile.css" text="First Name" />
+                  <Label id="InfoLbl" layoutX="276.0" layoutY="83.0" stylesheets="@Profile.css" text="Last Name" />
+                  <TextField fx:id="lastTF" layoutX="276.0" layoutY="111.0" prefHeight="40.0" prefWidth="228.0" />
+                  <Label id="InfoLbl" layoutX="18.0" layoutY="164.0" stylesheets="@Profile.css" text="Username" />
+                  <TextField fx:id="userTF" layoutX="14.0" layoutY="190.0" prefHeight="40.0" prefWidth="228.0" />
+                  <Separator layoutY="293.0" prefHeight="8.0" prefWidth="552.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="293.0" />
+                  <Label id="PersonalInfo" layoutX="151.0" layoutY="301.0" prefHeight="40.0" prefWidth="251.0" stylesheets="@../studentprof/StudentProf.css" text="Change your Password" />
+                  <Label id="CPLbl" layoutX="210.0" layoutY="353.0" stylesheets="@Profile.css" text="Current Password" />
+                  <TextField fx:id="passwordTF" layoutX="156.0" layoutY="379.0" prefHeight="40.0" prefWidth="240.0" />
+                  <Label id="CPLbl" layoutX="222.0" layoutY="419.0" stylesheets="@Profile.css" text="New Password" />
+                  <Label id="CPLbl" layoutX="209.0" layoutY="476.0" stylesheets="@Profile.css" text="Confirm Password" />
+                  <Button id="UpdateBtn" fx:id="updateBTN" layoutX="159.0" layoutY="539.0" mnemonicParsing="false" onAction="#updatePassword" prefHeight="40.0" prefWidth="234.0" stylesheets="@Profile.css" text="Update Password" />
+                  <TextField fx:id="newPasswordTF" layoutX="156.0" layoutY="436.0" prefHeight="40.0" prefWidth="240.0" />
+                  <TextField fx:id="profileConfirmPass" layoutX="156.0" layoutY="493.0" prefHeight="40.0" prefWidth="240.0" />
+                  <Button id="EditBtn" fx:id="saveBTN" alignment="CENTER" layoutX="276.0" layoutY="190.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveProfile" prefHeight="40.0" prefWidth="228.0" stylesheets="@Profile.css" text="Save" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="78.0" prefWidth="870.0">
+               <children>
+                  <AnchorPane layoutX="32.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label id="ProfileLbl" layoutX="30.0" layoutY="14.0" prefHeight="51.0" prefWidth="150.0" stylesheets="@Profile.css" text="Profile" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane id="Container" prefHeight="593.0" prefWidth="258.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="21.0">
+               <children>
+                  <VBox prefHeight="523.0" prefWidth="258.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="242.0" prefWidth="258.0">
+                           <children>
+                              <ImageView fx:id="profileImageView" fitHeight="200.0" fitWidth="200.0" layoutX="29.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                        <Label id="LblInfo" fx:id="usernameLBL" alignment="CENTER" prefHeight="57.0" prefWidth="258.0" stylesheets="@../studentprof/StudentProf.css" text="USERNAME" textAlignment="CENTER" />
+                        <Label id="LblInfo" fx:id="firstnameLBL" alignment="CENTER" prefHeight="57.0" prefWidth="258.0" stylesheets="@../studentprof/StudentProf.css" text="FIRST NAME" textAlignment="CENTER" />
+                        <Label id="LblInfo" fx:id="lastnameLBL" alignment="CENTER" prefHeight="57.0" prefWidth="258.0" stylesheets="@../studentprof/StudentProf.css" text="LAST NAME" textAlignment="CENTER" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
