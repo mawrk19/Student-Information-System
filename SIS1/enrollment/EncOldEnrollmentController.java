@@ -52,7 +52,7 @@ import com.mysql.cj.jdbc.Blob;
 import application.DatabaseManager;
 import application.UserSession;
 
-public class OldEnrollmentController implements Initializable {
+public class EncOldEnrollmentController implements Initializable {
 
 	@FXML
 	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, semCMB;
@@ -235,7 +235,7 @@ public class OldEnrollmentController implements Initializable {
 
 	private void replaceTableViewContent() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/OldTransaction.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/EncOldTransaction.fxml"));
 			AnchorPane newTableAnchorPane = loader.load();
 
 			StackPane tableViewParent = (StackPane) subjectsTableView.getParent();

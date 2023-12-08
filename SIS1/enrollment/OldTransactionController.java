@@ -40,7 +40,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import students.Students;
 
-public class TransactionController {
+public class OldTransactionController {
 	
 	private String firstName;
     private String middleName;
@@ -111,13 +111,15 @@ public class TransactionController {
     private double tuitionTotal;
     private double miscTotal;
 
-    private static TransactionController instance;
+    private static OldTransactionController instance;
 
     private String studCode;
 
     private double tuition = 1000; // Assuming tuition is a double
     
     private boolean continuousUpdate = false;
+    
+	private String searchedCode;
 
     public void initialize() {
         ObservableList<String> mop = FXCollections.observableArrayList("Scholar", "Full");
@@ -261,7 +263,6 @@ public class TransactionController {
         return miscTotal;
     }
 
-
 	@FXML
 	private void setStudents() {
 		try (Connection con = DatabaseManager.getConnection();
@@ -325,13 +326,14 @@ public class TransactionController {
 	@FXML
 	private void saveAndPrintClicked(ActionEvent event) throws IOException {
 	    continuousUpdate = false; // Stop continuous updates
-	    TransactionController trans = TransactionController.getInstance();
-	    String studCode1 = trans.getStudCode();
-	    EnrollmentController enroll = new EnrollmentController();
+	    searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	  
+	    System.out.println("rich baby daddy gang: " + searchedCode);
+	    OldEnrollmentController enroll = new OldEnrollmentController();
 
-	    if (studCode1 == null || studCode1.isEmpty()) {
+	    if (searchedCode == null || searchedCode.isEmpty()) {
 	        System.out.println("StudCode is not available. Please check your implementation.");
-	        System.out.println("eto scode: " + studCode1);
+	        System.out.println("eto scode: " + searchedCode);
 	        return;
 	    }
 
@@ -377,15 +379,14 @@ public class TransactionController {
 	}
 
 
-	public static TransactionController getInstance() {
+	public static OldTransactionController getInstance() {
 		if (instance == null) {
-			instance = new TransactionController();
+			instance = new OldTransactionController();
 		}
 		return instance;
 	}
 
 	private double calculateTotalAmount() {
-		TransactionController trans = TransactionController.getInstance();
 		String mop = MOPCMB.getValue();
 		String late = lateCMB.getValue();
 		String scheme = schemeCMB.getValue();
@@ -418,8 +419,10 @@ public class TransactionController {
 	}
 
 	private void saveAndPrint() {
-        TransactionController trans = TransactionController.getInstance();
-        String studCode1 = trans.getStudCode();
+		GeneratedIdSingleton idSingleton = GeneratedIdSingleton.getInstance();
+		int generatedId = idSingleton.getGeneratedId();
+		
+        System.out.println("yung scode sa save and print" + searchedCode);
         String mop = MOPCMB.getValue();
         String late = lateCMB.getValue();
         String scheme = schemeCMB.getValue();
@@ -432,7 +435,7 @@ public class TransactionController {
         // Generate a 6-digit transaction ID
         String transactID = generateRandomTransactionID();
 
-        System.out.println("has Transaction scode " + studCode1);
+        System.out.println("has Transaction scode " + searchedCode);
 
         double totalAmount = calculateTotalAmount();
 
@@ -440,7 +443,7 @@ public class TransactionController {
         String encoder = session.getUsername();
 
         try (Connection con = DatabaseManager.getConnection()) {
-            String sql = "UPDATE transaction SET transaction_id =?, payment_mode=?, amount=?, late=?, total=?, balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE scode=?";
+            String sql = "UPDATE transaction SET transaction_id =?, payment_mode=?, amount=?, late=?, total=?, balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE id=?";
 
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.setString(1, transactID);
@@ -454,7 +457,7 @@ public class TransactionController {
                 preparedStatement.setString(9, encoder);
                 preparedStatement.setString(10, getCurrentDate());
                 preparedStatement.setString(11, scheme);
-                preparedStatement.setString(12, studCode1);
+                preparedStatement.setInt(12, generatedId);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 
@@ -483,18 +486,10 @@ public class TransactionController {
 		return currentDate.format(formatter);
 	}
 
-	public void setStudCode(String studCode) {
-		this.studCode = studCode;
-	}
-
-	public String getStudCode() {
-		return studCode;
-	}
-	
 	private void returnToEnrollment(ActionEvent event) throws IOException {
 		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
 		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Enrollment.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/BeforeOldEnrollment.fxml"));
 		Parent timetable = loader.load();
 
 		AnchorPane.setLeftAnchor(timetable, 10.0);
@@ -526,11 +521,11 @@ public class TransactionController {
 //	        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
 //	        Grading.setBackground(new Background(ube));
 //	        Grading.setTextFill(Color.WHITE);
-		mainFrameController.Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		mainFrameController.Enrollment.setTextFill(Color.BLACK);
-		mainFrameController.oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-		mainFrameController.oldEnrollment.setBackground(new Background(ube));
-		mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
+		mainFrameController.Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+		mainFrameController.Enrollment.setBackground(new Background(ube));
+		mainFrameController.Enrollment.setTextFill(Color.WHITE);
+		mainFrameController.oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		mainFrameController.oldEnrollment.setTextFill(Color.BLACK);
 		mainFrameController.Students.setStyle("-fx-border-radius: 25 0 0 25;");
 		mainFrameController.Students.setBackground(new Background(ube));
 		mainFrameController.Students.setTextFill(Color.WHITE);

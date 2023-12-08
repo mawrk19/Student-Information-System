@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Evaluation.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="evaluation.EvaluationController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Evaluation.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="evaluation.EvaluationController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
@@ -98,11 +98,6 @@
                                     <Insets />
                                  </VBox.margin>
                               </Label>
-                              <Label id="infoLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" stylesheets="@Evaluation.css" text="Type:" VBox.vgrow="ALWAYS">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -138,11 +133,6 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <TextField id="txtField" fx:id="Type" alignment="CENTER" editable="false" maxHeight="1.7976931348623157E308" prefHeight="40.0" prefWidth="20.0" stylesheets="@Evaluation.css" VBox.vgrow="ALWAYS">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </TextField>
                            </children>
                            <padding>
                               <Insets right="20.0" />

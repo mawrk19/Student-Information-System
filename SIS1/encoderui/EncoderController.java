@@ -129,8 +129,7 @@ public class EncoderController implements Initializable{
 		 AnchorPane.setLeftAnchor(profilestage, 10.0);
 		 AnchorPane.setRightAnchor(profilestage, 10.0);
 		 AnchorPane.setTopAnchor(profilestage, 10.0);
-		 AnchorPane.setBottomAnchor(profilestage, 20.0);
-		 
+		 AnchorPane.setBottomAnchor(profilestage, 20.0);	 
 	}
 	
 	@FXML
@@ -224,15 +223,14 @@ public class EncoderController implements Initializable{
         Students.setTextFill(Color.WHITE);
 		
 
-		 Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
+		 Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/EncBeforeOldEnrollment.fxml"));
 		 contentarea.getChildren().removeAll();
 		 contentarea.getChildren().setAll(enrollmentstage);
 		 AnchorPane.setLeftAnchor(enrollmentstage, 10.0);
 		 AnchorPane.setRightAnchor(enrollmentstage, 10.0);
 		 AnchorPane.setTopAnchor(enrollmentstage, 10.0);
 		 AnchorPane.setBottomAnchor(enrollmentstage, 20.0);
-		 
-		 
+	 
 	}
 	
 	public void oldEnrollmentbtn(ActionEvent event) throws IOException {

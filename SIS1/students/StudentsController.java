@@ -1,6 +1,7 @@
 package students;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -79,19 +80,19 @@ public class StudentsController {
 
 	@FXML
 	private void initialize() {
-		setStudents();
-		configureTable();
-		courseColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
-		firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-		middleNameColumn.setCellValueFactory(new PropertyValueFactory<>("middleName"));
-		lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-		yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
-		sectionColumn.setCellValueFactory(new PropertyValueFactory<>("section"));
-		locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-		scodeColumn.setCellValueFactory(new PropertyValueFactory<>("scode"));
-		genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
-		dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-		sidColumn.setCellValueFactory(new PropertyValueFactory<>("sid"));
+	    setStudents();
+	    configureTable();
+	    courseColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
+	    firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+	    middleNameColumn.setCellValueFactory(new PropertyValueFactory<>("middleName"));
+	    lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+	    yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+	    sectionColumn.setCellValueFactory(new PropertyValueFactory<>("section")); // Update this line
+	    locationColumn.setCellValueFactory(new PropertyValueFactory<>("location")); // Update this line
+	    scodeColumn.setCellValueFactory(new PropertyValueFactory<>("scode"));
+	    genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
+	    dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+	    sidColumn.setCellValueFactory(new PropertyValueFactory<>("sid"));
 	}
 
 	@FXML
@@ -115,9 +116,10 @@ public class StudentsController {
 					int sid1 = resultSet.getInt("sid");
 					String gender1 = resultSet.getString("gender");
 					String sy = resultSet.getString("sy");
+					String sem = resultSet.getString("sem");
 
-					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, section1,
-							location1, sy, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+				             	//return new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
+					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1,location1,scode1, date1, sid1, gender1, null, sid1, sid1, sem);
 					studentList.add(studentObj);
 				}
 				studentTableView.setItems(studentList);
@@ -330,16 +332,22 @@ public class StudentsController {
 	    String lastName = resultSet.getString("last_name");
 	    String course1 = resultSet.getString("course");
 	    String year1 = resultSet.getString("year");
-	    String section1 = resultSet.getString("section");
-	    String location1 = resultSet.getString("location");
+	    String section1 = resultSet.getString("location"); // set "section" from the "location" column
+	    String location1 = resultSet.getString("sy"); // set "location" from the "sy" column
 	    int scode1 = resultSet.getInt("scode");
 	    String date1 = resultSet.getString("date");
 	    int sid1 = resultSet.getInt("sid");
 	    String gender1 = resultSet.getString("gender");
 	    String sy = resultSet.getString("sy");
+	    String sem = resultSet.getString("sem");
+	    int start = resultSet.getInt("eSubjectsStart");
+	    int end = resultSet.getInt("eSubjectsEnd");
 
-	    return new Students(firstName, middleName, lastName, course1, year1, section1, location1, sy, scode1, date1, sid1, gender1, null, sid1, sid1, gender1);
+	    System.out.println("section1 from database: " + resultSet.getString("section"));
+	    System.out.println("location1 from database: " + resultSet.getString("location"));
+	    System.out.println("sy from database: " + resultSet.getString("sy"));
+
+
+	    return new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
 	}
-
-
 }

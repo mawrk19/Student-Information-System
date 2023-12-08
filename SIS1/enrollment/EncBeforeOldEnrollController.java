@@ -1,6 +1,7 @@
 package enrollment;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import encoderui.EncoderController;
+import application.UserSession;
 
 public class EncBeforeOldEnrollController {
 	@FXML
@@ -45,8 +47,8 @@ public class EncBeforeOldEnrollController {
 	@FXML
 	void searchscodebtn(ActionEvent event) {
 		searchedCode = searchbar.getText();
-		
-
+		SearchBarSingleton.getInstance().setSearchbarText(searchedCode);
+		 
 		 try (Connection connection = DatabaseManager.getConnection()) {
 		        String query = "SELECT gwa FROM student WHERE scode = ?";
 		        PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -79,10 +81,13 @@ public class EncBeforeOldEnrollController {
 		    }
 	}
 
+	
+	
 	@FXML
 	void gotoOldEnrollment(ActionEvent event) throws IOException {
-		searchedCode = searchbar.getText();
-	    
+		searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	    System.out.println("Searched Code: " + searchedCode);
+		 
 	    if (searchedCode.isEmpty()) {
 	        showAlert("Error", "Empty Input", "Please input a valid Student Code");
 	        return;
@@ -100,7 +105,9 @@ public class EncBeforeOldEnrollController {
 	        String query = "SELECT gwa FROM student WHERE scode = ?";
 	        PreparedStatement preparedStatement = connection.prepareStatement(query);
 	        preparedStatement.setString(1, searchedCode);
-
+	        searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	       
+	        
 	        ResultSet resultSet = preparedStatement.executeQuery();
 
 	        if (resultSet.next()) {
@@ -113,17 +120,17 @@ public class EncBeforeOldEnrollController {
 
 				BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
 	
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/OldEnrollment.fxml"));
-				Parent oldenrollment = loader.load();
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/EncOldEnrollment.fxml"));
+				Parent encoldenrollment = loader.load();
 	
-				AnchorPane.setLeftAnchor(oldenrollment, 10.0);
-				AnchorPane.setRightAnchor(oldenrollment, 10.0);
-				AnchorPane.setTopAnchor(oldenrollment, 10.0);
-				AnchorPane.setBottomAnchor(oldenrollment, 20.0);
+				AnchorPane.setLeftAnchor(encoldenrollment, 10.0);
+				AnchorPane.setRightAnchor(encoldenrollment, 10.0);
+				AnchorPane.setTopAnchor(encoldenrollment, 10.0);
+				AnchorPane.setBottomAnchor(encoldenrollment, 20.0);
 	
-				FXMLLoader encoderui = new FXMLLoader(getClass().getResource("/encoderui/Encoder.fxml"));
-				Parent encoder = encoderui.load();
-				EncoderController encoderController = encoderui.getController();
+				FXMLLoader encoderLoader = new FXMLLoader(getClass().getResource("/encoderui/Encoder.fxml"));
+				Parent encoderui = encoderLoader.load();
+				EncoderController encoderController = encoderLoader.getController();
 	
 				encoderController.Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 	
@@ -136,6 +143,12 @@ public class EncBeforeOldEnrollController {
 	//	        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
 	//	        Timetable.setBackground(new Background(ube));
 	//	        Timetable.setTextFill(Color.WHITE);
+//				mainFrameController.Schedule.setStyle("-fx-border-radius: 25 0 0 25;");
+//				mainFrameController.Schedule.setBackground(new Background(ube));
+//				mainFrameController.Schedule.setTextFill(Color.WHITE);
+//				mainFrameController.Evaluation.setStyle("-fx-border-radius: 25 0 0 25;");
+//				mainFrameController.Evaluation.setBackground(new Background(ube));
+//				mainFrameController.Evaluation.setTextFill(Color.WHITE);
 	//	        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
 	//	        Grading.setBackground(new Background(ube));
 	//	        Grading.setTextFill(Color.WHITE);
@@ -148,9 +161,9 @@ public class EncBeforeOldEnrollController {
 				encoderController.Students.setBackground(new Background(ube));
 				encoderController.Students.setTextFill(Color.WHITE);
 	
-				encoderController.setContent(oldenrollment);
+				encoderController.setContent(encoldenrollment);
 	
-				Scene scene = new Scene(encoder);
+				Scene scene = new Scene(encoderui);
 				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				stage.setScene(scene);
 				stage.show();
@@ -194,4 +207,6 @@ public class EncBeforeOldEnrollController {
 		gwaValue = 0.0; // Reset the GWA value
 	}
 	
+	
 }
+

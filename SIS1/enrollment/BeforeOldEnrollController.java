@@ -1,6 +1,7 @@
 package enrollment;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import application.MainFrameController;
+import application.UserSession;
 
 public class BeforeOldEnrollController {
 	@FXML
@@ -45,8 +47,8 @@ public class BeforeOldEnrollController {
 	@FXML
 	void searchscodebtn(ActionEvent event) {
 		searchedCode = searchbar.getText();
-		
-
+		SearchBarSingleton.getInstance().setSearchbarText(searchedCode);
+		 
 		 try (Connection connection = DatabaseManager.getConnection()) {
 		        String query = "SELECT gwa FROM student WHERE scode = ?";
 		        PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -79,10 +81,13 @@ public class BeforeOldEnrollController {
 		    }
 	}
 
+	
+	
 	@FXML
 	void gotoOldEnrollment(ActionEvent event) throws IOException {
-		searchedCode = searchbar.getText();
-	    
+		searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	    System.out.println("Searched Code: " + searchedCode);
+		 
 	    if (searchedCode.isEmpty()) {
 	        showAlert("Error", "Empty Input", "Please input a valid Student Code");
 	        return;
@@ -100,7 +105,9 @@ public class BeforeOldEnrollController {
 	        String query = "SELECT gwa FROM student WHERE scode = ?";
 	        PreparedStatement preparedStatement = connection.prepareStatement(query);
 	        preparedStatement.setString(1, searchedCode);
-
+	        searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	       
+	        
 	        ResultSet resultSet = preparedStatement.executeQuery();
 
 	        if (resultSet.next()) {
@@ -200,4 +207,6 @@ public class BeforeOldEnrollController {
 		gwaValue = 0.0; // Reset the GWA value
 	}
 	
+	
 }
+
