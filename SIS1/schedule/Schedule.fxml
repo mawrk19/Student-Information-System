@@ -131,49 +131,53 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <AnchorPane layoutX="378.0" layoutY="3.0" prefHeight="280.0" prefWidth="462.0">
+                  <AnchorPane layoutX="378.0" layoutY="3.0" prefHeight="280.0" prefWidth="462.0" AnchorPane.leftAnchor="378.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
                      <children>
-                        <Label layoutX="2.0" layoutY="115.0" prefHeight="330.0" prefWidth="462.0" style="-fx-background-color: #E5E4E2; -fx-effect: dropshadow(gaussian,gray, 10, 0.5, 0, 0);" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="-50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <TextField fx:id="searchSID" layoutX="4.0" layoutY="8.0" prefHeight="36.0" prefWidth="401.0" promptText="Search SID..." AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="8.0" />
-                        <Label id="searchSID" fx:id="sidBTN" layoutX="409.0" layoutY="8.0" prefHeight="36.0" prefWidth="39.0" style="-fx-background-color: #3c5199;" stylesheets="@Schedule.css" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0">
+                        <Label layoutX="2.0" layoutY="115.0" prefHeight="370.0" prefWidth="462.0" style="-fx-background-color: #E5E4E2; -fx-effect: dropshadow(gaussian,gray, 10, 0.5, 0, 0);" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="-90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+                        <TextField fx:id="searchSID" layoutX="14.0" layoutY="8.0" prefHeight="36.0" prefWidth="391.0" promptText="Search SID..." AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="8.0" />
+                        <Button fx:id="sidBTN" layoutX="405.0" layoutY="8.0" minWidth="47.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="39.0" style="-fx-background-color: trsnsparent;" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="4.0">
                            <graphic>
-                              <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../src/imgs_icons/Search.png" />
-                                 </image>
-                              </ImageView>
+                              <Label id="searchSID" prefHeight="36.0" prefWidth="39.0" style="-fx-background-color: #3c5199;" stylesheets="@Schedule.css">
+                                 <graphic>
+                                    <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../src/imgs_icons/Search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
                            </graphic>
-                        </Label>
-                        <Label layoutX="52.0" layoutY="77.0" stylesheets="@Schedule.css" text="NAME :" textFill="#4a43b2" AnchorPane.leftAnchor="46.0" AnchorPane.rightAnchor="352.0">
+                        </Button>
+                        <Label layoutX="27.0" layoutY="75.0" prefHeight="22.0" prefWidth="56.0" stylesheets="@Schedule.css" text="NAME :" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="369.0" AnchorPane.topAnchor="75.0">
                            <font>
                               <Font name="Arial Black" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="49.0" layoutY="166.0" prefHeight="22.0" prefWidth="54.0" text="YEAR :" AnchorPane.leftAnchor="49.0" AnchorPane.rightAnchor="352.0">
+                        <Label layoutX="37.0" layoutY="142.0" prefHeight="22.0" prefWidth="56.0" text="YEAR :" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="142.0">
                            <font>
                               <Font name="Arial Black" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="26.0" layoutY="213.0" text="SECTION :" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="352.0">
+                        <Label layoutX="201.0" layoutY="143.0" text="SECTION :" AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="143.0">
                            <font>
                               <Font name="Arial Black" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="28.0" layoutY="123.0" text="COURSE :" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="359.0">
+                        <Label layoutX="16.0" layoutY="204.0" text="COURSE :" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="204.0">
                            <font>
                               <Font name="Arial Black" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="9.0" layoutY="255.0" prefHeight="22.0" prefWidth="101.0" text="SEMESTER :" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="352.0" AnchorPane.topAnchor="255.0">
+                        <Label layoutX="210.0" layoutY="204.0" prefHeight="22.0" prefWidth="101.0" text="SEMESTER :" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="204.0">
                            <font>
                               <Font name="Arial Black" size="14.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="111.0" layoutY="59.0" prefHeight="36.0" prefWidth="310.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="59.0" />
-                        <TextField layoutX="108.0" layoutY="105.0" prefHeight="36.0" prefWidth="310.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="41.0" />
-                        <TextField layoutX="104.0" layoutY="148.0" prefHeight="36.0" prefWidth="310.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="41.0" />
-                        <TextField layoutX="102.0" layoutY="195.0" prefHeight="36.0" prefWidth="310.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="41.0" />
-                        <TextField layoutX="102.0" layoutY="237.0" prefHeight="36.0" prefWidth="310.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="41.0" />
+                        <TextField fx:id="name" editable="false" layoutX="87.0" layoutY="68.0" prefHeight="36.0" prefWidth="311.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="68.0" />
+                        <TextField fx:id="course" editable="false" layoutX="88.0" layoutY="136.0" prefHeight="35.0" prefWidth="106.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="261.0" AnchorPane.topAnchor="136.0" />
+                        <TextField fx:id="yearTF" editable="false" layoutX="95.0" layoutY="197.0" prefHeight="35.0" prefWidth="106.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="261.0" AnchorPane.topAnchor="197.0" />
+                        <TextField fx:id="section" editable="false" layoutX="292.0" layoutY="135.0" prefHeight="35.0" prefWidth="106.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="135.0" />
+                        <TextField fx:id="semester" editable="false" layoutX="313.0" layoutY="198.0" prefHeight="35.0" prefWidth="85.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="198.0" />
                      </children>
                   </AnchorPane>
                </children>
@@ -182,11 +186,11 @@
                <children>
                   <Label layoutX="369.0" layoutY="30.0" prefHeight="84.0" prefWidth="471.0" style="-fx-background-color: #3c5199; -fx-background-radius: 8px;" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="-42.0" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
                   <Label layoutX="-3.0" layoutY="5.0" prefHeight="126.0" prefWidth="471.0" style="-fx-background-color: #3c5199; -fx-background-radius: 8px;" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="-30.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
-                  <ComboBox id="semester" fx:id="semesterCMB" layoutX="22.0" layoutY="65.0" prefHeight="28.0" prefWidth="137.0" promptText="SEMESTER" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="65.0" />
-                  <Button id="submitBTN" fx:id="submitBTN" layoutX="340.0" layoutY="16.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="105.0" style="-fx-background-color: #084ee4; -fx-background-radius: 12px;" stylesheets="@Schedule.css" text="SUBMIT" textFill="WHITE" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="16.0" />
-                  <ComboBox id="course" fx:id="courseCMB" layoutX="22.0" layoutY="16.0" prefHeight="29.0" prefWidth="137.0" promptText="COURSE" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="16.0" />
-                  <ComboBox id="year" fx:id="yearCMB" layoutX="181.0" layoutY="16.0" prefHeight="29.0" prefWidth="137.0" promptText="YEAR" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="16.0" />
-                  <ComboBox id="section" fx:id="sectionCMB" layoutX="181.0" layoutY="66.0" prefHeight="29.0" prefWidth="137.0" promptText="SECTION" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="66.0" />
+                  <ComboBox id="semester" fx:id="semesterCMB" layoutX="22.0" layoutY="73.0" prefHeight="28.0" prefWidth="137.0" promptText="SEMESTER" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="73.0" />
+                  <Button id="submitBTN" fx:id="submitBTN" layoutX="341.0" layoutY="26.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="105.0" style="-fx-background-color: #084ee4; -fx-background-radius: 12px;" stylesheets="@Schedule.css" text="SUBMIT" textFill="WHITE" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="341.0" AnchorPane.topAnchor="26.0" />
+                  <ComboBox id="course" fx:id="courseCMB" layoutX="22.0" layoutY="26.0" prefHeight="29.0" prefWidth="137.0" promptText="COURSE" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="26.0" />
+                  <ComboBox id="year" fx:id="yearCMB" layoutX="181.0" layoutY="26.0" prefHeight="29.0" prefWidth="137.0" promptText="YEAR" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="26.0" />
+                  <ComboBox id="section" fx:id="sectionCMB" layoutX="181.0" layoutY="73.0" prefHeight="29.0" prefWidth="137.0" promptText="SECTION" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="73.0" />
                </children>
             </AnchorPane>
       		<AnchorPane id="bgpane" prefHeight="370.0" prefWidth="840.0" stylesheets="@Schedule.css">

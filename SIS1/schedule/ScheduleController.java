@@ -30,15 +30,14 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.awt.Dialog;
-import java.awt.TextField;
+import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -102,6 +101,10 @@ public class ScheduleController implements Initializable{
 	        
 	        drawCalendar();
 		
+	        
+	        
+	        
+	        
 	        ObservableList<String> course = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
 	        courseCMB.setItems(course);
 	        
@@ -126,7 +129,21 @@ public class ScheduleController implements Initializable{
 			
 		
 			submitBTN.setOnAction(ActionEvent -> handleShowDataButtonClick());
-		
+			sidBTN.setOnAction(ActionEvent -> searchscodebtn());
+			
+	  
+			
+
+			searchSID.textProperty().addListener((observable, oldValue, newValue) -> {
+	            if (!newValue.matches("\\d*")) {
+	                searchSID.setText(newValue.replaceAll("[^\\d]", ""));
+	            }
+	            if (newValue.length() > 8) {
+	                String limitedValue = newValue.substring(0, 8);
+	                searchSID.setText(limitedValue);
+	            }
+	        });
+	    
 
 }
 		
@@ -252,15 +269,28 @@ public class ScheduleController implements Initializable{
 //		    }
 //		}
 	    
-		@FXML
-		private Button addBTN;
-			 
-		@FXML
-		private Button deleteBTN;
-			 
-	    @FXML
-	    private Button updateBTN;
+        @FXML
+        private TextField name;
 	
+        @FXML
+        private TextField course;
+        
+        @FXML
+        private TextField section;
+        
+        @FXML
+        private TextField yearTF;
+        
+        @FXML
+        private TextField semester;
+	
+        
+        @FXML
+        private TextField searchSID;
+	
+        @FXML
+	    private Button sidBTN;
+        
 	    @FXML
 	    private Button submitBTN;
 	    
@@ -346,5 +376,56 @@ public class ScheduleController implements Initializable{
 		}
 		
 		
+		
+		
+		
+		
+		
+		
+		private void searchscodebtn() {
+		    String searchedCode = searchSID.getText();
 
-	}
+		    try (Connection connection = DatabaseManager.getConnection()) {
+		        String query = "SELECT * FROM student WHERE scode = ?";
+		        PreparedStatement preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setString(1, searchedCode);
+
+		        ResultSet resultSet = preparedStatement.executeQuery();
+
+		        if (resultSet.next()) {
+		            String firstName = resultSet.getString("First_name");
+		            String middleName = resultSet.getString("Middle_name");
+		            String lastName = resultSet.getString("Last_name");
+
+		            String fullName = firstName + " " + middleName + " " + lastName;
+		            name.setText(fullName);
+		            yearTF.setText(resultSet.getString("year"));
+		            section.setText(resultSet.getString("section"));
+		            course.setText(resultSet.getString("course"));
+		            semester.setText(resultSet.getString("sem"));
+		        } else {
+		            clearFields();
+		            showAlert("Error", "Invalid scode", "The entered Student Code does not exist.");
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        // Handle the exception or log it appropriately
+		    }
+		}
+
+		private void showAlert(String title, String header, String content) {
+		    Alert alert = new Alert(Alert.AlertType.ERROR);
+		    alert.setTitle(title);
+		    alert.setHeaderText(header);
+		    alert.setContentText(content);
+		    alert.showAndWait();
+		}
+
+		private void clearFields() {
+		    name.clear();
+		    yearTF.clear();
+		    section.clear();
+		    course.clear();
+		    semester.clear();
+		}
+}
