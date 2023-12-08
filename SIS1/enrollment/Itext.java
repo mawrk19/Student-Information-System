@@ -18,11 +18,11 @@ import com.itextpdf.layout.properties.UnitValue;
 
 
 public class Itext {
-	public void generatePDF(String transaction_id, double total, double balance,  LocalDate date) throws FileNotFoundException {
+	public void generatePDF(String transaction_id, String total, String balance,  LocalDate date) throws FileNotFoundException {
 		
 	//public void createPDF() throws FileNotFoundException{
 		// TODO Auto-generated method stub
-		String path = "C:\\seiffer2\\sample5.pdf";
+		String path = "C:\\Users\\user\\git\\Student-Information-System\\transaction print\\sample2.pdf";
 	    PdfWriter pdfWriter = new PdfWriter(path);
 	    PdfDocument pdfDocument = new PdfDocument(pdfWriter);
 	    pdfDocument.setDefaultPageSize(PageSize.LEGAL);

@@ -2,6 +2,7 @@ package encoderui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,14 +15,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.BackgroundFill;
@@ -39,6 +45,9 @@ public class EncoderController implements Initializable{
     private AnchorPane contentarea;
     
     @FXML
+    private Button logoutButton;
+    
+    @FXML
     public Button Dashboard, StudentProf, Enrollment, oldEnrollment, Profileicn, Students;
 
 	@Override
@@ -50,24 +59,23 @@ public class EncoderController implements Initializable{
 		});
 		
 		try {
-			BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
-			
+			BackgroundFill transparentFill = new BackgroundFill(Color.web("#0e0a1a", 0.0), null, null); // Change the alpha value (0.5 for example)
+
 			Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
-			
 			Dashboard.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 			Dashboard.setTextFill(Color.BLACK);
 			StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-	        StudentProf.setBackground(new Background(ube));
-	        StudentProf.setTextFill(Color.WHITE);
-	        Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-	        Enrollment.setBackground(new Background(ube));
-	        Enrollment.setTextFill(Color.WHITE);
-	        oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-	        oldEnrollment.setBackground(new Background(ube));
-	        oldEnrollment.setTextFill(Color.WHITE);
-	        Students.setStyle("-fx-border-radius: 25 0 0 25;");
-	        Students.setBackground(new Background(ube));
-	        Students.setTextFill(Color.WHITE);
+			StudentProf.setBackground(new Background(transparentFill));
+			StudentProf.setTextFill(Color.WHITE);
+			Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+			Enrollment.setBackground(new Background(transparentFill));
+			Enrollment.setTextFill(Color.WHITE);
+			oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+			oldEnrollment.setBackground(new Background(transparentFill));
+			oldEnrollment.setTextFill(Color.WHITE);
+			Students.setStyle("-fx-border-radius: 25 0 0 25;");
+			Students.setBackground(new Background(transparentFill));
+			Students.setTextFill(Color.WHITE);
 			
 			 
 			 Parent dashboardstage = FXMLLoader.load(getClass().getResource("/dashboard/EncDashboard.fxml"));
@@ -104,23 +112,23 @@ public class EncoderController implements Initializable{
 	public void profileicnbtn(ActionEvent event) throws IOException {
 		
 		
-		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		BackgroundFill transparentFill = new BackgroundFill(Color.web("#0e0a1a", 0.0), null, null);
 		
 		Profileicn.setStyle("-fx-background-color: #3C3A44; -fx-border-radius: 50; -fx-background-radius: 25;");
 		
 		Dashboard.setStyle("-fx-background-radius: 25 0 0 25;");
 		Dashboard.setTextFill(Color.WHITE);
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-        StudentProf.setBackground(new Background(ube));
+        StudentProf.setBackground(new Background(transparentFill));
         StudentProf.setTextFill(Color.WHITE);
         Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        Enrollment.setBackground(new Background(ube));
+        Enrollment.setBackground(new Background(transparentFill));
         Enrollment.setTextFill(Color.WHITE);
         oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setBackground(new Background(transparentFill));
         oldEnrollment.setTextFill(Color.WHITE);
         Students.setStyle("-fx-border-radius: 25 0 0 25;");
-        Students.setBackground(new Background(ube));
+        Students.setBackground(new Background(transparentFill));
         Students.setTextFill(Color.WHITE);
 		 
 		 Pane profilestage = FXMLLoader.load(getClass().getResource("/profile/EncProfile.fxml"));
@@ -135,23 +143,23 @@ public class EncoderController implements Initializable{
 	@FXML
 	public void Dashboardbtn(ActionEvent event) throws IOException {
 		
-		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		BackgroundFill transparentFill = new BackgroundFill(Color.web("#0e0a1a", 0.0), null, null);
 		
 		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		
 		Dashboard.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
 		Dashboard.setTextFill(Color.BLACK);
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-        StudentProf.setBackground(new Background(ube));
+        StudentProf.setBackground(new Background(transparentFill));
         StudentProf.setTextFill(Color.WHITE);
         Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        Enrollment.setBackground(new Background(ube));
+        Enrollment.setBackground(new Background(transparentFill));
         Enrollment.setTextFill(Color.WHITE);
         oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setBackground(new Background(transparentFill));
         oldEnrollment.setTextFill(Color.WHITE);
         Students.setStyle("-fx-border-radius: 25 0 0 25;");
-        Students.setBackground(new Background(ube));
+        Students.setBackground(new Background(transparentFill));
         Students.setTextFill(Color.WHITE);
 		
 		 
@@ -170,23 +178,23 @@ public class EncoderController implements Initializable{
 	@FXML
 	public void StudentProfbtn(ActionEvent event) throws IOException {
 		
-		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		BackgroundFill transparentFill = new BackgroundFill(Color.web("#0e0a1a", 0.0), null, null);
 		
 		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		
 		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
-		Dashboard.setBackground(new Background(ube));
+		Dashboard.setBackground(new Background(transparentFill));
 		Dashboard.setTextFill(Color.WHITE);
 		StudentProf.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
         StudentProf.setTextFill(Color.BLACK);
         Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        Enrollment.setBackground(new Background(ube));
+        Enrollment.setBackground(new Background(transparentFill));
         Enrollment.setTextFill(Color.WHITE);
         oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setBackground(new Background(transparentFill));
         oldEnrollment.setTextFill(Color.WHITE);
         Students.setStyle("-fx-border-radius: 25 0 0 25;");
-        Students.setBackground(new Background(ube));
+        Students.setBackground(new Background(transparentFill));
         Students.setTextFill(Color.WHITE);
 		
 		 
@@ -203,23 +211,23 @@ public class EncoderController implements Initializable{
 	
 	public void Enrollmentbtn(ActionEvent event) throws IOException {
 		
-		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		BackgroundFill transparentFill = new BackgroundFill(Color.web("#0e0a1a", 0.0), null, null);
 		
 		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		
 		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
-		Dashboard.setBackground(new Background(ube));
+		Dashboard.setBackground(new Background(transparentFill));
 		Dashboard.setTextFill(Color.WHITE);
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-        StudentProf.setBackground(new Background(ube));
+        StudentProf.setBackground(new Background(transparentFill));
         StudentProf.setTextFill(Color.WHITE);
         Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
         Enrollment.setTextFill(Color.BLACK);
         oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setBackground(new Background(transparentFill));
         oldEnrollment.setTextFill(Color.WHITE);
         Students.setStyle("-fx-border-radius: 25 0 0 25;");
-        Students.setBackground(new Background(ube));
+        Students.setBackground(new Background(transparentFill));
         Students.setTextFill(Color.WHITE);
 		
 
@@ -235,23 +243,23 @@ public class EncoderController implements Initializable{
 	
 	public void oldEnrollmentbtn(ActionEvent event) throws IOException {
 		
-		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		BackgroundFill transparentFill = new BackgroundFill(Color.web("#0e0a1a", 0.0), null, null);
 		
 		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		
 		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
-		Dashboard.setBackground(new Background(ube));
+		Dashboard.setBackground(new Background(transparentFill));
 		Dashboard.setTextFill(Color.WHITE);
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-        StudentProf.setBackground(new Background(ube));
+        StudentProf.setBackground(new Background(transparentFill));
         StudentProf.setTextFill(Color.WHITE);
         Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        Enrollment.setBackground(new Background(ube));
+        Enrollment.setBackground(new Background(transparentFill));
         Enrollment.setTextFill(Color.WHITE);
         oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
         oldEnrollment.setTextFill(Color.BLACK);
         Students.setStyle("-fx-border-radius: 25 0 0 25;");
-        Students.setBackground(new Background(ube));
+        Students.setBackground(new Background(transparentFill));
         Students.setTextFill(Color.WHITE);
         
 		 
@@ -267,21 +275,21 @@ public class EncoderController implements Initializable{
 	
 	public void studentsbtn(ActionEvent event) throws IOException {
 		
-		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		BackgroundFill transparentFill = new BackgroundFill(Color.web("#0e0a1a", 0.0), null, null);
 		
 		Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 		
 		Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
-		Dashboard.setBackground(new Background(ube));
+		Dashboard.setBackground(new Background(transparentFill));
 		Dashboard.setTextFill(Color.WHITE);
 		StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-        StudentProf.setBackground(new Background(ube));
+        StudentProf.setBackground(new Background(transparentFill));
         StudentProf.setTextFill(Color.WHITE);
         Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        Enrollment.setBackground(new Background(ube));
+        Enrollment.setBackground(new Background(transparentFill));
         Enrollment.setTextFill(Color.WHITE);
         oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-        oldEnrollment.setBackground(new Background(ube));
+        oldEnrollment.setBackground(new Background(transparentFill));
         oldEnrollment.setTextFill(Color.WHITE);
         Students.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
         Students.setTextFill(Color.BLACK);
@@ -307,5 +315,44 @@ public class EncoderController implements Initializable{
 	
 	public void setDelete(Node node) {
         contentarea.getChildren().setAll(node);
+	}
+	
+	@FXML
+	public void logout(ActionEvent event) throws IOException {
+	    Alert alert = new Alert(AlertType.CONFIRMATION);
+	    alert.setTitle("Logout");
+	    alert.setHeaderText("You're about to log out");
+	    alert.setContentText("Do you want to save before you logout?");
+
+	    Optional<ButtonType> result = alert.showAndWait();
+	    if (result.isPresent() && result.get() == ButtonType.OK) {
+	        // Load the new FXML file
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/login/MainLogin.fxml"));
+	        Parent root = loader.load();
+
+	        // Create a new scene or stage and set the new FXML file
+	        Scene scene = new Scene(root);
+	        Stage newStage = new Stage();
+
+	        // Set the stage style to TRANSPARENT
+	        newStage.initStyle(StageStyle.TRANSPARENT);
+
+	        // Set the scene fill to TRANSPARENT
+	        scene.setFill(Color.TRANSPARENT);
+	        newStage.setScene(scene);
+
+	        // Close the current stage if available
+	        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        if (currentStage != null) {
+	            currentStage.close();
+	        } else {
+	            System.out.println("Unable to close the current stage");
+	        }
+
+	        // Show the new stage
+	        newStage.show();
+	    } else {
+	        System.out.println("Logout canceled");
+	    }
 	}
 }

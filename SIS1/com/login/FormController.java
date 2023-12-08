@@ -116,7 +116,6 @@ public class FormController implements Initializable{
 				}
 				
 			} else {
-				messLabel.setText("Wrong Credentials");
 				showAlert("Error", "Wrong Credentials", "Please valid Username and Password");
 			}
 		} catch (SQLException e) {
