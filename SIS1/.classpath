@@ -1,44 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path=""/>
-<<<<<<< HEAD
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/leslie mae aya-ay/repo/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Java Fx">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-=======
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
->>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="C:/Users/SHEAL/git/Student-Information-System/SIS1/mysql-connector-j-8.0.31.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-=======
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Itext"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVA_FXFX"/>
-	<classpathentry kind="lib" path="C:/Users/user/git/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
->>>>>>> 85c9f4d6a314c7afb9f2d3416243145ffe37d2ef
-=======
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Itext"/>
-	<classpathentry kind="lib" path="C:/Users/PC/git/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
->>>>>>> 3a3566fef3cbbdf24713783a343660baa5803f70
->>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
+	<classpathentry kind="lib" path="C:/Users/leslie mae aya-ay/repo/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
