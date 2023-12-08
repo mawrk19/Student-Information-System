@@ -18,7 +18,7 @@ import com.itextpdf.layout.properties.UnitValue;
 
 
 public class Itext {
-	public void generatePDF(String transaction_id, String total, String balance,  LocalDate date) throws FileNotFoundException {
+	public void generatePDF(String transaction_id, String total, String balance,  LocalDate date, String medfee, String libfee, String atheletefee, String scifee, String mediafee, String comlabfee) throws FileNotFoundException {
 		
 	//public void createPDF() throws FileNotFoundException{
 		// TODO Auto-generated method stub
@@ -70,17 +70,17 @@ public class Itext {
 	    MiscFee.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
 	    document.add(MiscFee);
 	    Table Bill = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
-	    Bill.addCell(new Cell().add(new Paragraph("Library Fee")).addStyle(header3));
-	    Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
-	    Bill.addCell(new Cell().add(new Paragraph("Medical Fee")).addStyle(header3));
-	    Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
-	    Bill.addCell(new Cell().add(new Paragraph("Science Lab Fee")).addStyle(header3));
-	    Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
-	    Bill.addCell(new Cell().add(new Paragraph("Computer Lab Fee")).addStyle(header3));
-	    Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
-	    Bill.addCell(new Cell().add(new Paragraph("Athletic Fee")).addStyle(header3));
-	    Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
-	    Bill.addCell(new Cell().add(new Paragraph("Media Fee")).addStyle(header3));
+	    Bill.addCell(new Cell().add(new Paragraph("Library Fee" + libfee)).addStyle(header3));
+        Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
+        Bill.addCell(new Cell().add(new Paragraph("Medical Fee" + medfee)).addStyle(header3));
+        Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
+        Bill.addCell(new Cell().add(new Paragraph("Science Lab Fee" + scifee)).addStyle(header3));
+        Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
+        Bill.addCell(new Cell().add(new Paragraph("Computer Lab Fee" + comlabfee)).addStyle(header3));
+        Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
+        Bill.addCell(new Cell().add(new Paragraph("Athletic Fee" + atheletefee)).addStyle(header3));
+        Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
+        Bill.addCell(new Cell().add(new Paragraph("Media Fee" + mediafee)).addStyle(header3));
 	    document.add(Bill.setBorderBottom(separator));
 	    Table Total = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 	    Total.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
