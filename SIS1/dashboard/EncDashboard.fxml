@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
+<AnchorPane id="encBackground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboard.DashboardController">
    <children>
       <VBox prefHeight="760.0" prefWidth="828.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -22,18 +22,18 @@
                <children>
                   <VBox prefHeight="701.0" prefWidth="575.0" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <AnchorPane id="greeting" fx:id="Greeting" prefHeight="182.0" prefWidth="575.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
+                        <AnchorPane id="encGreeting" fx:id="Greeting" prefHeight="182.0" prefWidth="575.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                            <children>
                               <HBox layoutX="26.0" layoutY="32.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <VBox spacing="15.0">
+                                    <VBox spacing="15.0" stylesheets="@Dashboard.css">
                                        <children>
-                                          <Label id="text" fx:id="Hello" prefHeight="31.0" prefWidth="280.0" stylesheets="@Dashboard.css" text="Welcome," textAlignment="CENTER" textFill="#dadfe3">
+                                          <Label id="text" fx:id="Hello" alignment="CENTER" prefHeight="31.0" prefWidth="280.0" stylesheets="@Dashboard.css" text="Welcome," textFill="#dadfe3">
                                              <font>
                                                 <Font name="Arial Rounded MT Bold" size="37.0" />
                                              </font>
                                           </Label>
-                                          <Label id="admin" fx:id="adminName" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css">
+                                          <Label id="admin" fx:id="adminName" alignment="CENTER" contentDisplay="CENTER" prefHeight="51.0" prefWidth="222.0" stylesheets="@Dashboard.css" textAlignment="CENTER">
                                              <font>
                                                 <Font name="Arial Rounded MT Bold" size="30.0" />
                                              </font>
@@ -61,7 +61,7 @@
                                  <children>
                                     <AnchorPane id="greeting" fx:id="Graph" prefHeight="285.0" prefWidth="303.0" style="-fx-background-color: gray;" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <PieChart id="pie" fx:id="pieChart" prefHeight="400.0" prefWidth="500.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <PieChart id="encPie" fx:id="pieChart" prefHeight="400.0" prefWidth="500.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane id="progress" prefHeight="200.0" prefWidth="200.0" stylesheets="@Dashboard.css" VBox.vgrow="ALWAYS">

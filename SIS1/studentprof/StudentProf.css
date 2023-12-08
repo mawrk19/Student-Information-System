@@ -14,8 +14,20 @@
 	-fx-border-radius: 25;
 }
 
+#encEnrollStatPane {
+	-fx-background-color: linear-gradient(to left, #382764, #46317d);
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;	
+}
+
 #SchedPane{
 	-fx-background-color: #DFE2ED;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#encSchedPane {
+	-fx-background-color: #cdc2e7; 
 	-fx-background-radius: 25;
 	-fx-border-radius: 25;
 }
@@ -47,6 +59,12 @@
 
 #SidePane{
 	-fx-background-color: #DEDFE2;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
+#encSidePane {
+	-fx-background-color: #c8cfe9;
 	-fx-background-radius: 25;
 	-fx-border-radius: 25;
 }
