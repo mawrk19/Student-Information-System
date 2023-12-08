@@ -55,17 +55,16 @@
                   <Button id="UpdateBtn" fx:id="updateBTN" layoutX="27.0" layoutY="541.0" mnemonicParsing="false" onAction="#updatePassword" prefHeight="40.0" prefWidth="234.0" stylesheets="@Profile.css" text="Update Password" />
                   <TextField fx:id="newPasswordTF" layoutX="22.0" layoutY="436.0" prefHeight="40.0" prefWidth="240.0" />
                   <TextField fx:id="profileConfirmPass" layoutX="22.0" layoutY="493.0" prefHeight="40.0" prefWidth="240.0" />
-                  <Label id="PersonalInfo" layoutX="327.0" layoutY="313.0" prefHeight="40.0" prefWidth="150.0" stylesheets="@../studentprof/StudentProf.css" text="Add as admin" />
-                  <TextField fx:id="insertIdLBL" layoutX="282.0" layoutY="408.0" prefHeight="40.0" prefWidth="240.0" />
-                  <Label id="CPLbl" layoutX="359.0" layoutY="391.0" stylesheets="@Profile.css" text="Insert ID" />
-                  <Label id="CPLbl" layoutX="340.0" layoutY="448.0" prefHeight="17.0" prefWidth="101.0" stylesheets="@Profile.css" text="Type Confirm" />
-                  <TextField fx:id="confirmLBL" layoutX="282.0" layoutY="465.0" prefHeight="40.0" prefWidth="240.0" />
-                  <Button id="UpdateBtn" fx:id="addBTN" layoutX="285.0" layoutY="541.0" mnemonicParsing="false" onAction="#addBTN" prefHeight="40.0" prefWidth="234.0" stylesheets="@Profile.css" text="Add" />
+                  <Label id="PersonalInfo" layoutX="288.0" layoutY="313.0" prefHeight="40.0" prefWidth="251.0" stylesheets="@../studentprof/StudentProf.css" text="Add or Delete as admin" />
+                  <TextField fx:id="insertIdLBL" layoutX="282.0" layoutY="379.0" prefHeight="40.0" prefWidth="240.0" />
+                  <Label id="CPLbl" layoutX="359.0" layoutY="362.0" stylesheets="@Profile.css" text="Insert ID" />
+                  <Button id="UpdateBtn" fx:id="addBTN" layoutX="282.0" layoutY="436.0" mnemonicParsing="false" onAction="#addBTN" prefHeight="40.0" prefWidth="109.0" stylesheets="@Profile.css" text="Add" />
                   <Button id="EditBtn" fx:id="saveBTN" alignment="CENTER" layoutX="276.0" layoutY="190.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveProfile" prefHeight="40.0" prefWidth="228.0" stylesheets="@Profile.css" text="Save" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="10.0" />
                      </font>
                   </Button>
+                  <Button id="UpdateBtn" fx:id="deleteBTN" layoutX="413.0" layoutY="436.0" mnemonicParsing="false" onAction="#deleteUserType" prefHeight="40.0" prefWidth="109.0" stylesheets="@Profile.css" text="Delete" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="78.0" prefWidth="870.0">

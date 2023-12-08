@@ -36,379 +36,400 @@ import javafx.util.converter.DefaultStringConverter;
 
 public class ProfileController implements Initializable {
 
-    @FXML
-    private Label countLBL;
+	@FXML
+	private Label countLBL;
 
-    @FXML
-    private Label fullnameLBL;
-    
-    @FXML
-    private Label firstnameLBL;
-    
-    @FXML
-    private Label lastnameLBL;
-    
-    @FXML
-    private Label usernameLBL;
+	@FXML
+	private Label fullnameLBL;
 
-    @FXML
-    private Label idLBL;
+	@FXML
+	private Label firstnameLBL;
 
-    @FXML
-    private TextField idTF;
-    
-    @FXML
-    private TextField firstTF;
-    
-    @FXML
-    private TextField lastTF;
-    
-    @FXML
-    private TextField userTF;
+	@FXML
+	private Label lastnameLBL;
 
-    @FXML
-    private Button makeBTN;
-    
-    @FXML
-    private Button saveBTN;
+	@FXML
+	private Label usernameLBL;
 
-    @FXML
-    private TextField passwordTF,insertIdLBL,confirmLBL;
-    
-    @FXML
-    private TextField newPasswordTF, profileConfirmPass;
+	@FXML
+	private Label idLBL;
 
-    @FXML
-    private ImageView profileImageView;
+	@FXML
+	private TextField idTF;
 
-    @FXML
-    private Button removeBTN;
+	@FXML
+	private TextField firstTF;
 
-    @FXML
-    private Button updateBTN, addBTN;
-        
-    private Image image;
-    
-    Connection con = DatabaseManager.getConnection();
+	@FXML
+	private TextField lastTF;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            // Check if the user has a saved image in the database
-            InputStream imageStream = getUserImageFromDatabase();
-            if (imageStream != null) {
-                // Load the user image from the database
-                Image userImage = new Image(imageStream);
-                profileImageView.setImage(userImage);
-                profileImageView.setClip(createClip(profileImageView));
-                centerImage(profileImageView);
-            } else {
-                // Use the default image
-                Image defaultImage = new Image(getClass().getResourceAsStream("/img_icons/NoPeep.png"));
-                profileImageView.setImage(defaultImage);
-                profileImageView.setClip(createClip(profileImageView));
-                centerImage(profileImageView);
-            }
+	@FXML
+	private TextField userTF;
 
-            profileImageView.setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    // Handle primary (left) mouse click
-                    insertIMG(null);
-                }
-            });
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
-        insertLBL();
-        
-        setupTextFormatterWithValidation(firstTF, 15, "[a-zA-Z]+", "Only letters are allowed");
-        setupTextFormatterWithValidation(lastTF, 15, "[a-zA-Z]+", "Only letters are allowed");
-        setupTextFormatterWithValidation(userTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
-        setupTextFormatterWithValidation(passwordTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
-        setupTextFormatterWithValidation(newPasswordTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
-        setupTextFormatterWithValidation(profileConfirmPass, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
-    }
-    
-    private void setupTextFormatterWithValidation(TextField textField, int maxLength, String regex, String alertMessage) {
-        TextFormatter<String> textFormatter = new TextFormatter<>(new DefaultStringConverter(), null,
-                change -> {
-                    String newText = change.getControlNewText();
-                    if (newText.length() <= maxLength && newText.matches(regex)) {
-                        return change;
-                    }
-                    return null; // reject the change if it exceeds the max length or doesn't match the regex
-                });
+	@FXML
+	private Button makeBTN;
 
-        textField.setTextFormatter(textFormatter);
-        addValidationAlert(textField, alertMessage);
-    }
+	@FXML
+	private Button saveBTN;
 
-    private void addValidationAlert(TextField textField, String message) {
-        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                validateAndShowAlert(textField, message);
-            }
-        });
-    }
+	@FXML
+	private TextField passwordTF, insertIdLBL;
 
-    private void validateAndShowAlert(TextField textField, String message) {
-        if (!textField.getText().matches("[a-zA-Z0-9]+")) {
-            showAlert(Alert.AlertType.ERROR, "Invalid Input", message);
-            textField.clear();
-        }
-    }
+	@FXML
+	private TextField newPasswordTF, profileConfirmPass;
 
-    private void showAlert(Alert.AlertType alertType, String title, String content) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
+	@FXML
+	private ImageView profileImageView;
 
-    
-    private InputStream getUserImageFromDatabase() throws SQLException {
-        try (PreparedStatement stmt = con.prepareStatement("SELECT userIMG FROM users WHERE id = ?")) {
-            stmt.setInt(1, UserSession.getInstance().getId());
-            ResultSet resultSet = stmt.executeQuery();
-            if (resultSet.next()) {
-                // Return the input stream containing the user image
-                return resultSet.getBinaryStream("userIMG");
-            }
-        }
-        return null; // Return null if no image is found
-    }
-    
-    @FXML
-    private void insertIMG(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
-        );
+	@FXML
+	private Button removeBTN;
 
-        File selectedFile = fileChooser.showOpenDialog(null);
+	@FXML
+	private Button updateBTN, addBTN, deleteBTN;
 
-        if (selectedFile != null) {
-            try {
-                Image selectedImage = new Image(selectedFile.toURI().toString());
-                profileImageView.setImage(selectedImage);
-                profileImageView.setClip(createClip(profileImageView));
-                centerImage(profileImageView);
+	private Image image;
 
-                // Save the image to the database
-                saveImageToDatabase(selectedFile);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Handle the exception as needed
-            }
-        }
-    }
-    
-    private void saveImageToDatabase(File imageFile) {
-        try (Connection con = DatabaseManager.getConnection()) {
-            con.setAutoCommit(false);
+	Connection con = DatabaseManager.getConnection();
 
-            try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET userIMG = ? WHERE id = ?")) {
-                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(profileImageView.getImage(), null);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(bufferedImage, "png", baos);
-                byte[] imageData = baos.toByteArray();
-                stmt.setBytes(1, imageData);
-                stmt.setInt(2, UserSession.getInstance().getId());  // Use the user ID from UserSession
-                stmt.executeUpdate();
-                con.commit();
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();  
-                con.rollback();
-            } finally {
-                con.setAutoCommit(true);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+		try {
+			// Check if the user has a saved image in the database
+			InputStream imageStream = getUserImageFromDatabase();
+			if (imageStream != null) {
+				// Load the user image from the database
+				Image userImage = new Image(imageStream);
+				profileImageView.setImage(userImage);
+				profileImageView.setClip(createClip(profileImageView));
+				centerImage(profileImageView);
+			} else {
+				// Use the default image
+				Image defaultImage = new Image(getClass().getResourceAsStream("/img_icons/NoPeep.png"));
+				profileImageView.setImage(defaultImage);
+				profileImageView.setClip(createClip(profileImageView));
+				centerImage(profileImageView);
+			}
 
-    private InputStream convertImageToInputStream(Image image) throws IOException {
-        if (image != null && image.getPixelReader() != null) {
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", outputStream);
-            return new ByteArrayInputStream(outputStream.toByteArray());
-        } else {
-            InputStream defaultImageStream = getClass().getResourceAsStream("/img_icons/NoPeep.png");
-            return defaultImageStream;
-        }
-    }
+			profileImageView.setOnMouseClicked(event -> {
+				if (event.getButton() == MouseButton.PRIMARY) {
+					// Handle primary (left) mouse click
+					insertIMG(null);
+				}
+			});
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-    private Circle createClip(ImageView imageView) {
-        Circle clip = new Circle();
-        double radius = Math.min(imageView.getFitWidth() / 2, imageView.getFitHeight() / 2);
-        clip.setRadius(radius);
-        clip.setCenterX(radius);
-        clip.setCenterY(radius);
-        return clip;
-    }
+		insertLBL();
 
+		setupTextFormatterWithValidation(firstTF, 15, "[a-zA-Z]+", "Only letters are allowed");
+		setupTextFormatterWithValidation(lastTF, 15, "[a-zA-Z]+", "Only letters are allowed");
+		setupTextFormatterWithValidation(userTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
+		setupTextFormatterWithValidation(passwordTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
+		setupTextFormatterWithValidation(newPasswordTF, 15, "[a-zA-Z0-9]+", "Only letters and numbers are allowed");
+		setupTextFormatterWithValidation(profileConfirmPass, 15, "[a-zA-Z0-9]+",
+				"Only letters and numbers are allowed");
+	}
 
-    private void centerImage(ImageView imageView) {
-        double imageViewWidth = imageView.getFitWidth();
-        double imageViewHeight = imageView.getFitHeight();
+	private void setupTextFormatterWithValidation(TextField textField, int maxLength, String regex,
+			String alertMessage) {
+		TextFormatter<String> textFormatter = new TextFormatter<>(new DefaultStringConverter(), null, change -> {
+			String newText = change.getControlNewText();
+			if (newText.length() <= maxLength && newText.matches(regex)) {
+				return change;
+			}
+			return null; // reject the change if it exceeds the max length or doesn't match the regex
+		});
 
-        Image image = imageView.getImage();
+		textField.setTextFormatter(textFormatter);
+		addValidationAlert(textField, alertMessage);
+	}
 
-        if (image != null) {
-            double imageWidth = image.getWidth();
-            double imageHeight = image.getHeight();
+	private void addValidationAlert(TextField textField, String message) {
+		textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				validateAndShowAlert(textField, message);
+			}
+		});
+	}
 
-            double offsetX = 0;
-            double offsetY = 0;
+	private void validateAndShowAlert(TextField textField, String message) {
+		if (!textField.getText().matches("[a-zA-Z0-9]+")) {
+			showAlert(Alert.AlertType.ERROR, "Invalid Input", message);
+			textField.clear();
+		}
+	}
 
-            if (imageWidth > imageViewWidth) {
-                offsetX = (imageWidth - imageViewWidth) / 2;
-            } else {
-                offsetX = (imageViewWidth - imageWidth) / 2;
-            }
+	private void showAlert(Alert.AlertType alertType, String title, String content) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(content);
+		alert.showAndWait();
+	}
 
-            if (imageHeight > imageViewHeight) {
-                offsetY = (imageHeight - imageViewHeight) / 2;
-            } else {
-                offsetY = (imageViewHeight - imageHeight) / 2;
-            }
+	private InputStream getUserImageFromDatabase() throws SQLException {
+		try (PreparedStatement stmt = con.prepareStatement("SELECT userIMG FROM users WHERE id = ?")) {
+			stmt.setInt(1, UserSession.getInstance().getId());
+			ResultSet resultSet = stmt.executeQuery();
+			if (resultSet.next()) {
+				// Return the input stream containing the user image
+				return resultSet.getBinaryStream("userIMG");
+			}
+		}
+		return null; // Return null if no image is found
+	}
 
-            imageView.setViewport(new Rectangle2D(offsetX, offsetY, imageViewWidth, imageViewHeight));
-        }
-    }
-    
-    private void insertLBL() {
-        UserSession session = UserSession.getInstance();
+	@FXML
+	private void insertIMG(ActionEvent event) {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters()
+				.addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 
-        // Assuming that you have appropriate getters in UserSession
-        String firstName = session.getFirstname();
-        String lastName = session.getLastname();
-        String username = session.getUsername();
-        String password = session.getPassword();
+		File selectedFile = fileChooser.showOpenDialog(null);
 
-        // Set the labels
-        firstnameLBL.setText(firstName);
-        lastnameLBL.setText(lastName);
-        usernameLBL.setText(username);
-        firstTF.setText(firstName);
-        lastTF.setText(lastName);
-        userTF.setText(username);
-        passwordTF.setText(password);
-    }
-    
-    @FXML
-    private void saveProfile(ActionEvent event) {
-        try {
-            // Get the values from the text fields
-            String newFirstName = firstTF.getText();
-            String newLastName = lastTF.getText();
-            String newUsername = userTF.getText();
+		if (selectedFile != null) {
+			try {
+				Image selectedImage = new Image(selectedFile.toURI().toString());
+				profileImageView.setImage(selectedImage);
+				profileImageView.setClip(createClip(profileImageView));
+				centerImage(profileImageView);
 
-            // Update the database with the new values
-            updateProfileInDatabase(newFirstName, newLastName, newUsername);
+				// Save the image to the database
+				saveImageToDatabase(selectedFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+				// Handle the exception as needed
+			}
+		}
+	}
 
-            // Update the labels
-            firstnameLBL.setText(newFirstName);
-            lastnameLBL.setText(newLastName);
-            usernameLBL.setText(newUsername);
+	private void saveImageToDatabase(File imageFile) {
+		try (Connection con = DatabaseManager.getConnection()) {
+			con.setAutoCommit(false);
 
-            // Optionally, you may want to update the UserSession with the new values
-            UserSession.getInstance().setFirstname(newFirstName);
-            UserSession.getInstance().setLastname(newLastName);
-            UserSession.getInstance().setUsername(newUsername);
+			try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET userIMG = ? WHERE id = ?")) {
+				BufferedImage bufferedImage = SwingFXUtils.fromFXImage(profileImageView.getImage(), null);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(bufferedImage, "png", baos);
+				byte[] imageData = baos.toByteArray();
+				stmt.setBytes(1, imageData);
+				stmt.setInt(2, UserSession.getInstance().getId()); // Use the user ID from UserSession
+				stmt.executeUpdate();
+				con.commit();
+			} catch (SQLException | IOException e) {
+				e.printStackTrace();
+				con.rollback();
+			} finally {
+				con.setAutoCommit(true);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
-            // Optionally, display a success message or perform other actions
-            System.out.println("Profile saved successfully!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the exception as needed
-        }
-    }
+	private InputStream convertImageToInputStream(Image image) throws IOException {
+		if (image != null && image.getPixelReader() != null) {
+			BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			ImageIO.write(bufferedImage, "png", outputStream);
+			return new ByteArrayInputStream(outputStream.toByteArray());
+		} else {
+			InputStream defaultImageStream = getClass().getResourceAsStream("/img_icons/NoPeep.png");
+			return defaultImageStream;
+		}
+	}
 
-    private void updateProfileInDatabase(String newFirstName, String newLastName, String newUsername) throws SQLException {
-        try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET fname = ?, lname = ?, username = ? WHERE id = ?")) {
-            stmt.setString(1, newFirstName);
-            stmt.setString(2, newLastName);
-            stmt.setString(3, newUsername);
-            stmt.setInt(4, UserSession.getInstance().getId()); // Use the user ID from UserSession
+	private Circle createClip(ImageView imageView) {
+		Circle clip = new Circle();
+		double radius = Math.min(imageView.getFitWidth() / 2, imageView.getFitHeight() / 2);
+		clip.setRadius(radius);
+		clip.setCenterX(radius);
+		clip.setCenterY(radius);
+		return clip;
+	}
 
-            stmt.executeUpdate();
-        }
-    }
-    
-    @FXML
-    private void updatePassword(ActionEvent event) {
-        try {
-            // Get the values from the text fields
-            String currentPass = passwordTF.getText();
-            String newPass = newPasswordTF.getText();
-            String confirmPass = profileConfirmPass.getText();
+	private void centerImage(ImageView imageView) {
+		double imageViewWidth = imageView.getFitWidth();
+		double imageViewHeight = imageView.getFitHeight();
 
-            // Update the database with the new values
-            updatePasswordDatabase(confirmPass);
+		Image image = imageView.getImage();
 
-            // Update the labels
-            passwordTF.clear();
-            newPasswordTF.clear();
-            profileConfirmPass.clear();
+		if (image != null) {
+			double imageWidth = image.getWidth();
+			double imageHeight = image.getHeight();
 
-            // Optionally, you may want to update the UserSession with the new values
-            UserSession.getInstance().setPassword(confirmPass);
+			double offsetX = 0;
+			double offsetY = 0;
 
-            // Display a success message
-            showSuccessAlert("Password changed successfully!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the exception as needed
-        }
-    }
+			if (imageWidth > imageViewWidth) {
+				offsetX = (imageWidth - imageViewWidth) / 2;
+			} else {
+				offsetX = (imageViewWidth - imageWidth) / 2;
+			}
 
-    private void updatePasswordDatabase(String confirmPass) throws SQLException {
-        try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET password = ? WHERE id = ?")) {
-            stmt.setString(1, confirmPass);
-            stmt.setInt(2, UserSession.getInstance().getId()); // Use the user ID from UserSession
+			if (imageHeight > imageViewHeight) {
+				offsetY = (imageHeight - imageViewHeight) / 2;
+			} else {
+				offsetY = (imageViewHeight - imageHeight) / 2;
+			}
 
-            stmt.executeUpdate();
-        }
-    }
+			imageView.setViewport(new Rectangle2D(offsetX, offsetY, imageViewWidth, imageViewHeight));
+		}
+	}
 
-    private void showSuccessAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+	private void insertLBL() {
+		UserSession session = UserSession.getInstance();
 
-    @FXML
-    private void addBTN(ActionEvent event) {
-        try {
-            // Get the values from the text fields
-            String confirmValue = confirmLBL.getText();
-            String insertValue = insertIdLBL.getText();
+		// Assuming that you have appropriate getters in UserSession
+		String firstName = session.getFirstname();
+		String lastName = session.getLastname();
+		String username = session.getUsername();
+		String password = session.getPassword();
 
-            // Update the database based on conditions
-            if ("Confirm".equalsIgnoreCase(confirmValue)) {
-            	 updateInsertValueInDatabase();
-            }
-            // Optionally, display a success message or perform other actions
-            System.out.println("Database updated successfully!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle the exception as needed
-        }
-    }
+		// Set the labels
+		firstnameLBL.setText(firstName);
+		lastnameLBL.setText(lastName);
+		usernameLBL.setText(username);
+		firstTF.setText(firstName);
+		lastTF.setText(lastName);
+		userTF.setText(username);
+		passwordTF.setText(password);
+	}
 
+	@FXML
+	private void saveProfile(ActionEvent event) {
+		try {
+			// Get the values from the text fields
+			String newFirstName = firstTF.getText();
+			String newLastName = lastTF.getText();
+			String newUsername = userTF.getText();
 
+			// Update the database with the new values
+			updateProfileInDatabase(newFirstName, newLastName, newUsername);
 
-    private void updateInsertValueInDatabase() throws SQLException {
-        try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET type = 'admin' WHERE id = ?")) {
-            // Update based on your conditions
-            stmt.setInt(1, UserSession.getInstance().getId());
-            stmt.executeUpdate();
-        }
-    }
+			// Update the labels
+			firstnameLBL.setText(newFirstName);
+			lastnameLBL.setText(newLastName);
+			usernameLBL.setText(newUsername);
+
+			// Optionally, you may want to update the UserSession with the new values
+			UserSession.getInstance().setFirstname(newFirstName);
+			UserSession.getInstance().setLastname(newLastName);
+			UserSession.getInstance().setUsername(newUsername);
+
+			// Optionally, display a success message or perform other actions
+			System.out.println("Profile saved successfully!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Handle the exception as needed
+		}
+	}
+
+	private void updateProfileInDatabase(String newFirstName, String newLastName, String newUsername)
+			throws SQLException {
+		try (PreparedStatement stmt = con
+				.prepareStatement("UPDATE users SET fname = ?, lname = ?, username = ? WHERE id = ?")) {
+			stmt.setString(1, newFirstName);
+			stmt.setString(2, newLastName);
+			stmt.setString(3, newUsername);
+			stmt.setInt(4, UserSession.getInstance().getId()); // Use the user ID from UserSession
+
+			stmt.executeUpdate();
+		}
+	}
+
+	@FXML
+	private void updatePassword(ActionEvent event) {
+		try {
+			// Get the values from the text fields
+			String currentPass = passwordTF.getText();
+			String newPass = newPasswordTF.getText();
+			String confirmPass = profileConfirmPass.getText();
+
+			// Update the database with the new values
+			updatePasswordDatabase(confirmPass);
+
+			// Update the labels
+			passwordTF.clear();
+			newPasswordTF.clear();
+			profileConfirmPass.clear();
+
+			// Optionally, you may want to update the UserSession with the new values
+			UserSession.getInstance().setPassword(confirmPass);
+
+			// Display a success message
+			showSuccessAlert("Password changed successfully!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Handle the exception as needed
+		}
+	}
+
+	private void updatePasswordDatabase(String confirmPass) throws SQLException {
+		try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET password = ? WHERE id = ?")) {
+			stmt.setString(1, confirmPass);
+			stmt.setInt(2, UserSession.getInstance().getId()); // Use the user ID from UserSession
+
+			stmt.executeUpdate();
+		}
+	}
+
+	private void showSuccessAlert(String message) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Success");
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
+	}
+
+	@FXML
+	private void addBTN(ActionEvent event) {
+		try {
+			int userId = Integer.parseInt(insertIdLBL.getText());
+			updateInsertValueInDatabase(userId);
+			showSuccessAlert("Success", "User type updated successfully!");
+		} catch (Exception e) {
+			handleException(e);
+		}
+	}
+
+	private void updateInsertValueInDatabase(int userId) throws SQLException {
+		try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET type = 'admin' WHERE id = ?")) {
+			stmt.setInt(1, userId);
+			stmt.executeUpdate();
+		}
+	}
+
+	@FXML
+	private void deleteUserType(ActionEvent event) {
+		try {
+			int userId = Integer.parseInt(insertIdLBL.getText());
+			updateDeleteValueInDatabase(userId);
+			showSuccessAlert("Success", "User type updated successfully!");
+		} catch (Exception e) {
+			handleException(e);
+		}
+	}
+
+	private void updateDeleteValueInDatabase(int userId) throws SQLException {
+		try (PreparedStatement stmt = con.prepareStatement("UPDATE users SET type = 'encoder' WHERE id = ?")) {
+			stmt.setInt(1, userId);
+			stmt.executeUpdate();
+		}
+	}
+
+	private void handleException(Exception e) {
+		e.printStackTrace();
+		// Add your custom exception handling logic here, such as displaying an error
+		// message
+	}
+
+	private void showSuccessAlert(String title, String message) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
+	}
 }
