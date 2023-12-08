@@ -2,10 +2,12 @@ package enrollment;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import application.DatabaseManager;
 import javafx.scene.control.Alert;
@@ -13,6 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,7 +30,7 @@ import javafx.scene.paint.Color;
 import application.MainFrameController;
 import application.UserSession;
 
-public class BeforeOldEnrollController {
+public class BeforeOldEnrollController implements Initializable {
 	@FXML
 	private Button searchbtn;
 
@@ -43,6 +46,22 @@ public class BeforeOldEnrollController {
 	private double gwaValue = 0.0;
 	
 	public String searchedCode;
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		searchbar.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                searchbar.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            
+            if (newValue.length() > 8) {
+                String limitedValue = newValue.substring(0, 8);
+                searchbar.setText(limitedValue);
+            }
+        });
+    }
+	
 
 	@FXML
 	void searchscodebtn(ActionEvent event) {

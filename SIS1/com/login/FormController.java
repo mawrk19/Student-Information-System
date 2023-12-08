@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -116,10 +117,12 @@ public class FormController implements Initializable{
 				
 			} else {
 				messLabel.setText("Wrong Credentials");
+				showAlert("Error", "Wrong Credentials", "Please valid Username and Password");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			messLabel.setText("Database error");
+			showAlert("Error", "Wrong Credentials", "Please valid Username and Password");
 		}
 	}
 
@@ -170,6 +173,16 @@ public class FormController implements Initializable{
 		});
 		
 	}
+	
+	private void showAlert(String title, String header, String content) {
+    	Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        
+        alert.showAndWait();
+
+    }
 
 	
 

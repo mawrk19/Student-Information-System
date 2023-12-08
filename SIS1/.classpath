@@ -21,6 +21,7 @@
 =======
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVA_FXFX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Itext"/>
 	<classpathentry kind="lib" path="C:/Users/user/git/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
 >>>>>>> 7b5ef6e11ed95805095d21366398f193a5a4ee21
 	<classpathentry kind="output" path="bin"/>
