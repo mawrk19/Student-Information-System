@@ -13,6 +13,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVA_FXFX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Itext"/>
 	<classpathentry kind="lib" path="C:/Users/user/git/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/git/Student-Information-System/slf4j-api-1.7.36.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/git/Student-Information-System/html2pdf-5.0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
