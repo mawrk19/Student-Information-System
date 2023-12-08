@@ -67,6 +67,33 @@
 	-fx-text-fill: #34245c;
 }
 
+#encEnroll {
+	-fx-background-color:#281c47;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+}
+
+#encCon {
+	-fx-background-color: linear-gradient(to bottom, #6446b2, #46317d, #281c47);
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+}
+
+#encConHeader {
+	-fx-background-color: #6446b2;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+}
+
+#txtField {
+	-fx-font-family: "Arial Rounded MT Bold";
+}
+
 .user-name {
 	
 }

@@ -13,12 +13,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EncEnrollmentController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@../profile/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EncEnrollmentController">
 	<children>
-		<AnchorPane prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<AnchorPane id="background" prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@../profile/Profile.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
 
-				<AnchorPane fx:id="newContentAnchorPane" layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #3C5199;" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="260.0">
+				<AnchorPane id="encCon" fx:id="newContentAnchorPane" layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="260.0">
 					<children>
 						<TableView fx:id="subjectsTableView" fixedCellSize="0.0" prefHeight="424.0" prefWidth="800.0" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
 							<columns>
@@ -33,7 +33,7 @@
 						</TableView>
 					</children>
 				</AnchorPane>
-				<AnchorPane layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" styleClass="Containers" stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
+				<AnchorPane id="encConHeader" layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" styleClass="Containers" stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
 					<children>
 						<ImageView id="image" fx:id="imageView" fitHeight="188.0" fitWidth="201.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -41,7 +41,7 @@
                      </image></ImageView>
 						<HBox id="Infos" layoutX="231.0" layoutY="10.0" prefHeight="200.0" prefWidth="580.0" spacing="10.0" style="-fx-background-color: #DFE2ED;" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
 							<children>
-								<VBox prefHeight="188.0" prefWidth="189.0" spacing="10.0" HBox.hgrow="ALWAYS">
+								<VBox id="txtField" prefHeight="188.0" prefWidth="189.0" spacing="10.0" stylesheets="@Enrollment.css" HBox.hgrow="ALWAYS">
 									<children>
 										<TextField fx:id="fNameTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="180.0" promptText="First Name" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
 											<VBox.margin>
@@ -69,7 +69,7 @@
 										</TextField>
 									</children>
 								</VBox>
-								<VBox prefHeight="188.0" prefWidth="189.0" spacing="10.0" HBox.hgrow="ALWAYS">
+								<VBox id="txtField" prefHeight="188.0" prefWidth="189.0" spacing="10.0" stylesheets="@Enrollment.css" HBox.hgrow="ALWAYS">
 									<children>
 										<TextField fx:id="sidTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Generating SID..." style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                                  <font>
@@ -100,7 +100,7 @@
                            </HBox.margin>
 								</VBox>
 
-								<VBox prefHeight="188.0" prefWidth="189.0" spacing="10.0" HBox.hgrow="ALWAYS">
+								<VBox id="txtField" prefHeight="188.0" prefWidth="189.0" spacing="10.0" stylesheets="@Enrollment.css" HBox.hgrow="ALWAYS">
 									<children>
 										<TextField fx:id="dateTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Date" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
 
@@ -143,7 +143,7 @@
 					<children>
 						<HBox prefHeight="46.0" prefWidth="825.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<Button fx:id="enrollBTN1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#enrollButtonClickedAction" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #3C5199;" text="Enroll" textFill="WHITE" HBox.hgrow="ALWAYS">
+								<Button id="encEnroll" fx:id="enrollBTN1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#enrollButtonClickedAction" prefHeight="45.0" prefWidth="405.0" stylesheets="@Enrollment.css" text="Enroll" textFill="WHITE" HBox.hgrow="ALWAYS">
                            <font>
                               <Font name="Berlin Sans FB" size="20.0" />
                            </font></Button>

@@ -17,10 +17,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EncOldEnrollmentController">
 	<children>
-		<AnchorPane prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<AnchorPane id="background" prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@../profile/Profile.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
 
-				<AnchorPane fx:id="newContentAnchorPane" layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #3C5199;" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="260.0">
+				<AnchorPane id="encCon" fx:id="newContentAnchorPane" layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="260.0">
 					<children>
                   <StackPane layoutX="12.0" layoutY="12.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="12.0">
                      <children>
@@ -47,7 +47,7 @@
                   </StackPane>
 					</children>
 				</AnchorPane>
-				<AnchorPane layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" styleClass="Containers" stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
+				<AnchorPane id="encConHeader" layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" styleClass="Containers" stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
 					<children>
 						<ImageView id="image" fx:id="imageView" fitHeight="188.0" fitWidth="201.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -157,7 +157,7 @@
 					<children>
 						<HBox prefHeight="46.0" prefWidth="825.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<Button fx:id="enrollBTN1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#enrollButtonClickedAction" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #3C5199;" text="Enroll" textFill="WHITE" HBox.hgrow="ALWAYS">
+								<Button id="encEnroll" fx:id="enrollBTN1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#enrollButtonClickedAction" prefHeight="45.0" prefWidth="405.0" stylesheets="@Enrollment.css" text="Enroll" textFill="WHITE" HBox.hgrow="ALWAYS">
                            <font>
                               <Font name="Berlin Sans FB" size="20.0" />
                            </font></Button>
