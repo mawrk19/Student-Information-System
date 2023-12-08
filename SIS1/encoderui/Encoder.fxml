@@ -202,11 +202,11 @@
                <children>
                   <HBox prefHeight="50.0" prefWidth="300.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #694bb8;">
+                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #2c1f4f;">
                            <children>
-                              <Button fx:id="Profileicn" alignment="CENTER" mnemonicParsing="false" onAction="#profileicnbtn" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #694bb8;" VBox.vgrow="ALWAYS">
+                              <Button fx:id="Profileicn" alignment="CENTER" mnemonicParsing="false" onAction="#profileicnbtn" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #2c1f4f;" VBox.vgrow="ALWAYS">
                                  <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-blend-mode: lighten;">
                                        <image>
                                           <Image url="@../src/imgs_icons/Userprofile.png" />
                                        </image>

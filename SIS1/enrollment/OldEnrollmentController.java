@@ -7,18 +7,28 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import students.Students;
+import javafx.scene.layout.StackPane;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -38,265 +48,1294 @@ import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 
+import com.mysql.cj.jdbc.Blob;
+
 import application.DatabaseManager;
 import application.UserSession;
 
 public class OldEnrollmentController implements Initializable {
 
-    @FXML
-    private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, statCMB, semCMB;
+	@FXML
+	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, semCMB;
 
-    @FXML
-    private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
+	@FXML
+	private TextField dateTF, fNameTF, lNameTF, mNameTF, sidTF;
 
-    @FXML
-    private Button enrollBTN;
+	@FXML
+	private Button enrollBTN;
 
-    @FXML
-    private ImageView insertIMG;
+	@FXML
+	private ImageView insertIMG;
 
-    @FXML
-    private TableView<Subject> subjectsTableView;
+	@FXML
+	private TableView<Subject> subjectsTableView;
 
-    @FXML
-    private TableColumn<Subject, Integer> idColumn;
+	@FXML
+	private TableColumn<Subject, Integer> idColumn;
 
-    @FXML
-    private TableColumn<Subject, String> subCodeColumn;
+	@FXML
+	private TableColumn<Subject, String> subCodeColumn;
 
-    @FXML
-    private TableColumn<Subject, Integer> unitsColumn;
+	@FXML
+	private TableColumn<Subject, Integer> unitsColumn;
 
-    @FXML
-    private TableColumn<Subject, String> subjectColumn;
+	@FXML
+	private TableColumn<Subject, String> subjectColumn;
 
-    @FXML
-    private ImageView imageView;
+	@FXML
+	private TableView<Subject> irregularTableView;
 
-    private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
+	@FXML
+	private AnchorPane newContentAnchorPane;
 
-    private Image image;
+	@FXML
+	private ImageView imageView;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
-        courseCMB.setItems(courses);
+	@FXML
+	AnchorPane contentarea;
 
-        ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
-        genderCMB.setItems(genders);
+	private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
 
-        ObservableList<String> locations = FXCollections.observableArrayList("Camarin", "Congress", "South");
-        locCMB.setItems(locations);
+	private Image image;
 
-        ObservableList<String> sections = FXCollections.observableArrayList("A", "B", "C");
-        secCMB.setItems(sections);
+	private String studCode;
 
-        ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
-        yrCMB.setItems(years);
+	// String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
 
-        ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
-        semCMB.setItems(sem);
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		Students student = setCredentials();
+		InputStream imageStream;
 
-        ObservableList<String> type = FXCollections.observableArrayList("Regular", "Irregular");
-        statCMB.setItems(type);
+		try {
+			imageStream = getUserImageFromDatabase();
+			if (imageStream != null) {
+				// Load the user image from the database
+				Image userImage = new Image(imageStream);
+				imageView.setImage(userImage);
+				centerImage(imageView);
+			} else {
+				System.out.println("Input stream is null. Skipping image loading.");
+			}
+		} catch (SQLException e) {
+			// Handle SQLException
+			e.printStackTrace();
+		}
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            dateTF.setText(LocalDateTime.now().format(formatter));
-        }));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
+		if (student != null) {
+			fNameTF.setText(student.getFirstName());
+			mNameTF.setText(student.getMiddleName());
+			lNameTF.setText(student.getLastName());
+			dateTF.setText(student.getDate());
+			genderCMB.setValue(student.getGender());
+			courseCMB.setValue(student.getCourse());
+			yrCMB.setValue(student.getYear());
+			secCMB.setValue(student.getSection());
+			semCMB.setValue(student.getSem());
+			locCMB.setValue(student.getLocation());
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subCode"));
-        unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
-        subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
+			// gawa ka method para sa image
+		}
 
-        courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-        yrCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-        secCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-        semCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-        statCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+		setSubjectsBasedOnSelection();
 
-        imageView.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                // Handle primary (left) mouse click
-                insertIMG();
-            }
-        });
-    }
+		ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
+		courseCMB.setItems(courses);
 
-    private void setSubjectsBasedOnSelection() {
-        String selectedCourse = courseCMB.getValue();
-        String selectedYear = yrCMB.getValue();
-        String selectedSection = secCMB.getValue();
-        String selectedSemester = semCMB.getValue();
-        String selectedType = statCMB.getValue();
+		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
+		genderCMB.setItems(genders);
 
-        if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
-                && "1st".equals(selectedSemester) && "Regular".equals(selectedType)) {
-            setSubjectsForSemester("BSCS1A1st", 1, 9);
-        } else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
-                && "2nd".equals(selectedSemester) && "Regular".equals(selectedType)) {
-            setSubjectsForSemester("BSCS1A2nd", 10, 17);
-        } else {
-            clearSubjectsTable();
-        }
-    }
+		ObservableList<String> locations = FXCollections.observableArrayList("Congress", "South");
+		locCMB.setItems(locations);
 
-    private void clearSubjectsTable() {
-        subjectsTableView.getItems().clear();
-    }
+		ObservableList<String> sections = FXCollections.observableArrayList("A", "B");
+		secCMB.setItems(sections);
 
-    private void setSubjectsForSemester(String semester, int startId, int endId) {
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement preparedStatement = connection
-                     .prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
+		ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
+		yrCMB.setItems(years);
 
-            preparedStatement.setInt(1, startId);
-            preparedStatement.setInt(2, endId);
+		ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
+		semCMB.setItems(sem);
+		
+		fNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+		        event.consume();
+		    }
+		});
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                clearSubjectsTable(); // Clear existing items before adding new ones
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    String subCode = resultSet.getString("sub_code");
-                    int units = resultSet.getInt("units");
-                    String subject = resultSet.getString("subject");
+		lNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+		        event.consume();
+		    }
+		});
+		
+		mNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+		        event.consume();
+		    }
+		});
 
-                    Subject subjectObj = new Subject(id, subCode, units, subject);
-                    subjectsList.add(subjectObj);
-                }
-                subjectsTableView.setItems(subjectsList);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception as needed
-        }
-    }
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			dateTF.setText(LocalDateTime.now().format(formatter));
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+
+		idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+		subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subCode"));
+		unitsColumn.setCellValueFactory(new PropertyValueFactory<>("units"));
+		subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));
+
+		courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+		yrCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+		secCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+		semCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+
+//		imageView.setOnMouseClicked(event -> {
+//			if (event.getButton() == MouseButton.PRIMARY) {
+//				// Handle primary (left) mouse click
+//				insertIMG();
+//			}
+//		});
+
+		sidTF.setEditable(false);
+		sidTF.setDisable(true);
+	}
+
+	private InputStream getUserImageFromDatabase() throws SQLException {
+
+		Connection con = DatabaseManager.getConnection();
+		try (PreparedStatement stmt = con.prepareStatement("SELECT image FROM student WHERE scode = ?")) {
+			stmt.setString(1, SearchBarSingleton.getInstance().getSearchbarText());
+			ResultSet resultSet = stmt.executeQuery();
+			if (resultSet.next()) {
+				return resultSet.getBinaryStream("image");
+			}
+		}
+		return null; // Return null if no image is found
+	}
+
+	private void centerImage(ImageView imageView) {
+		double imageViewWidth = imageView.getFitWidth();
+		double imageViewHeight = imageView.getFitHeight();
+
+		Image image = imageView.getImage();
+
+		if (image != null) {
+			double imageWidth = image.getWidth();
+			double imageHeight = image.getHeight();
+
+			double offsetX = 0;
+			double offsetY = 0;
+
+			if (imageWidth > imageViewWidth) {
+				offsetX = (imageWidth - imageViewWidth) / 2;
+			} else {
+				offsetX = (imageViewWidth - imageWidth) / 2;
+			}
+
+			if (imageHeight > imageViewHeight) {
+				offsetY = (imageHeight - imageViewHeight) / 2;
+			} else {
+				offsetY = (imageViewHeight - imageHeight) / 2;
+			}
+
+			imageView.setViewport(new Rectangle2D(offsetX, offsetY, imageViewWidth, imageViewHeight));
+		}
+	}
+
+	@FXML
+	private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
+		String studCode = enrollButtonClicked(createStudentsObject());
+		System.out.println("Enrolled student with studCode: " + studCode);
+		// setTransaction();
+	}
+
+	private void replaceTableViewContent() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/OldTransaction.fxml"));
+			AnchorPane newTableAnchorPane = loader.load();
+
+			StackPane tableViewParent = (StackPane) subjectsTableView.getParent();
+			Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
+			Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
+			Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
+			Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
+
+			tableViewParent.getChildren().remove(subjectsTableView);
+
+			AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
+			AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
+			AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
+			AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
+
+			tableViewParent.getChildren().add(newTableAnchorPane);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+//	public void newEnrollment() throws IOException {
+//		Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
+//		contentarea.getChildren().removeAll();
+//		contentarea.getChildren().setAll(enrollmentstage);
+//		AnchorPane.setLeftAnchor(enrollmentstage, 10.0);
+//		AnchorPane.setRightAnchor(enrollmentstage, 10.0);
+//		AnchorPane.setTopAnchor(enrollmentstage, 10.0);
+//		AnchorPane.setBottomAnchor(enrollmentstage, 20.0);
+//	}
+
+	public void setSubjectsBasedOnSelection() {
+		String selectedCourse = courseCMB.getValue();
+		String selectedYear = yrCMB.getValue();
+		String selectedSection = secCMB.getValue();
+		String selectedSemester = semCMB.getValue();
+
+		int startId;
+		int endId;
+
+		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 18;
+			endId = 25;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 18;
+			endId = 25;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 18;
+			endId = 25;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 18;
+			endId = 25;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 89;
+			endId = 96;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 89;
+			endId = 96;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 89;
+			endId = 96;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 89;
+			endId = 96;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 60;
+			endId = 66;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 60;
+			endId = 66;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 60;
+			endId = 66;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 60;
+			endId = 66;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 26;
+			endId = 32;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 26;
+			endId = 32;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 26;
+			endId = 32;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 26;
+			endId = 32;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 97;
+			endId = 104;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 97;
+			endId = 104;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 97;
+			endId = 104;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 97;
+			endId = 104;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 67;
+			endId = 74;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 67;
+			endId = 74;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 67;
+			endId = 74;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 67;
+			endId = 74;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 48;
+			endId = 54;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 48;
+			endId = 54;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 48;
+			endId = 54;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 48;
+			endId = 54;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 33;
+			endId = 40;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 33;
+			endId = 40;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 33;
+			endId = 40;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 33;
+			endId = 40;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 105;
+			endId = 113;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 105;
+			endId = 113;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 105;
+			endId = 113;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 105;
+			endId = 113;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 75;
+			endId = 82;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 75;
+			endId = 82;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 75;
+			endId = 82;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 75;
+			endId = 82;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 55;
+			endId = 59;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 55;
+			endId = 59;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 55;
+			endId = 59;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 55;
+			endId = 59;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 41;
+			endId = 47;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 41;
+			endId = 47;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 41;
+			endId = 47;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 41;
+			endId = 47;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 114;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 114;
+			endId = 120;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 114;
+			endId = 120;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 114;
+			endId = 120;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 83;
+			endId = 88;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 83;
+			endId = 88;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 83;
+			endId = 88;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 83;
+			endId = 88;
+		} else {
+			subjectsTableView.setVisible(false);
+			irregularTableView.setVisible(true);
+			clearSubjectsTable();
+			return;
+		}
+
+		// Set subjects for the specified conditions
+		setSubjectsForSemester(createStudentsObject());
+	}
+
+	private Students createStudentsObject() {
+		String selectedCourse = courseCMB.getValue();
+		String selectedYear = yrCMB.getValue();
+		String selectedSection = secCMB.getValue();
+		String selectedSemester = semCMB.getValue();
+
+		int startId = 1; // Default values
+		int endId = 9; // Default values
+
+		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 18;
+			endId = 25;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 18;
+			endId = 25;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 18;
+			endId = 25;
+		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 18;
+			endId = 25;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 89;
+			endId = 96;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 89;
+			endId = 96;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 89;
+			endId = 96;
+		} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 89;
+			endId = 96;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 60;
+			endId = 66;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 60;
+			endId = 66;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 60;
+			endId = 66;
+		} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 60;
+			endId = 66;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 10;
+			endId = 17;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 1;
+			endId = 9;
+		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 10;
+			endId = 17;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 26;
+			endId = 32;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 26;
+			endId = 32;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 26;
+			endId = 32;
+		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 26;
+			endId = 32;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 97;
+			endId = 104;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 97;
+			endId = 104;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 97;
+			endId = 104;
+		} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 97;
+			endId = 104;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 67;
+			endId = 74;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 67;
+			endId = 74;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 67;
+			endId = 74;
+		} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 67;
+			endId = 74;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 48;
+			endId = 54;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 48;
+			endId = 54;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 48;
+			endId = 54;
+		} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 48;
+			endId = 54;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 33;
+			endId = 40;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 33;
+			endId = 40;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 33;
+			endId = 40;
+		} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 33;
+			endId = 40;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 105;
+			endId = 113;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 105;
+			endId = 113;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 105;
+			endId = 113;
+		} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 105;
+			endId = 113;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 75;
+			endId = 82;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 75;
+			endId = 82;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 75;
+			endId = 82;
+		} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 75;
+			endId = 82;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 55;
+			endId = 59;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 55;
+			endId = 59;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 55;
+			endId = 59;
+		} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 55;
+			endId = 59;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 41;
+			endId = 47;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 41;
+			endId = 47;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 41;
+			endId = 47;
+		} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 41;
+			endId = 47;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 114;
+			endId = 9;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 114;
+			endId = 120;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 114;
+			endId = 120;
+		} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 114;
+			endId = 120;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 83;
+			endId = 88;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 83;
+			endId = 88;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "1st".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 83;
+			endId = 88;
+		} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+				&& "2nd".equals(selectedSemester)) {
+			subjectsTableView.setVisible(true);
+			irregularTableView.setVisible(false);
+			startId = 83;
+			endId = 88;
+		}
+
+		return new Students(selectedYear, selectedYear, selectedSection, selectedYear, selectedYear, selectedYear,
+				selectedYear, selectedYear, endId, selectedYear, endId, selectedYear, null, startId, endId,
+				selectedYear);
+	}
+
+	private void clearSubjectsTable() {
+		subjectsTableView.getItems().clear();
+	}
+
+	private void setSubjectsForSemester(Students student) {
+		int startId = student.getStart();
+		int endId = student.getEnd();
+
+		try (Connection connection = DatabaseManager.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
+
+			preparedStatement.setInt(1, startId);
+			preparedStatement.setInt(2, endId);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				clearSubjectsTable(); // Clear existing items before adding new ones
+				while (resultSet.next()) {
+					int id = resultSet.getInt("id");
+					String subCode = resultSet.getString("sub_code");
+					int units = resultSet.getInt("units");
+					String subject = resultSet.getString("subject");
+
+					Subject subjectObj = new Subject(id, subCode, units, subject);
+					subjectsList.add(subjectObj);
+				}
+				subjectsTableView.setItems(subjectsList);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle the exception as needed
+		}
+	}
+
+	private String enrollButtonClicked(Students student) throws SQLException, IOException {
+	    String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	    System.out.println("old enroll click " + searchedCode);
+	    String selectedCourse = courseCMB.getValue();
+	    String enrollmentDate = dateTF.getText();
+	    String firstName = fNameTF.getText();
+	    String gender = genderCMB.getValue();
+	    String location = locCMB.getValue();
+	    String lastName = lNameTF.getText();
+	    String middleName = mNameTF.getText();
+	    String section = secCMB.getValue();
+	    String year1 = yrCMB.getValue();
+	    String sy = "2023";
+	    String sy1 = "2023-2024";
+	    String startID = String.valueOf(student.getStart());
+	    String endID = String.valueOf(student.getEnd());
+	    String sem = semCMB.getValue();
+	    String status = "enrolled";
+
+	    // add mo yung sa images
+	    UserSession session = UserSession.getInstance();
+	    String username = session.getUsername();
+
+	    if (isFormFilled()) {
+	        // Form is filled, proceed with replacing content and database operations
+	        replaceTableViewContent();
+
+	        try (Connection con = DatabaseManager.getConnection()) {
+	            // SELECT query to retrieve ID
+	            String selectIdSql = "SELECT id FROM transaction WHERE scode = ?";
+
+	            // Update existing student record
+	            String updateSql = "UPDATE student SET course=?, date=?, First_name=?, gender=?, location=?, "
+	                    + "last_name=?, Middle_name=?, section=?, sy=?, year=?, sem=?, status=?, eSubjectsStart=?, "
+	                    + "eSubjectsEnd=?, encoder=? WHERE scode=?";
+	            try (PreparedStatement updateStatement = con.prepareStatement(updateSql)) {
+	                updateStatement.setString(1, selectedCourse);
+	                updateStatement.setString(2, enrollmentDate);
+	                updateStatement.setString(3, firstName);
+	                updateStatement.setString(4, gender);
+	                updateStatement.setString(5, location);
+	                updateStatement.setString(6, lastName);
+	                updateStatement.setString(7, middleName);
+	                updateStatement.setString(8, section);
+	                updateStatement.setString(9, sy1);
+	                updateStatement.setString(10, year1);
+	                updateStatement.setString(11, sem);
+	                updateStatement.setString(12, status);
+	                updateStatement.setString(13, startID);
+	                updateStatement.setString(14, endID);
+	                updateStatement.setString(15, username);
+	                updateStatement.setString(16, searchedCode);
+
+	                int rowsAffected = updateStatement.executeUpdate();
+
+	                if (rowsAffected > 0) {
+	                    System.out.println("Student record updated successfully.");
+
+	                    // Update scode in the student table
+	                    String updateScodeSql = "UPDATE student SET scode = ? WHERE scode = ?";
+	                    try (PreparedStatement updateScodeStatement = con.prepareStatement(updateScodeSql)) {
+	                        updateScodeStatement.setString(1, searchedCode);
+	                        updateScodeStatement.setString(2, searchedCode);
+
+	                        int scodeRowsAffected = updateScodeStatement.executeUpdate();
+
+	                        if (scodeRowsAffected > 0) {
+	                            System.out.println("Scode updated successfully.");
+
+	                            // Insert studCode into the transaction table
+	                            String transactionSql = "INSERT INTO transaction (scode) VALUES (?)";
+	                            try (PreparedStatement transactionStatement = con.prepareStatement(transactionSql)) {
+	                                transactionStatement.setString(1, searchedCode);
+
+	                                System.out.println("The Queens: " + searchedCode);
+
+	                                int transactionRowsAffected = transactionStatement.executeUpdate();
+
+	                                if (transactionRowsAffected > 0) {
+	                                    System.out.println("Transaction record inserted successfully.");
+
+	                                    // Retrieve id from transaction
+	                                    try (PreparedStatement selectIdStatement = con.prepareStatement(selectIdSql)) {
+	                                        selectIdStatement.setString(1, searchedCode);
+	                                        ResultSet resultSet = selectIdStatement.executeQuery();
+
+	                                        GeneratedIdSingleton idSingleton = GeneratedIdSingleton.getInstance();
+
+	                                        if (resultSet.next()) {
+	                                            int transactionId = resultSet.getInt("id");
+	                                            idSingleton.setGeneratedId(transactionId);
+	                                            System.out.println("printed transact ID: " + transactionId);
+	                                        } else {
+	                                            System.out.println("Failed to retrieve transaction record.");
+	                                        }
+	                                    }
+	                                } else {
+	                                    System.out.println("Failed to update scode.");
+	                                }
+	                            }
+	                        } else {
+	                            System.out.println("No rows affected. Update failed.");
+	                        }
+	                    }
+	                } else {
+	                    System.out.println("Transaction ID not found for scode: " + searchedCode);
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    } else {
+	        // Form is not filled, display an error message or take appropriate action
+	        System.out.println("Form is not filled. Please fill in all required fields.");
+	    }
+	    return searchedCode;
+	}
 
 
-    private InputStream convertImageToInputStream(Image image) throws IOException {
-        if (image != null && image.getPixelReader() != null) {
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", outputStream);
-            return new ByteArrayInputStream(outputStream.toByteArray());
-        } else {
-            InputStream defaultImageStream = getClass().getResourceAsStream("/img_icons/NoPeep.png");
-            return defaultImageStream;
-        }
-    }
+	public void clearFields() {
+		courseCMB.setValue(null);
+		dateTF.clear();
+		fNameTF.clear();
+		genderCMB.setValue(null);
+		locCMB.setValue(null);
+		lNameTF.clear();
+		mNameTF.clear();
+		secCMB.setValue(null);
+	}
 
+//	@FXML
+//	private void insertIMG() {
+//		FileChooser fileChooser = new FileChooser();
+//		fileChooser.getExtensionFilters()
+//				.add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+//		File selectedFile = fileChooser.showOpenDialog(null);
+//
+//		if (selectedFile != null) {
+//			Image newImage = new Image(selectedFile.toURI().toString());
+//			imageView.setImage(newImage);
+//			image = newImage;
+//		}
+//	}
 
-    @FXML
-    private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
-        enrollButtonClicked(convertImageToInputStream(image));
-    }
+	public void setStudCode(String studCode) {
+		this.studCode = studCode;
+	}
 
-    private void enrollButtonClicked(InputStream imageStream) throws SQLException, IOException {
-        String selectedCourse = courseCMB.getValue();
-        String enrollmentDate = dateTF.getText();
-        String firstName = fNameTF.getText();
-        String gender = genderCMB.getValue();
-        String location = locCMB.getValue();
-        String lastName = lNameTF.getText();
-        String middleName = mNameTF.getText();
-        String section = secCMB.getValue();
-        String year1 = yrCMB.getValue();
-        String sy = "2023";
+	public String getStudCode() {
+		return this.studCode;
+	}
 
-        UserSession session = UserSession.getInstance();
-        String username = session.getUsername();
+	private boolean isFormFilled() {
+		if (courseCMB.getValue() == null || dateTF.getText().isEmpty() || fNameTF.getText().isEmpty()
+				|| genderCMB.getValue() == null || locCMB.getValue() == null || lNameTF.getText().isEmpty()
+				|| mNameTF.getText().isEmpty() || secCMB.getValue() == null || semCMB.getValue() == null
+				|| yrCMB.getValue() == null) {
 
-        try (Connection con = DatabaseManager.getConnection()) {
-            String sql;
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Incomplete Form");
+			alert.setHeaderText(null);
+			alert.setContentText("Please fill in all the required fields.");
+			alert.showAndWait();
 
-            if (image != null) {
-                sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, image, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            } else {
-                sql = "INSERT INTO student (course, date, First_name, gender, location, last_name, Middle_name, section, sy, year, encoder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            }
+			return false;
+		}
 
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, selectedCourse);
-                preparedStatement.setString(2, enrollmentDate);
-                preparedStatement.setString(3, firstName);
-                preparedStatement.setString(4, gender);
-                preparedStatement.setString(5, location);
-                preparedStatement.setString(6, lastName);
-                preparedStatement.setString(7, middleName);
-                preparedStatement.setString(8, section);
-                preparedStatement.setString(9, sy);
-                preparedStatement.setString(10, year1);
+		return true;
+	}
 
-                if (image != null) {
-                    preparedStatement.setBlob(11, imageStream);
-                    preparedStatement.setString(12, username);
-                } else {
-                    preparedStatement.setString(11, username);
-                }
+	private Students setCredentials() {
+		Students student = null;
+		String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
 
-                int rowsAffected = preparedStatement.executeUpdate();
+		System.out.println("show searched code: " + searchedCode);
 
-                if (rowsAffected > 0) {
-                    try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                        if (generatedKeys.next()) {
-                            int generatedId = generatedKeys.getInt(1);
-                            System.out.println("Student with ID " + generatedId + " inserted successfully.");
+		try (Connection con = DatabaseManager.getConnection()) {
+			String sql = "SELECT * FROM student WHERE scode = ?";
 
-                            String formattedId = String.format("%04d", generatedId);
+			try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+				preparedStatement.setString(1, searchedCode);
 
-                            String studCode = sy + formattedId;
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+					if (resultSet.next()) {
+						// Retrieve values from the database
+						String firstName = resultSet.getString("First_name");
+						String middleName = resultSet.getString("Middle_name");
+						String lastName = resultSet.getString("last_name");
+						String course1 = resultSet.getString("course");
+						String year1 = resultSet.getString("year");
+						String section1 = resultSet.getString("section");
+						String location1 = resultSet.getString("location");
+						int scode1 = resultSet.getInt("scode");
+						String date1 = resultSet.getString("date");
+						int sid1 = resultSet.getInt("sid");
+						String gender1 = resultSet.getString("gender");
+						String sy = resultSet.getString("sy");
+						String sem = resultSet.getString("sem");
+						int start = resultSet.getInt("eSubjectsStart");
+						int end = resultSet.getInt("eSubjectsEnd");
+						Blob image = (Blob) resultSet.getBlob("image");
+						// Create a new Students object with retrieved values
+						student = new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1,
+								scode1, date1, sid1, gender1, image, start, end, sem);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-                            String sql1 = "update student set scode = (?) where sid =" + generatedId + "";
+		return student;
+	}
 
-                            try (PreparedStatement scodeStatement = con.prepareStatement(sql1)) {
-                                scodeStatement.setString(1, studCode);
-                                int scodeRowsAffected = scodeStatement.executeUpdate();
-
-                                if (scodeRowsAffected > 0) {
-                                    System.out.println("Scode inserted successfully.");
-                                    clearFields();
-                                } else {
-                                    System.out.println("Failed to insert scode.");
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    System.out.println("No rows affected. Insertion failed.");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void clearFields() {
-        courseCMB.setValue(null);
-        dateTF.clear();
-        fNameTF.clear();
-        genderCMB.setValue(null);
-        locCMB.setValue(null);
-        lNameTF.clear();
-        mNameTF.clear();
-        secCMB.setValue(null);
-    }
-
-
-    @FXML
-    private void insertIMG() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
-        File selectedFile = fileChooser.showOpenDialog(null);
-
-        if (selectedFile != null) {
-            Image newImage = new Image(selectedFile.toURI().toString());
-            imageView.setImage(newImage);
-            image = newImage;
-        }
-    }
-
-
-    
 }

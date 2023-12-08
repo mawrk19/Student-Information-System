@@ -2,10 +2,12 @@ package studentprof;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import students.Students;
@@ -76,6 +78,17 @@ public class EncStudentProfController {
 	    subCodeColumn.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
 	    credColumn.setCellValueFactory(new PropertyValueFactory<>("creditUnits"));
 	    subjectColumn.setCellValueFactory(new PropertyValueFactory<>("subject"));	
+	    
+	    searchTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                searchTF.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            
+            if (newValue.length() > 8) {
+                String limitedValue = newValue.substring(0, 8);
+                searchTF.setText(limitedValue);
+            }
+        });
 
 	    // Load data for the student with scode 20230001
 	    loadStudentProfile("20230001");
@@ -94,6 +107,7 @@ public class EncStudentProfController {
 					retrieveSubjectsForStudent(student);
 				} else {
 					System.out.println("No student found with scode: " + scode);
+					showAlert("Error", "Invalid scode", "The entered Student Code does not exist.");
 				}
 			}
 		} catch (SQLException ex) {
@@ -155,6 +169,7 @@ public class EncStudentProfController {
 						retrieveSubjectsForStudent(student);
 					} else {
 						System.out.println("No student found with scode: " + scode);
+						showAlert("Error", "Invalid scode", "The entered Student Code does not exist.");
 					}
 				}
 			}
@@ -252,6 +267,14 @@ public class EncStudentProfController {
 			// Handle the case where the imageBlob is null
 			studIMG.setImage(null);
 		}
+	}
+	
+	private void showAlert(String title, String header, String content) {
+	    Alert alert = new Alert(AlertType.ERROR);
+	    alert.setTitle(title);
+	    alert.setHeaderText(header);
+	    alert.setContentText(content);
+	    alert.showAndWait();
 	}
 
 }

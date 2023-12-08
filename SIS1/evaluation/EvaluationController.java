@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,15 +21,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.control.Label;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
 import application.DatabaseManager;
 
-public class EvaluationController {
+public class EvaluationController implements Initializable{
 	
     @FXML
     private TextField Campus;
@@ -50,9 +54,6 @@ public class EvaluationController {
 
     @FXML
     private TextField YearLevel;
-    
-    @FXML
-    private TextField Type;
 
     @FXML
     private TextField searchbar;
@@ -72,6 +73,20 @@ public class EvaluationController {
     @FXML
     private Button ComputeBtn;
     
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		searchbar.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                searchbar.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            
+            if (newValue.length() > 8) {
+                String limitedValue = newValue.substring(0, 8);
+                searchbar.setText(limitedValue);
+            }
+        });
+    }
 
     @FXML
     void searchscodebtn(ActionEvent event) {
@@ -97,7 +112,6 @@ public class EvaluationController {
                 Semester.setText(resultSet.getString("sem"));
                 Scode.setText(resultSet.getString("scode"));
                 Campus.setText(resultSet.getString("location"));
-                Type.setText(resultSet.getString("type"));
 
                 int subjectsStart = resultSet.getInt("eSubjectsStart");
                 int subjectsEnd = resultSet.getInt("eSubjectsEnd");
@@ -130,6 +144,7 @@ public class EvaluationController {
                 subjectsStatement.close();
             } else {
                 clearFields();
+                showAlert("Error", "Invalid scode", "The entered Studend Code does not exist.");
             }
 
             resultSet.close();
@@ -147,7 +162,6 @@ public class EvaluationController {
         Semester.clear();
         Scode.clear();
         Campus.clear();
-        Type.clear();
     }
     
     private HBox createNewRowdatabase(String sub_code) {
@@ -190,18 +204,15 @@ public class EvaluationController {
         HBox.setHgrow(grade, Priority.ALWAYS);
         
         int maxLength = 4; // Maximum length for the grade, including the decimal point and two decimal places
+
         grade.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Check if the new text is a valid decimal number or a whole number
-            if (newValue.isEmpty() || (newValue.matches("^\\d+(\\.\\d{1,2})?$") && newValue.length() <= maxLength)) {
-                // Allow the change or if the field is empty
-            } else {
-                // Deny the change
-                // Reset the text to the previous value
+            if (!newValue.matches("\\d*(\\.\\d{0,2})?")) {
                 grade.setText(oldValue);
-                // Show an error message if the field is not empty and the input is invalid
-                if (!newValue.isEmpty()) {
-                    showAlert("Error", "Invalid Grade Format", "Please enter a valid grade format: X.X or X.XX or X (whole number)");
-                }
+            }
+            
+            if (grade.getText().length() > maxLength) {
+                String limitedText = grade.getText().substring(0, maxLength);
+                grade.setText(limitedText);
             }
         });
         
@@ -353,7 +364,13 @@ public class EvaluationController {
 
                 try {
                     double units = Double.parseDouble(unitTextField.getText());
-                    double grade = Double.parseDouble(gradeTextField.getText());
+                    String gradeStr = gradeTextField.getText();
+
+                    if (!isValidGrade(gradeStr)) {
+                        throw new NumberFormatException();
+                    }
+
+                    double grade = Double.parseDouble(gradeStr);
 
                     totalUnits += units;
                     totalGradePoints += units * grade;
@@ -378,8 +395,8 @@ public class EvaluationController {
                 totalgwa.setText("0.00");
             }
         } else {
-            // Display an error pop-up for non-numeric input
-            showAlert("Error", "Invalid Input", "Please enter valid numeric unit and grades.");
+            // Display an error pop-up for non-numeric input or invalid grades
+            showAlert("Error", "Invalid Input", "Please enter valid numeric unit and grades. Please enter one of the following values: 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3, 3.0, 4, 5");
         }
     }
 
@@ -405,7 +422,7 @@ public class EvaluationController {
         return Name.getText().isEmpty() || YearLevel.getText().isEmpty() ||
                Section.getText().isEmpty() || Course.getText().isEmpty() ||
                Semester.getText().isEmpty() || Scode.getText().isEmpty() ||
-               Campus.getText().isEmpty() || Type.getText().isEmpty();
+               Campus.getText().isEmpty();
     }
     
     private boolean checkForEmptyGrades() {
@@ -481,6 +498,12 @@ public class EvaluationController {
         }
     }
     
+    private boolean isValidGrade(String gradeStr) {
+        String[] validGrades = {"1", "1.25", "1.5", "1.75", "2", "2.25", "2.5", "2.75", "3", "3.0", "4", "5"};
+
+        return Arrays.asList(validGrades).contains(gradeStr);
+    }
+    
     private void clearAllFields() {
     	Name.clear();
         YearLevel.clear();
@@ -489,7 +512,6 @@ public class EvaluationController {
         Semester.clear();
         Scode.clear();
         Campus.clear();
-        Type.clear();
         totalgwa.clear();
         searchbar.clear();
 

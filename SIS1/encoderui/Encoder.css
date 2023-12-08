@@ -3,25 +3,25 @@
 }
 
 #upperNavlbl {
-	-fx-background-color: #a08dd2;
+	-fx-background-color: linear-gradient(to right , #322258, #33235a);
 	-fx-border-radius: 0 25 0 0;
 	-fx-background-radius: 0 25 0 0;
 }
 
 #Closeicon {
-	-fx-background-color: #4b9ab8;
+	-fx-background-color: #34245c;
 	-fx-border-radius: 5;
 	-fx-background-radius: 5;
 }
 
 #NavigationIcons {
-	-fx-background-color:  #694bb8;
+	-fx-background-color:  #2c1f4f;
 	-fx-border-radius: 0 0 25 0;
 	-fx-background-radius: 0 0 0 0;
 }
 
 #NavigationLabelsPane {
-	-fx-background-color: linear-gradient(to bottom ,#a08dd2, #2c1f4f);
+	-fx-background-color: linear-gradient(to bottom left , #34245c, #0e0a1a);
 	-fx-border-radius: 0 0 25 0;
 	-fx-background-radius: 0 0 25 0;
 }
@@ -30,106 +30,151 @@
 	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #DashboardButton:hover {
-	-fx-background-color: #4b61ad;
+	-fx-background-color: #34245c;
+	 -fx-effect: dropshadow(gaussian,#150f27, 8, 0.5, 0, 0);
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #StudentProfButton {
 	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #StudentProfButton:hover {
-	-fx-background-color: #4b61ad;
+	-fx-background-color: #34245c;
+	 -fx-effect: dropshadow(gaussian,#150f27, 8, 0.5, 0, 0);
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #TimetableButton {
 	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #TimetableButton:hover {
-	-fx-background-color: #4b61ad;
+	-fx-background-color: #34245c;
+	 -fx-effect: dropshadow(gaussian,#150f27, 8, 0.5, 0, 0);
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #ScheduleButton {
 	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #ScheduleButton:hover {
-	-fx-background-color: #4b61ad;
+	-fx-background-color: #34245c;
+	 -fx-effect: dropshadow(gaussian,#150f27, 8, 0.5, 0, 0);
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #GradingButton {
 	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #GradingButton:hover {
-	-fx-background-color: #4b61ad;
+	-fx-background-color: #34245c;
+	 -fx-effect: dropshadow(gaussian,#150f27, 8, 0.5, 0, 0);
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #NewStudButton {
 	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #NewStudButton:hover {
-	-fx-background-color: #4b61ad;
+	-fx-background-color: #34245c;
+	 -fx-effect: dropshadow(gaussian,#150f27, 8, 0.5, 0, 0);
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #OldStudBtn {
 	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #OldStudBtn:hover {
-	-fx-background-color: #4b61ad;
+	-fx-background-color: #34245c;
+	 -fx-effect: dropshadow(gaussian,#150f27, 8, 0.5, 0, 0);
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15px;
 }
 
 #StudentsBtn {
 	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #StudentsBtn:hover {
-	-fx-background-color: #4b61ad;
+-fx-background-color: #34245c;
+	 -fx-effect: dropshadow(gaussian,#0e0b17, 8, 0.5, 0, 0);
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #LogOutButton {
 	-fx-background-color: transparent;
-	-fx-border-radius: 25 0 0 25;
-	-fx-background-radius: 25 0 0 25;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #LogOutButton:hover {
-	-fx-background-color: #FF6565;
+	-fx-background-color: #d9181e;
+	 -fx-effect: dropshadow(gaussian,#150f27, 8, 0.5, 0, 0);
 	-fx-border-radius: 25;
 	-fx-background-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }

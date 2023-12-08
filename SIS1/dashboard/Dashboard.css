@@ -2,11 +2,18 @@
 	-fx-background-color:#EFF0F3;
 }
 
+#encBackground {
+	-fx-background-color: #e8e3f4;
+}
 #greeting {
 	-fx-background-color: #3C5199;
 	-fx-background-radius: 24;
 }
 
+#encGreeting {
+	-fx-background-color: #4b3485;
+	-fx-background-radius: 24;	
+}
 #text {
 	-fx-text-fill: #DFE2ED; 
 	-fx-font-size:40px;
@@ -25,11 +32,24 @@
 	-fx-background-radius: 24;
 }
 
+#encPie {
+	-fx-background-color:#b1a1da;
+	-fx-opacity: 0.82;
+	-fx-background-radius: 24;
+}
+
 #bar {
 	-fx-background-color: #C9CAD9;
 	-fx-background-radius: 24;
 	-fx-font-family: "Arial Rounded MT Bold";
 	-fx-text-fill: #DFE2ED; 	
+}
+
+encBar {
+	-fx-background-color: #c8cfe9;
+	-fx-background-radius: 24;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-text-fill: #DFE2ED;
 }
 
 #label {
@@ -69,6 +89,13 @@
 }
 #progress {
 	-fx-background-color: #444BAF;
+	-fx-background-radius: 24;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-text-fill: #DFE2ED; 
+}
+
+#encProgress {
+	-fx-background-color: #3f2c70;
 	-fx-background-radius: 24;
 	-fx-font-family: "Arial Rounded MT Bold";
 	-fx-text-fill: #DFE2ED; 
