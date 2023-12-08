@@ -150,44 +150,49 @@ public class EncEnrollmentController implements Initializable {
 	}
 
 
-private void replaceTableViewContent() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/EncTransaction.fxml"));
-        AnchorPane newTableAnchorPane = loader.load();
+	private void replaceTableViewContent() {
+	    try {
+	        // Load Transaction.fxml
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/EncTransaction.fxml"));
+	        AnchorPane newTableAnchorPane = loader.load();
 
-        AnchorPane tableViewParent = (AnchorPane) subjectsTableView.getParent();
-        Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
-        Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
-        Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
-        Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
+	        // Assuming subjectsTableView is defined somewhere in your code.
+	        // Example:
+	        // TableView<?> subjectsTableView = new TableView<>();
 
-        // Store subjectsTableView temporarily
-        TableView<?> tempTableView = subjectsTableView;
+	        // Get the parent of subjectsTableView
+	        Pane tableViewParent = (Pane) subjectsTableView.getParent();
 
-        // Remove subjectsTableView from its parent
-        tableViewParent.getChildren().remove(subjectsTableView);
+	        // Get the anchor constraints of subjectsTableView
+	        Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
+	        Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
+	        Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
+	        Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
 
-        // Set anchor constraints for newTableAnchorPane
-        AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
-        AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
-        AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
-        AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
+	        // Remove subjectsTableView from its parent
+	        tableViewParent.getChildren().remove(subjectsTableView);
 
-        // Add newTableAnchorPane to the parent
-        tableViewParent.getChildren().add(newTableAnchorPane);
+	        // Set anchor constraints for newTableAnchorPane
+	        AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
+	        AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
+	        AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
+	        AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
 
-        EncTransactionController transactionController = loader.getController();
-        transactionController.setStudCode(this.studCode);
+	        // Add newTableAnchorPane to the parent
+	        tableViewParent.getChildren().add(newTableAnchorPane);
 
-        System.out.println("Stud code from enrollment: " + studCode);
+	        EncTransactionController transactionController = loader.getController();
+	        transactionController.setStudCode(this.studCode);
 
-        // Re-add subjectsTableView to the parent if needed
-        // tableViewParent.getChildren().add(tempTableView);
+	        System.out.println("Stud code from enrollment: " + studCode);
 
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
+	        // If needed, re-add subjectsTableView to the parent
+	        // tableViewParent.getChildren().add(subjectsTableView);
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
 	
 	public void newEnrollment() throws IOException {
 		Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/EncEnrollment.fxml"));

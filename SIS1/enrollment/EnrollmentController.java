@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -26,7 +27,6 @@ import javafx.scene.input.MouseButton;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import students.Students;
-import javafx.scene.layout.StackPane;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -150,34 +150,49 @@ public class EnrollmentController implements Initializable {
 	}
 
 	private void replaceTableViewContent() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Transaction.fxml"));
-			AnchorPane newTableAnchorPane = loader.load();
+	    try {
+	        // Load Transaction.fxml
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Transaction.fxml"));
+	        AnchorPane newTableAnchorPane = loader.load();
 
-			StackPane tableViewParent = (StackPane) subjectsTableView.getParent();
-			Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
-			Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
-			Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
-			Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
+	        // Assuming subjectsTableView is defined somewhere in your code.
+	        // Example:
+	        // TableView<?> subjectsTableView = new TableView<>();
 
-			tableViewParent.getChildren().remove(subjectsTableView);
+	        // Get the parent of subjectsTableView
+	        Pane tableViewParent = (Pane) subjectsTableView.getParent();
 
-			AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
-			AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
-			AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
-			AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
+	        // Get the anchor constraints of subjectsTableView
+	        Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
+	        Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
+	        Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
+	        Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
 
-			tableViewParent.getChildren().add(newTableAnchorPane);
+	        // Remove subjectsTableView from its parent
+	        tableViewParent.getChildren().remove(subjectsTableView);
 
-			TransactionController transactionController = loader.getController();
-			transactionController.setStudCode(this.studCode);
+	        // Set anchor constraints for newTableAnchorPane
+	        AnchorPane.setTopAnchor(newTableAnchorPane, topAnchor);
+	        AnchorPane.setBottomAnchor(newTableAnchorPane, bottomAnchor);
+	        AnchorPane.setLeftAnchor(newTableAnchorPane, leftAnchor);
+	        AnchorPane.setRightAnchor(newTableAnchorPane, rightAnchor);
 
-			System.out.println("Stud code from enrollment: " + studCode);
+	        // Add newTableAnchorPane to the parent
+	        tableViewParent.getChildren().add(newTableAnchorPane);
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	        TransactionController transactionController = loader.getController();
+	        transactionController.setStudCode(this.studCode);
+
+	        System.out.println("Stud code from enrollment: " + studCode);
+
+	        // If needed, re-add subjectsTableView to the parent
+	        // tableViewParent.getChildren().add(subjectsTableView);
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
+		
 	
 	public void newEnrollment() throws IOException {
 		Pane enrollmentstage = FXMLLoader.load(getClass().getResource("/enrollment/Enrollment.fxml"));
@@ -201,25 +216,25 @@ public class EnrollmentController implements Initializable {
 		if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
 				&& "1st".equals(selectedSemester) ) {
 			subjectsTableView.setVisible(true);
-	        irregularTableView.setVisible(false);
+	        //irregularTableView.setVisible(false);
 			startId = 1;
 			endId = 9;
 		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
 				&& "2nd".equals(selectedSemester) ) {
 			subjectsTableView.setVisible(true);
-	        irregularTableView.setVisible(false);
+	        //irregularTableView.setVisible(false);
 			startId = 10;
 			endId = 17;
 		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
 				&& "1st".equals(selectedSemester) ) {
 			subjectsTableView.setVisible(true);
-	        irregularTableView.setVisible(false);
+	        //irregularTableView.setVisible(false);
 			startId = 1;
 			endId = 9;
 		} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
 				&& "2nd".equals(selectedSemester) ) {
 			subjectsTableView.setVisible(true);
-	        irregularTableView.setVisible(false);
+	        //irregularTableView.setVisible(false);
 			startId = 10;
 			endId = 17;
 		} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
@@ -294,28 +309,29 @@ public class EnrollmentController implements Initializable {
 	        irregularTableView.setVisible(false);
 			startId = 60;
 			endId = 66;
+
 		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
 				&& "1st".equals(selectedSemester) ) {
 			subjectsTableView.setVisible(true);
-	        irregularTableView.setVisible(false);
+	        //irregularTableView.setVisible(false);
 			startId = 1;
 			endId = 9;
 		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
 				&& "2nd".equals(selectedSemester) ) {
 			subjectsTableView.setVisible(true);
-	        irregularTableView.setVisible(false);
+	        //irregularTableView.setVisible(false);
 			startId = 10;
 			endId = 17;
 		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
 				&& "1st".equals(selectedSemester) ) {
 			subjectsTableView.setVisible(true);
-	        irregularTableView.setVisible(false);
+	        //irregularTableView.setVisible(false);
 			startId = 1;
 			endId = 9;
 		} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
 				&& "2nd".equals(selectedSemester) ) {
 			subjectsTableView.setVisible(true);
-	        irregularTableView.setVisible(false);
+	        //irregularTableView.setVisible(false);
 			startId = 10;
 			endId = 17;
 		} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
@@ -584,7 +600,7 @@ public class EnrollmentController implements Initializable {
 			endId = 88;
 		} else {
 			subjectsTableView.setVisible(false);
-	        irregularTableView.setVisible(true);
+//	        irregularTableView.setVisible(true);
 			clearSubjectsTable();
 			return;
 		}
