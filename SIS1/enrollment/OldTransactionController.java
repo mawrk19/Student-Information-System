@@ -470,7 +470,7 @@ public class OldTransactionController {
                 LocalDate localdate = LocalDate.now();
                 Itext PDFgenerator = new Itext();
                 try {
-                	PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText() , balanceLBL.getText(),localdate);
+                	PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText() , balanceLBL.getText(),localdate, libCB.getText(), medCB.getText(), sciCB.getText(),comCB.getText(),athCB.getText(),mediaCB.getText() );
                 } catch (FileNotFoundException e) {
                 }
             }
