@@ -15,10 +15,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,6 +37,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.Dialog;
+import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -49,11 +54,13 @@ import enrollment.Subject;
 
 
 
+
 public class ScheduleController implements Initializable{
 
+		
 		ZonedDateTime dateFocus;
 	    ZonedDateTime today;
-	   
+
 	    
 	    @FXML
 	    private ComboBox<String> courseCMB;
@@ -119,6 +126,7 @@ public class ScheduleController implements Initializable{
 			
 		
 			submitBTN.setOnAction(ActionEvent -> handleShowDataButtonClick());
+		
 
 }
 		
@@ -244,7 +252,9 @@ public class ScheduleController implements Initializable{
 //		    }
 //		}
 	    
-		
+		@FXML
+		private Button addBTN;
+			 
 		@FXML
 		private Button deleteBTN;
 			 
@@ -270,6 +280,7 @@ public class ScheduleController implements Initializable{
 		private TableView<Schedule> scheduleTV;
 		
 		private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+
 	    
 		
 		private void setSubjectsBasedOnSelection() {
@@ -324,16 +335,16 @@ public class ScheduleController implements Initializable{
 		        }
 
 		    } catch (SQLException e) {
-		        e.printStackTrace(); // Handle the exception as needed
+		        e.printStackTrace();
 		    }
 		}
 
 		private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
 		        String selectedOption3, String selectedOption4) {
-		    // TODO: Implement your data fetching logic
+		     
 		    return null;
 		}
-	
 		
 		
+
 	}

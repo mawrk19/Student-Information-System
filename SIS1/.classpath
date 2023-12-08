@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path=""/>
-	<classpathentry kind="lib" path="C:/Users/leslie mae aya-ay/repo/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Java Fx">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-=======
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-19"/>
-	<classpathentry kind="lib" path="C:/Users/PC/git/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVAFX"/>
->>>>>>> ae4890e93541f3ffc0023fc737a72126bdca3322
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/leslie mae aya-ay/repo/Student-Information-System/html2pdf-5.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leslie mae aya-ay/repo/Student-Information-System/mysql-connector-j-8.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leslie mae aya-ay/repo/Student-Information-System/slf4j-api-1.7.36.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
