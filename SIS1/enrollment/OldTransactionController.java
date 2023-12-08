@@ -521,11 +521,11 @@ public class OldTransactionController {
 //	        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
 //	        Grading.setBackground(new Background(ube));
 //	        Grading.setTextFill(Color.WHITE);
-		mainFrameController.Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		mainFrameController.Enrollment.setTextFill(Color.BLACK);
-		mainFrameController.oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-		mainFrameController.oldEnrollment.setBackground(new Background(ube));
-		mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
+		mainFrameController.Enrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+		mainFrameController.Enrollment.setBackground(new Background(ube));
+		mainFrameController.Enrollment.setTextFill(Color.WHITE);
+		mainFrameController.oldEnrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		mainFrameController.oldEnrollment.setTextFill(Color.BLACK);
 		mainFrameController.Students.setStyle("-fx-border-radius: 25 0 0 25;");
 		mainFrameController.Students.setBackground(new Background(ube));
 		mainFrameController.Students.setTextFill(Color.WHITE);
