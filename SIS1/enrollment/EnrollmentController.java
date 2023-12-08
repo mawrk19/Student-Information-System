@@ -23,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
@@ -115,6 +116,24 @@ public class EnrollmentController implements Initializable {
 
 		ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
 		semCMB.setItems(sem);
+		
+		fNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+		        event.consume();
+		    }
+		});
+
+		lNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+		        event.consume();
+		    }
+		});
+		
+		mNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+		        event.consume();
+		    }
+		});
 
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
