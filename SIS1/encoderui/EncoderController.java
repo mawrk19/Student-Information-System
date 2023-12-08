@@ -2,6 +2,7 @@ package encoderui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,14 +15,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.BackgroundFill;
@@ -37,6 +43,9 @@ public class EncoderController implements Initializable{
 	
     @FXML 
     private AnchorPane contentarea;
+    
+    @FXML
+    private Button logoutButton;
     
     @FXML
     public Button Dashboard, StudentProf, Enrollment, oldEnrollment, Profileicn, Students;
@@ -306,5 +315,44 @@ public class EncoderController implements Initializable{
 	
 	public void setDelete(Node node) {
         contentarea.getChildren().setAll(node);
+	}
+	
+	@FXML
+	public void logout(ActionEvent event) throws IOException {
+	    Alert alert = new Alert(AlertType.CONFIRMATION);
+	    alert.setTitle("Logout");
+	    alert.setHeaderText("You're about to log out");
+	    alert.setContentText("Do you want to save before you logout?");
+
+	    Optional<ButtonType> result = alert.showAndWait();
+	    if (result.isPresent() && result.get() == ButtonType.OK) {
+	        // Load the new FXML file
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/login/MainLogin.fxml"));
+	        Parent root = loader.load();
+
+	        // Create a new scene or stage and set the new FXML file
+	        Scene scene = new Scene(root);
+	        Stage newStage = new Stage();
+
+	        // Set the stage style to TRANSPARENT
+	        newStage.initStyle(StageStyle.TRANSPARENT);
+
+	        // Set the scene fill to TRANSPARENT
+	        scene.setFill(Color.TRANSPARENT);
+	        newStage.setScene(scene);
+
+	        // Close the current stage if available
+	        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	        if (currentStage != null) {
+	            currentStage.close();
+	        } else {
+	            System.out.println("Unable to close the current stage");
+	        }
+
+	        // Show the new stage
+	        newStage.show();
+	    } else {
+	        System.out.println("Logout canceled");
+	    }
 	}
 }

@@ -340,14 +340,14 @@ public class TransactionController {
 	        saveAndPrint();
 
 	        // Update the UI with the new values
-	        Itext printshit = new Itext();
-	        printshit.generatePDF(studCode1, miscTotal, end, null); // <- Missing semicolon
-
-	        try {
-	            printshit.generatePDF(transacID.toString(), totalAmount, balanceTotal, localdate);
-	        } catch (FileNotFoundException e) {
-	            e.printStackTrace(); // <- Log the exception or handle it appropriately
-	        }
+//	        Itext printshit = new Itext();
+//	        printshit.generatePDF(studCode1, miscTotal, end, null); // <- Missing semicolon
+//
+//	        try {
+//	            printshit.generatePDF(transacID.toString(), totalAmount, balanceTotal, localdate);
+//	        } catch (FileNotFoundException e) {
+//	            e.printStackTrace(); // <- Log the exception or handle it appropriately
+//	        }
 
 	        setTransactionBasedOnSelection();
 	        returnToEnrollment(event);
@@ -472,6 +472,13 @@ public class TransactionController {
                     System.out.println("Transaction record updated successfully.");
                 } else {
                     System.out.println("No rows affected. Update failed.");
+                }
+                
+                LocalDate localdate = LocalDate.now();
+                Itext PDFgenerator = new Itext();
+                try {
+                	PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText() , balanceLBL.getText(),localdate);
+                } catch (FileNotFoundException e) {
                 }
             }
         } catch (SQLException e) {
