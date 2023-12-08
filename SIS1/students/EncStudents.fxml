@@ -67,9 +67,9 @@
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
                         <TextField fx:id="searchTF" onAction="#searchActionPerformed" prefHeight="33.0" prefWidth="224.0" />
-                        <Button id="SearchIcon" fx:id="searchbtn" mnemonicParsing="false" prefHeight="38.0" prefWidth="48.0" stylesheets="@../studentprof/StudentProf.css">
+                        <Button id="encSearchIcon" fx:id="searchbtn" mnemonicParsing="false" prefHeight="38.0" prefWidth="48.0" stylesheets="@../studentprof/StudentProf.css">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#searchActionPerformed" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="encSearchIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#searchActionPerformed" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../src/imgs_icons/Search.png" />
                                  </image>
