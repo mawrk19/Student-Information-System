@@ -286,6 +286,10 @@ public class TransactionController {
 					String sy = resultSet.getString("sy");
 					int start = resultSet.getInt("eSubjectsStart");
 					int end = resultSet.getInt("eSubjectsEnd");
+					
+					this.firstName = firstName;
+		            this.middleName = middleName;
+		            this.lastName = lastName;
 
 					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
 
@@ -340,14 +344,14 @@ public class TransactionController {
 	        saveAndPrint();
 
 	        // Update the UI with the new values
-	        Itext printshit = new Itext();
-	        printshit.generatePDF(studCode1, miscTotal, end, null); // <- Missing semicolon
-
-	        try {
-	            printshit.generatePDF(transacID.toString(), totalAmount, balanceTotal, localdate);
-	        } catch (FileNotFoundException e) {
-	            e.printStackTrace(); // <- Log the exception or handle it appropriately
-	        }
+//	        Itext printshit = new Itext();
+//	        printshit.generatePDF(studCode1, miscTotal, end, null); // <- Missing semicolon
+//
+//	        try {
+//	            printshit.generatePDF(transacID.toString(), totalAmount, balanceTotal, localdate);
+//	        } catch (FileNotFoundException e) {
+//	            e.printStackTrace(); // <- Log the exception or handle it appropriately
+//	        }
 
 	        setTransactionBasedOnSelection();
 	        returnToEnrollment(event);
@@ -427,7 +431,7 @@ public class TransactionController {
 
 	}
 
-	private void saveAndPrint() {
+	private void saveAndPrint() throws com.itextpdf.io.exceptions.IOException, IOException {
         TransactionController trans = TransactionController.getInstance();
         String studCode1 = trans.getStudCode();
         String mop = MOPCMB.getValue();
@@ -472,6 +476,33 @@ public class TransactionController {
                     System.out.println("Transaction record updated successfully.");
                 } else {
                     System.out.println("No rows affected. Update failed.");
+                }
+                setStudents();
+                
+                
+                
+                LocalDate localdate = LocalDate.now();
+                
+                if (validateInputs()) {
+                    // Existing code...
+                    // Ensure firstName, middleName, and lastName are populated before using them
+                    String firstNameStr = (firstName != null && !firstName.isEmpty()) ? firstName : "DefaultFirstName";
+                    String middleNameStr = (middleName != null && !middleName.isEmpty()) ? middleName : "DefaultMiddleName";
+                    String lastNameStr = (lastName != null && !lastName.isEmpty()) ? lastName : "DefaultLastName";
+
+                    Itext PDFgenerator = new Itext();
+                    try {
+                    	String path = "C:\\Users\\user\\git\\Student-Information-System\\transaction print\\sample2.pdf";
+                    	
+                        PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
+                                firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),
+                                sciCB.isSelected(), comCB.isSelected(), athCB.isSelected(), mediaCB.isSelected());
+                        
+                        PDFgenerator.openReceipt(path);
+                    } catch (FileNotFoundException e) {
+                        // Handle the file not found exception
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (SQLException e) {

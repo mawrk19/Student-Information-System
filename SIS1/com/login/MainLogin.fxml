@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="980.0" styleClass="parent" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.login.MainController">
    <children>
-      <Pane layoutX="2.0" layoutY="140.0" prefHeight="400.0" prefWidth="980.0" styleClass="pane">
+      <Pane id="backkyy" layoutX="2.0" layoutY="140.0" prefHeight="400.0" prefWidth="980.0" styleClass="pane">
          <children>
             <Label layoutX="21.0" layoutY="98.0" styleClass="mainLabel" text="Do you want to be an encoder?" textFill="WHITE">
                <font>
@@ -33,7 +33,7 @@
                </font>
             </Label>
             <Button fx:id="signInBTN" layoutX="712.0" layoutY="240.0" mnemonicParsing="false" onAction="#open_signin" prefHeight="32.0" prefWidth="93.0" styleClass="trans-btn-white-border" text="Sign In" />
-            <VBox id="vbox" fx:id="vbox" layoutX="21.0" layoutY="-49.0" prefHeight="500.0" prefWidth="480.0" styleClass="white-pane" />
+            <VBox id="frontyy" fx:id="vbox" layoutX="21.0" layoutY="-49.0" prefHeight="500.0" prefWidth="480.0" styleClass="white-pane" />
          </children>
       </Pane>
    </children>

@@ -4,6 +4,11 @@
 	-fx-background-radius: 25;
 }
 
+#encContainer {
+	-fx-background-color:#5d41a6;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+}
 #background {
 	-fx-background-color:#D1D7EB;
 }
@@ -18,8 +23,24 @@
 	-fx-text-fill: #EFF0F3;
 }
 
+#encEditBtn {
+	-fx-background-color: #46317d;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
+}
+
 #InformationPane {
 	-fx-background-color:#DFE2ED;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+}
+
+#encInformationPane {
+	-fx-background-color:#dbd3ee;
+	-fx-effect: dropshadow(gaussian,#46317d, 8, 0.5, .5, 0);
 	-fx-border-radius: 25;
 	-fx-background-radius: 25;
 }
@@ -59,6 +80,15 @@
 
 #UpdateBtn {
 	-fx-background-color: #3C5199;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size:15 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#encUpdateBtn {
+	-fx-background-color: #46317d;
 	-fx-background-radius: 25;
 	-fx-border-radius: 25;
 	-fx-font-family: "Arial Rounded MT Bold";

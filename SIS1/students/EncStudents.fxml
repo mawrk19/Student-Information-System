@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@students.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.EncStudentsController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@../profile/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.EncStudentsController">
    <children>
       <HBox prefHeight="790.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,7 +22,7 @@
                      <graphic>
                         <ImageView fitHeight="270.0" fitWidth="870.0" nodeOrientation="INHERIT" pickOnBounds="true">
                            <image>
-                              <Image url="@../src/imgs_icons/cover.png" />
+                              <Image url="@../src/imgs_icons/encCover.png" />
                            </image>
                            <viewport>
                               <Rectangle2D width="1000.0" />

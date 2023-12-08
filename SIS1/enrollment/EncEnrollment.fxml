@@ -143,10 +143,6 @@
 					<children>
 						<HBox prefHeight="46.0" prefWidth="825.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
-								<Button fx:id="subjectsBTN" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #3C5199;" text="Subjects" textFill="WHITE" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font name="Berlin Sans FB" size="20.0" />
-                           </font></Button>
 								<Button fx:id="enrollBTN1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#enrollButtonClickedAction" prefHeight="45.0" prefWidth="405.0" style="-fx-background-color: #3C5199;" text="Enroll" textFill="WHITE" HBox.hgrow="ALWAYS">
                            <font>
                               <Font name="Berlin Sans FB" size="20.0" />

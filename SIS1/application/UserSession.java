@@ -7,6 +7,7 @@ public class UserSession {
     private String username;
     private String lastname;
     private String firstname;
+    private String password;
     private int id;
     private String type;
 
@@ -64,4 +65,12 @@ public class UserSession {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
 }

@@ -1,5 +1,6 @@
 package enrollment;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Blob;
@@ -286,6 +287,10 @@ public class EncOldTransactionController {
 					String sy = resultSet.getString("sy");
 					int start = resultSet.getInt("eSubjectsStart");
 					int end = resultSet.getInt("eSubjectsEnd");
+					
+					this.firstName = firstName;
+		            this.middleName = middleName;
+		            this.lastName = lastName;
 
 					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
 
@@ -418,11 +423,9 @@ public class EncOldTransactionController {
 
 	}
 
-	private void saveAndPrint() {
-		GeneratedIdSingleton idSingleton = GeneratedIdSingleton.getInstance();
-		int generatedId = idSingleton.getGeneratedId();
-		
-        System.out.println("yung scode sa save and print" + searchedCode);
+	private void saveAndPrint() throws com.itextpdf.io.exceptions.IOException, IOException {
+        TransactionController trans = TransactionController.getInstance();
+        String studCode1 = trans.getStudCode();
         String mop = MOPCMB.getValue();
         String late = lateCMB.getValue();
         String scheme = schemeCMB.getValue();
@@ -435,7 +438,7 @@ public class EncOldTransactionController {
         // Generate a 6-digit transaction ID
         String transactID = generateRandomTransactionID();
 
-        System.out.println("has Transaction scode " + searchedCode);
+        System.out.println("has Transaction scode " + studCode1);
 
         double totalAmount = calculateTotalAmount();
 
@@ -443,7 +446,7 @@ public class EncOldTransactionController {
         String encoder = session.getUsername();
 
         try (Connection con = DatabaseManager.getConnection()) {
-            String sql = "UPDATE transaction SET transaction_id =?, payment_mode=?, amount=?, late=?, total=?, balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE id=?";
+            String sql = "UPDATE transaction SET transaction_id =?, payment_mode=?, amount=?, late=?, total=?, balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE scode=?";
 
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.setString(1, transactID);
@@ -457,7 +460,7 @@ public class EncOldTransactionController {
                 preparedStatement.setString(9, encoder);
                 preparedStatement.setString(10, getCurrentDate());
                 preparedStatement.setString(11, scheme);
-                preparedStatement.setInt(12, generatedId);
+                preparedStatement.setString(12, studCode1);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 
@@ -465,6 +468,33 @@ public class EncOldTransactionController {
                     System.out.println("Transaction record updated successfully.");
                 } else {
                     System.out.println("No rows affected. Update failed.");
+                }
+                setStudents();
+                
+                
+                
+                LocalDate localdate = LocalDate.now();
+                
+                if (validateInputs()) {
+                    // Existing code...
+                    // Ensure firstName, middleName, and lastName are populated before using them
+                    String firstNameStr = (firstName != null && !firstName.isEmpty()) ? firstName : "DefaultFirstName";
+                    String middleNameStr = (middleName != null && !middleName.isEmpty()) ? middleName : "DefaultMiddleName";
+                    String lastNameStr = (lastName != null && !lastName.isEmpty()) ? lastName : "DefaultLastName";
+
+                    Itext PDFgenerator = new Itext();
+                    try {
+                    	String path = "C:\\Users\\user\\git\\Student-Information-System\\transaction print\\sample2.pdf";
+                    	
+                        PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
+                                firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),
+                                sciCB.isSelected(), comCB.isSelected(), athCB.isSelected(), mediaCB.isSelected());
+                        
+                        PDFgenerator.openReceipt(path);
+                    } catch (FileNotFoundException e) {
+                        // Handle the file not found exception
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (SQLException e) {

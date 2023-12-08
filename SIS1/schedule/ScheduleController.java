@@ -1,7 +1,5 @@
 package schedule;
 
-
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,8 +49,12 @@ import application.DatabaseManager;
 import application.MainFrameController;
 import enrollment.Subject;
 
+public class ScheduleController implements Initializable {
 
+	ZonedDateTime dateFocus;
+	ZonedDateTime today;
 
+<<<<<<< HEAD
 
 public class ScheduleController implements Initializable{
 
@@ -144,83 +146,151 @@ public class ScheduleController implements Initializable{
 	            }
 	        });
 	    
+=======
+	@FXML
+	private ComboBox<String> courseCMB;
 
-}
-		
-		 @FXML
-		    void backOneMonth(ActionEvent event) {
-		        dateFocus = dateFocus.minusMonths(1);
-		        calendar.getChildren().clear();
-		        drawCalendar();
-		    }
+	@FXML
+	private ComboBox<String> yearCMB;
 
-		    @FXML
-		    void forwardOneMonth(ActionEvent event) {
-		        dateFocus = dateFocus.plusMonths(1);
-		        calendar.getChildren().clear();
-		        drawCalendar();
-		    }
-		
-		private void drawCalendar(){
-	        year.setText(String.valueOf(dateFocus.getYear()));
-	        month.setText(String.valueOf(dateFocus.getMonth()));
+	@FXML
+	private ComboBox<String> sectionCMB;
 
-	        double calendarWidth = calendar.getPrefWidth();
-	        double calendarHeight = calendar.getPrefHeight();
-	        double strokeWidth = 1;
-	        double spacingH = calendar.getHgap();
-	        double spacingV = calendar.getVgap();
+	@FXML
+	private ComboBox<String> semesterCMB;
 
-	        int monthMaxDate = dateFocus.getMonth().maxLength();
-	        //Check for leap year
-	        if(dateFocus.getYear() % 4 != 0 && monthMaxDate == 29){
-	            monthMaxDate = 28;
-	        }
-	        int dateOffset = ZonedDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), 1,0,0,0,0,dateFocus.getZone()).getDayOfWeek().getValue();
+	@FXML
+	private Text month;
 
-	        for (int i = 0; i < 6; i++) {
-	            for (int j = 0; j < 7; j++) {
-	                StackPane stackPane = new StackPane();
+	@FXML
+	private Text year;
 
-	                Rectangle rectangle = new Rectangle();
-	                rectangle.setFill(Color.TRANSPARENT);
-	                
-	                double rectangleWidth =(calendarWidth/7) - strokeWidth - spacingH;
-	                rectangle.setWidth(rectangleWidth);
-	                double rectangleHeight = (calendarHeight/6) - strokeWidth - spacingV;
-	                double cornerRadius = 10;
-	                rectangle.setArcWidth(cornerRadius);
-	                rectangle.setArcHeight(cornerRadius);
-	                rectangle.setHeight(rectangleHeight);
-	                stackPane.getChildren().add(rectangle);
+	@FXML
+	private Button forward;
 
-	                int calculatedDate = (j+1)+(7*i);
-	                if(calculatedDate > dateOffset){
-	                    int currentDate = calculatedDate - dateOffset;
-	                    if(currentDate <= monthMaxDate){
-	                        Text date = new Text(String.valueOf(currentDate));
-	                        double textTranslationY = - (rectangleHeight / 10) * 0.50;
-	                        date.setTranslateY(textTranslationY);
-	                        stackPane.getChildren().add(date);
-	                    }
-	                    if(today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate){
-	                    	Color ube = Color.web("#3c5199");
-	                    	for (Node node : stackPane.getChildren()) {
-	                            if (node instanceof Text) {
-	                                Text textNode = (Text) node;
-	                                textNode.setFill(Color.WHITE);
-	                            }
-	                        }
-	                        rectangle.setStroke(ube);
-	                        rectangle.setFill(ube);
-	                    }
-	                }
-	                FlowPane.setMargin(stackPane, new Insets(0, 0, 0, 0));
-	                calendar.getChildren().add(stackPane);
-	            }
-	        }
-	    }
-		
+	@FXML
+	private Button prev;
+
+//	    @FXML
+//	    private Button BtnTimetable;
+>>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
+
+	@FXML
+	private FlowPane calendar;
+
+	private boolean dataLoaded = false;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		dateFocus = ZonedDateTime.now();
+		today = ZonedDateTime.now();
+
+		drawCalendar();
+
+		ObservableList<String> course = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
+		courseCMB.setItems(course);
+
+		ObservableList<String> year = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
+		yearCMB.setItems(year);
+
+		ObservableList<String> section = FXCollections.observableArrayList("A", "B");
+		sectionCMB.setItems(section);
+
+		ObservableList<String> semester = FXCollections.observableArrayList("1st", "2nd");
+		semesterCMB.setItems(semester);
+
+		courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+		yearCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+		sectionCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+		semesterCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+
+		subcodeCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("subcodeCLMN"));
+		credunitCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("credunitCLMN"));
+		descriptionCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("descriptionCLMN"));
+		sdidCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("sdidCLMN"));
+
+		submitBTN.setOnAction(ActionEvent -> handleShowDataButtonClick());
+
+	}
+
+	@FXML
+	void backOneMonth(ActionEvent event) {
+		dateFocus = dateFocus.minusMonths(1);
+		calendar.getChildren().clear();
+		drawCalendar();
+	}
+
+	@FXML
+	void forwardOneMonth(ActionEvent event) {
+		dateFocus = dateFocus.plusMonths(1);
+		calendar.getChildren().clear();
+		drawCalendar();
+	}
+
+	private void drawCalendar() {
+		year.setText(String.valueOf(dateFocus.getYear()));
+		month.setText(String.valueOf(dateFocus.getMonth()));
+
+		double calendarWidth = calendar.getPrefWidth();
+		double calendarHeight = calendar.getPrefHeight();
+		double strokeWidth = 1;
+		double spacingH = calendar.getHgap();
+		double spacingV = calendar.getVgap();
+
+		int monthMaxDate = dateFocus.getMonth().maxLength();
+		// Check for leap year
+		if (dateFocus.getYear() % 4 != 0 && monthMaxDate == 29) {
+			monthMaxDate = 28;
+		}
+		int dateOffset = ZonedDateTime
+				.of(dateFocus.getYear(), dateFocus.getMonthValue(), 1, 0, 0, 0, 0, dateFocus.getZone()).getDayOfWeek()
+				.getValue();
+
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				StackPane stackPane = new StackPane();
+
+				Rectangle rectangle = new Rectangle();
+				rectangle.setFill(Color.TRANSPARENT);
+
+				double rectangleWidth = (calendarWidth / 7) - strokeWidth - spacingH;
+				rectangle.setWidth(rectangleWidth);
+				double rectangleHeight = (calendarHeight / 6) - strokeWidth - spacingV;
+				double cornerRadius = 10;
+				rectangle.setArcWidth(cornerRadius);
+				rectangle.setArcHeight(cornerRadius);
+				rectangle.setHeight(rectangleHeight);
+				stackPane.getChildren().add(rectangle);
+
+				int calculatedDate = (j + 1) + (7 * i);
+				if (calculatedDate > dateOffset) {
+					int currentDate = calculatedDate - dateOffset;
+					if (currentDate <= monthMaxDate) {
+						Text date = new Text(String.valueOf(currentDate));
+						double textTranslationY = -(rectangleHeight / 10) * 0.50;
+						date.setTranslateY(textTranslationY);
+						stackPane.getChildren().add(date);
+					}
+					if (today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth()
+							&& today.getDayOfMonth() == currentDate) {
+						Color ube = Color.web("#3c5199");
+						for (Node node : stackPane.getChildren()) {
+							if (node instanceof Text) {
+								Text textNode = (Text) node;
+								textNode.setFill(Color.WHITE);
+							}
+						}
+						rectangle.setStroke(ube);
+						rectangle.setFill(ube);
+					}
+				}
+				FlowPane.setMargin(stackPane, new Insets(0, 0, 0, 0));
+				calendar.getChildren().add(stackPane);
+			}
+		}
+	}
+
 //		public void gotoTimetable(ActionEvent event) throws IOException {
 //		    try {
 //		    	
@@ -268,6 +338,7 @@ public class ScheduleController implements Initializable{
 //		        e.printStackTrace();
 //		    }
 //		}
+<<<<<<< HEAD
 	    
         @FXML
         private TextField name;
@@ -296,13 +367,16 @@ public class ScheduleController implements Initializable{
 	    
 	    @FXML
 		private TableColumn<Schedule, String> subcodeCLMNColumn;
+=======
+>>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 
-		@FXML
-		private TableColumn<Schedule, String> credunitCLMNColumn;
+	@FXML
+	private Button deleteBTN;
 
-		@FXML
-		private TableColumn<Schedule, String> descriptionCLMNColumn;
+	@FXML
+	private Button updateBTN;
 
+<<<<<<< HEAD
 		@FXML
 		private TableColumn<Schedule, Integer> sdidCLMNColumn;
 		
@@ -315,42 +389,415 @@ public class ScheduleController implements Initializable{
 		
 		private void setSubjectsBasedOnSelection() {
 		    dataLoaded = false; 
+=======
+	@FXML
+	private Button submitBTN;
+>>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 
-		    
-		    scheduleList.clear();
-		    scheduleTV.getItems().clear();
+	@FXML
+	private TableColumn<Schedule, String> subcodeCLMNColumn;
+
+	@FXML
+	private TableColumn<Schedule, String> credunitCLMNColumn;
+
+	@FXML
+	private TableColumn<Schedule, String> descriptionCLMNColumn;
+
+	@FXML
+	private TableColumn<Schedule, Integer> sdidCLMNColumn;
+
+	@FXML
+	private TableView<Schedule> scheduleTV;
+
+	private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+
+	private void setSubjectsBasedOnSelection() {
+		dataLoaded = false;
+
+		scheduleList.clear();
+		scheduleTV.getItems().clear();
+	}
+
+	private void handleShowDataButtonClick() {
+		if (!dataLoaded) {
+			String selectedCourse = courseCMB.getValue();
+			String selectedYear = yearCMB.getValue();
+			String selectedSection = sectionCMB.getValue();
+			String selectedSemester = semesterCMB.getValue();
+
+			int startId;
+			int endId;
+
+			if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 1;
+				endId = 9;
+			} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 10;
+				endId = 17;
+			} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 1;
+				endId = 9;
+			} else if ("BSCS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 10;
+				endId = 17;
+			} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 18;
+				endId = 25;
+			} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 18;
+				endId = 25;
+			} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 18;
+				endId = 25;
+			} else if ("BSIT".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 18;
+				endId = 25;
+			} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 89;
+				endId = 96;
+			} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 89;
+				endId = 96;
+			} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 89;
+				endId = 96;
+			} else if ("BSIS".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 89;
+				endId = 96;
+			} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 60;
+				endId = 66;
+			} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 60;
+				endId = 66;
+			} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 60;
+				endId = 66;
+			} else if ("BSEMC".equals(selectedCourse) && "1st".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 60;
+				endId = 66;
+
+			} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 1;
+				endId = 9;
+			} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 10;
+				endId = 17;
+			} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 1;
+				endId = 9;
+			} else if ("BSCS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 10;
+				endId = 17;
+			} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 26;
+				endId = 32;
+			} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 26;
+				endId = 32;
+			} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 26;
+				endId = 32;
+			} else if ("BSIT".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 26;
+				endId = 32;
+			} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 97;
+				endId = 104;
+			} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 97;
+				endId = 104;
+			} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 97;
+				endId = 104;
+			} else if ("BSIS".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 97;
+				endId = 104;
+			} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 67;
+				endId = 74;
+			} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 67;
+				endId = 74;
+			} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 67;
+				endId = 74;
+			} else if ("BSEMC".equals(selectedCourse) && "2nd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 67;
+				endId = 74;
+			} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 48;
+				endId = 54;
+			} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 48;
+				endId = 54;
+			} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 48;
+				endId = 54;
+			} else if ("BSCS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 48;
+				endId = 54;
+			} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 33;
+				endId = 40;
+			} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 33;
+				endId = 40;
+			} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 33;
+				endId = 40;
+			} else if ("BSIT".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 33;
+				endId = 40;
+			} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 105;
+				endId = 113;
+			} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 105;
+				endId = 113;
+			} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 105;
+				endId = 113;
+			} else if ("BSIS".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 105;
+				endId = 113;
+			} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 75;
+				endId = 82;
+			} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 75;
+				endId = 82;
+			} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 75;
+				endId = 82;
+			} else if ("BSEMC".equals(selectedCourse) && "3rd".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 75;
+				endId = 82;
+			} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 55;
+				endId = 59;
+			} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 55;
+				endId = 59;
+			} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 55;
+				endId = 59;
+			} else if ("BSCS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 55;
+				endId = 59;
+			} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 41;
+				endId = 47;
+			} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 41;
+				endId = 47;
+			} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 41;
+				endId = 47;
+			} else if ("BSIT".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 41;
+				endId = 47;
+			} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 114;
+				endId = 9;
+			} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 114;
+				endId = 120;
+			} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 114;
+				endId = 120;
+			} else if ("BSIS".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 114;
+				endId = 120;
+			} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 83;
+				endId = 88;
+			} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "A".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 83;
+				endId = 88;
+			} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+					&& "1st".equals(selectedSemester)) {
+
+				startId = 83;
+				endId = 88;
+			} else if ("BSEMC".equals(selectedCourse) && "4th".equals(selectedYear) && "B".equals(selectedSection)
+					&& "2nd".equals(selectedSemester)) {
+
+				startId = 83;
+				endId = 88;
+			} else {
+				// Add more conditions as needed for other cases
+
+				return;
+			}
+
+			setSchedule(getScheduleId(selectedCourse, selectedYear, selectedSection, selectedSemester), startId, endId);
+			fetchDataForOptions(selectedCourse, selectedYear, selectedSemester, selectedSection);
+			dataLoaded = true;
 		}
+	}
 
-		private void handleShowDataButtonClick() {
-		   
-		    if (!dataLoaded) {
-		    String selectedCourse = courseCMB.getValue();
-		    String selectedYear = yearCMB.getValue();
-		    String selectedSection = sectionCMB.getValue();
-		    String selectedSemester = semesterCMB.getValue();
-		    
-		    
-		    
+	private String getScheduleId(String course, String year, String section, String semester) {
+		return course + year.charAt(0) + section + semester.charAt(0);
+	}
 
-		    if ("BSCS".equals(selectedCourse) && "1st YEAR".equals(selectedYear) && "A".equals(selectedSection)
-		            && "1st SEMESTER".equals(selectedSemester)) {
-		        setSchedule("BSCS1A1stSEMESTER", 1, 9);
-		    } else if ("BSCS".equals(selectedCourse) && "1st YEAR".equals(selectedYear) && "A".equals(selectedSection)
-		            && "2nd SEMESTER".equals(selectedSemester)) {
-		        setSchedule("BSCS1A2ndSEMESTER", 10, 17);
-		        fetchDataForOptions(selectedCourse, selectedYear, selectedSemester, selectedSection);
-		    }
-		    dataLoaded = true;
+	private void setSchedule(String semester, int startId, int endId) {
+		try (Connection connection = DatabaseManager.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
+
+			preparedStatement.setInt(1, startId);
+			preparedStatement.setInt(2, endId);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				while (resultSet.next()) {
+					String subcode = resultSet.getString("sub_code");
+					String credunit = resultSet.getString("units");
+					String description = resultSet.getString("subject");
+					int sdid = resultSet.getInt("id");
+
+					Schedule scheduleObj = new Schedule(subcode, credunit, description, sdid);
+					scheduleList.add(scheduleObj);
+				}
+				scheduleTV.setItems(scheduleList);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle the exception as needed
 		}
-		}
-		private void setSchedule(String semester, int startId, int endId) {
-		    try (Connection connection = DatabaseManager.getConnection();
-		         PreparedStatement preparedStatement = connection
-		                 .prepareStatement("SELECT * FROM subjects WHERE id between ? and ?")) {
+	}
 
-		        preparedStatement.setInt(1, startId);
-		        preparedStatement.setInt(2, endId);
+	private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
+			String selectedOption3, String selectedOption4) {
+		// TODO: Implement your data fetching logic
+		return null;
+	}
 
+<<<<<<< HEAD
 		        try (ResultSet resultSet = preparedStatement.executeQuery()) {
 		            while (resultSet.next()) {
 		                String subcode = resultSet.getString("sub_code");
@@ -428,4 +875,6 @@ public class ScheduleController implements Initializable{
 		    course.clear();
 		    semester.clear();
 		}
+=======
+>>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 }
