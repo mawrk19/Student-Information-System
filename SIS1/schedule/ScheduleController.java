@@ -13,10 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,13 +28,14 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -50,6 +54,99 @@ public class ScheduleController implements Initializable {
 	ZonedDateTime dateFocus;
 	ZonedDateTime today;
 
+<<<<<<< HEAD
+
+public class ScheduleController implements Initializable{
+
+		
+		ZonedDateTime dateFocus;
+	    ZonedDateTime today;
+
+	    
+	    @FXML
+	    private ComboBox<String> courseCMB;
+	    
+	    @FXML
+	    private ComboBox<String> yearCMB;
+	    
+	    @FXML
+	    private ComboBox<String> sectionCMB;
+	    
+	    @FXML
+	    private ComboBox<String> semesterCMB;
+	    
+	    @FXML
+	    private Text month;
+	    
+	    @FXML
+	    private Text year;
+	    
+	    @FXML
+	    private Button forward;
+	    
+	    @FXML
+	    private Button prev;
+	    
+//	    @FXML
+//	    private Button BtnTimetable;
+	    
+	    @FXML
+	    private FlowPane calendar;
+		   
+	    private boolean dataLoaded = false;
+	    
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+			// TODO Auto-generated method stub
+			dateFocus = ZonedDateTime.now();
+	        today = ZonedDateTime.now();
+	        
+	        drawCalendar();
+		
+	        
+	        
+	        
+	        
+	        ObservableList<String> course = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
+	        courseCMB.setItems(course);
+	        
+	        ObservableList<String> year = FXCollections.observableArrayList("1st YEAR", "2nd YEAR", "3rd YEAR", "4th YEAR");
+	        yearCMB.setItems(year);
+	        
+	        ObservableList<String> section = FXCollections.observableArrayList("A", "B");
+	        sectionCMB.setItems(section);
+	        
+		    ObservableList<String> semester = FXCollections.observableArrayList("1st SEMESTER", "2nd SEMESTER");
+	        semesterCMB.setItems(semester);
+	            
+	        courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	        yearCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	        sectionCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	        semesterCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+	        
+			subcodeCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("subcodeCLMN"));
+			credunitCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("credunitCLMN"));
+		    descriptionCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("descriptionCLMN"));
+			sdidCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("sdidCLMN"));
+			
+		
+			submitBTN.setOnAction(ActionEvent -> handleShowDataButtonClick());
+			sidBTN.setOnAction(ActionEvent -> searchscodebtn());
+			
+	  
+			
+
+			searchSID.textProperty().addListener((observable, oldValue, newValue) -> {
+	            if (!newValue.matches("\\d*")) {
+	                searchSID.setText(newValue.replaceAll("[^\\d]", ""));
+	            }
+	            if (newValue.length() > 8) {
+	                String limitedValue = newValue.substring(0, 8);
+	                searchSID.setText(limitedValue);
+	            }
+	        });
+	    
+=======
 	@FXML
 	private ComboBox<String> courseCMB;
 
@@ -76,6 +173,7 @@ public class ScheduleController implements Initializable {
 
 //	    @FXML
 //	    private Button BtnTimetable;
+>>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 
 	@FXML
 	private FlowPane calendar;
@@ -240,6 +338,37 @@ public class ScheduleController implements Initializable {
 //		        e.printStackTrace();
 //		    }
 //		}
+<<<<<<< HEAD
+	    
+        @FXML
+        private TextField name;
+	
+        @FXML
+        private TextField course;
+        
+        @FXML
+        private TextField section;
+        
+        @FXML
+        private TextField yearTF;
+        
+        @FXML
+        private TextField semester;
+	
+        
+        @FXML
+        private TextField searchSID;
+	
+        @FXML
+	    private Button sidBTN;
+        
+	    @FXML
+	    private Button submitBTN;
+	    
+	    @FXML
+		private TableColumn<Schedule, String> subcodeCLMNColumn;
+=======
+>>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 
 	@FXML
 	private Button deleteBTN;
@@ -247,8 +376,23 @@ public class ScheduleController implements Initializable {
 	@FXML
 	private Button updateBTN;
 
+<<<<<<< HEAD
+		@FXML
+		private TableColumn<Schedule, Integer> sdidCLMNColumn;
+		
+		@FXML
+		private TableView<Schedule> scheduleTV;
+		
+		private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+
+	    
+		
+		private void setSubjectsBasedOnSelection() {
+		    dataLoaded = false; 
+=======
 	@FXML
 	private Button submitBTN;
+>>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 
 	@FXML
 	private TableColumn<Schedule, String> subcodeCLMNColumn;
@@ -653,4 +797,84 @@ public class ScheduleController implements Initializable {
 		return null;
 	}
 
+<<<<<<< HEAD
+		        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+		            while (resultSet.next()) {
+		                String subcode = resultSet.getString("sub_code");
+		                String credunit = resultSet.getString("units");
+		                String description = resultSet.getString("subject");
+		                int sdid = resultSet.getInt("id");
+
+		                Schedule scheduleObj = new Schedule(subcode, credunit, description, sdid);
+		                scheduleList.add(scheduleObj);
+		            }
+		            scheduleTV.setItems(scheduleList);
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		}
+
+		private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
+		        String selectedOption3, String selectedOption4) {
+		     
+		    return null;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		private void searchscodebtn() {
+		    String searchedCode = searchSID.getText();
+
+		    try (Connection connection = DatabaseManager.getConnection()) {
+		        String query = "SELECT * FROM student WHERE scode = ?";
+		        PreparedStatement preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setString(1, searchedCode);
+
+		        ResultSet resultSet = preparedStatement.executeQuery();
+
+		        if (resultSet.next()) {
+		            String firstName = resultSet.getString("First_name");
+		            String middleName = resultSet.getString("Middle_name");
+		            String lastName = resultSet.getString("Last_name");
+
+		            String fullName = firstName + " " + middleName + " " + lastName;
+		            name.setText(fullName);
+		            yearTF.setText(resultSet.getString("year"));
+		            section.setText(resultSet.getString("section"));
+		            course.setText(resultSet.getString("course"));
+		            semester.setText(resultSet.getString("sem"));
+		        } else {
+		            clearFields();
+		            showAlert("Error", "Invalid scode", "The entered Student Code does not exist.");
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        // Handle the exception or log it appropriately
+		    }
+		}
+
+		private void showAlert(String title, String header, String content) {
+		    Alert alert = new Alert(Alert.AlertType.ERROR);
+		    alert.setTitle(title);
+		    alert.setHeaderText(header);
+		    alert.setContentText(content);
+		    alert.showAndWait();
+		}
+
+		private void clearFields() {
+		    name.clear();
+		    yearTF.clear();
+		    section.clear();
+		    course.clear();
+		    semester.clear();
+		}
+=======
+>>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 }
