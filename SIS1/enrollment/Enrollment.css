@@ -24,6 +24,49 @@
 	-fx-background-radius: 10; 
 }
 
+#gwaLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 24 px;
+	-fx-text-fill: #EFF0F3;
+}
+
+#vboxCon {
+	-fx-background-color: linear-gradient(to bottom , #4b63b8, #344685);
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-text-fill: #EFF0F3;
+}
+
+#submitBtn {
+	-fx-background-color:#aeb9df;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-text-fill: #34245c;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-text-fill: #24315c;
+}
+
+#encgwaLbl {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 24 px;
+	-fx-text-fill: #EFF0F3;
+	
+}
+
+#encvboxCon {
+	-fx-background-color: linear-gradient(to top , #34245c, #7253bd);
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-text-fill: #EFF0F3;
+}
+
+#encsubmitBtn {
+	-fx-background-color:#d5cbeb;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-text-fill: #34245c;
+}
+
 .user-name {
 	
 }
