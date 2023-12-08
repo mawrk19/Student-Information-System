@@ -8,6 +8,12 @@
 	-fx-border-radius: 25;
 }
 
+#encSearchIcon {
+	-fx-background-color: #46317d;
+	-fx-background-radius: 25;
+	-fx-border-radius: 25;
+}
+
 #EnrollStatPane{
 	-fx-background-color: linear-gradient(to left, #2675e3, #3C5199);
 	-fx-background-radius: 25;
@@ -64,7 +70,8 @@
 }
 
 #encSidePane {
-	-fx-background-color: #c8cfe9;
+	-fx-background-color: #dbd3ee;
+	-fx-effect: dropshadow(gaussian,#46317d, 10, 0.5, 2, 2);
 	-fx-background-radius: 25;
 	-fx-border-radius: 25;
 }
