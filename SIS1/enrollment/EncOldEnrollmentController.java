@@ -52,7 +52,7 @@ import com.mysql.cj.jdbc.Blob;
 import application.DatabaseManager;
 import application.UserSession;
 
-public class OldEnrollmentController implements Initializable {
+public class EncOldEnrollmentController implements Initializable {
 
 	@FXML
 	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, yrCMB, semCMB;

@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,27 +11,40 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.OldEnrollmentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.OldEnrollmentController">
 	<children>
 		<AnchorPane prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
 
 				<AnchorPane fx:id="newContentAnchorPane" layoutX="26.0" layoutY="265.0" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #3C5199;" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="260.0">
 					<children>
-						<TableView fx:id="subjectsTableView" fixedCellSize="0.0" layoutX="12.0" layoutY="12.0" prefHeight="424.0" prefWidth="800.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="12.0">
-							<columns>
-								<TableColumn fx:id="idColumn" prefWidth="95.0" resizable="false" text="Subject ID" />
-								<TableColumn fx:id="subCodeColumn" prefWidth="118.0" resizable="false" text="Sub Code" />
-								<TableColumn fx:id="unitsColumn" minWidth="0.0" prefWidth="84.0" resizable="false" text="Units" />
-								<TableColumn fx:id="subjectColumn" prefWidth="502.0" resizable="false" text="Subject" />
-							</columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-						</TableView>
+                  <StackPane layoutX="12.0" layoutY="12.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="12.0">
+                     <children>
+      						<TableView fx:id="subjectsTableView" fixedCellSize="0.0" prefHeight="424.0" prefWidth="800.0" visible="false" StackPane.alignment="CENTER">
+      							<columns>
+      								<TableColumn fx:id="idColumn" prefWidth="95.0" resizable="false" text="Subject ID" />
+      								<TableColumn fx:id="subCodeColumn" prefWidth="118.0" resizable="false" text="Sub Code" />
+      								<TableColumn fx:id="unitsColumn" minWidth="0.0" prefWidth="84.0" resizable="false" text="Units" />
+      								<TableColumn fx:id="subjectColumn" prefWidth="502.0" resizable="false" text="Subject" />
+      							</columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+      						</TableView>
+                        <TableView fx:id="irregularTableView" prefHeight="401.0" prefWidth="825.0" visible="false" StackPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="subIDColumn" prefWidth="97.0" resizable="false" text="Subject ID" />
+                              <TableColumn fx:id="subCodeColumn1" minWidth="0.0" prefWidth="125.0" resizable="false" text="Sub Code " />
+                              <TableColumn fx:id="unitsColumn1" prefWidth="111.0" resizable="false" text="Units " />
+                              <TableColumn fx:id="subColumn" prefWidth="491.0" resizable="false" text="Subject" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </StackPane>
 					</children>
 				</AnchorPane>
 				<AnchorPane layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" styleClass="Containers" stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
@@ -43,7 +57,7 @@
 							<children>
 								<VBox prefHeight="188.0" prefWidth="189.0" spacing="10.0" HBox.hgrow="ALWAYS">
 									<children>
-										<TextField fx:id="fNameTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="First Name" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+										<TextField fx:id="fNameTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="180.0" promptText="First Name" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
 											<VBox.margin>
 												<Insets />
 											</VBox.margin>
@@ -53,7 +67,7 @@
 										</TextField>
 										<TextField fx:id="mNameTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Middle Name" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
 											<VBox.margin>
-												<Insets />
+												<Insets top="20.0" />
 											</VBox.margin>
                                  <font>
                                     <Font size="15.0" />
@@ -61,22 +75,17 @@
 										</TextField>
 										<TextField fx:id="lNameTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Last Name" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
 											<VBox.margin>
-												<Insets />
+												<Insets top="20.0" />
 											</VBox.margin>
                                  <font>
                                     <Font size="15.0" />
                                  </font>
 										</TextField>
-                              <ComboBox fx:id="semCMB" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Semester" style="-fx-background-color: white;">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </ComboBox>
 									</children>
 								</VBox>
 								<VBox prefHeight="188.0" prefWidth="189.0" spacing="10.0" HBox.hgrow="ALWAYS">
 									<children>
-										<TextField fx:id="sidTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="SID" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+										<TextField fx:id="sidTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Generating SID..." style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
@@ -129,11 +138,11 @@
 												<Insets />
 											</VBox.margin>
 										</ComboBox>
-										<ComboBox fx:id="statCMB" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Type" style="-fx-background-color: white;">
-											<VBox.margin>
-												<Insets />
-											</VBox.margin>
-										</ComboBox>
+                              <ComboBox fx:id="semCMB" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Semester" style="-fx-background-color: white;">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ComboBox>
 									</children>
 								</VBox>
 							</children>
@@ -160,6 +169,7 @@
 						</HBox>
 					</children>
 				</AnchorPane>
+            <Label layoutX="40.0" layoutY="6.0" prefHeight="17.0" prefWidth="137.0" text="Old Enrollment" />
 
 			</children>
 		</AnchorPane>

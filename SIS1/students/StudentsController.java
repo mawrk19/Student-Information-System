@@ -350,7 +350,4 @@ public class StudentsController {
 
 	    return new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
 	}
-	
-
-
 }
