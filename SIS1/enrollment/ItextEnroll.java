@@ -19,8 +19,8 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 
-public class Itext {
-	public void generatePDF(String encoder, String transaction_id, String total, String balance, String date2, String firstName,
+public class ItextEnroll {
+	public void titeGeneratePDF(String Encoder, String transaction_id, String total, String balance, LocalDate date, String firstName,
 			String middleName, String lastName, boolean libfee, boolean medfee, boolean scifee, boolean comlabfee,
 			boolean athletefee, boolean mediafee) throws FileNotFoundException {
 
@@ -44,8 +44,8 @@ public class Itext {
 		TITLE.addCell(new Cell().add(new Paragraph("BILL")).addStyle(header2));
 		document.add(TITLE);
 		Table CashierAndTime = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
-		CashierAndTime.addCell(new Cell().add(new Paragraph("Date:" + date2)).addStyle(header1));
-		CashierAndTime.addCell(new Cell().add(new Paragraph("Encoder Name:" + encoder)).addStyle(header1));
+		CashierAndTime.addCell(new Cell().add(new Paragraph("Date:" + date)).addStyle(header1));
+		CashierAndTime.addCell(new Cell().add(new Paragraph("Encoder Name:" + Encoder)).addStyle(header1));
 		document.add(CashierAndTime);
 		Table TransacID = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		TransacID.addCell(new Cell().add(new Paragraph("")).addStyle(header1));

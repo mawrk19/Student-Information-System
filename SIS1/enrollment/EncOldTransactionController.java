@@ -264,69 +264,78 @@ public class EncOldTransactionController {
         return miscTotal;
     }
 
-	@FXML
-	private void setStudents() {
-		try (Connection con = DatabaseManager.getConnection();
-				PreparedStatement stmt = con.prepareStatement("SELECT * FROM student")) {
+    @FXML
+    private void setStudents() {
+        try (Connection con = DatabaseManager.getConnection()) {
+            String selectSql = "SELECT * FROM student WHERE scode = ?";
+            String updateSql = "UPDATE your_table SET your_column = ? WHERE some_condition = ?"; // Provide your actual update SQL
 
-			try (ResultSet resultSet = stmt.executeQuery()) {
-				while (resultSet.next()) {
+            try (PreparedStatement selectStmt = con.prepareStatement(selectSql)) {
+                selectStmt.setString(1, searchedCode); // Set the value for the placeholder in the SELECT statement
 
-					String firstName = resultSet.getString("First_name");
-					String middleName = resultSet.getString("Middle_name");
-					String lastName = resultSet.getString("last_name");
-					String course1 = resultSet.getString("course");
-					String year1 = resultSet.getString("year");
-					String section1 = resultSet.getString("section");
-					String location1 = resultSet.getString("location");
-					int scode1 = resultSet.getInt("scode");
-					String date1 = resultSet.getString("date");
-					int sid1 = resultSet.getInt("sid");
-					String gender1 = resultSet.getString("gender");
-					String sem = resultSet.getString("sem");
-					String sy = resultSet.getString("sy");
-					int start = resultSet.getInt("eSubjectsStart");
-					int end = resultSet.getInt("eSubjectsEnd");
-					
-					this.firstName = firstName;
-		            this.middleName = middleName;
-		            this.lastName = lastName;
-					
+                try (ResultSet resultSet = selectStmt.executeQuery()) {
+                    while (resultSet.next()) {
+                        String firstName = resultSet.getString("First_name");
+                        String middleName = resultSet.getString("Middle_name");
+                        String lastName = resultSet.getString("last_name");
+                        String course1 = resultSet.getString("course");
+                        String year1 = resultSet.getString("year");
+                        String section1 = resultSet.getString("section");
+                        String location1 = resultSet.getString("location");
+                        int scode1 = resultSet.getInt("scode");
+                        String date1 = resultSet.getString("date");
+                        int sid1 = resultSet.getInt("sid");
+                        String gender1 = resultSet.getString("gender");
+                        String sem = resultSet.getString("sem");
+                        String sy = resultSet.getString("sy");
+                        int start = resultSet.getInt("eSubjectsStart");
+                        int end = resultSet.getInt("eSubjectsEnd");
 
-					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
+                        Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
 
-					// studentList.add(studentObj);
-				}
-				// studentTableView.setItems(studentList);
+                        // If you want to add to a list, uncomment the next line
+                        // studentList.add(studentObj);
+                    }
+                    // If you want to set the items in a TableView, uncomment the next line
+                    // studentTableView.setItems(studentList);
+                }
+            }
 
-			}
-		} catch (SQLException e) {
-			e.printStackTrace(); // Handle the exception as needed
-		}
-	}
+            // If you have an update to perform, use the updateStatement here
+            try (PreparedStatement updateStatement = con.prepareStatement(updateSql)) {
+                // Set parameters and execute the update
+                // updateStatement.setString(1, newValue);
+                // updateStatement.setInt(2, someCondition);
+                // updateStatement.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception as needed
+        }
+    }
 	
-	private void Students(String firstName, String middleName, String lastName, String course1, String year1, String sy,
-			String section1, String location1, int scode1, String date1, int sid1, String gender1, Object object,
-			int start, int end, String sem) {
-		
-		this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.course = course;
-        this.year = year;
-        this.sem = sem; // Added this line to set the 'sem' property
-        this.section = section;
-        this.location = location;
-        this.scode = scode;
-        this.date = date;
-        this.sid = sid;
-        this.gender = gender;
-        this.studentImage = studentImage;
-        this.start = start;
-        this.end = end;
-        this.sy = sy;
-		
-	}
+//	private void Students(String firstName, String middleName, String lastName, String course1, String year1, String sy,
+//			String section1, String location1, int scode1, String date1, int sid1, String gender1, Object object,
+//			int start, int end, String sem) {
+//		
+//		this.firstName = firstName;
+//        this.middleName = middleName;
+//        this.lastName = lastName;
+//        this.course = course;
+//        this.year = year;
+//        this.sem = sem; // Added this line to set the 'sem' property
+//        this.section = section;
+//        this.location = location;
+//        this.scode = scode;
+//        this.date = date;
+//        this.sid = sid;
+//        this.gender = gender;
+//        this.studentImage = studentImage;
+//        this.start = start;
+//        this.end = end;
+//        this.sy = sy;
+//		
+//	}
 
 
 	@FXML
@@ -425,85 +434,118 @@ public class EncOldTransactionController {
 	}
 
 	private void saveAndPrint() throws com.itextpdf.io.exceptions.IOException, IOException {
-        TransactionController trans = TransactionController.getInstance();
-        String studCode1 = trans.getStudCode();
-        String mop = MOPCMB.getValue();
-        String late = lateCMB.getValue();
-        String scheme = schemeCMB.getValue();
+	    // Get transaction details from UI
+	    TransactionController trans = TransactionController.getInstance();
+	    String studCode1 = trans.getStudCode();
+	    String mop = MOPCMB.getValue();
+	    String late = lateCMB.getValue();
+	    String scheme = schemeCMB.getValue();
 
-        if (mop == null || late == null || scheme == null) {
-            System.out.println("Please fill in all required fields.");
-            return;
-        }
+	    // Check if essential details are present
+	    if (mop == null || late == null || scheme == null) {
+	        System.out.println("Please fill in all required fields.");
+	        return;
+	    }
 
-        // Generate a 6-digit transaction ID
-        String transactID = generateRandomTransactionID();
+	    // Generate a 6-digit transaction ID
+	    String transactID = generateRandomTransactionID();
 
-        System.out.println("has Transaction scode " + searchedCode);
+	    // Get user session details
+	    UserSession session = UserSession.getInstance();
+	    String encoder = session.getUsername();
 
-        double totalAmount = calculateTotalAmount();
+	    try (Connection con = DatabaseManager.getConnection()) {
+	        // SQL query to update transaction details
+	        String updateSql = "UPDATE transaction SET transaction_id=?, payment_mode=?, amount=?, late=?, total=?, "
+	                + "balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE scode=?";
 
-        UserSession session = UserSession.getInstance();
-        String encoder = session.getUsername();
+	        try (PreparedStatement updateStatement = con.prepareStatement(updateSql)) {
+	            // Set parameters for the update query
+	            updateStatement.setString(1, transactID);
+	            updateStatement.setString(2, mop);
+	            updateStatement.setString(3, amtTF.getText());
+	            updateStatement.setString(4, late);
+	            updateStatement.setString(5, totalLBL.getText());
+	            updateStatement.setString(6, balanceLBL.getText());
+	            updateStatement.setDouble(7, calculateMiscAmount());
+	            updateStatement.setString(8, tuitionLBL.getText());
+	            updateStatement.setString(9, encoder);
+	            updateStatement.setString(10, getCurrentDate());
+	            updateStatement.setString(11, scheme);
+	            updateStatement.setString(12, searchedCode);
 
-        try (Connection con = DatabaseManager.getConnection()) {
-            String sql = "UPDATE transaction SET transaction_id =?, payment_mode=?, amount=?, late=?, total=?, balance=?, misc_total=?, tuition_total=?, encoder=?, date=?, scheme=? WHERE scode=?";
+	            // Execute the update query
+	            int rowsAffected = updateStatement.executeUpdate();
 
-            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
-                preparedStatement.setString(1, transactID);
-                preparedStatement.setString(2, mop);
-                preparedStatement.setString(3, amtTF.getText());
-                preparedStatement.setString(4, late);
-                preparedStatement.setString(5, totalLBL.getText());
-                preparedStatement.setString(6, balanceLBL.getText());
-                preparedStatement.setDouble(7, calculateMiscAmount());
-                preparedStatement.setString(8, tuitionLBL.getText());
-                preparedStatement.setString(9, encoder);
-                preparedStatement.setString(10, getCurrentDate());
-                preparedStatement.setString(11, scheme);
-                preparedStatement.setString(12, searchedCode);
+	            // Check if the update was successful
+	            if (rowsAffected > 0) {
+	                System.out.println("Transaction record updated successfully.");
+	            } else {
+	                System.out.println("No rows affected. Update failed.");
+	                return;
+	            }
 
-                int rowsAffected = preparedStatement.executeUpdate();
+	            // Retrieve student details for PDF generation
+	            String selectSql = "SELECT * FROM student WHERE scode = ?";
+	            try (PreparedStatement selectStmt = con.prepareStatement(selectSql)) {
+	                selectStmt.setString(1, searchedCode);
 
-                if (rowsAffected > 0) {
-                    System.out.println("Transaction record updated successfully.");
-                } else {
-                    System.out.println("No rows affected. Update failed.");
-                }
-                setStudents();
-                
-                
-                
-                LocalDate localdate = LocalDate.now();
-                
-                if (validateInputs()) {
-                    // Existing code...
-                    // Ensure firstName, middleName, and lastName are populated before using them
-                    String firstNameStr = (firstName != null && !firstName.isEmpty()) ? firstName : "DefaultName";
-                    String middleNameStr = (middleName != null && !middleName.isEmpty()) ? middleName : "DefaultName";
-                    String lastNameStr = (lastName != null && !lastName.isEmpty()) ? lastName : "DefaultName";
+	                try (ResultSet resultSet = selectStmt.executeQuery()) {
+	                    if (resultSet.next()) {
+	                        String firstName = resultSet.getString("First_name");
+	                        String middleName = resultSet.getString("Middle_name");
+	                        String lastName = resultSet.getString("last_name");
+	                        String course = resultSet.getString("course");
+	                        String year = resultSet.getString("year");
+	                        String section = resultSet.getString("section");
+	                        String location = resultSet.getString("location");
+	                        int scode = resultSet.getInt("scode");
+	                        String date = resultSet.getString("date");
+	                        int sid = resultSet.getInt("sid");
+	                        String gender = resultSet.getString("gender");
+	                        String sem = resultSet.getString("sem");
+	                        String sy = resultSet.getString("sy");
+	                        int start = resultSet.getInt("eSubjectsStart");
+	                        int end = resultSet.getInt("eSubjectsEnd");
 
-                    Itext PDFgenerator = new Itext();
-                    try {
-                    	String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\sample2.pdf";
-                    	
-                        PDFgenerator.generatePDF(encoder,transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
-                                firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),
-                                sciCB.isSelected(), comCB.isSelected(), athCB.isSelected(), mediaCB.isSelected());
-                        
-                        PDFgenerator.openReceipt(path);
-                    } catch (FileNotFoundException e) {
-                        // Handle the file not found exception
-                        e.printStackTrace();
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // for development only, replace with proper logging
-            System.out.println("An error occurred. Please contact support.");
-        }
-    }
-	
+	                        // Create a Students object with retrieved data
+	                        Students studentObj = new Students(firstName, middleName, lastName, course, year, sy, section,
+	                                location, scode, date, sid, gender, null, start, end, sem);
+
+	                        // Generate PDF with student details
+	                        generateAndOpenPDF(encoder, transactID, date, studentObj);
+	                    }
+	                }
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Log or handle the exception as needed
+	        System.out.println("An error occurred. Please contact support.");
+	    }
+	}
+
+	private void generateAndOpenPDF(String encoder, String transactID, String date2, Students studentObj) throws com.itextpdf.io.exceptions.IOException, IOException {
+	    // Ensure firstName, middleName, and lastName are populated before using them
+	    String firstNameStr = studentObj.getFirstName();
+	    String middleNameStr = studentObj.getMiddleName();
+	    String lastNameStr = studentObj.getLastName();
+
+	    Itext PDFgenerator = new Itext();
+	    try {
+	        String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\sample2.pdf";
+
+	        PDFgenerator.generatePDF(encoder, transactID, totalLBL.getText(), balanceLBL.getText(), date2,
+	                firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),
+	                sciCB.isSelected(), comCB.isSelected(), athCB.isSelected(), mediaCB.isSelected());
+
+	        PDFgenerator.openReceipt(path);
+	    } catch (FileNotFoundException e) {
+	        // Handle the file not found exception
+	        e.printStackTrace();
+	    }
+	}
+
 	private String generateRandomTransactionID() {
         Random random = new Random();
         int transactionID = random.nextInt(900000) + 100000; // Generates a random number between 100000 and 999999
