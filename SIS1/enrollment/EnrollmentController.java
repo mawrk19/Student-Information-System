@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -345,12 +346,12 @@ public class EnrollmentController implements Initializable {
 	    return null;
 	}
 		
-
-	
 	private List<Subject> showAddSubjectDialog() {
+	    // Create a dialog for adding subjects
 	    Dialog<List<Subject>> dialog = new Dialog<>();
 	    dialog.setTitle("Add Subject");
 
+	    // Add buttons for Add and Cancel
 	    ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
 	    dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
 
@@ -370,7 +371,6 @@ public class EnrollmentController implements Initializable {
 	    TextField locField = new TextField();
 	    locField.setPromptText("Location");
 
-	    // Create TableView for subjects with a maximum of 10 rows
 	    TableView<Subject> subjectsTable = new TableView<>();
 	    List<Subject> subjectsList = new ArrayList<>();
 
@@ -406,9 +406,14 @@ public class EnrollmentController implements Initializable {
 	        subject.setSubject(event.getNewValue());
 	    });
 
+	    // Set preferred width for columns
+	    subCodeCol.setPrefWidth(100);
+	    unitsCol.setPrefWidth(100);
+	    subjectCol.setPrefWidth(600);
+
 	    subjectsTable.getColumns().addAll(subCodeCol, unitsCol, subjectCol);
 
-	    // Add listener for enabling/disabling Add button
+	    // Add a listener for enabling/disabling the Add button
 	    Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
 	    addButton.setDisable(true);
 
@@ -420,6 +425,10 @@ public class EnrollmentController implements Initializable {
 
 	    // Create the layout and add it to the dialog
 	    GridPane grid = new GridPane();
+	    grid.setHgap(10); // Set horizontal gap
+	    grid.setVgap(10); // Set vertical gap
+	    grid.setPadding(new Insets(20, 150, 10, 10)); 
+	    
 	    grid.add(new Label("Course:"), 0, 0);
 	    grid.add(courseField, 1, 0);
 	    grid.add(new Label("Section:"), 0, 1);
@@ -436,7 +445,7 @@ public class EnrollmentController implements Initializable {
 
 	    dialog.getDialogPane().setContent(grid);
 
-	    // Set the result converter to return subjectsList when Add button is clicked
+	    // Set the result converter to return subjectsList when the Add button is clicked
 	    dialog.setResultConverter(dialogButton -> {
 	        if (dialogButton == addButtonType) {
 	            return subjectsList;
@@ -444,7 +453,10 @@ public class EnrollmentController implements Initializable {
 	        return null;
 	    });
 
+	    dialog.getDialogPane().setPrefWidth(800);
+
 	    Optional<List<Subject>> result = dialog.showAndWait();
+
 
 	    result.ifPresent(subjectsList1 -> {
 	        // Process the subject information here
@@ -459,6 +471,7 @@ public class EnrollmentController implements Initializable {
 
 	    return subjectsList;
 	}
+
 
 
 	// Insert subjects into the 'subjects' table
