@@ -484,9 +484,9 @@ public class EncOldTransactionController {
 
                     Itext PDFgenerator = new Itext();
                     try {
-                    	String path = "C:\\Users\\user\\git\\Student-Information-System\\transaction print\\sample2.pdf";
+                    	String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\sample2.pdf";
                     	
-                        PDFgenerator.generatePDF(transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
+                        PDFgenerator.generatePDF(encoder,transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
                                 firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),
                                 sciCB.isSelected(), comCB.isSelected(), athCB.isSelected(), mediaCB.isSelected());
                         
