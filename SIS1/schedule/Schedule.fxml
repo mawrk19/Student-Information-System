@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="Apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" style="-fx-background-color: #DFE2ED;" stylesheets="@Schedule.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schedule.ScheduleController">
+<AnchorPane id="Apane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" style="-fx-background-color: #DFE2ED;" stylesheets="@Schedule.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="schedule.ScheduleController">
 	<children>
       <VBox layoutX="13.0" layoutY="12.0" prefHeight="773.0" prefWidth="845.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -135,7 +135,7 @@
                      <children>
                         <Label layoutX="2.0" layoutY="115.0" prefHeight="370.0" prefWidth="462.0" style="-fx-background-color: #E5E4E2; -fx-effect: dropshadow(gaussian,gray, 10, 0.5, 0, 0);" stylesheets="@Schedule.css" AnchorPane.bottomAnchor="-90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
                         <TextField fx:id="searchSID" layoutX="14.0" layoutY="8.0" prefHeight="36.0" prefWidth="391.0" promptText="Search SID..." AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="8.0" />
-                        <Button fx:id="sidBTN" layoutX="405.0" layoutY="8.0" minWidth="47.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="39.0" style="-fx-background-color: trsnsparent;" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="4.0">
+                        <Button fx:id="sidBTN" layoutX="405.0" layoutY="8.0" minWidth="47.0" mnemonicParsing="false" onAction="#search" prefHeight="36.0" prefWidth="39.0" style="-fx-background-color: trsnsparent;" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="4.0">
                            <graphic>
                               <Label id="searchSID" prefHeight="36.0" prefWidth="39.0" style="-fx-background-color: #3c5199;" stylesheets="@Schedule.css">
                                  <graphic>
