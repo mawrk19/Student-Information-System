@@ -439,7 +439,6 @@ public class EnrollmentController implements Initializable {
 	    grid.add(semField, 1, 3);
 	    grid.add(new Label("Location:"), 0, 4);
 	    grid.add(locField, 1, 4);
-
 	    grid.add(new Label("Subjects:"), 0, 5, 2, 1);
 	    grid.add(subjectsTable, 0, 6, 2, 1);
 
@@ -515,9 +514,6 @@ public class EnrollmentController implements Initializable {
 	    return null;
 	}
 
-
-
-	// Insert information into the 'school' table
 	private void insertSchoolInformation(String course, String section, String year, String semester, String location) {
 	    try {
 	        Connection con = DatabaseManager.getConnection();
@@ -602,20 +598,13 @@ public class EnrollmentController implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Transaction.fxml"));
 			AnchorPane newTableAnchorPane = loader.load();
 
-			// Assuming subjectsTableView is defined somewhere in your code.
-			// Example:
-			// TableView<?> subjectsTableView = new TableView<>();
-
-			// Get the parent of subjectsTableView
 			Pane tableViewParent = (Pane) subjectsTableView.getParent();
-
 			// Get the anchor constraints of subjectsTableView
 			Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
 			Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
 			Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
 			Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
 
-			// Remove subjectsTableView from its parent
 			tableViewParent.getChildren().remove(subjectsTableView);
 
 			// Set anchor constraints for newTableAnchorPane
@@ -631,10 +620,6 @@ public class EnrollmentController implements Initializable {
 			transactionController.setStudCode(this.studCode);
 
 			System.out.println("Stud code from enrollment: " + studCode);
-
-			// If needed, re-add subjectsTableView to the parent
-			// tableViewParent.getChildren().add(subjectsTableView);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
