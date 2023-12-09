@@ -49,13 +49,6 @@ import application.DatabaseManager;
 import application.MainFrameController;
 import enrollment.Subject;
 
-public class ScheduleController implements Initializable {
-
-	ZonedDateTime dateFocus;
-	ZonedDateTime today;
-
-<<<<<<< HEAD
-
 public class ScheduleController implements Initializable{
 
 		
@@ -94,91 +87,7 @@ public class ScheduleController implements Initializable{
 	    private FlowPane calendar;
 		   
 	    private boolean dataLoaded = false;
-	    
-		@Override
-		public void initialize(URL arg0, ResourceBundle arg1) {
-			// TODO Auto-generated method stub
-			dateFocus = ZonedDateTime.now();
-	        today = ZonedDateTime.now();
-	        
-	        drawCalendar();
-		
-	        
-	        
-	        
-	        
-	        ObservableList<String> course = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
-	        courseCMB.setItems(course);
-	        
-	        ObservableList<String> year = FXCollections.observableArrayList("1st YEAR", "2nd YEAR", "3rd YEAR", "4th YEAR");
-	        yearCMB.setItems(year);
-	        
-	        ObservableList<String> section = FXCollections.observableArrayList("A", "B");
-	        sectionCMB.setItems(section);
-	        
-		    ObservableList<String> semester = FXCollections.observableArrayList("1st SEMESTER", "2nd SEMESTER");
-	        semesterCMB.setItems(semester);
-	            
-	        courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	        yearCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	        sectionCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	        semesterCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-	        
-			subcodeCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("subcodeCLMN"));
-			credunitCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("credunitCLMN"));
-		    descriptionCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("descriptionCLMN"));
-			sdidCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("sdidCLMN"));
-			
-		
-			submitBTN.setOnAction(ActionEvent -> handleShowDataButtonClick());
-			sidBTN.setOnAction(ActionEvent -> searchscodebtn());
-			
-	  
-			
 
-			searchSID.textProperty().addListener((observable, oldValue, newValue) -> {
-	            if (!newValue.matches("\\d*")) {
-	                searchSID.setText(newValue.replaceAll("[^\\d]", ""));
-	            }
-	            if (newValue.length() > 8) {
-	                String limitedValue = newValue.substring(0, 8);
-	                searchSID.setText(limitedValue);
-	            }
-	        });
-	    
-=======
-	@FXML
-	private ComboBox<String> courseCMB;
-
-	@FXML
-	private ComboBox<String> yearCMB;
-
-	@FXML
-	private ComboBox<String> sectionCMB;
-
-	@FXML
-	private ComboBox<String> semesterCMB;
-
-	@FXML
-	private Text month;
-
-	@FXML
-	private Text year;
-
-	@FXML
-	private Button forward;
-
-	@FXML
-	private Button prev;
-
-//	    @FXML
-//	    private Button BtnTimetable;
->>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
-
-	@FXML
-	private FlowPane calendar;
-
-	private boolean dataLoaded = false;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -338,7 +247,7 @@ public class ScheduleController implements Initializable{
 //		        e.printStackTrace();
 //		    }
 //		}
-<<<<<<< HEAD
+
 	    
         @FXML
         private TextField name;
@@ -365,10 +274,6 @@ public class ScheduleController implements Initializable{
 	    @FXML
 	    private Button submitBTN;
 	    
-	    @FXML
-		private TableColumn<Schedule, String> subcodeCLMNColumn;
-=======
->>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 
 	@FXML
 	private Button deleteBTN;
@@ -376,23 +281,7 @@ public class ScheduleController implements Initializable{
 	@FXML
 	private Button updateBTN;
 
-<<<<<<< HEAD
-		@FXML
-		private TableColumn<Schedule, Integer> sdidCLMNColumn;
-		
-		@FXML
-		private TableView<Schedule> scheduleTV;
-		
-		private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
 
-	    
-		
-		private void setSubjectsBasedOnSelection() {
-		    dataLoaded = false; 
-=======
-	@FXML
-	private Button submitBTN;
->>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 
 	@FXML
 	private TableColumn<Schedule, String> subcodeCLMNColumn;
@@ -756,7 +645,6 @@ public class ScheduleController implements Initializable{
 			}
 
 			setSchedule(getScheduleId(selectedCourse, selectedYear, selectedSection, selectedSemester), startId, endId);
-			fetchDataForOptions(selectedCourse, selectedYear, selectedSemester, selectedSection);
 			dataLoaded = true;
 		}
 	}
@@ -791,44 +679,39 @@ public class ScheduleController implements Initializable{
 		}
 	}
 
-	private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
-			String selectedOption3, String selectedOption4) {
-		// TODO: Implement your data fetching logic
-		return null;
-	}
+//	private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
+//			String selectedOption3, String selectedOption4) {
+//		// TODO: Implement your data fetching logic
+//		return null;
+//	}
+//
+//		        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//		            while (resultSet.next()) {
+//		                String subcode = resultSet.getString("sub_code");
+//		                String credunit = resultSet.getString("units");
+//		                String description = resultSet.getString("subject");
+//		                int sdid = resultSet.getInt("id");
+//
+//		                Schedule scheduleObj = new Schedule(subcode, credunit, description, sdid);
+//		                scheduleList.add(scheduleObj);
+//		            }
+//		            scheduleTV.setItems(scheduleList);
+//		        }
+//
+//		    } catch (SQLException e) {
+//		        e.printStackTrace();
+//		    }
+//		}
+//
+//		private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
+//		        String selectedOption3, String selectedOption4) {
+//		     
+//		    return null;
+//		}
+//
+	
+	
 
-<<<<<<< HEAD
-		        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-		            while (resultSet.next()) {
-		                String subcode = resultSet.getString("sub_code");
-		                String credunit = resultSet.getString("units");
-		                String description = resultSet.getString("subject");
-		                int sdid = resultSet.getInt("id");
-
-		                Schedule scheduleObj = new Schedule(subcode, credunit, description, sdid);
-		                scheduleList.add(scheduleObj);
-		            }
-		            scheduleTV.setItems(scheduleList);
-		        }
-
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }
-		}
-
-		private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
-		        String selectedOption3, String selectedOption4) {
-		     
-		    return null;
-		}
-		
-		
-		
-		
-		
-		
-		
-		
 		private void searchscodebtn() {
 		    String searchedCode = searchSID.getText();
 
@@ -859,6 +742,11 @@ public class ScheduleController implements Initializable{
 		        // Handle the exception or log it appropriately
 		    }
 		}
+		
+		@FXML
+		void search(ActionEvent event) {
+			searchscodebtn();
+		}
 
 		private void showAlert(String title, String header, String content) {
 		    Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -875,6 +763,4 @@ public class ScheduleController implements Initializable{
 		    course.clear();
 		    semester.clear();
 		}
-=======
->>>>>>> 39a4ab3e092de0dd093fe47ea598fcc7e5637dc2
 }
