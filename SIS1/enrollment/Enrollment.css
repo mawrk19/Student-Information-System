@@ -94,6 +94,38 @@
 	-fx-font-family: "Arial Rounded MT Bold";
 }
 
+
+#vboxTransaction {
+	-fx-background-color: linear-gradient(to bottom, #6446b2, #46317d, #281c47);
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+}
+
+#miscLbl {
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20 px;
+}
+
+#comboBox {
+	-fx-background-color: #6446b2;
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15 px;
+}
+
+#checkbox {
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15 px;
+}
+
+#text {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15 px;
+}
+
+
 .user-name {
 	
 }

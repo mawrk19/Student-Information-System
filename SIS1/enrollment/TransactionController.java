@@ -491,11 +491,11 @@ public class TransactionController {
                     String lastNameStr = (lastName != null && !lastName.isEmpty()) ? lastName : "DefaultLastName";
                     
 
-                    Itext PDFgenerator = new Itext();
+                    ItextEnroll PDFgenerator = new ItextEnroll();
                     try {
                     	String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\sample2.pdf";
                     	
-                        PDFgenerator.generatePDF(encoder ,transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
+                        PDFgenerator.titeGeneratePDF(encoder ,transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
                                 firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),
                                 sciCB.isSelected(), comCB.isSelected(), athCB.isSelected(), mediaCB.isSelected());
                         
