@@ -291,6 +291,7 @@ public class EncOldTransactionController {
 					this.firstName = firstName;
 		            this.middleName = middleName;
 		            this.lastName = lastName;
+					
 
 					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
 
@@ -438,7 +439,7 @@ public class EncOldTransactionController {
         // Generate a 6-digit transaction ID
         String transactID = generateRandomTransactionID();
 
-        System.out.println("has Transaction scode " + studCode1);
+        System.out.println("has Transaction scode " + searchedCode);
 
         double totalAmount = calculateTotalAmount();
 
@@ -460,7 +461,7 @@ public class EncOldTransactionController {
                 preparedStatement.setString(9, encoder);
                 preparedStatement.setString(10, getCurrentDate());
                 preparedStatement.setString(11, scheme);
-                preparedStatement.setString(12, studCode1);
+                preparedStatement.setString(12, searchedCode);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 
@@ -478,9 +479,9 @@ public class EncOldTransactionController {
                 if (validateInputs()) {
                     // Existing code...
                     // Ensure firstName, middleName, and lastName are populated before using them
-                    String firstNameStr = (firstName != null && !firstName.isEmpty()) ? firstName : "DefaultFirstName";
-                    String middleNameStr = (middleName != null && !middleName.isEmpty()) ? middleName : "DefaultMiddleName";
-                    String lastNameStr = (lastName != null && !lastName.isEmpty()) ? lastName : "DefaultLastName";
+                    String firstNameStr = (firstName != null && !firstName.isEmpty()) ? firstName : "DefaultName";
+                    String middleNameStr = (middleName != null && !middleName.isEmpty()) ? middleName : "DefaultName";
+                    String lastNameStr = (lastName != null && !lastName.isEmpty()) ? lastName : "DefaultName";
 
                     Itext PDFgenerator = new Itext();
                     try {

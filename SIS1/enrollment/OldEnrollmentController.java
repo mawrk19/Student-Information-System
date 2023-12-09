@@ -97,7 +97,7 @@ public class OldEnrollmentController implements Initializable {
 
 	private String studCode;
 
-	// String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
