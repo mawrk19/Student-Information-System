@@ -3,7 +3,7 @@
 }
 
 #upperNavlbl {
-	-fx-background-color: #3c5199;
+	-fx-background-color: linear-gradient(to right , #222e57, #23305a);
 	-fx-border-radius: 0 25 0 0;
 	-fx-background-radius: 0 25 0 0;
 }
@@ -21,15 +21,17 @@
 }
 
 #NavigationLabelsPane {
-	-fx-background-color: #3c5199;
+	-fx-background-color: linear-gradient(to bottom left , #24315c, #0e0a1a);
 	-fx-border-radius: 0 0 25 0;
 	-fx-background-radius: 0 0 25 0;
 }
 
 #DashboardButton {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #DashboardButton:hover {
@@ -39,9 +41,11 @@
 }
 
 #StudentProfButton {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #StudentProfButton:hover {
@@ -51,9 +55,11 @@
 }
 
 #TimetableButton {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #TimetableButton:hover {
@@ -63,9 +69,11 @@
 }
 
 #ScheduleButton {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 20px;
 }
 
 #ScheduleButton:hover {
