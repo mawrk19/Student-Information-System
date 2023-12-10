@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.OldEnrollmentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.OldEnrollmentController">
 	<children>
 		<AnchorPane prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
@@ -49,10 +48,7 @@
 				</AnchorPane>
 				<AnchorPane layoutX="26.0" layoutY="26.0" prefHeight="220.0" prefWidth="825.0" styleClass="Containers" stylesheets="@Enrollment.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="26.0">
 					<children>
-						<ImageView id="image" fx:id="imageView" fitHeight="188.0" fitWidth="201.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../src/imgs_icons/Insert.png" />
-                     </image></ImageView>
+						<ImageView id="image" fx:id="imageView" fitHeight="188.0" fitWidth="201.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
 						<HBox id="Infos" layoutX="231.0" layoutY="10.0" prefHeight="200.0" prefWidth="580.0" spacing="10.0" style="-fx-background-color: #DFE2ED;" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0">
 							<children>
 								<VBox prefHeight="188.0" prefWidth="189.0" spacing="10.0" HBox.hgrow="ALWAYS">

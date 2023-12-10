@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EnrollmentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EnrollmentController">
 	<children>
 		<AnchorPane prefHeight="790.0" prefWidth="870.0" styleClass="Body" stylesheets="@Enrollment.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
@@ -53,7 +53,7 @@
 										</TextField>
 										<TextField fx:id="mNameTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Middle Name" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
 											<VBox.margin>
-												<Insets top="20.0" />
+												<Insets />
 											</VBox.margin>
                                  <font>
                                     <Font size="15.0" />
@@ -61,12 +61,18 @@
 										</TextField>
 										<TextField fx:id="lNameTF" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Last Name" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
 											<VBox.margin>
-												<Insets top="20.0" />
+												<Insets />
 											</VBox.margin>
                                  <font>
                                     <Font size="15.0" />
                                  </font>
 										</TextField>
+										<ComboBox fx:id="genderCMB" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Gender" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+
+											<VBox.margin>
+												<Insets />
+											</VBox.margin>
+										</ComboBox>
 									</children>
 								</VBox>
 								<VBox prefHeight="188.0" prefWidth="189.0" spacing="10.0" HBox.hgrow="ALWAYS">
@@ -111,12 +117,6 @@
                                     <Font size="15.0" />
                                  </font>
 										</TextField>
-										<ComboBox fx:id="genderCMB" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Gender" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
-
-											<VBox.margin>
-												<Insets />
-											</VBox.margin>
-										</ComboBox>
 
 										<ComboBox fx:id="locCMB" maxWidth="1.7976931348623157E308" prefHeight="40.0" promptText="Location" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
 
@@ -129,6 +129,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </ComboBox>
+                              <Button fx:id="modifyBTN" mnemonicParsing="false" prefHeight="42.0" prefWidth="180.0" styleClass="Containers" stylesheets="@Enrollment.css" text="MODIFY" />
 									</children>
 								</VBox>
 							</children>
