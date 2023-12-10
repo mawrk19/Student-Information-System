@@ -94,25 +94,15 @@ public class EncEnrollmentController implements Initializable {
 
 	private String studCode;
 
+	private Connection connection;
+	private Statement statement;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		ObservableList<String> courses = FXCollections.observableArrayList("BSCS", "BSIT", "BSIS", "BSEMC");
-		courseCMB.setItems(courses);
-
-		ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
-		genderCMB.setItems(genders);
-
-		ObservableList<String> locations = FXCollections.observableArrayList("Congress", "South");
-		locCMB.setItems(locations);
-
-		ObservableList<String> sections = FXCollections.observableArrayList("A", "B");
-		secCMB.setItems(sections);
-
-		ObservableList<String> years = FXCollections.observableArrayList("1st", "2nd", "3rd", "4th");
-		yrCMB.setItems(years);
-
-		ObservableList<String> sem = FXCollections.observableArrayList("1st", "2nd");
-		semCMB.setItems(sem);
+		initializeDatabase();
+		loadComboBoxValues();
+		setupComboBoxListeners();
+		
 		
 		fNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
 		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
@@ -156,6 +146,48 @@ public class EncEnrollmentController implements Initializable {
 		});
 		sidTF.setEditable(false);
 		sidTF.setDisable(true);
+	}
+
+	private void initializeDatabase() {
+		try {
+			Connection con = DatabaseManager.getConnection();
+			statement = con.createStatement();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void loadComboBoxValues() {
+	    loadComboBox("courses", courseCMB);
+	    loadComboBox("genders", genderCMB);
+	    loadComboBox("locations", locCMB);
+	    loadComboBox("sections", secCMB);
+	    loadComboBox("semesters", semCMB);
+	    loadComboBox("years", yrCMB);    
+	}
+
+	private void loadComboBox(String columnName, ComboBox<String> comboBox) {
+	    try {
+	        ResultSet resultSet = statement.executeQuery("SELECT DISTINCT " + columnName + " FROM school");
+	        ObservableList<String> items = FXCollections.observableArrayList();
+	        while (resultSet.next()) {
+	            items.add(resultSet.getString(columnName));
+	        }
+	        comboBox.setItems(items);
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	private void setupComboBoxListeners() {
+	}
+
+	private void insertValue(String columnName, String value) {
+	    try {
+	        statement.executeUpdate("INSERT INTO school (" + columnName + ") VALUES ('" + value + "')");
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	@FXML

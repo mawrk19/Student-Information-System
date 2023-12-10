@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -106,12 +107,12 @@ public class EnrollmentController implements Initializable {
 	@FXML
 	private ComboBox<String> courseCMB, genderCMB, locCMB, secCMB, semCMB, yrCMB;
 
+	@FXML
+	private Button addButton, editButton, deleteButton, modifyBTN;
+	
 	private Connection connection;
 	private Statement statement;
 	
-	@FXML
-	private Button addButton, editButton, deleteButton, modifyBTN;
-
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeDatabase();
@@ -195,28 +196,6 @@ public class EnrollmentController implements Initializable {
 	}
 
 	private void setupComboBoxListeners() {
-		// Add your listeners here
-		// For example, if you want to add a listener to the 'courseCMB' ComboBox
-		// courseCMB.setOnAction(event -> handleCourseSelection());
-	}
-
-	
-	
-
-	private void addValue() {
-	    // Implement logic to add a new value to the "courses" ComboBox
-	    TextInputDialog dialog = new TextInputDialog();
-	    dialog.setTitle("Add New Value");
-	    dialog.setHeaderText("Enter a new value:");
-	    dialog.setContentText("Value:");
-
-	    // Show dialog and get the result
-	    dialog.showAndWait().ifPresent(newValue -> {
-	        if (!newValue.isEmpty()) {
-	            insertValue("courses", newValue);
-	            loadComboBox("courses", courseCMB);
-	        }
-	    });
 	}
 
 	private void insertValue(String columnName, String value) {
@@ -227,8 +206,6 @@ public class EnrollmentController implements Initializable {
 	    }
 	}
 
-	
-
 	private void setupButtonListeners() {
 		modifyBTN.setOnAction(event -> showModifyDialog());
 	}
@@ -236,13 +213,11 @@ public class EnrollmentController implements Initializable {
 	private void showModifyDialog() {
 	    MenuButton modifyMenuButton = new MenuButton("Modify");
 
-	    MenuItem addMenuItem = new MenuItem("Add");
-	    addMenuItem.setOnAction(event -> showAddDialog());
 
 	    MenuItem addSubjectMenuItem = new MenuItem("Add Subject");
 	    addSubjectMenuItem.setOnAction(event -> showAddSubjectDialog());
 
-	    modifyMenuButton.getItems().addAll(addMenuItem, addSubjectMenuItem);
+	    modifyMenuButton.getItems().addAll(addSubjectMenuItem);
 
 	    // Create an alert or dialog if needed
 	    Alert modifyAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -270,7 +245,7 @@ public class EnrollmentController implements Initializable {
 
 	    // Create and configure the ComboBox
 	    ComboBox<String> comboBox = new ComboBox<>();
-	    comboBox.getItems().addAll("courses", "genders", "locations", "sections", "semesters", "years");
+	    comboBox.getItems().addAll("courses","locations", "sections", "semesters", "years");
 	    comboBox.setPromptText("Select a category");
 
 	    // Create the value input field
@@ -345,12 +320,12 @@ public class EnrollmentController implements Initializable {
 	    return null;
 	}
 		
-
-	
 	private List<Subject> showAddSubjectDialog() {
+	    // Create a dialog for adding subjects
 	    Dialog<List<Subject>> dialog = new Dialog<>();
 	    dialog.setTitle("Add Subject");
 
+	    // Add buttons for Add and Cancel
 	    ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
 	    dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
 
@@ -370,7 +345,6 @@ public class EnrollmentController implements Initializable {
 	    TextField locField = new TextField();
 	    locField.setPromptText("Location");
 
-	    // Create TableView for subjects with a maximum of 10 rows
 	    TableView<Subject> subjectsTable = new TableView<>();
 	    List<Subject> subjectsList = new ArrayList<>();
 
@@ -406,9 +380,14 @@ public class EnrollmentController implements Initializable {
 	        subject.setSubject(event.getNewValue());
 	    });
 
+	    // Set preferred width for columns
+	    subCodeCol.setPrefWidth(100);
+	    unitsCol.setPrefWidth(100);
+	    subjectCol.setPrefWidth(600);
+
 	    subjectsTable.getColumns().addAll(subCodeCol, unitsCol, subjectCol);
 
-	    // Add listener for enabling/disabling Add button
+	    // Add a listener for enabling/disabling the Add button
 	    Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
 	    addButton.setDisable(true);
 
@@ -420,6 +399,10 @@ public class EnrollmentController implements Initializable {
 
 	    // Create the layout and add it to the dialog
 	    GridPane grid = new GridPane();
+	    grid.setHgap(10); // Set horizontal gap
+	    grid.setVgap(10); // Set vertical gap
+	    grid.setPadding(new Insets(20, 150, 10, 10)); 
+	    
 	    grid.add(new Label("Course:"), 0, 0);
 	    grid.add(courseField, 1, 0);
 	    grid.add(new Label("Section:"), 0, 1);
@@ -430,13 +413,12 @@ public class EnrollmentController implements Initializable {
 	    grid.add(semField, 1, 3);
 	    grid.add(new Label("Location:"), 0, 4);
 	    grid.add(locField, 1, 4);
-
 	    grid.add(new Label("Subjects:"), 0, 5, 2, 1);
 	    grid.add(subjectsTable, 0, 6, 2, 1);
 
 	    dialog.getDialogPane().setContent(grid);
 
-	    // Set the result converter to return subjectsList when Add button is clicked
+	    // Set the result converter to return subjectsList when the Add button is clicked
 	    dialog.setResultConverter(dialogButton -> {
 	        if (dialogButton == addButtonType) {
 	            return subjectsList;
@@ -444,7 +426,10 @@ public class EnrollmentController implements Initializable {
 	        return null;
 	    });
 
+	    dialog.getDialogPane().setPrefWidth(800);
+
 	    Optional<List<Subject>> result = dialog.showAndWait();
+
 
 	    result.ifPresent(subjectsList1 -> {
 	        // Process the subject information here
@@ -459,6 +444,7 @@ public class EnrollmentController implements Initializable {
 
 	    return subjectsList;
 	}
+
 
 
 	// Insert subjects into the 'subjects' table
@@ -502,9 +488,6 @@ public class EnrollmentController implements Initializable {
 	    return null;
 	}
 
-
-
-	// Insert information into the 'school' table
 	private void insertSchoolInformation(String course, String section, String year, String semester, String location) {
 	    try {
 	        Connection con = DatabaseManager.getConnection();
@@ -589,20 +572,13 @@ public class EnrollmentController implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/Transaction.fxml"));
 			AnchorPane newTableAnchorPane = loader.load();
 
-			// Assuming subjectsTableView is defined somewhere in your code.
-			// Example:
-			// TableView<?> subjectsTableView = new TableView<>();
-
-			// Get the parent of subjectsTableView
 			Pane tableViewParent = (Pane) subjectsTableView.getParent();
-
 			// Get the anchor constraints of subjectsTableView
 			Double topAnchor = AnchorPane.getTopAnchor(subjectsTableView);
 			Double bottomAnchor = AnchorPane.getBottomAnchor(subjectsTableView);
 			Double leftAnchor = AnchorPane.getLeftAnchor(subjectsTableView);
 			Double rightAnchor = AnchorPane.getRightAnchor(subjectsTableView);
 
-			// Remove subjectsTableView from its parent
 			tableViewParent.getChildren().remove(subjectsTableView);
 
 			// Set anchor constraints for newTableAnchorPane
@@ -618,10 +594,6 @@ public class EnrollmentController implements Initializable {
 			transactionController.setStudCode(this.studCode);
 
 			System.out.println("Stud code from enrollment: " + studCode);
-
-			// If needed, re-add subjectsTableView to the parent
-			// tableViewParent.getChildren().add(subjectsTableView);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
