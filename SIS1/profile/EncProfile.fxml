@@ -24,7 +24,7 @@
                            <children>
                               <ImageView fx:id="coverImage" fitHeight="340.0" fitWidth="870.0" pickOnBounds="true" HBox.hgrow="ALWAYS">
                                  <image>
-                                    <Image url="@../src/imgs_icons/cover.png" />
+                                    <Image url="@../src/imgs_icons/encCover.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -33,7 +33,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane id="InformationPane" prefHeight="593.0" prefWidth="552.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="22.0">
+            <AnchorPane id="encInformationPane" prefHeight="593.0" prefWidth="552.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="22.0">
                <children>
                   <AnchorPane layoutY="14.0" prefHeight="51.0" prefWidth="552.0">
                      <children>
@@ -52,10 +52,10 @@
                   <TextField fx:id="passwordTF" layoutX="156.0" layoutY="379.0" prefHeight="40.0" prefWidth="240.0" />
                   <Label id="CPLbl" layoutX="222.0" layoutY="419.0" stylesheets="@Profile.css" text="New Password" />
                   <Label id="CPLbl" layoutX="209.0" layoutY="476.0" stylesheets="@Profile.css" text="Confirm Password" />
-                  <Button id="UpdateBtn" fx:id="updateBTN" layoutX="159.0" layoutY="539.0" mnemonicParsing="false" onAction="#updatePassword" prefHeight="40.0" prefWidth="234.0" stylesheets="@Profile.css" text="Update Password" />
+                  <Button id="encUpdateBtn" fx:id="updateBTN" layoutX="159.0" layoutY="539.0" mnemonicParsing="false" onAction="#updatePassword" prefHeight="40.0" prefWidth="234.0" stylesheets="@Profile.css" text="Update Password" />
                   <TextField fx:id="newPasswordTF" layoutX="156.0" layoutY="436.0" prefHeight="40.0" prefWidth="240.0" />
                   <TextField fx:id="profileConfirmPass" layoutX="156.0" layoutY="493.0" prefHeight="40.0" prefWidth="240.0" />
-                  <Button id="EditBtn" fx:id="saveBTN" alignment="CENTER" layoutX="276.0" layoutY="190.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveProfile" prefHeight="40.0" prefWidth="228.0" stylesheets="@Profile.css" text="Save" textFill="WHITE">
+                  <Button id="encEditBtn" fx:id="saveBTN" alignment="CENTER" layoutX="276.0" layoutY="190.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#saveProfile" prefHeight="40.0" prefWidth="228.0" stylesheets="@Profile.css" text="Save" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="10.0" />
                      </font>
@@ -74,7 +74,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane id="Container" prefHeight="593.0" prefWidth="258.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="21.0">
+            <AnchorPane id="encContainer" prefHeight="593.0" prefWidth="258.0" stylesheets="@Profile.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="21.0">
                <children>
                   <VBox prefHeight="523.0" prefWidth="258.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>

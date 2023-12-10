@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@students.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.StudentsController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@students.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="students.StudentsController">
    <children>
       <HBox prefHeight="790.0" prefWidth="870.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -43,17 +43,17 @@
                   <TableView fx:id="studentTableView" prefHeight="498.0" prefWidth="844.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       
                                 <columns>
-                      <TableColumn fx:id="firstNameColumn" prefWidth="106.0" resizable="false" styleClass="columnHeader" text="First Name" />
-                        <TableColumn fx:id="middleNameColumn" prefWidth="86.0" resizable="false" styleClass="columnHeader" text="Middle Name" />
-                        <TableColumn fx:id="lastNameColumn" resizable="false" styleClass="columnHeader" text="Last Name" />
-                        <TableColumn fx:id="courseColumn" prefWidth="66.0" resizable="false" styleClass="columnHeader" text="Course" />
-                        <TableColumn fx:id="yearColumn" prefWidth="50.0" resizable="false" styleClass="columnHeader" text="Year" />
-                        <TableColumn fx:id="sectionColumn" prefWidth="58.0" resizable="false" styleClass="columnHeader" text="Section" />
-                        <TableColumn fx:id="locationColumn" prefWidth="71.0" resizable="false" style="-fx-text-fill: #EFF0F3;" styleClass="columnHeader" text="Location" />
-                        <TableColumn fx:id="scodeColumn" prefWidth="97.0" resizable="false" styleClass="columnHeader" text="SCode" />
-                        <TableColumn fx:id="genderColumn" prefWidth="63.0" resizable="false" styleClass="columnHeader" text="Gender" />
-                        <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="102.0" resizable="false" styleClass="columnHeader" text="date" />
-                        <TableColumn fx:id="sidColumn" prefWidth="70.0" resizable="false" styleClass="columnHeader" text="SID" />
+                      <TableColumn fx:id="firstNameColumn" prefWidth="106.0" resizable="false" text="First Name" />
+                        <TableColumn fx:id="middleNameColumn" prefWidth="86.0" resizable="false" text="Middle Name" />
+                        <TableColumn fx:id="lastNameColumn" resizable="false" text="Last Name" />
+                        <TableColumn fx:id="courseColumn" prefWidth="66.0" resizable="false" text="Course" />
+                        <TableColumn fx:id="yearColumn" prefWidth="50.0" resizable="false" text="Year" />
+                        <TableColumn fx:id="sectionColumn" prefWidth="58.0" resizable="false" text="Section" />
+                        <TableColumn fx:id="locationColumn" prefWidth="71.0" resizable="false" style="-fx-text-fill: #EFF0F3;" text="Location" />
+                        <TableColumn fx:id="scodeColumn" prefWidth="97.0" resizable="false" text="SCode" />
+                        <TableColumn fx:id="genderColumn" prefWidth="63.0" resizable="false" text="Gender" />
+                        <TableColumn fx:id="dateColumn" minWidth="0.0" prefWidth="102.0" resizable="false" text="date" />
+                        <TableColumn fx:id="sidColumn" prefWidth="70.0" resizable="false" text="SID" />
                         
                                 </columns>
                      <columnResizePolicy>

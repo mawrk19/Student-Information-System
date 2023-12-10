@@ -155,7 +155,7 @@ public class EncOldTransactionController {
     
     private boolean continuousUpdate = false;
     
-	private String searchedCode;
+    public String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
 
     public void initialize() {
         ObservableList<String> mop = FXCollections.observableArrayList("Scholar", "Full");

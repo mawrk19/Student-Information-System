@@ -68,5 +68,6 @@
             <Insets left="50.0" right="50.0" />
          </padding>
       </VBox>
+      <Label layoutX="20.0" layoutY="6.0" prefHeight="17.0" prefWidth="95.0" text="Old enrollment" />
    </children>
 </AnchorPane>

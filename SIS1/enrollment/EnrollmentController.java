@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -109,33 +110,40 @@ public class EnrollmentController implements Initializable {
 
 	@FXML
 	private Button addButton, editButton, deleteButton, modifyBTN;
-	
+
 	private Connection connection;
 	private Statement statement;
-	
+
+	@FXML
+	private ComboBox<String> deleteComboBox;
+	@FXML
+	private TextField deleteValueTextField;
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeDatabase();
 		loadComboBoxValues();
 		setupComboBoxListeners();
 		setupButtonListeners();
-		
+		//deleteComboBox.setItems(
+		//		FXCollections.observableArrayList("courses", "genders", "locations", "sections", "semesters", "years"));
+
 		fNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
-		        event.consume();
-		    }
+			if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+				event.consume();
+			}
 		});
 
 		lNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
-		        event.consume();
-		    }
+			if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+				event.consume();
+			}
 		});
-		
+
 		mNameTF.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-		    if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
-		        event.consume();
-		    }
+			if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+				event.consume();
+			}
 		});
 
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -174,25 +182,25 @@ public class EnrollmentController implements Initializable {
 	}
 
 	private void loadComboBoxValues() {
-	    loadComboBox("courses", courseCMB);
-	    loadComboBox("genders", genderCMB);
-	    loadComboBox("locations", locCMB);
-	    loadComboBox("sections", secCMB);
-	    loadComboBox("semesters", semCMB);
-	    loadComboBox("years", yrCMB);    
+		loadComboBox("courses", courseCMB);
+		loadComboBox("genders", genderCMB);
+		loadComboBox("locations", locCMB);
+		loadComboBox("sections", secCMB);
+		loadComboBox("semesters", semCMB);
+		loadComboBox("years", yrCMB);
 	}
 
 	private void loadComboBox(String columnName, ComboBox<String> comboBox) {
-	    try {
-	        ResultSet resultSet = statement.executeQuery("SELECT DISTINCT " + columnName + " FROM school");
-	        ObservableList<String> items = FXCollections.observableArrayList();
-	        while (resultSet.next()) {
-	            items.add(resultSet.getString(columnName));
-	        }
-	        comboBox.setItems(items);
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			ResultSet resultSet = statement.executeQuery("SELECT DISTINCT " + columnName + " FROM school");
+			ObservableList<String> items = FXCollections.observableArrayList();
+			while (resultSet.next()) {
+				items.add(resultSet.getString(columnName));
+			}
+			comboBox.setItems(items);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void setupComboBoxListeners() {
@@ -200,13 +208,12 @@ public class EnrollmentController implements Initializable {
 	}
 
 	private void insertValue(String columnName, String value) {
-	    try {
-	        statement.executeUpdate("INSERT INTO school (" + columnName + ") VALUES ('" + value + "')");
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			statement.executeUpdate("INSERT INTO school (" + columnName + ") VALUES ('" + value + "')");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
 
 	private void setupButtonListeners() {
 		modifyBTN.setOnAction(event -> showModifyDialog());
@@ -215,11 +222,13 @@ public class EnrollmentController implements Initializable {
 	private void showModifyDialog() {
 	    MenuButton modifyMenuButton = new MenuButton("Modify");
 
-
-
 	    MenuItem addSubjectMenuItem = new MenuItem("Add Subject");
 	    addSubjectMenuItem.setOnAction(event -> showAddSubjectDialog());
 	    modifyMenuButton.getItems().addAll(addSubjectMenuItem);
+
+	    MenuItem deleteSubjectMenuItem = new MenuItem("Delete Subject");
+	    deleteSubjectMenuItem.setOnAction(event -> deleteSelectedSubjects(event));
+	    modifyMenuButton.getItems().addAll(deleteSubjectMenuItem);
 
 	    // Create an alert or dialog if needed
 	    Alert modifyAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -227,289 +236,361 @@ public class EnrollmentController implements Initializable {
 	    modifyAlert.setHeaderText("Choose an action:");
 	    modifyAlert.setContentText("Select the action you want to perform:");
 
-	    // Set the content of the alert to the modifyMenuButton
-	    modifyAlert.getDialogPane().setContent(modifyMenuButton);
+	    // Create and initialize the deleteComboBox (use the class-level variable)
+	    deleteComboBox = new ComboBox<>();
+	    deleteComboBox.setItems(FXCollections.observableArrayList("courses", "genders", "locations", "sections", "semesters", "years"));
+
+	    // Create and initialize the deleteValueTextField
+	    deleteValueTextField = new TextField();
+	    deleteValueTextField.setPromptText("Enter value");
+
+	    VBox content = new VBox(); // You can use another layout if needed
+	    content.getChildren().addAll(deleteComboBox, deleteValueTextField);
+
+	    // Set the content of the alert to the modifyMenuButton and additional UI components
+	    modifyAlert.getDialogPane().setContent(new VBox(modifyMenuButton, content));
 
 	    Optional<ButtonType> result = modifyAlert.showAndWait();
 	    // Process the result if needed
 	}
-	
+
+
+
+	@FXML
+	private void deleteSelectedSubjects(ActionEvent event) {
+	    String selectedColumn = deleteComboBox.getValue();
+	    String deleteValue = deleteValueTextField.getText().trim();
+
+	    if (selectedColumn == null || deleteValue.isEmpty()) {
+	        // Show a warning if the ComboBox or TextField is not selected/entered
+	        Alert alert = new Alert(Alert.AlertType.WARNING);
+	        alert.setTitle("Invalid Input");
+	        alert.setHeaderText(null);
+	        alert.setContentText("Please select a column and enter a value.");
+	        alert.showAndWait();
+	        return;
+	    }
+
+	    ObservableList<Subject> selectedSubjects = subjectsTableView.getSelectionModel().getSelectedItems();
+
+	    if (!selectedSubjects.isEmpty()) {
+	        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+	        alert.setTitle("Delete Subjects");
+	        alert.setHeaderText("Are you sure you want to delete subjects where " + selectedColumn + " is '" + deleteValue + "'?");
+	        alert.setContentText("This action cannot be undone.");
+
+	        Optional<ButtonType> result = alert.showAndWait();
+	        if (result.isPresent() && result.get() == ButtonType.OK) {
+	            // Delete selected subjects from the database
+	            deleteSubjectsFromDatabase(selectedColumn, deleteValue);
+
+	            // Remove selected subjects from the table view
+	            subjectsTableView.getItems().removeAll(selectedSubjects);
+	        }
+	    } else {
+	        // No subjects selected, show a warning
+	        Alert alert = new Alert(Alert.AlertType.WARNING);
+	        alert.setTitle("No Subjects Selected");
+	        alert.setHeaderText(null);
+	        alert.setContentText("Please select subjects to delete.");
+	        alert.showAndWait();
+	    }
+	}
+
+	private void deleteSubjectsFromDatabase(String columnName, String value) {
+	    try (Connection connection = DatabaseManager.getConnection()) {
+	        String deleteSQL = "DELETE FROM school WHERE " + columnName + " = ?";
+	        try (PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)) {
+	            preparedStatement.setString(1, value);
+	            preparedStatement.executeUpdate();
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Handle the exception as needed
+	    }
+	}
+
 	private void showAddDialog() {
-	    // Create a dialog for adding a new value
-	    Dialog<Pair<String, String>> dialog = new Dialog<>();
-	    dialog.setTitle("Add New Value");
+		// Create a dialog for adding a new value
+		Dialog<Pair<String, String>> dialog = new Dialog<>();
+		dialog.setTitle("Add New Value");
 
-	    // Set the button types
-	    ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
-	    dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+		// Set the button types
+		ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
 
-	    // Create and configure the ComboBox
-	    ComboBox<String> comboBox = new ComboBox<>();
+		// Create and configure the ComboBox
+		ComboBox<String> comboBox = new ComboBox<>();
 
-	    comboBox.getItems().addAll("courses", "genders", "locations", "sections", "semesters", "years");
-	    comboBox.setPromptText("Select a category");
+		comboBox.getItems().addAll("courses", "genders", "locations", "sections", "semesters", "years");
+		comboBox.setPromptText("Select a category");
 
-	    // Create the value input field
-	    TextField valueField = new TextField();
-	    valueField.setPromptText("Value");
+		// Create the value input field
+		TextField valueField = new TextField();
+		valueField.setPromptText("Value");
 
-	    // Enable/Disable Add button depending on whether a category is selected
-	    Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
-	    addButton.setDisable(true);
+		// Enable/Disable Add button depending on whether a category is selected
+		Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
+		addButton.setDisable(true);
 
-	    // Add listener to ComboBox selection for enabling/disabling the Add button
-	    comboBox.valueProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue == null));
+		// Add listener to ComboBox selection for enabling/disabling the Add button
+		comboBox.valueProperty()
+				.addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue == null));
 
-	    // Create the layout and add it to the dialog
-	    GridPane grid = new GridPane();
-	    grid.add(new Label("Category:"), 0, 0);
-	    grid.add(comboBox, 1, 0);
-	    grid.add(new Label("Value:"), 0, 1);
-	    grid.add(valueField, 1, 1);
+		// Create the layout and add it to the dialog
+		GridPane grid = new GridPane();
+		grid.add(new Label("Category:"), 0, 0);
+		grid.add(comboBox, 1, 0);
+		grid.add(new Label("Value:"), 0, 1);
+		grid.add(valueField, 1, 1);
 
-	    dialog.getDialogPane().setContent(grid);
+		dialog.getDialogPane().setContent(grid);
 
-	    // Convert the result to a key-value pair when the Add button is clicked
-	    dialog.setResultConverter(dialogButton -> {
-	        if (dialogButton == addButtonType) {
-	            return new Pair<>(comboBox.getValue(), valueField.getText());
-	        }
-	        return null;
-	    });
+		// Convert the result to a key-value pair when the Add button is clicked
+		dialog.setResultConverter(dialogButton -> {
+			if (dialogButton == addButtonType) {
+				return new Pair<>(comboBox.getValue(), valueField.getText());
+			}
+			return null;
+		});
 
-	    Optional<Pair<String, String>> result = dialog.showAndWait();
+		Optional<Pair<String, String>> result = dialog.showAndWait();
 
-	    result.ifPresent(pair -> {
-	        if (!pair.getValue().isEmpty()) {
-	            insertValue(pair.getKey(), pair.getValue());
-	            loadComboBox(pair.getKey(), getComboBoxByName(pair.getKey()));
-	        }
-	    });
+		result.ifPresent(pair -> {
+			if (!pair.getValue().isEmpty()) {
+				insertValue(pair.getKey(), pair.getValue());
+				loadComboBox(pair.getKey(), getComboBoxByName(pair.getKey()));
+			}
+		});
 	}
 
 	private ComboBox<String> getComboBoxByName(String comboBoxName) {
-	    // Implement a method to return the ComboBox based on the name
-	    if (comboBoxName != null) {
-	        switch (comboBoxName) {
-	            case "courses":
-	                return courseCMB;
-	            case "genders":
-	                return genderCMB;
-	            case "locations":
-	                return locCMB;
-	            case "sections":
-	                return secCMB;
-	            case "semesters":
-	                return semCMB;
-	            case "years":
-	                return yrCMB;
-	            default:
-	                return null;
-	        }
-	    } else {
-	        // Handle the case where comboBoxName is null
-	        return null;
-	    }
+		// Implement a method to return the ComboBox based on the name
+		if (comboBoxName != null) {
+			switch (comboBoxName) {
+			case "courses":
+				return courseCMB;
+			case "genders":
+				return genderCMB;
+			case "locations":
+				return locCMB;
+			case "sections":
+				return secCMB;
+			case "semesters":
+				return semCMB;
+			case "years":
+				return yrCMB;
+			default:
+				return null;
+			}
+		} else {
+			// Handle the case where comboBoxName is null
+			return null;
+		}
 	}
-	
+
 	private String getSelectedValue(String comboBoxName) {
-	    // Implement a method to get the selected value from the specified ComboBox
-	    ComboBox<String> comboBox = getComboBoxByName(comboBoxName);
-	    if (comboBox != null) {
-	        return comboBox.getValue();
-	    }
-	    return null;
+		// Implement a method to get the selected value from the specified ComboBox
+		ComboBox<String> comboBox = getComboBoxByName(comboBoxName);
+		if (comboBox != null) {
+			return comboBox.getValue();
+		}
+		return null;
 	}
-		
+
 	private List<Subject> showAddSubjectDialog() {
-	    // Create a dialog for adding subjects
-	    Dialog<List<Subject>> dialog = new Dialog<>();
-	    dialog.setTitle("Add Subject");
+		// Create a dialog for adding subjects
+		Dialog<List<Subject>> dialog = new Dialog<>();
+		dialog.setTitle("Add Subject");
 
-	    // Add buttons for Add and Cancel
-	    ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
-	    dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+		// Add buttons for Add and Cancel
+		ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
 
-	    // Create and configure TextFields for course, section, year, sem, location
-	    TextField courseField = new TextField();
-	    courseField.setPromptText("Course");
+		// Create and configure TextFields for course, section, year, sem, location
+		TextField courseField = new TextField();
+		courseField.setPromptText("Course");
 
-	    TextField sectionField = new TextField();
-	    sectionField.setPromptText("Section");
+		TextField sectionField = new TextField();
+		sectionField.setPromptText("Section");
 
-	    TextField yearField = new TextField();
-	    yearField.setPromptText("Year");
+		TextField yearField = new TextField();
+		yearField.setPromptText("Year");
 
-	    TextField semField = new TextField();
-	    semField.setPromptText("Semester");
+		TextField semField = new TextField();
+		semField.setPromptText("Semester");
 
-	    TextField locField = new TextField();
-	    locField.setPromptText("Location");
+		TextField locField = new TextField();
+		locField.setPromptText("Location");
 
-	    TableView<Subject> subjectsTable = new TableView<>();
-	    List<Subject> subjectsList = new ArrayList<>();
+		TableView<Subject> subjectsTable = new TableView<>();
+		List<Subject> subjectsList = new ArrayList<>();
 
-	    for (int i = 0; i < 10; i++) {
-	        subjectsList.add(new Subject(i, "", 0, ""));
-	    }
+		for (int i = 0; i < 10; i++) {
+			subjectsList.add(new Subject(i, "", 0, ""));
+		}
 
-	    subjectsTable.setItems(FXCollections.observableArrayList(subjectsList));
+		subjectsTable.setItems(FXCollections.observableArrayList(subjectsList));
 
-	    subjectsTable.setEditable(true);
+		subjectsTable.setEditable(true);
 
-	    TableColumn<Subject, String> subCodeCol = new TableColumn<>("Subject Code");
-	    subCodeCol.setCellValueFactory(new PropertyValueFactory<>("subCode"));
-	    subCodeCol.setCellFactory(TextFieldTableCell.forTableColumn());
-	    subCodeCol.setOnEditCommit(event -> {
-	        Subject subject = event.getRowValue();
-	        subject.setSubCode(event.getNewValue());
-	    });
+		TableColumn<Subject, String> subCodeCol = new TableColumn<>("Subject Code");
+		subCodeCol.setCellValueFactory(new PropertyValueFactory<>("subCode"));
+		subCodeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		subCodeCol.setOnEditCommit(event -> {
+			Subject subject = event.getRowValue();
+			subject.setSubCode(event.getNewValue());
+		});
 
-	    TableColumn<Subject, Integer> unitsCol = new TableColumn<>("Units");
-	    unitsCol.setCellValueFactory(new PropertyValueFactory<>("units"));
-	    unitsCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-	    unitsCol.setOnEditCommit(event -> {
-	        Subject subject = event.getRowValue();
-	        subject.setUnits(event.getNewValue());
-	    });
+		TableColumn<Subject, Integer> unitsCol = new TableColumn<>("Units");
+		unitsCol.setCellValueFactory(new PropertyValueFactory<>("units"));
+		unitsCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		unitsCol.setOnEditCommit(event -> {
+			Subject subject = event.getRowValue();
+			subject.setUnits(event.getNewValue());
+		});
 
-	    TableColumn<Subject, String> subjectCol = new TableColumn<>("Subject");
-	    subjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
-	    subjectCol.setCellFactory(TextFieldTableCell.forTableColumn());
-	    subjectCol.setOnEditCommit(event -> {
-	        Subject subject = event.getRowValue();
-	        subject.setSubject(event.getNewValue());
-	    });
+		TableColumn<Subject, String> subjectCol = new TableColumn<>("Subject");
+		subjectCol.setCellValueFactory(new PropertyValueFactory<>("subject"));
+		subjectCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		subjectCol.setOnEditCommit(event -> {
+			Subject subject = event.getRowValue();
+			subject.setSubject(event.getNewValue());
+		});
 
-	    // Set preferred width for columns
-	    subCodeCol.setPrefWidth(100);
-	    unitsCol.setPrefWidth(100);
-	    subjectCol.setPrefWidth(600);
+		// Set preferred width for columns
+		subCodeCol.setPrefWidth(100);
+		unitsCol.setPrefWidth(100);
+		subjectCol.setPrefWidth(600);
 
-	    subjectsTable.getColumns().addAll(subCodeCol, unitsCol, subjectCol);
+		subjectsTable.getColumns().addAll(subCodeCol, unitsCol, subjectCol);
 
-	    // Add a listener for enabling/disabling the Add button
-	    Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
-	    addButton.setDisable(true);
+		// Add a listener for enabling/disabling the Add button
+		Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
+		addButton.setDisable(true);
 
-	    courseField.textProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
-	    sectionField.textProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
-	    yearField.textProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
-	    semField.textProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
-	    locField.textProperty().addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
+		courseField.textProperty()
+				.addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
+		sectionField.textProperty()
+				.addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
+		yearField.textProperty()
+				.addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
+		semField.textProperty()
+				.addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
+		locField.textProperty()
+				.addListener((observable, oldValue, newValue) -> addButton.setDisable(newValue.isEmpty()));
 
-	    // Create the layout and add it to the dialog
-	    GridPane grid = new GridPane();
-	    grid.setHgap(10); // Set horizontal gap
-	    grid.setVgap(10); // Set vertical gap
-	    grid.setPadding(new Insets(20, 150, 10, 10)); 
-	    
-	    grid.add(new Label("Course:"), 0, 0);
-	    grid.add(courseField, 1, 0);
-	    grid.add(new Label("Section:"), 0, 1);
-	    grid.add(sectionField, 1, 1);
-	    grid.add(new Label("Year:"), 0, 2);
-	    grid.add(yearField, 1, 2);
-	    grid.add(new Label("Semester:"), 0, 3);
-	    grid.add(semField, 1, 3);
-	    grid.add(new Label("Location:"), 0, 4);
-	    grid.add(locField, 1, 4);
-	    grid.add(new Label("Subjects:"), 0, 5, 2, 1);
-	    grid.add(subjectsTable, 0, 6, 2, 1);
+		// Create the layout and add it to the dialog
+		GridPane grid = new GridPane();
+		grid.setHgap(10); // Set horizontal gap
+		grid.setVgap(10); // Set vertical gap
+		grid.setPadding(new Insets(20, 150, 10, 10));
 
-	    dialog.getDialogPane().setContent(grid);
+		grid.add(new Label("Course:"), 0, 0);
+		grid.add(courseField, 1, 0);
+		grid.add(new Label("Section:"), 0, 1);
+		grid.add(sectionField, 1, 1);
+		grid.add(new Label("Year:"), 0, 2);
+		grid.add(yearField, 1, 2);
+		grid.add(new Label("Semester:"), 0, 3);
+		grid.add(semField, 1, 3);
+		grid.add(new Label("Location:"), 0, 4);
+		grid.add(locField, 1, 4);
+		grid.add(new Label("Subjects:"), 0, 5, 2, 1);
+		grid.add(subjectsTable, 0, 6, 2, 1);
 
-	    // Set the result converter to return subjectsList when the Add button is clicked
-	    dialog.setResultConverter(dialogButton -> {
-	        if (dialogButton == addButtonType) {
-	            return subjectsList;
-	        }
-	        return null;
-	    });
+		dialog.getDialogPane().setContent(grid);
 
-	    dialog.getDialogPane().setPrefWidth(800);
+		// Set the result converter to return subjectsList when the Add button is
+		// clicked
+		dialog.setResultConverter(dialogButton -> {
+			if (dialogButton == addButtonType) {
+				return subjectsList;
+			}
+			return null;
+		});
 
-	    Optional<List<Subject>> result = dialog.showAndWait();
+		dialog.getDialogPane().setPrefWidth(800);
 
+		Optional<List<Subject>> result = dialog.showAndWait();
 
-	    result.ifPresent(subjectsList1 -> {
-	        // Process the subject information here
-	        String course = courseField.getText();
-	        String section = sectionField.getText();
-	        String year = yearField.getText();
-	        String semester = semField.getText();
-	        String location = locField.getText();
-	        insertSubjectsIntoSubjectsTable(subjectsList, course, section, year, semester, location);
-	        insertSchoolInformation(course, section, year, semester, location);
-	    });
+		result.ifPresent(subjectsList1 -> {
+			// Process the subject information here
+			String course = courseField.getText();
+			String section = sectionField.getText();
+			String year = yearField.getText();
+			String semester = semField.getText();
+			String location = locField.getText();
+			insertSubjectsIntoSubjectsTable(subjectsList, course, section, year, semester, location);
+			insertSchoolInformation(course, section, year, semester, location);
+		});
 
-	    return subjectsList;
+		return subjectsList;
 	}
-
-
 
 	// Insert subjects into the 'subjects' table
-	private Pair<Integer, Integer> insertSubjectsIntoSubjectsTable(List<Subject> subjectsList, String course, String section, String year, String semester, String location) {
-	    try {
-	        Connection con = DatabaseManager.getConnection();
-	        con.setAutoCommit(false);  // Set auto-commit to false
+	private Pair<Integer, Integer> insertSubjectsIntoSubjectsTable(List<Subject> subjectsList, String course,
+			String section, String year, String semester, String location) {
+		try {
+			Connection con = DatabaseManager.getConnection();
+			con.setAutoCommit(false); // Set auto-commit to false
 
-	        String insertSubjectsSQL = "INSERT INTO subjects (sub_code, units, subject) VALUES (?, ?, ?)";
+			String insertSubjectsSQL = "INSERT INTO subjects (sub_code, units, subject) VALUES (?, ?, ?)";
 
-	        // Use RETURN_GENERATED_KEYS to retrieve auto-generated IDs
-	        try (PreparedStatement preparedStatement = con.prepareStatement(insertSubjectsSQL, Statement.RETURN_GENERATED_KEYS)) {
-	            for (Subject subject : subjectsList) {
-	                preparedStatement.setString(1, subject.getSubCode());
-	                preparedStatement.setInt(2, subject.getUnits());
-	                preparedStatement.setString(3, subject.getSubject());
-	                preparedStatement.addBatch();
-	            }
-	            preparedStatement.executeBatch();
+			// Use RETURN_GENERATED_KEYS to retrieve auto-generated IDs
+			try (PreparedStatement preparedStatement = con.prepareStatement(insertSubjectsSQL,
+					Statement.RETURN_GENERATED_KEYS)) {
+				for (Subject subject : subjectsList) {
+					preparedStatement.setString(1, subject.getSubCode());
+					preparedStatement.setInt(2, subject.getUnits());
+					preparedStatement.setString(3, subject.getSubject());
+					preparedStatement.addBatch();
+				}
+				preparedStatement.executeBatch();
 
-	            // Retrieve auto-generated keys (IDs)
-	            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-	                if (generatedKeys.next()) {
-	                    int startId = generatedKeys.getInt(1);
-	                    int endId = startId + subjectsList.size() - 1;
+				// Retrieve auto-generated keys (IDs)
+				try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						int startId = generatedKeys.getInt(1);
+						int endId = startId + subjectsList.size() - 1;
 
-	                    System.out.println("Retrieved startId from insertSubjectsIntoSubjectsTable: " + startId);
-	                    System.out.println("Retrieved endId from insertSubjectsIntoSubjectsTable: " + endId);
+						System.out.println("Retrieved startId from insertSubjectsIntoSubjectsTable: " + startId);
+						System.out.println("Retrieved endId from insertSubjectsIntoSubjectsTable: " + endId);
 
-	                    return new Pair<>(startId, endId);
-	                }
-	            }
-	        }
+						return new Pair<>(startId, endId);
+					}
+				}
+			}
 
-	        con.commit();  // Commit the transaction
-	        con.setAutoCommit(true);  // Set auto-commit back to true
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+			con.commit(); // Commit the transaction
+			con.setAutoCommit(true); // Set auto-commit back to true
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    return null;
+		return null;
 	}
 
 	private void insertSchoolInformation(String course, String section, String year, String semester, String location) {
-	    try {
-	        Connection con = DatabaseManager.getConnection();
-	        con.setAutoCommit(false);  // Set auto-commit to false
+		try {
+			Connection con = DatabaseManager.getConnection();
+			con.setAutoCommit(false); // Set auto-commit to false
 
-	        String insertSchoolSQL = "INSERT INTO school (courses, sections, years, semesters, locations) VALUES (?, ?, ?, ?, ?)";
-	        
-	        try (PreparedStatement preparedStatement = con.prepareStatement(insertSchoolSQL)) {
-	            preparedStatement.setString(1, course);
-	            preparedStatement.setString(2, section);
-	            preparedStatement.setString(3, year);
-	            preparedStatement.setString(4, semester);
-	            preparedStatement.setString(5, location);
-	            preparedStatement.executeUpdate();
-	        }
+			String insertSchoolSQL = "INSERT INTO school (courses, sections, years, semesters, locations) VALUES (?, ?, ?, ?, ?)";
 
-	        con.commit();  // Commit the transaction
-	        con.setAutoCommit(true);  // Set auto-commit back to true
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+			try (PreparedStatement preparedStatement = con.prepareStatement(insertSchoolSQL)) {
+				preparedStatement.setString(1, course);
+				preparedStatement.setString(2, section);
+				preparedStatement.setString(3, year);
+				preparedStatement.setString(4, semester);
+				preparedStatement.setString(5, location);
+				preparedStatement.executeUpdate();
+			}
+
+			con.commit(); // Commit the transaction
+			con.setAutoCommit(true); // Set auto-commit back to true
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void clearSubjectsTable() {
@@ -517,36 +598,36 @@ public class EnrollmentController implements Initializable {
 	}
 
 	private void setSubjectsForSemester(Students student) {
-	    int startId = student.getStart();
-	    int endId = student.getEnd();
+		int startId = student.getStart();
+		int endId = student.getEnd();
 
-	    try (Connection connection = DatabaseManager.getConnection();
-	         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM subjects WHERE id BETWEEN ? AND ?")) {
+		try (Connection connection = DatabaseManager.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM subjects WHERE id BETWEEN ? AND ?")) {
 
-	        preparedStatement.setInt(1, startId);
-	        preparedStatement.setInt(2, endId);
+			preparedStatement.setInt(1, startId);
+			preparedStatement.setInt(2, endId);
 
-	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-	            ObservableList<Subject> newSubjectsList = FXCollections.observableArrayList();
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				ObservableList<Subject> newSubjectsList = FXCollections.observableArrayList();
 
-	            while (resultSet.next()) {
-	                int id = resultSet.getInt("id");
-	                String subCode = resultSet.getString("sub_code");
-	                int units = resultSet.getInt("units");
-	                String subject = resultSet.getString("subject");
+				while (resultSet.next()) {
+					int id = resultSet.getInt("id");
+					String subCode = resultSet.getString("sub_code");
+					int units = resultSet.getInt("units");
+					String subject = resultSet.getString("subject");
 
-	                Subject subjectObj = new Subject(id, subCode, units, subject);
-	                newSubjectsList.add(subjectObj);
-	            }
+					Subject subjectObj = new Subject(id, subCode, units, subject);
+					newSubjectsList.add(subjectObj);
+				}
 
-	            clearSubjectsTable();
-	            subjectsTableView.setItems(newSubjectsList);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace(); // Handle the exception as needed
-	    }
+				clearSubjectsTable();
+				subjectsTableView.setItems(newSubjectsList);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace(); // Handle the exception as needed
+		}
 	}
-
 
 	private void closeConnection() {
 		try {
@@ -558,8 +639,7 @@ public class EnrollmentController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	@FXML
 	private void enrollButtonClickedAction(ActionEvent event) throws SQLException, IOException {
 		String studCode = enrollButtonClicked(convertImageToInputStream(image), createStudentsObject());
@@ -1412,8 +1492,6 @@ public class EnrollmentController implements Initializable {
 				selectedYear, selectedYear, endId, selectedYear, endId, selectedYear, null, startId, endId,
 				selectedYear);
 	}
-
-
 
 	private InputStream convertImageToInputStream(Image image) throws IOException {
 		if (image != null && image.getPixelReader() != null) {

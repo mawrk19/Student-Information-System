@@ -12,6 +12,7 @@
 .enrollBTN {
 	-fx-background-color:  #DFE2ED;
 	}	
+
 .combo-box {
     -fx-background-color: #f2f2f2;
     -fx-border-color: #ccc; 
@@ -22,6 +23,13 @@
 #Infos{
 	-fx-border-radius: 10;
 	-fx-background-radius: 10; 
+}
+
+#modifiyBtn {
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15 px;
+	-fx-text-fill: #EFF0F3;
+	
 }
 
 #gwaLbl {

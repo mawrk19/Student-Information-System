@@ -97,8 +97,6 @@ public class EncOldEnrollmentController implements Initializable {
 
 	private String studCode;
 
-	String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
-
 	private Connection connection;
 	private Statement statement;
 	

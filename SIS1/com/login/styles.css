@@ -97,3 +97,6 @@
 	-fx-border-radius: 35 35 35 35;
 	-fx-background-radius: 35 35 35 35;
 }
+#frontyy {
+	-fx-background-color: linear-gradient(to left , #46317d, #0e0a1a);
+}
