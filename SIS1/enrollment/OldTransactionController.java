@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -24,6 +26,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,7 +35,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -70,25 +76,22 @@ public class OldTransactionController {
     private ComboBox<String> lateCMB;
 
     @FXML
-    private Label amtDueLBL;
-
+    private TextField libTF;
+    
     @FXML
-    private CheckBox athCB;
-
+    private TextField medTF;
+    
     @FXML
-    private Label balanceLBL;
-
+    private TextField sciTF;
+    
     @FXML
-    private CheckBox comCB;
-
+    private TextField compTF;
+    
     @FXML
-    private CheckBox libCB;
-
+    private TextField athTF;
+    
     @FXML
-    private CheckBox medCB;
-
-    @FXML
-    private CheckBox mediaCB;
+    private TextField mediaTF;
 
     @FXML
     private Label miscLBL;
@@ -98,7 +101,9 @@ public class OldTransactionController {
 
     @FXML
     private Label totalLBL;
-
+    
+    @FXML
+    private Label balanceLBL;
 
     @FXML
     private TextField amtTF;
@@ -109,8 +114,38 @@ public class OldTransactionController {
     @FXML
     private Button saveAndPrint;
     
+    @FXML
+    private Button addbtn;
+    
+    @FXML
+    private Button deletebtn1;
+    
+    @FXML
+    private Button deletebtn2;
+    
+    @FXML
+    private Button deletebtn3;
+    
+    @FXML
+    private Button deletebtn4;
+    
+    @FXML
+    private Button deletebtn5;
+    
+    @FXML
+    private Button deletebtn6;
+    
+    @FXML
+    private VBox vboxcontainer;
+    
+    private TextField price;
+    private TextField category;
+    
     private double tuitionTotal;
     private double miscTotal;
+    
+    private List<String> additionalCategoryValues = new ArrayList<>();
+    private List<String> additionalPriceValues = new ArrayList<>();
 
     private static OldTransactionController instance;
 
@@ -136,12 +171,12 @@ public class OldTransactionController {
         schemeCMB.setOnAction(event -> setTransactionBasedOnSelection());
         lateCMB.setOnAction(event -> setTransactionBasedOnSelection());
         amtTF.setOnAction(event -> setTransactionBasedOnSelection());
-        libCB.setOnAction(event -> setTransactionBasedOnSelection());
-        medCB.setOnAction(event -> setTransactionBasedOnSelection());
-        sciCB.setOnAction(event -> setTransactionBasedOnSelection());
-        comCB.setOnAction(event -> setTransactionBasedOnSelection());
-        athCB.setOnAction(event -> setTransactionBasedOnSelection());
-        mediaCB.setOnAction(event -> setTransactionBasedOnSelection());
+        deletebtn1.setOnAction(event -> deleteRow(event));
+        deletebtn2.setOnAction(event -> deleteRow(event));
+        deletebtn3.setOnAction(event -> deleteRow(event));
+        deletebtn4.setOnAction(event -> deleteRow(event));
+        deletebtn5.setOnAction(event -> deleteRow(event));
+        deletebtn6.setOnAction(event -> deleteRow(event));
         saveAndPrint.setOnAction(arg0 -> {
 			try {
 				saveAndPrintClicked(arg0);
@@ -191,20 +226,21 @@ public class OldTransactionController {
         
 
     private void setTransactionBasedOnSelection() {
-        Platform.runLater(() -> {
+    	Platform.runLater(() -> {
             String mop = MOPCMB.getValue();
             String scheme = schemeCMB.getValue();
             String late = lateCMB.getValue();
             String amt = amtTF.getText();
 
-            double balance = 0.0;  // Default balance value
+            double tuitionTotal = calculateTuitionTotal(mop, scheme, late);
+            double miscTotal = calculateMiscAmount();
+
             double total = tuitionTotal + miscTotal;
+            double balance = 0.0; // Default balance value
+            
             if (!amt.isEmpty()) {
                 balance = total - Double.parseDouble(amt);
             }
-
-            tuitionTotal = calculateTuitionTotal(mop, scheme, late);
-            miscTotal = calculateMiscAmount();
 
             totalLBL.setText(String.valueOf(total));
             balanceLBL.setText(String.valueOf(balance));
@@ -233,35 +269,80 @@ public class OldTransactionController {
 
     // Assuming this method calculates the miscellaneous total based on selected checkboxes
     private double calculateMiscAmount() {
-        double miscTotal = 0.0;
+    	double total = 0.0;
 
-        double libFee = 30.0;
-        double medFee = 40.0;
-        double sciFee = 100.0;
-        double comFee = 100.0;
-        double athFee = 30.0;
-        double mediaFee = 40.0;
+    	for (Node node : vboxcontainer.getChildren()) {
+            if (node instanceof HBox) {
+                HBox hbox = (HBox) node;
+                TextField priceField = (TextField) hbox.getChildren().get(1); // Assuming price TextField is at index 1
 
-        if (libCB.isSelected()) {
-            miscTotal += libFee;
-        }
-        if (medCB.isSelected()) {
-            miscTotal += medFee;
-        }
-        if (sciCB.isSelected()) {
-            miscTotal += sciFee;
-        }
-        if (comCB.isSelected()) {
-            miscTotal += comFee;
-        }
-        if (athCB.isSelected()) {
-            miscTotal += athFee;
-        }
-        if (mediaCB.isSelected()) {
-            miscTotal += mediaFee;
+                double priceValue = parseTextFieldValue(priceField.getText());
+                total += priceValue;
+            }
         }
 
-        return miscTotal;
+        return total;
+    }
+    
+    private double parseTextFieldValue(String text) {
+        if (text.isEmpty()) {
+            return 0.0;
+        } else {
+            return Double.parseDouble(text);
+        }
+    }
+    
+    @FXML
+    private void addrows() {
+    	HBox hbox = createRow(); // Create a new row
+        vboxcontainer.getChildren().add(hbox);
+        setTransactionBasedOnSelection();
+        
+        TextField categoryField = (TextField) hbox.getChildren().get(0); // Assuming category TextField is at index 0
+        TextField priceField = (TextField) hbox.getChildren().get(1); // Assuming price TextField is at index 1
+        String categoryValue = categoryField.getText();
+        String priceValue = priceField.getText();
+
+        // Store the values for the newly added row
+        additionalCategoryValues.add(categoryValue);
+        additionalPriceValues.add(priceValue);
+    }
+    
+    private HBox createRow() {
+        HBox hbox = new HBox();
+        hbox.setPrefSize(314, 50);
+        hbox.setAlignment(Pos.CENTER);
+        hbox.setSpacing(20);
+
+        category = new TextField();
+        category.setPrefSize(123, 20);
+        category.setAlignment(Pos.CENTER);
+        category.setFont(new Font(15));
+
+        // Use the class-level 'price' variable instead of creating a new one
+        price = new TextField(); // Assign the created price text field to the class-level variable
+        price.setPrefSize(78, 23);
+        price.setAlignment(Pos.CENTER);
+
+        // Add a listener to update the total when the price changes
+        price.textProperty().addListener((observable, oldValue, newValue) -> {
+            setTransactionBasedOnSelection(); // Recalculate totals when price changes
+        });
+
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(this::deleteRow); // Assign the deleteRow method
+
+        hbox.getChildren().addAll(category, price, deleteButton);
+
+        return hbox;
+    }
+    
+    public void deleteRow(ActionEvent event) {
+		Button deleteBtn = (Button) event.getSource(); // Get the delete button that triggered the event
+	    HBox hbox = (HBox) deleteBtn.getParent(); // Get the parent HBox containing the delete button
+	    clearTextFields(hbox); // Clear the text fields in this row
+	    vboxcontainer.getChildren().remove(hbox);
+	    setTransactionBasedOnSelection();
     }
 
 	@FXML
@@ -332,6 +413,8 @@ public class OldTransactionController {
 	private void saveAndPrintClicked(ActionEvent event) throws IOException {
 	    continuousUpdate = false; // Stop continuous updates
 	    searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	    
+	    saveAndPrintClicked(event);
 	  
 	    System.out.println("rich baby daddy gang: " + searchedCode);
 	    OldEnrollmentController enroll = new OldEnrollmentController();
@@ -396,7 +479,6 @@ public class OldTransactionController {
 		String late = lateCMB.getValue();
 		String scheme = schemeCMB.getValue();
 
-		double miscTotal = calculateMiscAmount();
 
 		double tuitionTotal;
 
@@ -439,6 +521,8 @@ public class OldTransactionController {
 
 	    // Generate a 6-digit transaction ID
 	    String transactID = generateRandomTransactionID();
+	    
+	    double totalAmount = calculateTotalAmount();
 
 	    // Get user session details
 	    UserSession session = UserSession.getInstance();
@@ -517,18 +601,34 @@ public class OldTransactionController {
 
 	private void generateAndOpenPDF(String encoder, String transactID, String date2, Students studentObj) throws com.itextpdf.io.exceptions.IOException, IOException {
 	    // Ensure firstName, middleName, and lastName are populated before using them
+		String categoryValue = category.getText();
+        String priceValue = price.getText();
 	    String firstNameStr = studentObj.getFirstName();
 	    String middleNameStr = studentObj.getMiddleName();
 	    String lastNameStr = studentObj.getLastName();
 
 	    Itext PDFgenerator = new Itext();
 	    try {
-	        String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\sample2.pdf";
+	    	String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\sample2.pdf";
 
-	        PDFgenerator.generatePDF(encoder, transactID, totalLBL.getText(), balanceLBL.getText(), date2,
-	                firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),
-	                sciCB.isSelected(), comCB.isSelected(), athCB.isSelected(), mediaCB.isSelected());
-
+	        PDFgenerator.generatePDF(
+                    encoder,
+                    transactID.toString(),
+                    totalLBL.getText(),
+                    balanceLBL.getText(),
+                    date2,
+                    firstNameStr,
+                    middleNameStr,
+                    lastNameStr,
+                    libTF.getText(),
+                    medTF.getText(),
+                    sciTF.getText(),
+                    compTF.getText(),
+                    athTF.getText(),
+                    mediaTF.getText(),
+                    categoryValue,
+                    priceValue
+            );
 	        PDFgenerator.openReceipt(path);
 	    } catch (FileNotFoundException e) {
 	        // Handle the file not found exception
@@ -605,6 +705,14 @@ public class OldTransactionController {
 
 		stage.setWidth(windowWidth);
 		stage.setHeight(windowHeight);
+	}
+	
+	private void clearTextFields(HBox hbox) {
+	    for (Node node : hbox.getChildren()) {
+	        if (node instanceof TextField) {
+	            ((TextField) node).setText(""); // Clear the text field
+	        }
+	    }
 	}
 	
 }

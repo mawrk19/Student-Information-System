@@ -13,17 +13,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.List;
+import java.util.ArrayList;
 
 import application.DatabaseManager;
 import application.MainFrameController;
-import encoderui.EncoderController;
 import application.UserSession;
+import encoderui.EncoderController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,12 +36,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import students.Students;
 
 public class EncTransactionController {
@@ -68,46 +74,77 @@ public class EncTransactionController {
 
     @FXML
     private ComboBox<String> lateCMB;
+    
+    @FXML
+    private TextField libTF;
+    
+    @FXML
+    private TextField medTF;
+    
+    @FXML
+    private TextField sciTF;
+    
+    @FXML
+    private TextField compTF;
+    
+    @FXML
+    private TextField athTF;
+    
+    @FXML
+    private TextField mediaTF;
 
     @FXML
     private Label amtDueLBL;
 
     @FXML
-    private CheckBox athCB;
-
-    @FXML
     private Label balanceLBL;
 
     @FXML
-    private CheckBox comCB;
-
-    @FXML
-    private CheckBox libCB;
-
-    @FXML
-    private CheckBox medCB;
-
-    @FXML
-    private CheckBox mediaCB;
-
-    @FXML
-    private Label miscLBL;
-
-    @FXML
-    private CheckBox sciCB;
-
-    @FXML
     private Label totalLBL;
-
 
     @FXML
     private TextField amtTF;
 
     @FXML
     private Label tuitionLBL;
+    
+    @FXML
+    private Label miscLBL;
 
     @FXML
     private Button saveAndPrint;
+    
+    @FXML
+    private Button addbtn;
+    
+    @FXML
+    private Button deletebtn1;
+    
+    @FXML
+    private Button deletebtn2;
+    
+    @FXML
+    private Button deletebtn3;
+    
+    @FXML
+    private Button deletebtn4;
+    
+    @FXML
+    private Button deletebtn5;
+    
+    @FXML
+    private Button deletebtn6;
+    
+    @FXML
+    private VBox vboxcontainer;
+    
+    private TextField price;
+    
+    private TextField category;
+    
+    private List<String> additionalCategoryValues = new ArrayList<>();
+    private List<String> additionalPriceValues = new ArrayList<>();
+    
     
     private double tuitionTotal;
     private double miscTotal;
@@ -129,17 +166,20 @@ public class EncTransactionController {
 
         ObservableList<String> scheme = FXCollections.observableArrayList("1", "2");
         schemeCMB.setItems(scheme);
+        
+        price = new TextField();
 
         MOPCMB.setOnAction(event -> setTransactionBasedOnSelection());
         schemeCMB.setOnAction(event -> setTransactionBasedOnSelection());
         lateCMB.setOnAction(event -> setTransactionBasedOnSelection());
         amtTF.setOnAction(event -> setTransactionBasedOnSelection());
-        libCB.setOnAction(event -> setTransactionBasedOnSelection());
-        medCB.setOnAction(event -> setTransactionBasedOnSelection());
-        sciCB.setOnAction(event -> setTransactionBasedOnSelection());
-        comCB.setOnAction(event -> setTransactionBasedOnSelection());
-        athCB.setOnAction(event -> setTransactionBasedOnSelection());
-        mediaCB.setOnAction(event -> setTransactionBasedOnSelection());
+        
+        deletebtn1.setOnAction(event -> deleteRow(event));
+        deletebtn2.setOnAction(event -> deleteRow(event));
+        deletebtn3.setOnAction(event -> deleteRow(event));
+        deletebtn4.setOnAction(event -> deleteRow(event));
+        deletebtn5.setOnAction(event -> deleteRow(event));
+        deletebtn6.setOnAction(event -> deleteRow(event));
         saveAndPrint.setOnAction(arg0 -> {
 			try {
 				saveAndPrintClicked(arg0);
@@ -189,26 +229,57 @@ public class EncTransactionController {
         
 
     private void setTransactionBasedOnSelection() {
-        Platform.runLater(() -> {
+    	Platform.runLater(() -> {
             String mop = MOPCMB.getValue();
             String scheme = schemeCMB.getValue();
             String late = lateCMB.getValue();
             String amt = amtTF.getText();
 
-            double balance = 0.0;  // Default balance value
+            double tuitionTotal = calculateTuitionTotal(mop, scheme, late);
+            double miscTotal = calculateMiscAmount();
+
             double total = tuitionTotal + miscTotal;
+            double balance = 0.0; // Default balance value
+            
             if (!amt.isEmpty()) {
                 balance = total - Double.parseDouble(amt);
             }
-
-            tuitionTotal = calculateTuitionTotal(mop, scheme, late);
-            miscTotal = calculateMiscAmount();
 
             totalLBL.setText(String.valueOf(total));
             balanceLBL.setText(String.valueOf(balance));
             tuitionLBL.setText(String.valueOf(tuitionTotal));
             miscLBL.setText(String.valueOf(miscTotal));
         });
+    }
+    
+    private double calculateMiscAmount() {
+//        double libValue = parseTextFieldValue(libTF.getText());
+//        double medValue = parseTextFieldValue(medTF.getText());
+//        double sciValue = parseTextFieldValue(sciTF.getText());
+//        double compValue = parseTextFieldValue(compTF.getText());
+//        double athValue = parseTextFieldValue(athTF.getText());
+//        double mediValue = parseTextFieldValue(mediaTF.getText());
+    	double total = 0.0;
+
+    	for (Node node : vboxcontainer.getChildren()) {
+            if (node instanceof HBox) {
+                HBox hbox = (HBox) node;
+                TextField priceField = (TextField) hbox.getChildren().get(1); // Assuming price TextField is at index 1
+
+                double priceValue = parseTextFieldValue(priceField.getText());
+                total += priceValue;
+            }
+        }
+
+        return total;
+    }
+    
+    private double parseTextFieldValue(String text) {
+        if (text.isEmpty()) {
+            return 0.0;
+        } else {
+            return Double.parseDouble(text);
+        }
     }
 
     private double calculateTuitionTotal(String mop, String scheme, String late) {
@@ -228,39 +299,61 @@ public class EncTransactionController {
 
         return tuitionTotal;
     }
+    
+    @FXML
+    private void addrows() {
+    	HBox hbox = createRow(); // Create a new row
+        vboxcontainer.getChildren().add(hbox);
+        setTransactionBasedOnSelection();
+        
+        TextField categoryField = (TextField) hbox.getChildren().get(0); // Assuming category TextField is at index 0
+        TextField priceField = (TextField) hbox.getChildren().get(1); // Assuming price TextField is at index 1
+        String categoryValue = categoryField.getText();
+        String priceValue = priceField.getText();
 
-    // Assuming this method calculates the miscellaneous total based on selected checkboxes
-    private double calculateMiscAmount() {
-        double miscTotal = 0.0;
-
-        double libFee = 30.0;
-        double medFee = 40.0;
-        double sciFee = 100.0;
-        double comFee = 100.0;
-        double athFee = 30.0;
-        double mediaFee = 40.0;
-
-        if (libCB.isSelected()) {
-            miscTotal += libFee;
-        }
-        if (medCB.isSelected()) {
-            miscTotal += medFee;
-        }
-        if (sciCB.isSelected()) {
-            miscTotal += sciFee;
-        }
-        if (comCB.isSelected()) {
-            miscTotal += comFee;
-        }
-        if (athCB.isSelected()) {
-            miscTotal += athFee;
-        }
-        if (mediaCB.isSelected()) {
-            miscTotal += mediaFee;
-        }
-
-        return miscTotal;
+        // Store the values for the newly added row
+        additionalCategoryValues.add(categoryValue);
+        additionalPriceValues.add(priceValue);
     }
+    
+    private HBox createRow() {
+        HBox hbox = new HBox();
+        hbox.setPrefSize(314, 50);
+        hbox.setAlignment(Pos.CENTER);
+        hbox.setSpacing(20);
+
+        category = new TextField();
+        category.setPrefSize(123, 20);
+        category.setAlignment(Pos.CENTER);
+        category.setFont(new Font(15));
+
+        // Use the class-level 'price' variable instead of creating a new one
+        price = new TextField(); // Assign the created price text field to the class-level variable
+        price.setPrefSize(78, 23);
+        price.setAlignment(Pos.CENTER);
+
+        // Add a listener to update the total when the price changes
+        price.textProperty().addListener((observable, oldValue, newValue) -> {
+            setTransactionBasedOnSelection(); // Recalculate totals when price changes
+        });
+
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(this::deleteRow); // Assign the deleteRow method
+
+        hbox.getChildren().addAll(category, price, deleteButton);
+
+        return hbox;
+    }
+    
+	
+	public void deleteRow(ActionEvent event) {
+		Button deleteBtn = (Button) event.getSource(); // Get the delete button that triggered the event
+	    HBox hbox = (HBox) deleteBtn.getParent(); // Get the parent HBox containing the delete button
+	    clearTextFields(hbox); // Clear the text fields in this row
+	    vboxcontainer.getChildren().remove(hbox);
+	    setTransactionBasedOnSelection();
+    }
+
 
 
 	@FXML
@@ -291,7 +384,8 @@ public class EncTransactionController {
 		            this.middleName = middleName;
 		            this.lastName = lastName;
 
-					Students( firstName,  middleName,  lastName,  course1,  year1,  sy, section1, location1,  scode1,  date1,  sid1,  gender1,  null,  start, end, sem);
+					Students studentObj = new Students(firstName, middleName, lastName, course1, year1, sy, section1, location1, scode1, date1, sid1, gender1, null, start, end, sem);
+
 					// studentList.add(studentObj);
 				}
 				// studentTableView.setItems(studentList);
@@ -331,7 +425,7 @@ public class EncTransactionController {
 	    continuousUpdate = false; // Stop continuous updates
 	    EncTransactionController trans = EncTransactionController.getInstance();
 	    String studCode1 = trans.getStudCode();
-	    EncEnrollmentController enroll = new EncEnrollmentController();
+	    EnrollmentController enroll = new EnrollmentController();
 
 	    if (studCode1 == null || studCode1.isEmpty()) {
 	        System.out.println("StudCode is not available. Please check your implementation.");
@@ -342,9 +436,7 @@ public class EncTransactionController {
 	    if (validateInputs()) {
 	        saveAndPrint();
 
-	        // Update the UI with the new values
 	        setTransactionBasedOnSelection();
-
 	        returnToEnrollment(event);
 
 	        // Re-enable continuous updates after save operation
@@ -395,8 +487,6 @@ public class EncTransactionController {
 		String late = lateCMB.getValue();
 		String scheme = schemeCMB.getValue();
 
-		double miscTotal = calculateMiscAmount();
-
 		double tuitionTotal;
 
 		// Set tuitionTotal based on the selected scheme
@@ -423,7 +513,7 @@ public class EncTransactionController {
 	}
 
 	private void saveAndPrint() throws com.itextpdf.io.exceptions.IOException, IOException {
-        TransactionController trans = TransactionController.getInstance();
+        EncTransactionController trans = EncTransactionController.getInstance();
         String studCode1 = trans.getStudCode();
         String mop = MOPCMB.getValue();
         String late = lateCMB.getValue();
@@ -469,25 +559,42 @@ public class EncTransactionController {
                     System.out.println("No rows affected. Update failed.");
                 }
                 setStudents();
-                
-                
-                
+                            
                 LocalDate localdate = LocalDate.now();
                 
                 if (validateInputs()) {
                     // Existing code...
                     // Ensure firstName, middleName, and lastName are populated before using them
+                    
+                	String categoryValue = category.getText();
+        	        String priceValue = price.getText();
                     String firstNameStr = (firstName != null && !firstName.isEmpty()) ? firstName : "DefaultFirstName";
                     String middleNameStr = (middleName != null && !middleName.isEmpty()) ? middleName : "DefaultMiddleName";
                     String lastNameStr = (lastName != null && !lastName.isEmpty()) ? lastName : "DefaultLastName";
-
+                    
                     ItextEnroll PDFgenerator = new ItextEnroll();
                     try {
                     	String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\sample2.pdf";
-                    	
-                        PDFgenerator.titeGeneratePDF(encoder, transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
-                                firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),
-                                sciCB.isSelected(), comCB.isSelected(), athCB.isSelected(), mediaCB.isSelected());
+                                PDFgenerator.titeGeneratePDF(
+                                        encoder,
+                                        transactID.toString(),
+                                        totalLBL.getText(),
+                                        balanceLBL.getText(),
+                                        localdate,
+                                        firstNameStr,
+                                        middleNameStr,
+                                        lastNameStr,
+                                        libTF.getText(),
+                                        medTF.getText(),
+                                        sciTF.getText(),
+                                        compTF.getText(),
+                                        athTF.getText(),
+                                        mediaTF.getText(),
+                                        categoryValue,
+                                        priceValue
+                                );
+                            
+                        
                         
                         PDFgenerator.openReceipt(path);
                     } catch (FileNotFoundException e) {
@@ -524,46 +631,45 @@ public class EncTransactionController {
 	}
 	
 	private void returnToEnrollment(ActionEvent event) throws IOException {
-BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
+		BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/enrollment/EncEnrollment.fxml"));
-		Parent encenrollment = loader.load();
+		Parent timetable = loader.load();
 
-		AnchorPane.setLeftAnchor(encenrollment, 10.0);
-		AnchorPane.setRightAnchor(encenrollment, 10.0);
-		AnchorPane.setTopAnchor(encenrollment, 10.0);
-		AnchorPane.setBottomAnchor(encenrollment, 20.0);
+		AnchorPane.setLeftAnchor(timetable, 10.0);
+		AnchorPane.setRightAnchor(timetable, 10.0);
+		AnchorPane.setTopAnchor(timetable, 10.0);
+		AnchorPane.setBottomAnchor(timetable, 20.0);
 
-		FXMLLoader encoderloder = new FXMLLoader(getClass().getResource("/encoderui/Encoder.fxml"));
-		Parent encoder = encoderloder.load();
-		EncoderController encoderController = encoderloder.getController();
+		FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/encoderui/Encoder.fxml"));
+		Parent mainFrame = mainFrameLoader.load();
+		EncoderController encodercontroller = mainFrameLoader.getController();
 
-		encoderController.Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
+		encodercontroller.Profileicn.setStyle("-fx-background-color: #5d76dc; -fx-border-radius: 50; -fx-background-radius: 25;");
 
-		encoderController.Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
-		encoderController.Dashboard.setBackground(new Background(ube));
-		encoderController.Dashboard.setTextFill(Color.WHITE);
-		encoderController.StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
-		encoderController.StudentProf.setBackground(new Background(ube));
-		encoderController.StudentProf.setTextFill(Color.WHITE);
+		encodercontroller.Dashboard.setStyle("-fx-border-radius: 25 0 0 25;");
+		encodercontroller.Dashboard.setBackground(new Background(ube));
+		encodercontroller.Dashboard.setTextFill(Color.WHITE);
+		encodercontroller.StudentProf.setStyle("-fx-border-radius: 25 0 0 25;");
+		encodercontroller.StudentProf.setBackground(new Background(ube));
+		encodercontroller.StudentProf.setTextFill(Color.WHITE);
 //	        Timetable.setStyle("-fx-border-radius: 25 0 0 25;");
 //	        Timetable.setBackground(new Background(ube));
 //	        Timetable.setTextFill(Color.WHITE);
 //	        Grading.setStyle("-fx-border-radius: 25 0 0 25;");
 //	        Grading.setBackground(new Background(ube));
 //	        Grading.setTextFill(Color.WHITE);
-		encoderController.Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-		encoderController.Enrollment.setTextFill(Color.BLACK);
-		encoderController.oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
-		encoderController.oldEnrollment.setBackground(new Background(ube));
-		encoderController.oldEnrollment.setTextFill(Color.WHITE);
-		encoderController.Students.setStyle("-fx-border-radius: 25 0 0 25;");
-		encoderController.Students.setBackground(new Background(ube));
-		encoderController.Students.setTextFill(Color.WHITE);
+		encodercontroller.Enrollment.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
+		encodercontroller.Enrollment.setTextFill(Color.BLACK);
+		encodercontroller.oldEnrollment.setStyle("-fx-border-radius: 25 0 0 25;");
+		encodercontroller.oldEnrollment.setBackground(new Background(ube));
+		encodercontroller.oldEnrollment.setTextFill(Color.WHITE);
+		encodercontroller.Students.setStyle("-fx-border-radius: 25 0 0 25;");
+		encodercontroller.Students.setBackground(new Background(ube));
+		encodercontroller.Students.setTextFill(Color.WHITE);
+		encodercontroller.setContent(timetable);
 
-		encoderController.setContent(encenrollment);
-
-		Scene scene = new Scene(encoder);
+		Scene scene = new Scene(mainFrame);
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
@@ -574,4 +680,13 @@ BackgroundFill ube = new BackgroundFill(Color.web("#3c5199"), null, null);
 		stage.setWidth(windowWidth);
 		stage.setHeight(windowHeight);
 	}
+	
+	private void clearTextFields(HBox hbox) {
+	    for (Node node : hbox.getChildren()) {
+	        if (node instanceof TextField) {
+	            ((TextField) node).setText(""); // Clear the text field
+	        }
+	    }
+	}
+	
 }

@@ -233,9 +233,7 @@ public class EnrollmentController implements Initializable {
 	    Optional<ButtonType> result = modifyAlert.showAndWait();
 	    // Process the result if needed
 	}
-
-
-
+	
 	private void showAddDialog() {
 	    // Create a dialog for adding a new value
 	    Dialog<Pair<String, String>> dialog = new Dialog<>();
