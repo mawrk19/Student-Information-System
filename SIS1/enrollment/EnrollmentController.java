@@ -196,6 +196,7 @@ public class EnrollmentController implements Initializable {
 	}
 
 	private void setupComboBoxListeners() {
+
 	}
 
 	private void insertValue(String columnName, String value) {
@@ -206,6 +207,7 @@ public class EnrollmentController implements Initializable {
 	    }
 	}
 
+
 	private void setupButtonListeners() {
 		modifyBTN.setOnAction(event -> showModifyDialog());
 	}
@@ -214,9 +216,9 @@ public class EnrollmentController implements Initializable {
 	    MenuButton modifyMenuButton = new MenuButton("Modify");
 
 
+
 	    MenuItem addSubjectMenuItem = new MenuItem("Add Subject");
 	    addSubjectMenuItem.setOnAction(event -> showAddSubjectDialog());
-
 	    modifyMenuButton.getItems().addAll(addSubjectMenuItem);
 
 	    // Create an alert or dialog if needed
@@ -245,7 +247,8 @@ public class EnrollmentController implements Initializable {
 
 	    // Create and configure the ComboBox
 	    ComboBox<String> comboBox = new ComboBox<>();
-	    comboBox.getItems().addAll("courses","locations", "sections", "semesters", "years");
+
+	    comboBox.getItems().addAll("courses", "genders", "locations", "sections", "semesters", "years");
 	    comboBox.setPromptText("Select a category");
 
 	    // Create the value input field

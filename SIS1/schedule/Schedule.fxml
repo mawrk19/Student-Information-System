@@ -153,7 +153,7 @@
                               <Font name="Arial Black" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="37.0" layoutY="142.0" prefHeight="22.0" prefWidth="56.0" text="YEAR :" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="142.0">
+                        <Label layoutX="37.0" layoutY="205.0" prefHeight="20.0" prefWidth="53.0" text="YEAR :" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="205.0">
                            <font>
                               <Font name="Arial Black" size="14.0" />
                            </font>
@@ -163,7 +163,7 @@
                               <Font name="Arial Black" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="16.0" layoutY="204.0" text="COURSE :" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="204.0">
+                        <Label layoutX="14.0" layoutY="143.0" text="COURSE :" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="143.0">
                            <font>
                               <Font name="Arial Black" size="14.0" />
                            </font>
