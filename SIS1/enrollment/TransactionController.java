@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.List;
+import java.util.ArrayList;
 
 import application.DatabaseManager;
 import application.MainFrameController;
@@ -138,6 +140,11 @@ public class TransactionController {
     
     private TextField price;
     
+    private TextField category;
+    
+    private List<String> additionalCategoryValues = new ArrayList<>();
+    private List<String> additionalPriceValues = new ArrayList<>();
+    
     
     private double tuitionTotal;
     private double miscTotal;
@@ -166,6 +173,13 @@ public class TransactionController {
         schemeCMB.setOnAction(event -> setTransactionBasedOnSelection());
         lateCMB.setOnAction(event -> setTransactionBasedOnSelection());
         amtTF.setOnAction(event -> setTransactionBasedOnSelection());
+        
+        deletebtn1.setOnAction(event -> deleteRow(event));
+        deletebtn2.setOnAction(event -> deleteRow(event));
+        deletebtn3.setOnAction(event -> deleteRow(event));
+        deletebtn4.setOnAction(event -> deleteRow(event));
+        deletebtn5.setOnAction(event -> deleteRow(event));
+        deletebtn6.setOnAction(event -> deleteRow(event));
         saveAndPrint.setOnAction(arg0 -> {
 			try {
 				saveAndPrintClicked(arg0);
@@ -239,17 +253,23 @@ public class TransactionController {
     }
     
     private double calculateMiscAmount() {
-        double libValue = parseTextFieldValue(libTF.getText());
-        double medValue = parseTextFieldValue(medTF.getText());
-        double sciValue = parseTextFieldValue(sciTF.getText());
-        double compValue = parseTextFieldValue(compTF.getText());
-        double athValue = parseTextFieldValue(athTF.getText());
-        double mediValue = parseTextFieldValue(mediaTF.getText());
+//        double libValue = parseTextFieldValue(libTF.getText());
+//        double medValue = parseTextFieldValue(medTF.getText());
+//        double sciValue = parseTextFieldValue(sciTF.getText());
+//        double compValue = parseTextFieldValue(compTF.getText());
+//        double athValue = parseTextFieldValue(athTF.getText());
+//        double mediValue = parseTextFieldValue(mediaTF.getText());
+    	double total = 0.0;
 
-        // Retrieve the value from the price field
-        double priceValue = parseTextFieldValue(price.getText());
+    	for (Node node : vboxcontainer.getChildren()) {
+            if (node instanceof HBox) {
+                HBox hbox = (HBox) node;
+                TextField priceField = (TextField) hbox.getChildren().get(1); // Assuming price TextField is at index 1
 
-        double total = libValue + medValue + sciValue + compValue + athValue + mediValue + priceValue;
+                double priceValue = parseTextFieldValue(priceField.getText());
+                total += priceValue;
+            }
+        }
 
         return total;
     }
@@ -284,6 +304,16 @@ public class TransactionController {
     private void addrows() {
     	HBox hbox = createRow(); // Create a new row
         vboxcontainer.getChildren().add(hbox);
+        setTransactionBasedOnSelection();
+        
+        TextField categoryField = (TextField) hbox.getChildren().get(0); // Assuming category TextField is at index 0
+        TextField priceField = (TextField) hbox.getChildren().get(1); // Assuming price TextField is at index 1
+        String categoryValue = categoryField.getText();
+        String priceValue = priceField.getText();
+
+        // Store the values for the newly added row
+        additionalCategoryValues.add(categoryValue);
+        additionalPriceValues.add(priceValue);
     }
     
     private HBox createRow() {
@@ -292,7 +322,7 @@ public class TransactionController {
         hbox.setAlignment(Pos.CENTER);
         hbox.setSpacing(20);
 
-        TextField category = new TextField();
+        category = new TextField();
         category.setPrefSize(123, 20);
         category.setAlignment(Pos.CENTER);
         category.setFont(new Font(15));
@@ -321,6 +351,7 @@ public class TransactionController {
 	    HBox hbox = (HBox) deleteBtn.getParent(); // Get the parent HBox containing the delete button
 	    clearTextFields(hbox); // Clear the text fields in this row
 	    vboxcontainer.getChildren().remove(hbox);
+	    setTransactionBasedOnSelection();
     }
 
 
@@ -404,16 +435,6 @@ public class TransactionController {
 
 	    if (validateInputs()) {
 	        saveAndPrint();
-
-	        // Update the UI with the new values
-//	        Itext printshit = new Itext();
-//	        printshit.generatePDF(studCode1, miscTotal, end, null); // <- Missing semicolon
-//
-//	        try {
-//	            printshit.generatePDF(transacID.toString(), totalAmount, balanceTotal, localdate);
-//	        } catch (FileNotFoundException e) {
-//	            e.printStackTrace(); // <- Log the exception or handle it appropriately
-//	        }
 
 	        setTransactionBasedOnSelection();
 	        returnToEnrollment(event);
@@ -538,39 +559,42 @@ public class TransactionController {
                     System.out.println("No rows affected. Update failed.");
                 }
                 setStudents();
-                
-                
-                
+                            
                 LocalDate localdate = LocalDate.now();
                 
                 if (validateInputs()) {
                     // Existing code...
                     // Ensure firstName, middleName, and lastName are populated before using them
+                    
+                	String categoryValue = category.getText();
+        	        String priceValue = price.getText();
                     String firstNameStr = (firstName != null && !firstName.isEmpty()) ? firstName : "DefaultFirstName";
                     String middleNameStr = (middleName != null && !middleName.isEmpty()) ? middleName : "DefaultMiddleName";
                     String lastNameStr = (lastName != null && !lastName.isEmpty()) ? lastName : "DefaultLastName";
                     
-
                     ItextEnroll PDFgenerator = new ItextEnroll();
                     try {
                     	String path = "C:\\Users\\user\\git\\Student-Information-System\\transaction print\\sample2.pdf";
-                    	
-                    	PDFgenerator.titeGeneratePDF(
-                    		    encoder,
-                    		    transactID.toString(),
-                    		    totalLBL.getText(),
-                    		    balanceLBL.getText(),
-                    		    localdate,
-                    		    firstNameStr,
-                    		    middleNameStr,
-                    		    lastNameStr,
-                    		    libTF.getText(), // Replace with the appropriate text field
-                    		    medTF.getText(), // Replace with the appropriate text field
-                    		    sciTF.getText(), // Replace with the appropriate text field
-                    		    compTF.getText(), // Replace with the appropriate text field
-                    		    athTF.getText(), // Replace with the appropriate text field
-                    		    mediaTF.getText() // Replace with the appropriate text field
-                    		);
+                                PDFgenerator.titeGeneratePDF(
+                                        encoder,
+                                        transactID.toString(),
+                                        totalLBL.getText(),
+                                        balanceLBL.getText(),
+                                        localdate,
+                                        firstNameStr,
+                                        middleNameStr,
+                                        lastNameStr,
+                                        libTF.getText(),
+                                        medTF.getText(),
+                                        sciTF.getText(),
+                                        compTF.getText(),
+                                        athTF.getText(),
+                                        mediaTF.getText(),
+                                        categoryValue,
+                                        priceValue
+                                );
+                            
+                        
                         
                         PDFgenerator.openReceipt(path);
                     } catch (FileNotFoundException e) {

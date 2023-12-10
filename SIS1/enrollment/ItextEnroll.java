@@ -22,7 +22,7 @@ import com.itextpdf.layout.properties.UnitValue;
 public class ItextEnroll {
 	public void titeGeneratePDF(String Encoder, String transaction_id, String total, String balance, LocalDate date, String firstName,
 			String middleName, String lastName, String libTF, String medTF, String sciTF, String compTF,
-			String athTF, String mediaTF) throws FileNotFoundException {
+			String athTF, String mediaTF, String categoryValue, String priceValue) throws FileNotFoundException {
 
 		// public void createPDF() throws FileNotFoundException{
 		// TODO Auto-generated method stub
@@ -91,14 +91,11 @@ public class ItextEnroll {
 		if (mediaTF != null) {
 			String mediaFee = mediaTF;
 			Bill.addCell(new Cell().add(new Paragraph("Media Fee: " + mediaFee)).addStyle(header3));
+			Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
 		}
-//		Table categoryPriceTable = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
-//	    categoryPriceTable.addCell(new Cell().add(new Paragraph("Category:")).addStyle(header3));
-//	    categoryPriceTable.addCell(new Cell().add(new Paragraph(categoryValue)).addStyle(header3));
-//	    categoryPriceTable.addCell(new Cell().add(new Paragraph("Price:")).addStyle(header3));
-//	    categoryPriceTable.addCell(new Cell().add(new Paragraph(priceValue)).addStyle(header3));
-//
-//	    document.add(categoryPriceTable.setBorderBottom(separator));
+		if (categoryValue != null && priceValue != null) {
+	    Bill.addCell(new Cell().add(new Paragraph(categoryValue + " : " + priceValue )).addStyle(header3));
+		}
 		document.add(Bill.setBorderBottom(separator));
 		Table Total = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		Total.addCell(new Cell().add(new Paragraph("")).addStyle(header3));

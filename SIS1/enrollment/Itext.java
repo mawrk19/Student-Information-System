@@ -21,8 +21,8 @@ import com.itextpdf.layout.properties.UnitValue;
 
 public class Itext {
 	public void generatePDF(String encoder, String transaction_id, String total, String balance, String date2, String firstName,
-			String middleName, String lastName, boolean libfee, boolean medfee, boolean scifee, boolean comlabfee,
-			boolean athletefee, boolean mediafee) throws FileNotFoundException {
+			String middleName, String lastName, String libTF, String medTF, String sciTF, String compTF,
+			String athTF, String mediaTF, String categoryValue, String priceValue) throws FileNotFoundException {
 
 		// public void createPDF() throws FileNotFoundException{
 		// TODO Auto-generated method stub
@@ -63,29 +63,39 @@ public class Itext {
 		MiscFee.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
 		document.add(MiscFee);
 		Table Bill = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
-		if (libfee == true) {
-			Bill.addCell(new Cell().add(new Paragraph("Library Fee: 30")).addStyle(header3));
+		if (libTF != null) {
+			String libraryFee = libTF;
+			Bill.addCell(new Cell().add(new Paragraph("Library Fee: " + libraryFee)).addStyle(header3));
 			Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
 		}
-		if (medfee == true) {
-			Bill.addCell(new Cell().add(new Paragraph("Medical Fee: 40")).addStyle(header3));
+		if (medTF != null) {
+			String medicalFee = medTF;
+			Bill.addCell(new Cell().add(new Paragraph("Medical Fee: " + medicalFee)).addStyle(header3));
 			Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
 		}
-		if (scifee == true) {
-			Bill.addCell(new Cell().add(new Paragraph("Science Lab Fee: 100")).addStyle(header3));
+		if (sciTF != null) {
+			String scienceFee = sciTF;
+			Bill.addCell(new Cell().add(new Paragraph("Science Lab Fee: " + scienceFee)).addStyle(header3));
 			Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header5));
 		}
-		if (comlabfee == true) {
-			Bill.addCell(new Cell().add(new Paragraph("Computer Lab Fee: 100")).addStyle(header3));
+		if (compTF != null) {
+			String computerFee = compTF;
+			Bill.addCell(new Cell().add(new Paragraph("Computer Lab Fee: " + computerFee)).addStyle(header3));
 			Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
 		}
-		if (athletefee == true) {
-			Bill.addCell(new Cell().add(new Paragraph("Athletic Fee: 30")).addStyle(header3));
+		if (athTF != null) {
+			String athleteFee = athTF;
+			Bill.addCell(new Cell().add(new Paragraph("Athletic Fee: " + athleteFee)).addStyle(header3));
 			Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
 		}
-		if (mediafee == true) {
-			Bill.addCell(new Cell().add(new Paragraph("Media Fee: 40")).addStyle(header3));
+		if (mediaTF != null) {
+			String mediaFee = mediaTF;
+			Bill.addCell(new Cell().add(new Paragraph("Media Fee: " + mediaFee)).addStyle(header3));
+			Bill.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
 		}
+		if (categoryValue != null && priceValue != null) {
+		    Bill.addCell(new Cell().add(new Paragraph(categoryValue + " : " + priceValue )).addStyle(header3));
+			}
 		document.add(Bill.setBorderBottom(separator));
 		Table Total = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		Total.addCell(new Cell().add(new Paragraph("")).addStyle(header3));

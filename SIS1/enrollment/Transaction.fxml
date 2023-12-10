@@ -38,7 +38,7 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="libTF" alignment="CENTER" prefHeight="23.0" prefWidth="78.0" />
-                                          <Button fx:id="deletebtn1" mnemonicParsing="false" onAction="#deleteRow" text="Delete" />
+                                          <Button fx:id="deletebtn1" mnemonicParsing="false" text="Delete" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="314.0" spacing="20.0">
@@ -49,7 +49,7 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="medTF" alignment="CENTER" prefHeight="23.0" prefWidth="78.0" />
-                                          <Button fx:id="deletebtn2" mnemonicParsing="false" onAction="#deleteRow" text="Delete" />
+                                          <Button fx:id="deletebtn2" mnemonicParsing="false" text="Delete" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="314.0" spacing="20.0">
@@ -60,7 +60,7 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="sciTF" alignment="CENTER" prefHeight="23.0" prefWidth="78.0" />
-                                          <Button fx:id="deletebtn3" mnemonicParsing="false" onAction="#deleteRow" text="Delete" />
+                                          <Button fx:id="deletebtn3" mnemonicParsing="false" text="Delete" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="314.0" spacing="20.0">
@@ -71,7 +71,7 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="compTF" alignment="CENTER" prefHeight="23.0" prefWidth="78.0" />
-                                          <Button fx:id="deletebtn4" mnemonicParsing="false" onAction="#deleteRow" text="Delete" />
+                                          <Button fx:id="deletebtn4" mnemonicParsing="false" text="Delete" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="314.0" spacing="20.0">
@@ -82,7 +82,7 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="athTF" alignment="CENTER" prefHeight="23.0" prefWidth="78.0" />
-                                          <Button fx:id="deletebtn5" mnemonicParsing="false" onAction="#deleteRow" text="Delete" />
+                                          <Button fx:id="deletebtn5" mnemonicParsing="false" text="Delete" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="314.0" spacing="20.0">
@@ -93,7 +93,7 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="mediaTF" alignment="CENTER" prefHeight="23.0" prefWidth="78.0" />
-                                          <Button fx:id="deletebtn6" mnemonicParsing="false" onAction="#deleteRow" text="Delete" />
+                                          <Button fx:id="deletebtn6" mnemonicParsing="false" text="Delete" />
                                        </children>
                                     </HBox>
                                  </children>
