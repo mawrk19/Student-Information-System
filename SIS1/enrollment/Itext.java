@@ -26,7 +26,7 @@ public class Itext {
 
 		// public void createPDF() throws FileNotFoundException{
 		// TODO Auto-generated method stub
-		String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\samp.pdf";
+		String path = "C:\\Users\\user\\git\\Student-Information-System\\transaction print\\samp.pdf";
 		PdfWriter pdfWriter = new PdfWriter(path);
 		PdfDocument pdfDocument = new PdfDocument(pdfWriter);
 		pdfDocument.setDefaultPageSize(PageSize.LEGAL);

@@ -483,7 +483,7 @@ public class EncTransactionController {
 
                     ItextEnroll PDFgenerator = new ItextEnroll();
                     try {
-                    	String path = "C:\\Users\\SHEAL\\git\\Student-Information-System\\transaction print\\sample2.pdf";
+                    	String path = "C:\\Users\\user\\git\\Student-Information-System\\transaction print\\sample2.pdf";
                     	
                         PDFgenerator.titeGeneratePDF(encoder, transactID.toString(), totalLBL.getText(), balanceLBL.getText(), localdate,
                                 firstNameStr, middleNameStr, lastNameStr, libCB.isSelected(), medCB.isSelected(),

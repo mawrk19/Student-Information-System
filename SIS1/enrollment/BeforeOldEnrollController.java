@@ -122,6 +122,10 @@ public class BeforeOldEnrollController implements Initializable {
 		searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
 	    System.out.println("Searched Code: " + searchedCode);
 		 
+	    if (searchedCode == null) {
+	        showAlert("Error", "Invalid GWA", "Please fetch the GWA before proceeding");
+	        return;
+	    }
 	    if (searchedCode.isEmpty()) {
 	        showAlert("Error", "Empty Input", "Please input a valid Student Code");
 	        return;

@@ -83,7 +83,7 @@
 }
 
 #GradingButton {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
@@ -95,7 +95,7 @@
 }
 
 #NewStudButton {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
@@ -107,7 +107,7 @@
 }
 
 #OldStudBtn {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
@@ -119,7 +119,7 @@
 }
 
 #StudentsBtn {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
@@ -131,7 +131,7 @@
 }
 
 #LogOutButton {
-	-fx-background-color: #3c5199;
+	-fx-background-color: transparent;
 	-fx-border-radius: 25 0 0 25;
 	-fx-background-radius: 25 0 0 25;
 }
