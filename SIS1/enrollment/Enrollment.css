@@ -95,19 +95,19 @@
 }
 
 
-#vboxTransaction {
+#encvboxTransaction {
 	-fx-background-color: linear-gradient(to bottom, #6446b2, #46317d, #281c47);
 	-fx-text-fill: #EFF0F3;
 	-fx-font-family: "Arial Rounded MT Bold";
 }
 
-#miscLbl {
+#encmiscLbl {
 	-fx-text-fill: #EFF0F3;
 	-fx-font-family: "Arial Rounded MT Bold";
 	-fx-font-size: 20 px;
 }
 
-#comboBox {
+#enccomboBox {
 	-fx-background-color: #6446b2;
 	-fx-text-fill: #EFF0F3;
 	-fx-font-family: "Arial Rounded MT Bold";

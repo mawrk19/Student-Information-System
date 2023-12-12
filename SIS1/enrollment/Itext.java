@@ -89,11 +89,11 @@ public class Itext {
 		document.add(Bill.setBorderBottom(separator));
 		Table Total = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		Total.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
-		Total.addCell(new Cell().add(new Paragraph("Total" + total)).addStyle(header3));
+		Total.addCell(new Cell().add(new Paragraph("Total: " + total)).addStyle(header3));
 		document.add(Total);
 		Table Balance = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		Balance.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
-		Balance.addCell(new Cell().add(new Paragraph("Balance" + balance)).addStyle(header3));
+		Balance.addCell(new Cell().add(new Paragraph("Balance: " + balance)).addStyle(header3));
 
 		document.add(Balance);
 		document.close();

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #EFF0F3;" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.OldTransactionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="825.0" style="-fx-background-color: #EFF0F3;" stylesheets="@Enrollment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.OldTransactionController">
    <children>
       <HBox alignment="CENTER" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -34,8 +34,8 @@
             <VBox alignment="CENTER_LEFT" prefHeight="410.0" prefWidth="298.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <ComboBox fx:id="schemeCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Scheme" />
-                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="amount" />
                   <ComboBox fx:id="lateCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Late Enrolee" />
+                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="amount" />
                   <HBox prefHeight="48.0" prefWidth="295.0">
                      <children>
                         <Label prefHeight="17.0" prefWidth="59.0" text="Total:">

@@ -38,8 +38,8 @@
             <VBox alignment="CENTER_LEFT" prefHeight="410.0" prefWidth="298.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <ComboBox fx:id="schemeCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Scheme" />
-                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="amount" />
                   <ComboBox fx:id="lateCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="Late Enrolee" />
+                  <TextField fx:id="amtTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="170.0" promptText="amount" />
                   <HBox id="text" prefHeight="48.0" prefWidth="295.0" stylesheets="@Enrollment.css">
                      <children>
                         <Label prefHeight="17.0" prefWidth="59.0" text="Total:">
@@ -47,22 +47,22 @@
                               <Insets top="15.0" />
                            </padding>
                         </Label>
-                        <Label id="text" fx:id="totalLBL" prefHeight="48.0" prefWidth="185.0" stylesheets="@Enrollment.css" text="total" />
+                        <Label id="text" fx:id="totalLBL" prefHeight="48.0" prefWidth="165.0" stylesheets="@Enrollment.css" text="total" />
                      </children>
                   </HBox>
                   <HBox prefHeight="55.0" prefWidth="295.0">
                      <children>
-                        <Label id="text" prefHeight="17.0" prefWidth="59.0" stylesheets="@Enrollment.css" text="Balance:">
+                        <Label id="text" prefHeight="32.0" prefWidth="74.0" stylesheets="@Enrollment.css" text="Balance:">
                            <padding>
                               <Insets top="15.0" />
                            </padding>
                         </Label>
-                        <Label id="text" fx:id="balanceLBL" prefHeight="48.0" prefWidth="189.0" stylesheets="@Enrollment.css" text="balance" />
+                        <Label id="text" fx:id="balanceLBL" prefHeight="48.0" prefWidth="142.0" stylesheets="@Enrollment.css" text="balance" />
                      </children>
                   </HBox>
                   <HBox prefHeight="60.0" prefWidth="295.0">
                      <children>
-                        <Label id="text" prefHeight="17.0" prefWidth="59.0" stylesheets="@Enrollment.css" text="Tuition:">
+                        <Label id="text" prefHeight="32.0" prefWidth="108.0" stylesheets="@Enrollment.css" text="Tuition:">
                            <padding>
                               <Insets top="15.0" />
                            </padding>
@@ -81,10 +81,10 @@
                               <Insets left="1.0" top="15.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="miscLBL" prefHeight="48.0" prefWidth="189.0" text="miscellanous" />
+                        <Label fx:id="miscLBL" prefHeight="48.0" prefWidth="119.0" text="miscellanous" />
                      </children>
                   </HBox>
-                  <Button id="encEnroll" fx:id="saveAndPrint" mnemonicParsing="false" onAction="#saveAndPrintClicked" prefHeight="36.0" prefWidth="123.0" text="Save and Enroll">
+                  <Button id="Enroll" fx:id="saveAndPrint" mnemonicParsing="false" onAction="#saveAndPrintClicked" prefHeight="36.0" prefWidth="123.0" text="Save and Enroll">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
