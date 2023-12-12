@@ -64,8 +64,8 @@ public class EncBeforeOldEnrollController implements Initializable{
 
 	@FXML
 	void searchscodebtn(ActionEvent event) {
-	    searchedCode = searchbar.getText();
-	    SearchBarSingleton.getInstance().setSearchbarText(searchedCode);
+		searchedCode = searchbar.getText();
+        SearchBarController.setSearchBarValue(searchedCode);
 
 	    try (Connection connection = DatabaseManager.getConnection()) {
 	        String query = "SELECT gwa FROM student WHERE scode = ?";
@@ -118,7 +118,7 @@ public class EncBeforeOldEnrollController implements Initializable{
 	
 	@FXML
 	void gotoOldEnrollment(ActionEvent event) throws IOException {
-		searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+		String searchedCode = SearchBarController.getSearchBarValue();
 	    System.out.println("Searched Code: " + searchedCode);
 		 
 	    if (searchedCode.isEmpty()) {
@@ -138,9 +138,7 @@ public class EncBeforeOldEnrollController implements Initializable{
 	        String query = "SELECT gwa FROM student WHERE scode = ?";
 	        PreparedStatement preparedStatement = connection.prepareStatement(query);
 	        preparedStatement.setString(1, searchedCode);
-	        searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
-	       
-	        
+     
 	        ResultSet resultSet = preparedStatement.executeQuery();
 
 	        if (resultSet.next()) {
