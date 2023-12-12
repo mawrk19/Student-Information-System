@@ -44,12 +44,12 @@ public class ItextEnroll {
 		TITLE.addCell(new Cell().add(new Paragraph("BILL")).addStyle(header2));
 		document.add(TITLE);
 		Table CashierAndTime = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
-		CashierAndTime.addCell(new Cell().add(new Paragraph("Date:" + date)).addStyle(header1));
-		CashierAndTime.addCell(new Cell().add(new Paragraph("Encoder Name:" + Encoder)).addStyle(header1));
+		CashierAndTime.addCell(new Cell().add(new Paragraph("Date: " + date)).addStyle(header1));
+		CashierAndTime.addCell(new Cell().add(new Paragraph("Encoder Name: " + Encoder)).addStyle(header1));
 		document.add(CashierAndTime);
 		Table TransacID = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		TransacID.addCell(new Cell().add(new Paragraph("")).addStyle(header1));
-		TransacID.addCell(new Cell().add(new Paragraph("Transaction ID:" + transaction_id)).addStyle(header1));
+		TransacID.addCell(new Cell().add(new Paragraph("Transaction ID: " + transaction_id)).addStyle(header1));
 		document.add(TransacID.setBorderBottom(separator));
 		Table Name = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		Name.addCell(new Cell().add(new Paragraph("Name: " + firstName + " " + middleName + " " + lastName))
@@ -89,11 +89,11 @@ public class ItextEnroll {
 		document.add(Bill.setBorderBottom(separator));
 		Table Total = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		Total.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
-		Total.addCell(new Cell().add(new Paragraph("Total" + total)).addStyle(header3));
+		Total.addCell(new Cell().add(new Paragraph("Total: " + total)).addStyle(header3));
 		document.add(Total);
 		Table Balance = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 		Balance.addCell(new Cell().add(new Paragraph("")).addStyle(header3));
-		Balance.addCell(new Cell().add(new Paragraph("Balance" + balance)).addStyle(header3));
+		Balance.addCell(new Cell().add(new Paragraph("Balance: " + balance)).addStyle(header3));
 
 		document.add(Balance);
 		document.close();
