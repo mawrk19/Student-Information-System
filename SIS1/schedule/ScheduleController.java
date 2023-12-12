@@ -35,6 +35,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import students.Students;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
@@ -49,45 +50,86 @@ import application.DatabaseManager;
 import application.MainFrameController;
 import enrollment.Subject;
 
-public class ScheduleController implements Initializable{
+public class ScheduleController implements Initializable {
 
-		
-		ZonedDateTime dateFocus;
-	    ZonedDateTime today;
+	ZonedDateTime dateFocus;
+	ZonedDateTime today;
 
-	    
-	    @FXML
-	    private ComboBox<String> courseCMB;
-	    
-	    @FXML
-	    private ComboBox<String> yearCMB;
-	    
-	    @FXML
-	    private ComboBox<String> sectionCMB;
-	    
-	    @FXML
-	    private ComboBox<String> semesterCMB;
-	    
-	    @FXML
-	    private Text month;
-	    
-	    @FXML
-	    private Text year;
-	    
-	    @FXML
-	    private Button forward;
-	    
-	    @FXML
-	    private Button prev;
-	    
+	@FXML
+	private ComboBox<String> courseCMB;
+
+	@FXML
+	private ComboBox<String> yearCMB;
+
+	@FXML
+	private ComboBox<String> sectionCMB;
+
+	@FXML
+	private ComboBox<String> semesterCMB;
+
+	@FXML
+	private Text month;
+
+	@FXML
+	private Text year;
+
+	@FXML
+	private Button forward;
+
+	@FXML
+	private Button prev;
+
 //	    @FXML
 //	    private Button BtnTimetable;
-	    
-	    @FXML
-	    private FlowPane calendar;
-		   
-	    private boolean dataLoaded = false;
 
+	@FXML
+	private FlowPane calendar;
+
+	private boolean dataLoaded = false;
+	@FXML
+	private TextField name;
+
+	@FXML
+	private TextField course;
+
+	@FXML
+	private TextField section;
+
+	@FXML
+	private TextField yearTF;
+
+	@FXML
+	private TextField semester;
+
+	@FXML
+	private TextField searchSID;
+
+	@FXML
+	private Button sidBTN;
+
+	@FXML
+	private Button deleteBTN;
+
+	@FXML
+	private Button updateBTN;
+
+	@FXML
+	private TableColumn<Schedule, String> subcodeCLMNColumn;
+
+	@FXML
+	private TableColumn<Schedule, String> credunitCLMNColumn;
+
+	@FXML
+	private TableColumn<Schedule, String> descriptionCLMNColumn;
+
+	@FXML
+	private TableColumn<Schedule, Integer> sdidCLMNColumn;
+
+	@FXML
+	private TableView<Schedule> scheduleTV;
+
+	private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -109,18 +151,20 @@ public class ScheduleController implements Initializable{
 		ObservableList<String> semester = FXCollections.observableArrayList("1st", "2nd");
 		semesterCMB.setItems(semester);
 
-		courseCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-		yearCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-		sectionCMB.setOnAction(event -> setSubjectsBasedOnSelection());
-		semesterCMB.setOnAction(event -> setSubjectsBasedOnSelection());
+		courseCMB.valueProperty().addListener((observable, oldValue, newValue) -> updateTableView());
+		yearCMB.valueProperty().addListener((observable, oldValue, newValue) -> updateTableView());
+		sectionCMB.valueProperty().addListener((observable, oldValue, newValue) -> updateTableView());
+		semesterCMB.valueProperty().addListener((observable, oldValue, newValue) -> updateTableView());
 
 		subcodeCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("subcodeCLMN"));
 		credunitCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("credunitCLMN"));
 		descriptionCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("descriptionCLMN"));
 		sdidCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("sdidCLMN"));
-
-		submitBTN.setOnAction(ActionEvent -> handleShowDataButtonClick());
-
+	}
+	
+	private void updateTableView() {
+	    dataLoaded = false;
+	    handleShowDataButtonClick();
 	}
 
 	@FXML
@@ -200,108 +244,13 @@ public class ScheduleController implements Initializable{
 		}
 	}
 
-//		public void gotoTimetable(ActionEvent event) throws IOException {
-//		    try {
-//		    	
-//		        FXMLLoader loader = new FXMLLoader(getClass().getResource("/timetable/Timetable.fxml"));
-//		        Parent timetable = loader.load();
-//		        
-//		        AnchorPane.setLeftAnchor(timetable, 10.0);
-//				AnchorPane.setRightAnchor(timetable, 10.0);
-//				AnchorPane.setTopAnchor(timetable, 10.0);
-//				AnchorPane.setBottomAnchor(timetable, 20.0);
-//
-//		        FXMLLoader mainFrameLoader = new FXMLLoader(getClass().getResource("/application/MainFrame.fxml"));
-//		        Parent mainFrame = mainFrameLoader.load();
-//		        MainFrameController mainFrameController = mainFrameLoader.getController();
-//		        
-//		        mainFrameController.Dashboard.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-//		    	mainFrameController.Dashboard.setTextFill(Color.WHITE);
-//		    	mainFrameController.StudentProf.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-//		    	mainFrameController.StudentProf.setTextFill(Color.WHITE);
-//		    	mainFrameController.Timetable.setStyle("-fx-background-color: #eff0f3; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-//		    	mainFrameController.Timetable.setTextFill(Color.BLACK);
-//		    	mainFrameController.Schedule.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-//		    	mainFrameController.Schedule.setTextFill(Color.WHITE);
-//		    	mainFrameController.Enrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-//		    	mainFrameController.Enrollment.setTextFill(Color.WHITE);
-//		    	mainFrameController.oldEnrollment.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-//		    	mainFrameController.oldEnrollment.setTextFill(Color.WHITE);
-//		    	mainFrameController.Students.setStyle("-fx-background-color: #3c5199; -fx-border-radius: 25 0 0 25; -fx-background-radius: 25 0 0 25;");
-//		    	mainFrameController.Students.setTextFill(Color.WHITE);
-//		        
-//
-//		        mainFrameController.setContent(timetable);
-//
-//		        Scene scene = new Scene(mainFrame);
-//		        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//		        stage.setScene(scene);
-//		        stage.show();
-//		        
-//		        double windowWidth = stage.getWidth();
-//		        double windowHeight = stage.getHeight();
-//
-//		        stage.setWidth(windowWidth);
-//		        stage.setHeight(windowHeight);
-//		    } catch (IOException e) {
-//		        e.printStackTrace();
-//		    }
-//		}
-
-	    
-        @FXML
-        private TextField name;
-	
-        @FXML
-        private TextField course;
-        
-        @FXML
-        private TextField section;
-        
-        @FXML
-        private TextField yearTF;
-        
-        @FXML
-        private TextField semester;
-	
-        
-        @FXML
-        private TextField searchSID;
-	
-        @FXML
-	    private Button sidBTN;
-        
-	    @FXML
-	    private Button submitBTN;
-	    
-
-	@FXML
-	private Button deleteBTN;
-
-	@FXML
-	private Button updateBTN;
-
-
-
-	@FXML
-	private TableColumn<Schedule, String> subcodeCLMNColumn;
-
-	@FXML
-	private TableColumn<Schedule, String> credunitCLMNColumn;
-
-	@FXML
-	private TableColumn<Schedule, String> descriptionCLMNColumn;
-
-	@FXML
-	private TableColumn<Schedule, Integer> sdidCLMNColumn;
-
-	@FXML
-	private TableView<Schedule> scheduleTV;
-
-	private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
-
 	private void setSubjectsBasedOnSelection() {
 		dataLoaded = false;
+
+		String selectedCourse = courseCMB.getValue();
+		String selectedYear = yearCMB.getValue();
+		String selectedSection = sectionCMB.getValue();
+		String selectedSemester = semesterCMB.getValue();
 
 		scheduleList.clear();
 		scheduleTV.getItems().clear();
@@ -643,7 +592,8 @@ public class ScheduleController implements Initializable{
 
 				return;
 			}
-
+		    scheduleList.clear();
+		    scheduleTV.getItems().clear();
 			setSchedule(getScheduleId(selectedCourse, selectedYear, selectedSection, selectedSemester), startId, endId);
 			dataLoaded = true;
 		}
@@ -679,88 +629,61 @@ public class ScheduleController implements Initializable{
 		}
 	}
 
-//	private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
-//			String selectedOption3, String selectedOption4) {
-//		// TODO: Implement your data fetching logic
-//		return null;
-//	}
-//
-//		        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-//		            while (resultSet.next()) {
-//		                String subcode = resultSet.getString("sub_code");
-//		                String credunit = resultSet.getString("units");
-//		                String description = resultSet.getString("subject");
-//		                int sdid = resultSet.getInt("id");
-//
-//		                Schedule scheduleObj = new Schedule(subcode, credunit, description, sdid);
-//		                scheduleList.add(scheduleObj);
-//		            }
-//		            scheduleTV.setItems(scheduleList);
-//		        }
-//
-//		    } catch (SQLException e) {
-//		        e.printStackTrace();
-//		    }
-//		}
-//
-//		private ObservableList<String> fetchDataForOptions(String selectedOption1, String selectedOption2,
-//		        String selectedOption3, String selectedOption4) {
-//		     
-//		    return null;
-//		}
-//
-	
-	
+	private void searchscodebtn() {
+		String searchedCode = searchSID.getText();
 
-		private void searchscodebtn() {
-		    String searchedCode = searchSID.getText();
+		try (Connection connection = DatabaseManager.getConnection()) {
+			String query = "SELECT * FROM student WHERE scode = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, searchedCode);
 
-		    try (Connection connection = DatabaseManager.getConnection()) {
-		        String query = "SELECT * FROM student WHERE scode = ?";
-		        PreparedStatement preparedStatement = connection.prepareStatement(query);
-		        preparedStatement.setString(1, searchedCode);
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-		        ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				String firstName = resultSet.getString("First_name");
+				String middleName = resultSet.getString("Middle_name");
+				String lastName = resultSet.getString("Last_name");
 
-		        if (resultSet.next()) {
-		            String firstName = resultSet.getString("First_name");
-		            String middleName = resultSet.getString("Middle_name");
-		            String lastName = resultSet.getString("Last_name");
+				String fullName = firstName + " " + middleName + " " + lastName;
+				name.setText(fullName);
+				yearTF.setText(resultSet.getString("year"));
+				section.setText(resultSet.getString("section"));
+				course.setText(resultSet.getString("course"));
+				semester.setText(resultSet.getString("sem"));
+				courseCMB.setValue(resultSet.getString("course"));
+				yearCMB.setValue(resultSet.getString("year"));
+				semesterCMB.setValue(resultSet.getString("sem"));
+				sectionCMB.setValue(resultSet.getString("section"));
 
-		            String fullName = firstName + " " + middleName + " " + lastName;
-		            name.setText(fullName);
-		            yearTF.setText(resultSet.getString("year"));
-		            section.setText(resultSet.getString("section"));
-		            course.setText(resultSet.getString("course"));
-		            semester.setText(resultSet.getString("sem"));
-		        } else {
-		            clearFields();
-		            showAlert("Error", "Invalid scode", "The entered Student Code does not exist.");
-		        }
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		        // Handle the exception or log it appropriately
-		    }
+				
+			} else {
+				clearFields();
+				showAlert("Error", "Invalid scode", "The entered Student Code does not exist.");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// Handle the exception or log it appropriately
 		}
-		
-		@FXML
-		void search(ActionEvent event) {
-			searchscodebtn();
-		}
+	}
 
-		private void showAlert(String title, String header, String content) {
-		    Alert alert = new Alert(Alert.AlertType.ERROR);
-		    alert.setTitle(title);
-		    alert.setHeaderText(header);
-		    alert.setContentText(content);
-		    alert.showAndWait();
-		}
+	@FXML
+	void search(ActionEvent event) {
+		searchscodebtn();
+	}
 
-		private void clearFields() {
-		    name.clear();
-		    yearTF.clear();
-		    section.clear();
-		    course.clear();
-		    semester.clear();
-		}
+	private void showAlert(String title, String header, String content) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+		alert.showAndWait();
+	}
+
+	private void clearFields() {
+		name.clear();
+		yearTF.clear();
+		section.clear();
+		course.clear();
+		semester.clear();
+	}
 }
