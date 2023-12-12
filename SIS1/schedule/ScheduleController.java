@@ -120,6 +120,17 @@ public class ScheduleController implements Initializable{
 		sdidCLMNColumn.setCellValueFactory(new PropertyValueFactory<>("sdidCLMN"));
 
 		submitBTN.setOnAction(ActionEvent -> handleShowDataButtonClick());
+		
+		searchSID.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+            	searchSID.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            
+            if (newValue.length() > 8) {
+                String limitedValue = newValue.substring(0, 8);
+                searchSID.setText(limitedValue);
+            }
+        });
 
 	}
 
