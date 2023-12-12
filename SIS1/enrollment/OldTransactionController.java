@@ -150,16 +150,7 @@ public class OldTransactionController {
 				e1.printStackTrace();
 			}
 		});
-        
-        saveAndPrint.setOnAction(event -> {
-            continuousUpdate = false; // Stop continuous updates
-            try {
-				saveAndPrintClicked(event);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        });
+       
         new Thread(() -> {
             continuousUpdate = true;
             while (continuousUpdate) {
@@ -328,31 +319,31 @@ public class OldTransactionController {
 	}
 
 
-	@FXML
-	private void saveAndPrintClicked(ActionEvent event) throws IOException {
-	    continuousUpdate = false; // Stop continuous updates
-	    searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
-	  
-	    System.out.println("rich baby daddy gang: " + searchedCode);
-	    OldEnrollmentController enroll = new OldEnrollmentController();
-
-	    if (searchedCode == null || searchedCode.isEmpty()) {
-	        System.out.println("StudCode is not available. Please check your implementation.");
-	        System.out.println("eto scode: " + searchedCode);
-	        return;
-	    }
-
-	    if (validateInputs()) {
-	        saveAndPrint();
-
-	        // Update the UI with the new values
-	        setTransactionBasedOnSelection();
-	        returnToEnrollment(event);
-
-	        // Re-enable continuous updates after save operation
-	        continuousUpdate = true;
-	    }
-	}
+//	@FXML
+//	private void saveAndPrintClicked(ActionEvent event) throws IOException {
+//	    continuousUpdate = false; // Stop continuous updates
+//	    searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+//	  
+//	    System.out.println("rich baby daddy gang: " + searchedCode);
+//	    OldEnrollmentController enroll = new OldEnrollmentController();
+//
+//	    if (searchedCode == null || searchedCode.isEmpty()) {
+//	        System.out.println("StudCode is not available. Please check your implementation.");
+//	        System.out.println("eto scode: " + searchedCode);
+//	        return;
+//	    }
+//
+//	    if (validateInputs()) {
+//	        saveAndPrint();
+//
+//	        // Update the UI with the new values
+//	        setTransactionBasedOnSelection();
+//	        returnToEnrollment(event);
+//
+//	        // Re-enable continuous updates after save operation
+//	        continuousUpdate = true;
+//	    }
+//	}
 
 	
 	private boolean validateInputs() {
@@ -423,7 +414,7 @@ public class OldTransactionController {
 
 	}
 
-	private void saveAndPrint() throws com.itextpdf.io.exceptions.IOException, IOException {
+	private void saveAndPrintClicked(ActionEvent event) throws com.itextpdf.io.exceptions.IOException, IOException {
 	    // Get transaction details from UI
 	    TransactionController trans = TransactionController.getInstance();
 	    String studCode1 = trans.getStudCode();
