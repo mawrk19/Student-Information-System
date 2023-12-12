@@ -67,6 +67,14 @@
 	-fx-text-fill: #34245c;
 }
 
+#Enroll {
+	-fx-background-color:#24315c;
+	-fx-border-radius: 25;
+	-fx-background-radius: 25;
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+}
+
 #encEnroll {
 	-fx-background-color:#281c47;
 	-fx-border-radius: 25;
@@ -94,6 +102,11 @@
 	-fx-font-family: "Arial Rounded MT Bold";
 }
 
+#vboxTransaction{
+	-fx-background-color: linear-gradient(to bottom, #24315c, #0e0a1a);
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+}
 
 #encvboxTransaction {
 	-fx-background-color: linear-gradient(to bottom, #6446b2, #46317d, #281c47);
@@ -107,8 +120,13 @@
 	-fx-font-size: 20 px;
 }
 
+#comboBox {
+	-fx-text-fill: #EFF0F3;
+	-fx-font-family: "Arial Rounded MT Bold";
+	-fx-font-size: 15 px;
+}
+
 #enccomboBox {
-	-fx-background-color: #6446b2;
 	-fx-text-fill: #EFF0F3;
 	-fx-font-family: "Arial Rounded MT Bold";
 	-fx-font-size: 15 px;

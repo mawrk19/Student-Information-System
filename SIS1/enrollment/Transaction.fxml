@@ -19,7 +19,7 @@
             <VBox id="vboxTransaction" alignment="CENTER" prefHeight="410.0" prefWidth="336.0" spacing="10.0" stylesheets="@Enrollment.css" HBox.hgrow="ALWAYS">
                <children>
                   <ComboBox id="comboBox" fx:id="MOPCMB" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" promptText="Mode of payment" stylesheets="@Enrollment.css" VBox.vgrow="ALWAYS" />
-                  <Label id="miscLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" stylesheets="@Enrollment.css" text="Miscellanous Fee" VBox.vgrow="ALWAYS">
+                  <Label id="text" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="200.0" stylesheets="@Enrollment.css" text="Miscellanous Fee" textFill="WHITE" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="Verdana" size="22.0" />
                      </font>
