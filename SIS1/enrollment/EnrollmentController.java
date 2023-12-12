@@ -215,11 +215,19 @@ public class EnrollmentController implements Initializable {
 	private void showModifyDialog() {
 	    MenuButton modifyMenuButton = new MenuButton("Modify");
 
-
-
 	    MenuItem addSubjectMenuItem = new MenuItem("Add Subject");
 	    addSubjectMenuItem.setOnAction(event -> showAddSubjectDialog());
-	    modifyMenuButton.getItems().addAll(addSubjectMenuItem);
+	    modifyMenuButton.getItems().add(addSubjectMenuItem);
+
+	    MenuItem deleteMenuItem = new MenuItem("Delete Value");
+	    deleteMenuItem.setOnAction(event -> showDeleteDialog());
+	    modifyMenuButton.getItems().add(deleteMenuItem);
+
+	    MenuItem addValueMenuItem = new MenuItem("Add Value");
+	    addValueMenuItem.setOnAction(event -> showAddValueDialog());
+	    modifyMenuButton.getItems().add(addValueMenuItem);
+
+	    // ... (other menu items if needed)
 
 	    // Create an alert or dialog if needed
 	    Alert modifyAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -233,8 +241,6 @@ public class EnrollmentController implements Initializable {
 	    Optional<ButtonType> result = modifyAlert.showAndWait();
 	    // Process the result if needed
 	}
-
-
 
 	private void showAddDialog() {
 	    // Create a dialog for adding a new value
@@ -289,6 +295,129 @@ public class EnrollmentController implements Initializable {
 	    });
 	}
 
+	private void showDeleteDialog() {
+	    // Create a dialog for deleting a value
+	    Dialog<Pair<String, String>> dialog = new Dialog<>();
+	    dialog.setTitle("Delete Value");
+
+	    // Set the button types
+	    ButtonType deleteButtonType = new ButtonType("Delete", ButtonData.OK_DONE);
+	    dialog.getDialogPane().getButtonTypes().addAll(deleteButtonType, ButtonType.CANCEL);
+
+	    // Create and configure the ComboBox
+	    ComboBox<String> comboBox = new ComboBox<>();
+	    comboBox.getItems().addAll("courses", "genders", "locations", "sections", "semesters", "years");
+	    comboBox.setPromptText("Select a category");
+
+	    // Create the value input field
+	    TextField valueField = new TextField();
+	    valueField.setPromptText("Value");
+
+	    // Enable/Disable Delete button depending on whether both category and value are selected
+	    Node deleteButton = dialog.getDialogPane().lookupButton(deleteButtonType);
+	    deleteButton.setDisable(true);
+
+	    // Add listener to ComboBox and TextField for enabling/disabling the Delete button
+	    comboBox.valueProperty().addListener((observable, oldValue, newValue) -> updateDeleteButtonState(deleteButton, newValue, valueField.getText()));
+	    valueField.textProperty().addListener((observable, oldValue, newValue) -> updateDeleteButtonState(deleteButton, comboBox.getValue(), newValue));
+
+	    // Create the layout and add it to the dialog
+	    GridPane grid = new GridPane();
+	    grid.add(new Label("Category:"), 0, 0);
+	    grid.add(comboBox, 1, 0);
+	    grid.add(new Label("Value:"), 0, 1);
+	    grid.add(valueField, 1, 1);
+
+	    dialog.getDialogPane().setContent(grid);
+
+	    // Convert the result to a pair of strings when the Delete button is clicked
+	    dialog.setResultConverter(dialogButton -> {
+	        if (dialogButton == deleteButtonType) {
+	            return new Pair<>(comboBox.getValue(), valueField.getText());
+	        }
+	        return null;
+	    });
+
+	    Optional<Pair<String, String>> result = dialog.showAndWait();
+
+	    result.ifPresent(pair -> {
+	        // Delete the selected category and value
+	        deleteValue(pair.getKey(), pair.getValue());
+	        loadComboBox(pair.getKey(), getComboBoxByName(pair.getKey()));
+	    });
+	}
+
+	private void updateDeleteButtonState(Node deleteButton, String category, String value) {
+	    deleteButton.setDisable(category == null || value.isEmpty());
+	}
+
+	private void deleteValue(String category, String value) {
+	    try {
+	        // Implement your deletion logic here
+	        // For example, you can execute a SQL DELETE statement
+	        statement.executeUpdate("DELETE FROM school WHERE " + category + " = '" + value + "'");
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Handle the exception as needed
+	    }
+	}
+
+	private void showAddValueDialog() {
+	    // Create a dialog for adding a new value
+	    Dialog<Pair<String, String>> dialog = new Dialog<>();
+	    dialog.setTitle("Add Value");
+
+	    // Set the button types
+	    ButtonType addButtonType = new ButtonType("Add", ButtonData.OK_DONE);
+	    dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+
+	    // Create and configure the ComboBox
+	    ComboBox<String> comboBox = new ComboBox<>();
+	    comboBox.getItems().addAll("courses", "genders", "locations", "sections", "semesters", "years");
+	    comboBox.setPromptText("Select a category");
+
+	    // Create the value input field
+	    TextField valueField = new TextField();
+	    valueField.setPromptText("Value");
+
+	    // Enable/Disable Add button depending on whether both category and value are selected/entered
+	    Node addButton = dialog.getDialogPane().lookupButton(addButtonType);
+	    addButton.setDisable(true);
+
+	    // Add listener to ComboBox and TextField for enabling/disabling the Add button
+	    comboBox.valueProperty().addListener((observable, oldValue, newValue) -> updateAddButtonState(addButton, newValue, valueField.getText()));
+	    valueField.textProperty().addListener((observable, oldValue, newValue) -> updateAddButtonState(addButton, comboBox.getValue(), newValue));
+
+	    // Create the layout and add it to the dialog
+	    GridPane grid = new GridPane();
+	    grid.add(new Label("Category:"), 0, 0);
+	    grid.add(comboBox, 1, 0);
+	    grid.add(new Label("Value:"), 0, 1);
+	    grid.add(valueField, 1, 1);
+
+	    dialog.getDialogPane().setContent(grid);
+
+	    // Convert the result to a pair of strings when the Add button is clicked
+	    dialog.setResultConverter(dialogButton -> {
+	        if (dialogButton == addButtonType) {
+	            return new Pair<>(comboBox.getValue(), valueField.getText());
+	        }
+	        return null;
+	    });
+
+	    Optional<Pair<String, String>> result = dialog.showAndWait();
+
+	    result.ifPresent(pair -> {
+	        // Add the new category and value
+	        insertValue(pair.getKey(), pair.getValue());
+	        loadComboBox(pair.getKey(), getComboBoxByName(pair.getKey()));
+	    });
+	}
+
+	private void updateAddButtonState(Node addButton, String category, String value) {
+	    addButton.setDisable(category == null || value.isEmpty());
+	}
+	
 	private ComboBox<String> getComboBoxByName(String comboBoxName) {
 	    // Implement a method to return the ComboBox based on the name
 	    if (comboBoxName != null) {
