@@ -96,8 +96,8 @@ public class OldEnrollmentController implements Initializable {
 	private Image image;
 
 	private String studCode;
-
-	String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+	
+	public String scode;
 
 	Students student = setCredentials();
 	InputStream imageStream;
@@ -217,17 +217,20 @@ public class OldEnrollmentController implements Initializable {
 	}
 
 	private InputStream getUserImageFromDatabase() throws SQLException {
+	    String searchedCode = SearchBarController.getSearchBarValue();
+	    System.out.println("getted shitz: " + searchedCode );
 
-		Connection con = DatabaseManager.getConnection();
-		try (PreparedStatement stmt = con.prepareStatement("SELECT image FROM student WHERE scode = ?")) {
-			stmt.setString(1, SearchBarSingleton.getInstance().getSearchbarText());
-			ResultSet resultSet = stmt.executeQuery();
-			if (resultSet.next()) {
-				return resultSet.getBinaryStream("image");
-			}
-		}
-		return null; // Return null if no image is found
+	    Connection con = DatabaseManager.getConnection();
+	    try (PreparedStatement stmt = con.prepareStatement("SELECT image FROM student WHERE scode = ?")) {
+	        stmt.setString(1, searchedCode);
+	        ResultSet resultSet = stmt.executeQuery();
+	        if (resultSet.next()) {
+	            return resultSet.getBinaryStream("image");
+	        }
+	    }
+	    return null; // Return null if no image is found
 	}
+
 
 	private void centerImage(ImageView imageView) {
 		double imageViewWidth = imageView.getFitWidth();
@@ -1135,7 +1138,9 @@ public class OldEnrollmentController implements Initializable {
 	}
 
 	private String enrollButtonClicked(Students student) throws SQLException, IOException {
-	    String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
+		String searchedCode = SearchBarController.getSearchBarValue();
+		System.out.println("getted shitz: " + searchedCode );
+
 	    System.out.println("old enroll click " + searchedCode);
 	    String selectedCourse = courseCMB.getValue();
 	    String enrollmentDate = dateTF.getText();
@@ -1306,10 +1311,9 @@ public class OldEnrollmentController implements Initializable {
 
 	private Students setCredentials() {
 		Students student = null;
-		String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
-
-		System.out.println("show searched code: " + searchedCode);
-
+		String searchedCode = SearchBarController.getSearchBarValue();
+		System.out.println("getted shitz last: " + searchedCode );
+		
 		try (Connection con = DatabaseManager.getConnection()) {
 			String sql = "SELECT * FROM student WHERE scode = ?";
 

@@ -120,8 +120,6 @@ public class EncOldTransactionController {
     
     private boolean continuousUpdate = false;
     
-	private String searchedCode;
-
     public void initialize() {
         ObservableList<String> mop = FXCollections.observableArrayList("Scholar", "Full");
         MOPCMB.setItems(mop);
@@ -267,6 +265,7 @@ public class EncOldTransactionController {
     @FXML
     private void setStudents() {
         try (Connection con = DatabaseManager.getConnection()) {
+    		String searchedCode = SearchBarController.getSearchBarValue();
             String selectSql = "SELECT * FROM student WHERE scode = ?";
             String updateSql = "UPDATE your_table SET your_column = ? WHERE some_condition = ?"; // Provide your actual update SQL
 
@@ -338,30 +337,28 @@ public class EncOldTransactionController {
 //	}
 
 
-	@FXML
+    @FXML
 	private void saveAndPrintClicked(ActionEvent event) throws IOException {
-	    continuousUpdate = false; // Stop continuous updates
-	    searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
-	  
-	    System.out.println("rich baby daddy gang: " + searchedCode);
-	    EncOldTransactionController enroll = new EncOldTransactionController();
+		continuousUpdate = false; // Stop continuous updates
+		String searchedCode = SearchBarController.getSearchBarValue();
+		System.out.println("getted scoderist: " + searchedCode);
 
-	    if (searchedCode == null || searchedCode.isEmpty()) {
-	        System.out.println("StudCode is not available. Please check your implementation.");
-	        System.out.println("eto scode: " + searchedCode);
-	        return;
-	    }
+		if (searchedCode == null || searchedCode.isEmpty()) {
+			System.out.println("StudCode is not available. Please check your implementation.");
+			System.out.println("eto scode: " + searchedCode);
+			return;
+		}
 
-	    if (validateInputs()) {
-	        saveAndPrint();
+		if (validateInputs()) {
+			saveAndPrint();
 
-	        // Update the UI with the new values
-	        setTransactionBasedOnSelection();
-	        returnToEnrollment(event);
+			// Update the UI with the new values
+			setTransactionBasedOnSelection();
+			returnToEnrollment(event);
 
-	        // Re-enable continuous updates after save operation
-	        continuousUpdate = true;
-	    }
+			// Re-enable continuous updates after save operation
+			continuousUpdate = true;
+		}
 	}
 
 	
@@ -440,6 +437,7 @@ public class EncOldTransactionController {
 	    String mop = MOPCMB.getValue();
 	    String late = lateCMB.getValue();
 	    String scheme = schemeCMB.getValue();
+		String searchedCode = SearchBarController.getSearchBarValue();
 
 	    // Check if essential details are present
 	    if (mop == null || late == null || scheme == null) {

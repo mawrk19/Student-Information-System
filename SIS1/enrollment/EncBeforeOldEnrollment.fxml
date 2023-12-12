@@ -11,62 +11,83 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="870.0" stylesheets="@../profile/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="enrollment.EncBeforeOldEnrollController">
-   <children>
-      <VBox alignment="CENTER" layoutX="385.0" layoutY="295.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-         <children>
-            <Label text="Enter Student Code">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="30.0" />
-               </font>
-            </Label>
-            <VBox id="encvboxCon" alignment="CENTER" spacing="20.0" stylesheets="@Enrollment.css">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="48.0" prefWidth="690.0" spacing="10.0">
-                     <children>
-                        <TextField fx:id="searchbar" alignment="CENTER" prefHeight="57.0" prefWidth="622.0" />
-                        <Button id="encSearchIcon" fx:id="searchbtn" mnemonicParsing="false" onAction="#searchscodebtn" prefHeight="50.0" prefWidth="48.0" stylesheets="@../studentprof/StudentProf.css">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../src/imgs_icons/Search.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <padding>
-                        <Insets left="50.0" right="50.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label id="encgwaLbl" alignment="CENTER" prefHeight="43.0" prefWidth="209.0" stylesheets="@Enrollment.css" text="GWA:">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label id="encgwaLbl" fx:id="gwalbl" alignment="CENTER" prefHeight="43.0" prefWidth="209.0" stylesheets="@Enrollment.css">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Button id="encsubmitBtn" fx:id="submitbtn" mnemonicParsing="false" onAction="#gotoOldEnrollment" prefHeight="51.0" prefWidth="170.0" stylesheets="@Enrollment.css" text="Submit">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="20.0" />
-                     </font>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </VBox>
-         </children>
-         <padding>
-            <Insets left="50.0" right="50.0" />
-         </padding>
-      </VBox>
-   </children>
+<AnchorPane id="background" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="790.0" prefWidth="870.0"
+	stylesheets="@../profile/Profile.css"
+	xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="enrollment.EncBeforeOldEnrollController">
+	<children>
+		<VBox alignment="CENTER" layoutX="385.0" layoutY="295.0"
+			prefHeight="200.0" prefWidth="100.0" spacing="20.0"
+			AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+			AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+			<children>
+				<Label text="Enter Student Code">
+					<font>
+						<Font name="Arial Rounded MT Bold" size="30.0" />
+					</font>
+				</Label>
+				<VBox id="encvboxCon" alignment="CENTER" spacing="20.0"
+					stylesheets="@Enrollment.css">
+					<children>
+						<HBox alignment="CENTER" prefHeight="48.0" prefWidth="690.0"
+							spacing="10.0">
+							<children>
+								<TextField fx:id="searchbar" alignment="CENTER"
+									prefHeight="57.0" prefWidth="622.0" />
+								<Button id="encSearchIcon" fx:id="searchbtn"
+									mnemonicParsing="false" onAction="#searchscodebtn"
+									prefHeight="50.0" prefWidth="48.0"
+									stylesheets="@../studentprof/StudentProf.css">
+									<graphic>
+										<ImageView fitHeight="30.0" fitWidth="30.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../src/imgs_icons/Search.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+							</children>
+							<padding>
+								<Insets left="50.0" right="50.0" />
+							</padding>
+						</HBox>
+						<HBox alignment="CENTER">
+							<children>
+								<Label id="encgwaLbl" alignment="CENTER" prefHeight="43.0"
+									prefWidth="209.0" stylesheets="@Enrollment.css" text="GWA:">
+									<font>
+										<Font size="20.0" />
+									</font>
+								</Label>
+								<Label id="encgwaLbl" fx:id="gwalbl" alignment="CENTER"
+									prefHeight="43.0" prefWidth="209.0"
+									stylesheets="@Enrollment.css">
+									<font>
+										<Font size="20.0" />
+									</font>
+								</Label>
+							</children>
+						</HBox>
+						<Button id="encsubmitBtn" fx:id="submitbtn"
+							mnemonicParsing="false" onAction="#gotoOldEnrollment"
+							prefHeight="51.0" prefWidth="170.0" stylesheets="@Enrollment.css"
+							text="Submit">
+							<font>
+								<Font name="Arial Rounded MT Bold" size="20.0" />
+							</font>
+						</Button>
+					</children>
+					<padding>
+						<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+					</padding>
+				</VBox>
+			</children>
+			<padding>
+				<Insets left="50.0" right="50.0" />
+			</padding>
+		</VBox>
+	</children>
 </AnchorPane>
