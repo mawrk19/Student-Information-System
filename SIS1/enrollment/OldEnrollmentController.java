@@ -1136,7 +1136,7 @@ public class OldEnrollmentController implements Initializable {
 
 	private String enrollButtonClicked(Students student) throws SQLException, IOException {
 	    String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
-	    System.out.println("old enroll click " + searchedCode);
+	    System.out.println("Search Bar text getted" + searchedCode);
 	    String selectedCourse = courseCMB.getValue();
 	    String enrollmentDate = dateTF.getText();
 	    String firstName = fNameTF.getText();

@@ -410,12 +410,10 @@ public class OldTransactionController {
 
 
 	@FXML
-	private void saveAndPrintClicked(ActionEvent event) throws IOException {
+	private void saveAndPrintClicked(ActionEvent event) throws IOException { 
+	   // saveAndPrintClicked(event);
 	    continuousUpdate = false; // Stop continuous updates
-	    searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
-	    
-	    saveAndPrintClicked(event);
-	  
+	    String searchedCode = SearchBarSingleton.getInstance().getSearchbarText();
 	    System.out.println("rich baby daddy gang: " + searchedCode);
 	    OldEnrollmentController enroll = new OldEnrollmentController();
 
